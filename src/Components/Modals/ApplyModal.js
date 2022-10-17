@@ -8,6 +8,11 @@ import moment from 'moment';
 import { ko } from 'date-fns/esm/locale';
 import DatePicker from 'react-datepicker';
 import { toast } from '../ToasMessage/ToastManager';
+import axios from 'axios';
+import { useDispatch, useSelector } from 'react-redux';
+import { Loader_Check_For_False, Loader_Check_For_True } from '../../Models/LoaderCheckReducer/LoaderCheckReducer';
+import LoginModalMainPage from './LoginModal/LoginModalMainPage';
+import { LOGOUT_INFO_DATA_Changes } from '../../Models/LoginInfoReducer/LoginInfoReducer';
 
 const customStyles = {
     content: {
@@ -19,6 +24,7 @@ const customStyles = {
         transform: 'translate(-50%, -50%)',
         width: '90%',
         height: '90%',
+        zIndex: '40000',
     },
 };
 Modal.setAppElement('#ApplyModal');
@@ -230,6 +236,16 @@ const ApplyModalMainDivBox = styled.div`
             width: calc(100%-100px);
             display: flex;
             height: 100%;
+            .Float_cotainer_box_Right_InpuBox_cotainer {
+                min-width: 400px;
+                height: 100%;
+                input {
+                    height: 100%;
+                    width: 100%;
+                    border: 1px solid light gray;
+                    padding-left: 10px;
+                }
+            }
             .DatePickerUseContainer {
                 border: 1px solid gray;
                 margin-right: 10px;
@@ -257,6 +273,47 @@ const ApplyModalMainDivBox = styled.div`
             }
         }
     }
+    .Button_Cotainer {
+        text-align: center;
+        button {
+            width: 120px;
+            height: 40px;
+            border: none;
+            font-weight: bolder;
+            font-size: 1.1em;
+            border-radius: 5px;
+            :hover {
+                cursor: pointer;
+            }
+        }
+        .Cancle {
+            background-color: orange;
+            margin-right: 30px;
+            color: #fff;
+            :hover {
+                background-color: #efefef;
+                color: orange;
+            }
+        }
+        .Delete {
+            background-color: red;
+            margin-left: 30px;
+            color: #fff;
+            :hover {
+                background-color: #efefef;
+                color: red;
+            }
+        }
+        .Submit {
+            background-color: green;
+            margin-right: 30px;
+            color: #fff;
+            :hover {
+                background-color: #efefef;
+                color: green;
+            }
+        }
+    }
 `;
 
 const ApplyModal = ({
@@ -271,7 +328,10 @@ const ApplyModal = ({
     setSelectDate,
     NowTimes,
     setNowTimes,
+    getDatas,
 }) => {
+    const dispatch = useDispatch();
+    const LoginInfo = useSelector(state => state.LoginInfoDataRedux.Infomation);
     const [TimesStateData, setTimesStateData] = useState([
         { value: '00:00', label: '00:00' },
         { value: '00:30', label: '00:30' },
@@ -326,7 +386,7 @@ const ApplyModal = ({
         StartDate: SelectDate.StartDate ? SelectDate.StartDate : new Date(NowTimes),
         StartTime: SelectDate.StartTime ? SelectDate.StartTime : null,
         EndDate: SelectDate.EndDate ? SelectDate.EndDate : new Date(NowTimes),
-        EndTime: SelectDate.EndTime ? SelectDate.StartTime : null,
+        EndTime: SelectDate.EndTime ? SelectDate.EndTime : null,
     });
 
     //예약 할 일정 라임으로 표시
@@ -337,6 +397,8 @@ const ApplyModal = ({
         StartTime: SelectDate.StartTime ? SelectDate.StartTime : null,
         EndTime: SelectDate.EndTime ? SelectDate.EndTime : null,
     });
+
+    const [TitleBooking, setTitleBooking] = useState('');
 
     //Modal 종료
     const ModalPopUpClose = () => {
@@ -472,171 +534,246 @@ const ApplyModal = ({
         return new Date(new Date(date.getFullYear(), date.getMonth(), date.getDate(), 0, 0, 0));
     };
 
+    const handleRoomReservation = async () => {
+        try {
+            dispatch(Loader_Check_For_True());
+            const ReserverationForServer = await axios.post(`http://192.168.2.155:3003/users/BrityWorksBooking_For_API`, {
+                ApplyModalData,
+                SelectedShowTableTimes,
+                SelectLeftHeaderInfo,
+                TitleBooking,
+                LoginInfo,
+            });
+
+            if (ReserverationForServer.data.dataSuccess) {
+                console.log(ReserverationForServer);
+                getDatas();
+                ModalPopUpClose();
+                dispatch(Loader_Check_For_False());
+                toast.show({
+                    title: `${SelectLeftHeaderInfo.label}의 ${moment(ApplyModalData.StartDate).format('YYYY-MM-DD')} ${
+                        SelectedShowTableTimes.StartTime
+                    } ~ ${moment(ApplyModalData.EndDate).format('YYYY-MM-DD')} ${
+                        SelectedShowTableTimes.EndTime
+                    }으로 예약이 완료되었습니다.`,
+                    successCheck: true,
+                    duration: 8000,
+                });
+            } else {
+                dispatch(Loader_Check_For_False());
+                toast.show({
+                    title: `${ReserverationForServer.data.result.detailMessages ? ReserverationForServer.data.result.detailMessages : ''} ${
+                        ReserverationForServer.data.result.errorMessage
+                    } ( ERROR CODE : ${ReserverationForServer.data.result.errorCode} ) `,
+                    successCheck: false,
+                    duration: 12000,
+                });
+            }
+        } catch (error) {
+            console.log(error);
+            toast.show({
+                title: `Error 발생. IT팀에 문의바랍니다. `,
+                successCheck: false,
+                duration: 5000,
+            });
+            dispatch(Loader_Check_For_False());
+        }
+    };
+
     return (
-        <Modal isOpen={ApplyModalOpenData} style={customStyles} contentLabel="Example Modal">
-            <ApplyModalMainDivBox>
-                <h2>{SelectBasicTitle === 'Company_Room' ? '회의실' : '법인차량'} 예약</h2>
-                <div className="Close_button_container" onClick={ModalPopUpClose}>
-                    <CgCloseO></CgCloseO>
-                </div>
-                <div>
+        <Modal isOpen={ApplyModalOpenData} style={customStyles} contentLabel="Apply Modal">
+            {LoginInfo.Login_token ? (
+                <ApplyModalMainDivBox>
+                    <h2>{SelectBasicTitle === 'Company_Room' ? '회의실' : '법인차량'} 예약</h2>
+                    <div className="Close_button_container" onClick={ModalPopUpClose}>
+                        <CgCloseO></CgCloseO>
+                    </div>
                     <div>
-                        <h4>
-                            <Select
-                                className="basic-single"
-                                classNamePrefix="이쪽에서 선택 해주세요."
-                                defaultValue={SelectLeftHeaderInfo}
-                                isClearable={true}
-                                isSearchable={true}
-                                name="Room"
-                                options={LeftHeaderInfo}
-                                onChange={value => handleChangeRoom(value)}
-                            />
-                        </h4>
-                    </div>
-                    {RoomDatas.length > 0 && SelectLeftHeaderInfo
-                        ? RoomDatas.map((list, i) => {
-                              return list.name === SelectLeftHeaderInfo.name ? (
-                                  <ApplyModalTable
-                                      SelectLeftHeaderInfo={SelectLeftHeaderInfo}
-                                      SelectRoom_Info_Data={list.Datas}
-                                      SelectedShowTableTimes={SelectedShowTableTimes}
-                                      setApplyModalData={data => setApplyModalData(data)}
-                                      ApplyModalData={ApplyModalData}
-                                      setSelectDate={data => setSelectDate(data)}
-                                  ></ApplyModalTable>
-                              ) : (
-                                  ''
-                              );
-                          })
-                        : ''}
-                </div>
-                <div className="ApplyModal_Input_Container">
-                    <div style={{ marginTop: '20px' }}>
-                        <div className="Float_cotainer_box">
-                            <div className="Float_cotainer_box_Left">예약 일자</div>
-                            <div className="Float_cotainer_box_Right">
-                                <div className="DatePickerUseContainer">
-                                    <DatePicker
-                                        locale={ko}
-                                        selected={ApplyModalData.StartDate}
-                                        onChange={date => {
-                                            setNowTimes(new Date(date));
-                                            setApplyModalData({ ...ApplyModalData, StartDate: date, EndDate: date });
-                                        }}
-                                        dateFormat="yyyy-MM-dd"
-                                        highlightDates={[new Date()]}
-                                        popperModifiers={{
-                                            // 모바일 web 환경에서 화면을 벗어나지 않도록 하는 설정
-                                            preventOverflow: {
-                                                enabled: true,
-                                            },
-                                        }}
-                                        dayClassName={date =>
-                                            getDayName(createDate(date)) === '토'
-                                                ? 'saturday'
-                                                : getDayName(createDate(date)) === '일'
-                                                ? 'sunday'
-                                                : undefined
-                                        }
-                                        customInput={<ExampleCustomInput />}
-                                    />
-                                </div>
-                                {!SelectedShowTableTimes.AlldayChecking ? (
-                                    <div className="TimePickerUserContainer">
-                                        <select value={ApplyModalData.StartTime} onChange={e => handleChangeStartTimeDate(e)} readOnly>
-                                            {TimesStateData.map((list, i) => {
-                                                return (
-                                                    <option key={list.value} value={list.value}>
-                                                        {list.label}
-                                                    </option>
-                                                );
-                                            })}
-                                        </select>
-                                    </div>
-                                ) : (
-                                    <div></div>
-                                )}
-
-                                <div style={{ marginRight: '10px', marginLeft: '10px', fontWeight: 'bold', lineHeight: '36px' }}>
-                                    {' ~ '}
-                                </div>
-                                <div className="DatePickerUseContainer">
-                                    <DatePicker
-                                        locale={ko}
-                                        selected={ApplyModalData.EndDate}
-                                        onChange={date => {
-                                            setApplyModalData({ ...ApplyModalData, EndDate: date });
-                                        }}
-                                        dateFormat="yyyy-MM-dd"
-                                        highlightDates={[new Date()]}
-                                        minDate={ApplyModalData.StartDate}
-                                        popperModifiers={{
-                                            // 모바일 web 환경에서 화면을 벗어나지 않도록 하는 설정
-                                            preventOverflow: {
-                                                enabled: true,
-                                            },
-                                        }}
-                                        dayClassName={date =>
-                                            getDayName(createDate(date)) === '토'
-                                                ? 'saturday'
-                                                : getDayName(createDate(date)) === '일'
-                                                ? 'sunday'
-                                                : undefined
-                                        }
-                                        customInput={<ExampleCustomInput />}
-                                    />
-                                </div>
-                                {!SelectedShowTableTimes.AlldayChecking ? (
-                                    <div className="TimePickerUserContainer">
-                                        <select value={ApplyModalData.EndTime} onChange={e => handleChangeEndTimeDate(e)} readOnly>
-                                            {TimesStateData.map((list, i) => {
-                                                return (
-                                                    <option key={list.value} value={list.value}>
-                                                        {list.label}
-                                                    </option>
-                                                );
-                                            })}
-                                        </select>
-                                    </div>
-                                ) : (
-                                    <div></div>
-                                )}
-                            </div>
-                        </div>
-                        <div className="Float_cotainer_box">
-                            <div className="Float_cotainer_box_Left" style={{ opacity: 0 }}>
-                                공란
-                            </div>
-                            <div className="Float_cotainer_box_Right">
-                                <div>종일</div>
-                                <div>
-                                    <input
-                                        type="CheckBox"
-                                        value={SelectedShowTableTimes.AlldayChecking}
-                                        onChange={() => handleChangeAllDayBooking()}
-                                    ></input>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="Float_cotainer_box">
-                            <div className="Float_cotainer_box_Left">예약자</div>
-                            <div className="Float_cotainer_box_Right">
-                                <div>
-                                    <input type="text" value="자동으로 완성됩니다." readOnly></input>
-                                </div>
-                            </div>
-                        </div>
-
                         <div>
-                            <div>
-                                <button onClick={() => alert('메롱')}>저장</button>
-                                <button onClick={() => ModalPopUpClose()}>취소</button>
+                            <h4>
+                                <Select
+                                    className="basic-single"
+                                    classNamePrefix="이쪽에서 선택 해주세요."
+                                    defaultValue={SelectLeftHeaderInfo}
+                                    isClearable={true}
+                                    isSearchable={true}
+                                    name="Room"
+                                    options={LeftHeaderInfo}
+                                    onChange={value => handleChangeRoom(value)}
+                                />
+                            </h4>
+                        </div>
+                        {RoomDatas.length > 0 && SelectLeftHeaderInfo
+                            ? RoomDatas.map((list, i) => {
+                                  return list.name === SelectLeftHeaderInfo.name ? (
+                                      <ApplyModalTable
+                                          SelectLeftHeaderInfo={SelectLeftHeaderInfo}
+                                          SelectRoom_Info_Data={list.Datas}
+                                          SelectedShowTableTimes={SelectedShowTableTimes}
+                                          setApplyModalData={data => setApplyModalData(data)}
+                                          ApplyModalData={ApplyModalData}
+                                          setSelectDate={data => setSelectDate(data)}
+                                      ></ApplyModalTable>
+                                  ) : (
+                                      ''
+                                  );
+                              })
+                            : ''}
+                    </div>
+                    <div className="ApplyModal_Input_Container">
+                        <div style={{ marginTop: '20px' }}>
+                            <div className="Float_cotainer_box" style={{ marginBottom: '5px' }}>
+                                <div className="Float_cotainer_box_Left">예약 일자</div>
+                                <div className="Float_cotainer_box_Right">
+                                    <div className="DatePickerUseContainer">
+                                        <DatePicker
+                                            locale={ko}
+                                            selected={ApplyModalData.StartDate}
+                                            onChange={date => {
+                                                setNowTimes(new Date(date));
+                                                setApplyModalData({ ...ApplyModalData, StartDate: date, EndDate: date });
+                                            }}
+                                            dateFormat="yyyy-MM-dd"
+                                            highlightDates={[new Date()]}
+                                            popperModifiers={{
+                                                // 모바일 web 환경에서 화면을 벗어나지 않도록 하는 설정
+                                                preventOverflow: {
+                                                    enabled: true,
+                                                },
+                                            }}
+                                            dayClassName={date =>
+                                                getDayName(createDate(date)) === '토'
+                                                    ? 'saturday'
+                                                    : getDayName(createDate(date)) === '일'
+                                                    ? 'sunday'
+                                                    : undefined
+                                            }
+                                            customInput={<ExampleCustomInput />}
+                                        />
+                                    </div>
+                                    {!SelectedShowTableTimes.AlldayChecking ? (
+                                        <div className="TimePickerUserContainer">
+                                            <select value={ApplyModalData.StartTime} onChange={e => handleChangeStartTimeDate(e)} readOnly>
+                                                {TimesStateData.map((list, i) => {
+                                                    return (
+                                                        <option key={list.value} value={list.value}>
+                                                            {list.label}
+                                                        </option>
+                                                    );
+                                                })}
+                                            </select>
+                                        </div>
+                                    ) : (
+                                        <div></div>
+                                    )}
+
+                                    <div style={{ marginRight: '10px', marginLeft: '10px', fontWeight: 'bold', lineHeight: '36px' }}>
+                                        {' ~ '}
+                                    </div>
+                                    <div className="DatePickerUseContainer">
+                                        <DatePicker
+                                            locale={ko}
+                                            selected={ApplyModalData.EndDate}
+                                            onChange={date => {
+                                                setApplyModalData({ ...ApplyModalData, EndDate: date });
+                                            }}
+                                            dateFormat="yyyy-MM-dd"
+                                            highlightDates={[new Date()]}
+                                            minDate={ApplyModalData.StartDate}
+                                            popperModifiers={{
+                                                // 모바일 web 환경에서 화면을 벗어나지 않도록 하는 설정
+                                                preventOverflow: {
+                                                    enabled: true,
+                                                },
+                                            }}
+                                            dayClassName={date =>
+                                                getDayName(createDate(date)) === '토'
+                                                    ? 'saturday'
+                                                    : getDayName(createDate(date)) === '일'
+                                                    ? 'sunday'
+                                                    : undefined
+                                            }
+                                            customInput={<ExampleCustomInput />}
+                                        />
+                                    </div>
+                                    {!SelectedShowTableTimes.AlldayChecking ? (
+                                        <div className="TimePickerUserContainer">
+                                            <select value={ApplyModalData.EndTime} onChange={e => handleChangeEndTimeDate(e)} readOnly>
+                                                {TimesStateData.map((list, i) => {
+                                                    return (
+                                                        <option key={list.value} value={list.value}>
+                                                            {list.label}
+                                                        </option>
+                                                    );
+                                                })}
+                                            </select>
+                                        </div>
+                                    ) : (
+                                        <div></div>
+                                    )}
+                                </div>
+                            </div>
+                            <div className="Float_cotainer_box">
+                                <div className="Float_cotainer_box_Left" style={{ opacity: 0 }}>
+                                    공란
+                                </div>
+                                <div className="Float_cotainer_box_Right" style={{ margin: 0 }}>
+                                    <div>종일</div>
+                                    <div>
+                                        <input
+                                            type="CheckBox"
+                                            value={SelectedShowTableTimes.AlldayChecking}
+                                            onChange={() => handleChangeAllDayBooking()}
+                                        ></input>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="Float_cotainer_box">
+                                <div className="Float_cotainer_box_Left">제목</div>
+                                <div className="Float_cotainer_box_Right">
+                                    <div className="Float_cotainer_box_Right_InpuBox_cotainer">
+                                        <input
+                                            type="text"
+                                            value={TitleBooking}
+                                            onChange={e => setTitleBooking(e.target.value)}
+                                            placeholder="사용 이유를 적어주세요."
+                                        ></input>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="Float_cotainer_box">
+                                <div className="Float_cotainer_box_Left">예약자</div>
+                                <div className="Float_cotainer_box_Right">
+                                    <div className="Float_cotainer_box_Right_InpuBox_cotainer">
+                                        <input type="text" value={LoginInfo.Login_name} readOnly></input>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className="Button_Cotainer">
+                                <button className="Submit" onClick={() => handleRoomReservation()}>
+                                    예약하기
+                                </button>
+                                <button
+                                    className="Cancle"
+                                    onClick={() => {
+                                        ModalPopUpClose();
+                                    }}
+                                >
+                                    취소
+                                </button>
                             </div>
                         </div>
                     </div>
-                </div>
-            </ApplyModalMainDivBox>
+                </ApplyModalMainDivBox>
+            ) : (
+                <ApplyModalMainDivBox style={{ height: '100%' }}>
+                    <LoginModalMainPage></LoginModalMainPage>
+                    <div className="Close_button_container" onClick={ModalPopUpClose}>
+                        <CgCloseO></CgCloseO>
+                    </div>
+                </ApplyModalMainDivBox>
+            )}
         </Modal>
     );
 };

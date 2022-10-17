@@ -19,10 +19,58 @@ import { TiThMenu } from 'react-icons/ti';
 import { IoCloseSharp } from 'react-icons/io5';
 import { FcOvertime } from 'react-icons/fc';
 import ApplyModal from './Modals/ApplyModal';
+import { useDispatch, useSelector } from 'react-redux';
+import { Loader_Check_For_False, Loader_Check_For_True } from '../Models/LoaderCheckReducer/LoaderCheckReducer';
+import SelectModal from './Modals/SelectModal';
 
 const TestMainDivBox = styled.div`
     min-height: 100vh;
     padding: 10px;
+    .Date_Show_Click_Main_Container {
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        .Date_Show_Click_Before {
+            margin-right: 10px;
+            font-size: 2em;
+            :hover {
+                cursor: pointer;
+                color: gray;
+            }
+        }
+        .Date_Show_Content {
+            .example-custom-input {
+                font-size: 1.5em;
+                border: none;
+                background: none;
+                :hover {
+                    cursor: pointer;
+                    color: blue;
+                }
+            }
+            margin-top: 12px;
+            :hover {
+                cursor: pointer;
+                color: blue;
+            }
+
+            .saturday {
+                color: blue;
+            }
+            .sunday {
+                color: red;
+            }
+        }
+        .Date_Show_Click_After {
+            margin-left: 10px;
+            font-size: 2em;
+            :hover {
+                cursor: pointer;
+                color: gray;
+            }
+        }
+    }
 
     .Mian_Table_Container {
         margin: 0;
@@ -31,53 +79,6 @@ const TestMainDivBox = styled.div`
         min-width: 1510px;
         background-color: #fff;
         position: relative;
-        .Date_Show_Click_Main_Container {
-            width: 400px;
-            display: flex;
-            position: absolute;
-            top: -65px;
-            left: 600px;
-            justify-content: space-between;
-            align-items: center;
-            .Date_Show_Click_Before {
-                margin-right: 10px;
-                font-size: 2em;
-                :hover {
-                    cursor: pointer;
-                    color: gray;
-                }
-            }
-            .Date_Show_Content {
-                .example-custom-input {
-                    font-size: 1.5em;
-                    border: none;
-                    :hover {
-                        cursor: pointer;
-                        color: blue;
-                    }
-                }
-                margin-top: 12px;
-                :hover {
-                    cursor: pointer;
-                    color: blue;
-                }
-
-                .saturday {
-                    color: blue;
-                }
-                .sunday {
-                    color: red;
-                }
-            }
-            .Date_Show_Click_After {
-                margin-left: 10px;
-                font-size: 2em;
-                :hover {
-                    cursor: pointer;
-                    color: gray;
-                }
-            }
-        }
     }
     .Room_title_container {
         width: 190px;
@@ -247,11 +248,9 @@ const TestMainDivBox = styled.div`
 
 const MainTableContainer = () => {
     moment.locale('ko');
+    const dispatch = useDispatch();
 
-    const setScrollView = useRef(null);
-    const [NowTimes, setNowTimes] = useState(new Date());
-    const [SelectBasicTitle, setSelectBasicTitle] = useState('Company_Room');
-    const [LeftHeaderInfo, setLeftHeaderInfo] = useState([
+    const RoomData = [
         {
             name: '2F_A_ROOM',
             value: '2F_A_ROOM',
@@ -301,16 +300,119 @@ const MainTableContainer = () => {
             userId: 'a34dhk08.d',
             label: '판교 8층 D룸 ( 8F_D_ROOM )',
         },
-    ]);
+    ];
+    const CarData = [
+        {
+            name: '(아산)_155허 7765',
+            value: '(아산)_155허 7765',
+            targetId: 'M220511064156A344713',
+            userId: 'a34car1.car4',
+            label: '아산 법인차량 ( (아산)_155허 7765 )',
+        },
+        {
+            name: '(아산)_191허 3152',
+            value: '(아산)_191허 3152',
+            targetId: 'M220511065112A342288',
+            userId: 'a34car1.car10',
+            label: '아산 법인차량 ( (아산)_191허 3152 )',
+        },
+        {
+            name: '(아산)_191허 3153',
+            value: '(아산)_191허 3153',
+            targetId: 'M220511064348A348000',
+            userId: 'a34car1.car6',
+            label: '아산 법인차량 ( (아산)_191허 3153 )',
+        },
+        {
+            name: '(아산)_45호 6140',
+            value: '(아산)_45호 6140',
+            targetId: 'M220511065222A346350',
+            userId: 'a34car1.car11',
+            label: '아산 법인차량 ( (아산)_45호 6140 )',
+        },
+        {
+            name: '(아산)_45호 6141',
+            value: '(아산)_45호 6141',
+            targetId: 'M220511065331A342699',
+            userId: 'a34car1.car12',
+            label: '아산 법인차량 ( (아산)_45호 6141 )',
+        },
+        {
+            name: '(아산)_45호 6142',
+            value: '(아산)_45호 6142',
+            targetId: 'M220511065431A343884',
+            userId: 'a34car1.car13',
+            label: '아산 법인차량 ( (아산)_45호 6142 )',
+        },
+        {
+            name: '(아산)_74러 3874',
+            value: '(아산)_74러 3874',
+            targetId: 'M220511065002A343682',
+            userId: 'a34car1.car9',
+            label: '아산 법인차량 ( (아산)_74러 3874 )',
+        },
+        {
+            name: '(판교)_14나 1878',
+            value: '(판교)_14나 1878',
+            targetId: 'M220511064243A342636',
+            userId: 'a34car1.car5',
+            label: '판교 법인차량 ( (판교)_14나 1878 )',
+        },
+        {
+            name: '(판교)_155허 7879',
+            value: '(판교)_155허 7879',
+            targetId: 'M220511063838A347157',
+            userId: 'a34car1.car1',
+            label: '판교 법인차량 ( (판교)_155허 7879 )',
+        },
+        {
+            name: '(판교)_155허 7880',
+            value: '(판교)_155허 7880',
+            targetId: 'M220511063942A348400',
+            userId: 'a34car1.car2',
+            label: '판교 법인차량 ( (판교)_155허 7880 )',
+        },
+        {
+            name: '(판교)_155허 8053',
+            value: '(판교)_155허 8053',
+            targetId: 'M220511064109A345960',
+            userId: 'a34car1.car3',
+            label: '판교 법인차량 ( (판교)_155허 8053 )',
+        },
+        {
+            name: '(판교)_191허 3655',
+            value: '(판교)_191허 3655',
+            targetId: 'M220511064441A34933',
+            userId: 'a34car1.car7',
+            label: '판교 법인차량 ( (판교)_191허 3655 )',
+        },
+        {
+            name: '(판교)_45호 6144',
+            value: '(판교)_45호 6144',
+            targetId: 'M220511064534A346135',
+            userId: 'a34car1.car8',
+            label: '판교 법인차량 ( (판교)_45호 6144 )',
+        },
+    ];
+    const Loading = useSelector(state => state.LoaderCheckingRedux.loading);
+
+    const setScrollView = useRef(null);
+    const [NowTimes, setNowTimes] = useState(new Date());
+    const [SelectBasicTitle, setSelectBasicTitle] = useState('Company_Room');
+    const [LeftHeaderInfo, setLeftHeaderInfo] = useState(CarData);
 
     const [SelectLeftHeaderInfo, setSelectLeftHeaderInfo] = useState(null);
     const [SelectRoom_Info_Data, setSelectRoom_Info_Data] = useState(null);
     const [RoomDatas, setRoomDatas] = useState([]);
     const [Room_8F_D_Data, setRoom_8F_D_Data] = useState([]);
-    const [Loading, setLoading] = useState(false);
+    // const [Loading, setLoading] = useState(false);
     const [FloatingMenuOnCheck, setFloatingMenuOnCheck] = useState(true);
     const [ApplyModalIsOpen, setApplyModalIsOpen] = useState(false);
+    const [SelectModalIsOpen, setSelectModalIsOpen] = useState(false);
+    const [SelectModalData, setSelectModalData] = useState(null);
+    const [SelectModalRomms_Data, setSelectModalRomms_Data] = useState(null);
     const [SelectedRoomName, setSelectRoomName] = useState(null);
+
     const [SelectDate, setSelectDate] = useState({
         StartDate: null,
         StartTime: null,
@@ -321,13 +423,14 @@ const MainTableContainer = () => {
     ///API 호출후 데이터 가져오기
 
     useEffect(() => {
-        if (RoomDatas.length === 0) getDatas();
-        // getDatas();
-    }, [NowTimes]);
+        // if (RoomDatas.length === 0) getDatas();
+        getDatas();
+    }, [NowTimes, LeftHeaderInfo]);
 
     const getDatas = async () => {
         try {
-            setLoading(true);
+            // setLoading(true);
+            dispatch(Loader_Check_For_True());
 
             const getDatasFromServer = await axios.post(`http://192.168.2.155:3003/users/Test_Brity_works_Pims_API_Router`, {
                 Show_Date: moment(NowTimes).format('YYYY-MM-DD'),
@@ -335,14 +438,15 @@ const MainTableContainer = () => {
             });
             if (getDatasFromServer.data.dataSuccess) {
                 setRoomDatas(getDatasFromServer.data.RoomDatas);
-                setLoading(false);
+                // setLoading(false);
+                dispatch(Loader_Check_For_False());
             } else {
                 toast.show({
                     title: `BrityWorks API Error발생. DHKS_IT팀(유성재)에게 문의바랍니다.`,
                     successCheck: false,
                     duration: 6000,
                 });
-                setLoading(false);
+                dispatch(Loader_Check_For_False());
             }
 
             console.log(getDatasFromServer);
@@ -353,7 +457,7 @@ const MainTableContainer = () => {
                 successCheck: false,
                 duration: 6000,
             });
-            setLoading(false);
+            dispatch(Loader_Check_For_False());
         }
     };
 
@@ -397,16 +501,17 @@ const MainTableContainer = () => {
             StartDate: new Date(NowTimes),
             StartTime: data.StartTime,
             EndDate: new Date(NowTimes),
-            EndTime: data.StartTime,
+            EndTime: moment(`${moment(NowTimes).format('YYYY-MM-DD')} ${data.StartTime}`)
+                .add(30, 'minutes')
+                .format('HH:mm'),
         });
         setApplyModalIsOpen(true);
     };
 
     return (
         <TestMainDivBox>
-            <h2>{SelectBasicTitle === 'Company_Room' ? '회의실' : '법인차량'} 예약</h2>
-            <div className="Mian_Table_Container">
-                {/* 날짜 선택 시작 */}
+            {/* 날짜 선택 시작 */}
+            <div style={{ textAlign: 'center' }}>
                 <div className="Date_Show_Click_Main_Container">
                     <div
                         className="Date_Show_Click_Before"
@@ -445,10 +550,25 @@ const MainTableContainer = () => {
                     </div>
                 </div>
                 {/* 날짜 선택 끝 */}
-
+            </div>
+            <div className="Mian_Table_Container">
                 {/* 테이블 목록 왼쪽 제목 시작 */}
                 <div className="Room_title_container">
-                    <div className="Main_Room_Time_title"></div>
+                    <div className="Main_Room_Time_title">
+                        <div style={{ lineHeight: '50px', fontSize: '1.2em', fontWeight: 'bold', color: 'red' }}>
+                            {SelectBasicTitle === 'Company_Room' ? '회의실' : '법인차량'} 예약
+                            {/* <select
+                                value={SelectBasicTitle}
+                                onChange={e => {
+                                    setSelectBasicTitle(e.target.value);
+                                    setLeftHeaderInfo(e.target.value === 'Company_Room' ? RoomData : CarData);
+                                }}
+                            >
+                                <option value="Company_Room">회의실</option>
+                                <option value="Company_Car">법인차량</option>
+                            </select> */}
+                        </div>
+                    </div>
                     {RoomDatas.map((list, i) => {
                         return <LeftHeaderShowTable key={list.name} InfoDatas={list}></LeftHeaderShowTable>;
                     })}
@@ -472,6 +592,9 @@ const MainTableContainer = () => {
                                     Room_Name={list.name}
                                     Room_Datas={list.Datas}
                                     handleTableTimeSelect={data => handleTableTimeSelect(data)}
+                                    setSelectModalIsOpen={() => setSelectModalIsOpen(true)}
+                                    setSelectModalData={data => setSelectModalData(data)}
+                                    setSelectModalRomms_Data={data => setSelectModalRomms_Data(data)}
                                 ></FloorRoomTable>
                             );
                         })}
@@ -532,12 +655,28 @@ const MainTableContainer = () => {
                     setSelectDate={data => setSelectDate(data)}
                     NowTimes={NowTimes}
                     setNowTimes={data => setNowTimes(data)}
+                    getDatas={() => getDatas()}
                 ></ApplyModal>
             ) : (
                 <></>
             )}
-
             {/* 예약시작 컴포넌트 끝*/}
+
+            {/* 예약조회 컴포넌트 시작 */}
+            {SelectModalIsOpen ? (
+                <SelectModal
+                    SelectModalIsOpen={SelectModalIsOpen}
+                    setSelectModalIsOpen={() => setSelectModalIsOpen(false)}
+                    SelectModalData={SelectModalData}
+                    RoomDatas={RoomDatas}
+                    SelectModalRomms_Data={SelectModalRomms_Data}
+                    setSelectModalData={data => setSelectModalData(data)}
+                    getDatas={() => getDatas()}
+                ></SelectModal>
+            ) : (
+                <></>
+            )}
+            {/* 예약조회 컴포넌트 끝 */}
         </TestMainDivBox>
     );
 };

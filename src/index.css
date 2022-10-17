@@ -28,3 +28,14 @@ code {
 .react-datepicker-popper {
     z-index: 1000 !important;
 }
+
+li {
+    list-style: none;
+}
+
+.ReactModal__Overlay {
+    z-index: 600;
+}
+.ReactModal__Overlay--after-open {
+    z-index: 600;
+}

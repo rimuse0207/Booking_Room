@@ -1,58 +1,9 @@
-import React, { useState } from 'react';
 import moment from 'moment';
-import { useSelector } from 'react-redux';
+import React, { useState } from 'react';
 import styled from 'styled-components';
+const SelectFloorRoomTableMainDivBox = styled.div``;
 
-const FloorRoomTableMainDivBox = styled.div`
-    .tooltip {
-        position: relative;
-        display: inline-block;
-        border-bottom: 1px dotted black;
-    }
-
-    .tooltip .tooltiptext {
-        visibility: hidden;
-        width: 120px;
-        background-color: #555;
-        color: #fff;
-        text-align: center;
-        border-radius: 6px;
-        padding: 5px 0;
-        position: absolute;
-        z-index: 1;
-        bottom: 125%;
-        left: 50%;
-        margin-left: -60px;
-        opacity: 0;
-        transition: opacity 0.3s;
-    }
-
-    .tooltip .tooltiptext::after {
-        content: '';
-        position: absolute;
-        top: 100%;
-        left: 50%;
-        margin-left: -5px;
-        border-width: 5px;
-        border-style: solid;
-        border-color: #555 transparent transparent transparent;
-    }
-
-    .tooltip:hover .tooltiptext {
-        visibility: visible;
-        opacity: 1;
-    }
-`;
-
-const FloorRoomTable = ({
-    Room_Name,
-    Room_Datas,
-    handleTableTimeSelect,
-    setSelectModalIsOpen,
-    setSelectModalData,
-    setSelectModalRomms_Data,
-}) => {
-    const LoginInfo = useSelector(state => state.LoginInfoDataRedux.Infomation);
+const SelectFloorRoomTable = ({ RoomDatas, SelectModalData, Room_Datas, setSelectModalData }) => {
     const [TimeContents, setTimeContents] = useState([
         { colors: 'lightgray', Times: '00:00', businessCheck: false },
         { colors: 'lightgray', Times: '00:30', businessCheck: false },
@@ -104,53 +55,35 @@ const FloorRoomTable = ({
         { colors: 'lightgray', Times: '23:30', businessCheck: false },
     ]);
 
-    const HandleClicks = times => {
-        const datas = {
-            StartTime: times,
-            SelectRoom: Room_Name,
-            SelectRoomInfo: Room_Datas,
-        };
-        handleTableTimeSelect(datas);
-    };
     return (
-        <FloorRoomTableMainDivBox className="Main_Room_title">
-            <div className="TableInTableLine">
-                {TimeContents.map(list => {
-                    return (
-                        <div
-                            key={list.Times}
-                            className="Main_TimeLine_Content"
-                            style={list.businessCheck ? {} : { backgroundColor: 'lightgray' }}
-                            onClick={() => HandleClicks(list.Times)}
-                        ></div>
-                    );
-                })}
+        <SelectFloorRoomTableMainDivBox>
+            <div className="Main_Room_title">
+                <div className="TableInTableLine">
+                    {TimeContents.map(list => {
+                        return (
+                            <div
+                                key={list.Times}
+                                className="Main_TimeLine_Content"
+                                style={list.businessCheck ? {} : { backgroundColor: 'lightgray' }}
+                            ></div>
+                        );
+                    })}
 
-                {Room_Datas.map((list, i) => {
-                    return (
-                        <div>
+                    {Room_Datas.map((list, i) => {
+                        return (
                             <div
                                 style={{
-                                    left: `${list.PostionLeftPxCal * 60 + 5}px`,
-                                    width: `${list.WidthLeftPxCal * 60 - 10}px`,
-                                    height: '100%',
+                                    left: `${list.PostionLeftPxCal * 40 + 4}px`,
+                                    width: `${list.WidthLeftPxCal * 40 - 8}px`,
+                                    height: '90%',
                                 }}
                                 className="Reservation_Room_Container"
                                 key={list.scheduleId}
                             >
                                 <div
                                     className="Reservation_Room_date"
-                                    onClick={() => {
-                                        setSelectModalIsOpen();
-                                        setSelectModalData(list);
-                                        setSelectModalRomms_Data({ SelectRoom: Room_Name, SelectRoomInfo: Room_Datas });
-                                    }}
-                                    style={
-                                        LoginInfo.Login_name === list.subject.split('____')[1] ||
-                                        LoginInfo.Login_name === list.attendees[0].displayName.split('/')[0]
-                                            ? { backgroundColor: '#368', color: '#fff' }
-                                            : {}
-                                    }
+                                    style={SelectModalData.scheduleId === list.scheduleId ? { background: 'orange', color: '#fff' } : {}}
+                                    onClick={() => setSelectModalData(list)}
                                 >
                                     <div className="ContentTextCotainer">
                                         <div className="ContentTitle">{list.class === 'PUBLIC' ? list.subject : '비공개'}</div>
@@ -159,29 +92,19 @@ const FloorRoomTable = ({
                                                 ? list.subject.split('____')[1]
                                                 : list.attendees[0].displayName.split('/')[0]}
                                         </div>
-                                        {list.allDayYn === 'Y' ? (
-                                            <div className="Content_times">
-                                                {moment(list.startTime.date).format('MM월 DD일')} ~{' '}
-                                                {moment(list.endTime.date).format('MM월 DD일')}
-                                            </div>
-                                        ) : (
-                                            <div className="Content_times">
-                                                {moment(list.startTime.dateTime).format('HH:mm')} ~{' '}
-                                                {moment(list.endTime.dateTime).format('HH:mm')}
-                                            </div>
-                                        )}
+                                        <div className="Content_times">
+                                            {moment(list.startTime.dateTime).format('HH:mm')} ~{' '}
+                                            {moment(list.endTime.dateTime).format('HH:mm')}
+                                        </div>
                                     </div>
-                                    {/* <div className="Reservation_Room_date tooltip">
-                                        <div className="tooltiptext">Tooltip text</div>
-                                    </div> */}
                                 </div>
                             </div>
-                        </div>
-                    );
-                })}
+                        );
+                    })}
+                </div>
             </div>
-        </FloorRoomTableMainDivBox>
+        </SelectFloorRoomTableMainDivBox>
     );
 };
 
-export default FloorRoomTable;
+export default SelectFloorRoomTable;
