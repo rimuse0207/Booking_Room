@@ -5,6 +5,7 @@ import { GiHamburgerMenu } from 'react-icons/gi';
 import HambergerMenuMainPage from './HambergerMenu/HambergerMenuMainPage';
 import UserInfoMainPage from './HambergerMenu/UserInfoPage/UserInfoMainPage';
 import { useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
 
 const NavigationMainPageMainDivBox = styled.div`
     border-bottom: 1px solid #368;
@@ -32,7 +33,7 @@ const NavigationMainPageMainDivBox = styled.div`
             position: absolute;
             left: 0px;
             right: 0px;
-            top: -25px;
+            top: -16px;
         }
         .NAV_Display_Profile_Right {
             position: absolute;
@@ -40,6 +41,9 @@ const NavigationMainPageMainDivBox = styled.div`
             right: 70px;
             font-size: 2em;
             color: #fff;
+            @media only screen and (max-width: 800px) {
+                display: none;
+            }
             :hover {
                 cursor: pointer;
             }
@@ -69,20 +73,26 @@ const NavigationMainPageMainDivBox = styled.div`
 `;
 
 const NavigationMainPage = () => {
+    const { UserId, UserCompany } = useParams();
     const LoginInfo = useSelector(state => state.LoginInfoDataRedux.Infomation);
+    const SelectBasicTitle = useSelector(state => state.TitleSelectorRedux.SelectBasicTitle);
     const [UserInfoMenuBarIsOpen, setUserInfoMenuBarIsOpen] = useState(false);
 
     return (
         <NavigationMainPageMainDivBox>
             <div className="NAV_Display_Cotainer">
-                <div className="NAV_Display_Menu_Left" onClick={() => alert('asda')}>
+                <div className="NAV_Display_Menu_Left">
                     <div>
                         {/* <GiHamburgerMenu></GiHamburgerMenu> */}
                         <HambergerMenuMainPage></HambergerMenuMainPage>
                     </div>
                 </div>
                 <div className="NAV_Display_Title_Center">
-                    <h2>회의실 예약</h2>
+                    {UserCompany === 'Company_DHK' ? (
+                        <h2>사용자 관리</h2>
+                    ) : (
+                        <h2>{SelectBasicTitle === 'Company_Room' ? '회의실' : '법인차량'} 예약</h2>
+                    )}
                 </div>
                 <div className="NAV_Display_Profile_Right">
                     <div onClick={() => setUserInfoMenuBarIsOpen(!UserInfoMenuBarIsOpen)}>

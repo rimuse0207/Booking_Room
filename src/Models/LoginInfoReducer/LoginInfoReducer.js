@@ -9,6 +9,7 @@ const initState = {
         Login_epid: null,
         Login_epid_id: null,
         Login_token: null,
+        Login_Admin_Access: false,
     },
 };
 

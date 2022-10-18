@@ -128,7 +128,7 @@ const FloorRoomTable = ({
 
                 {Room_Datas.map((list, i) => {
                     return (
-                        <div>
+                        <div key={list.scheduleId}>
                             <div
                                 style={{
                                     left: `${list.PostionLeftPxCal * 60 + 5}px`,
@@ -136,7 +136,6 @@ const FloorRoomTable = ({
                                     height: '100%',
                                 }}
                                 className="Reservation_Room_Container"
-                                key={list.scheduleId}
                             >
                                 <div
                                     className="Reservation_Room_date"

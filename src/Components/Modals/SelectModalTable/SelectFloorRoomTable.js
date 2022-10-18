@@ -92,10 +92,21 @@ const SelectFloorRoomTable = ({ RoomDatas, SelectModalData, Room_Datas, setSelec
                                                 ? list.subject.split('____')[1]
                                                 : list.attendees[0].displayName.split('/')[0]}
                                         </div>
-                                        <div className="Content_times">
+                                        {list.allDayYn === 'Y' ? (
+                                            <div className="Content_times">
+                                                {moment(list.startTime.date).format('MM월 DD일')} ~{' '}
+                                                {moment(list.endTime.date).format('MM월 DD일')}
+                                            </div>
+                                        ) : (
+                                            <div className="Content_times">
+                                                {moment(list.startTime.dateTime).format('HH:mm')} ~{' '}
+                                                {moment(list.endTime.dateTime).format('HH:mm')}
+                                            </div>
+                                        )}
+                                        {/* <div className="Content_times">
                                             {moment(list.startTime.dateTime).format('HH:mm')} ~{' '}
                                             {moment(list.endTime.dateTime).format('HH:mm')}
-                                        </div>
+                                        </div> */}
                                     </div>
                                 </div>
                             </div>

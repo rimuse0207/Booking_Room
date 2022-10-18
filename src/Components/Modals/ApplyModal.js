@@ -51,9 +51,16 @@ const ApplyModalMainDivBox = styled.div`
         min-width: 880px;
         background-color: #fff;
         position: relative;
+        @media only screen and (max-width: 800px) {
+            width: 100% !important;
+            min-width: 0px;
+        }
     }
     .Modal_Apply_Room_title_container {
         width: 190px;
+        @media only screen and (max-width: 800px) {
+            width: 90px !important;
+        }
         .Modal_Apply_Main_Room_Time_title {
             height: 50px;
             text-align: center;
@@ -65,6 +72,11 @@ const ApplyModalMainDivBox = styled.div`
             text-align: center;
             font-weight: bold;
             width: 190px;
+            line-height: 42px;
+            @media only screen and (max-width: 800px) {
+                width: 90px !important;
+                font-size: 0.7em;
+            }
         }
     }
     .Modal_Apply_Room_Content_container {
@@ -72,6 +84,10 @@ const ApplyModalMainDivBox = styled.div`
 
         min-width: 880px;
         overflow-x: scroll;
+        @media only screen and (max-width: 800px) {
+            width: 100% !important;
+            min-width: 0px;
+        }
         ::-webkit-scrollbar {
             width: 5px;
             height: 10px;
@@ -119,6 +135,7 @@ const ApplyModalMainDivBox = styled.div`
                             overflow: hidden;
                             text-overflow: ellipsis;
                             white-space: nowrap;
+                            padding-top: 8px;
                             :hover {
                                 cursor: pointer;
                                 opacity: 0.9;
@@ -185,6 +202,7 @@ const ApplyModalMainDivBox = styled.div`
         position: relative;
         .TableInTableLine_Hours {
             display: flex;
+            padding-top: 8px;
             .Main_TimeLine_Hour_content {
                 width: 80px;
                 text-align: center;
@@ -217,6 +235,12 @@ const ApplyModalMainDivBox = styled.div`
         max-width: 800px;
         height: 40px;
         margin-bottom: 30px;
+        @media only screen and (max-width: 800px) {
+            width: 100% !important;
+            min-width: 100%;
+            max-width: 100%;
+            height: 100%;
+        }
         ::after {
             display: block;
             content: '';
@@ -226,9 +250,23 @@ const ApplyModalMainDivBox = styled.div`
             float: left;
             width: 100px;
             font-size: 1em;
-
             font-weight: bold;
             line-height: 40px;
+            @media only screen and (max-width: 800px) {
+                width: 100% !important;
+                float: none;
+                display: block;
+            }
+        }
+        .Mobile_Time_Right {
+            @media only screen and (max-width: 800px) {
+                display: inline-block !important;
+            }
+        }
+        .MiddleTime {
+            @media only screen and (max-width: 800px) {
+                text-align: center;
+            }
         }
         .Float_cotainer_box_Right {
             margin-left: 10px;
@@ -236,9 +274,19 @@ const ApplyModalMainDivBox = styled.div`
             width: calc(100%-100px);
             display: flex;
             height: 100%;
+            @media only screen and (max-width: 800px) {
+                width: 100% !important;
+                float: none;
+            }
+
             .Float_cotainer_box_Right_InpuBox_cotainer {
                 min-width: 400px;
                 height: 100%;
+                @media only screen and (max-width: 800px) {
+                    width: 100% !important;
+                    min-width: 0px;
+                    height: 40px;
+                }
                 input {
                     height: 100%;
                     width: 100%;
@@ -252,6 +300,9 @@ const ApplyModalMainDivBox = styled.div`
                 height: 100%;
                 padding-left: 5px;
                 padding-right: 5px;
+                @media only screen and (max-width: 800px) {
+                    margin-bottom: 10px !important;
+                }
                 .example-custom-input {
                     border: none;
                     width: 100%;
@@ -262,6 +313,8 @@ const ApplyModalMainDivBox = styled.div`
             .TimePickerUserContainer {
                 border: 1px solid gray;
                 height: 100%;
+                @media only screen and (max-width: 800px) {
+                }
                 select {
                     border: none;
                     width: 100%;
@@ -269,6 +322,12 @@ const ApplyModalMainDivBox = styled.div`
                     font-size: 0.9em;
                     padding-left: 10px;
                     padding-right: 10px;
+                    @media only screen and (max-width: 800px) {
+                        width: 100% !important;
+                        min-width: 0px;
+                        height: 40px;
+                        text-align: center;
+                    }
                 }
             }
         }
@@ -285,6 +344,10 @@ const ApplyModalMainDivBox = styled.div`
             :hover {
                 cursor: pointer;
             }
+            @media only screen and (max-width: 800px) {
+                width: 90px !important;
+                font-size: 0.9em;
+            }
         }
         .Cancle {
             background-color: orange;
@@ -293,6 +356,9 @@ const ApplyModalMainDivBox = styled.div`
             :hover {
                 background-color: #efefef;
                 color: orange;
+            }
+            @media only screen and (max-width: 800px) {
+                margin-right: 10px;
             }
         }
         .Delete {
@@ -303,6 +369,9 @@ const ApplyModalMainDivBox = styled.div`
                 background-color: #efefef;
                 color: red;
             }
+            @media only screen and (max-width: 800px) {
+                margin-left: 10px;
+            }
         }
         .Submit {
             background-color: green;
@@ -311,6 +380,9 @@ const ApplyModalMainDivBox = styled.div`
             :hover {
                 background-color: #efefef;
                 color: green;
+            }
+            @media only screen and (max-width: 800px) {
+                margin-right: 10px;
             }
         }
     }
@@ -331,6 +403,7 @@ const ApplyModal = ({
     getDatas,
 }) => {
     const dispatch = useDispatch();
+
     const LoginInfo = useSelector(state => state.LoginInfoDataRedux.Infomation);
     const [TimesStateData, setTimesStateData] = useState([
         { value: '00:00', label: '00:00' },
@@ -391,6 +464,7 @@ const ApplyModal = ({
 
     //예약 할 일정 라임으로 표시
     const [SelectedShowTableTimes, setSelectedShowTableTimes] = useState({
+        Public_Check: false,
         AlldayChecking: false,
         PositionLeftPxCal: 0,
         WidthLeftPxCal: 0,
@@ -406,6 +480,8 @@ const ApplyModal = ({
         setSelectLeftHeaderInfo(null);
         setSelectDate({ StartDate: null, StartTime: null, EndDate: null, EndTime: null });
         setSelectedShowTableTimes({
+            Public_Check: false,
+            AlldayChecking: false,
             PositionLeftPxCal: 0,
             WidthLeftPxCal: 0,
             StartTime: null,
@@ -482,7 +558,6 @@ const ApplyModal = ({
             });
         } else {
             //날짜가 다름 표시 X
-            console.log('날짜가 다름');
             setSelectedShowTableTimes({
                 ...SelectedShowTableTimes,
                 PositionLeftPxCal: 0,
@@ -534,10 +609,19 @@ const ApplyModal = ({
         return new Date(new Date(date.getFullYear(), date.getMonth(), date.getDate(), 0, 0, 0));
     };
 
+    //예약하기 버튼 클릭 시
     const handleRoomReservation = async () => {
         try {
+            if (!TitleBooking) {
+                toast.show({
+                    title: `제목을 입력 해주세요. `,
+                    successCheck: false,
+                    duration: 5000,
+                });
+                return;
+            }
             dispatch(Loader_Check_For_True());
-            const ReserverationForServer = await axios.post(`http://192.168.2.155:3003/users/BrityWorksBooking_For_API`, {
+            const ReserverationForServer = await axios.post(`${process.env.REACT_APP_DB_HOST}/users/BrityWorksBooking_For_API`, {
                 ApplyModalData,
                 SelectedShowTableTimes,
                 SelectLeftHeaderInfo,
@@ -546,7 +630,6 @@ const ApplyModal = ({
             });
 
             if (ReserverationForServer.data.dataSuccess) {
-                console.log(ReserverationForServer);
                 getDatas();
                 ModalPopUpClose();
                 dispatch(Loader_Check_For_False());
@@ -571,12 +654,12 @@ const ApplyModal = ({
             }
         } catch (error) {
             console.log(error);
+            dispatch(Loader_Check_For_False());
             toast.show({
                 title: `Error 발생. IT팀에 문의바랍니다. `,
                 successCheck: false,
                 duration: 5000,
             });
-            dispatch(Loader_Check_For_False());
         }
     };
 
@@ -607,6 +690,7 @@ const ApplyModal = ({
                             ? RoomDatas.map((list, i) => {
                                   return list.name === SelectLeftHeaderInfo.name ? (
                                       <ApplyModalTable
+                                          key={list.name}
                                           SelectLeftHeaderInfo={SelectLeftHeaderInfo}
                                           SelectRoom_Info_Data={list.Datas}
                                           SelectedShowTableTimes={SelectedShowTableTimes}
@@ -624,7 +708,7 @@ const ApplyModal = ({
                         <div style={{ marginTop: '20px' }}>
                             <div className="Float_cotainer_box" style={{ marginBottom: '5px' }}>
                                 <div className="Float_cotainer_box_Left">예약 일자</div>
-                                <div className="Float_cotainer_box_Right">
+                                <div className="Float_cotainer_box_Right Mobile_Time_Right">
                                     <div className="DatePickerUseContainer">
                                         <DatePicker
                                             locale={ko}
@@ -667,7 +751,10 @@ const ApplyModal = ({
                                         <div></div>
                                     )}
 
-                                    <div style={{ marginRight: '10px', marginLeft: '10px', fontWeight: 'bold', lineHeight: '36px' }}>
+                                    <div
+                                        className="MiddleTime"
+                                        style={{ marginRight: '10px', marginLeft: '10px', fontWeight: 'bold', lineHeight: '36px' }}
+                                    >
                                         {' ~ '}
                                     </div>
                                     <div className="DatePickerUseContainer">
@@ -718,12 +805,31 @@ const ApplyModal = ({
                                     공란
                                 </div>
                                 <div className="Float_cotainer_box_Right" style={{ margin: 0 }}>
-                                    <div>종일</div>
+                                    <div>
+                                        <label htmlFor="EveryDay">종일</label>
+                                    </div>
                                     <div>
                                         <input
+                                            id="EveryDay"
                                             type="CheckBox"
                                             value={SelectedShowTableTimes.AlldayChecking}
                                             onChange={() => handleChangeAllDayBooking()}
+                                        ></input>
+                                    </div>
+                                    <div style={{ marginLeft: '30px' }}>
+                                        <label htmlFor="Public_Check">비공개</label>
+                                    </div>
+                                    <div>
+                                        <input
+                                            id="Public_Check"
+                                            type="CheckBox"
+                                            value={SelectedShowTableTimes.Public_Check}
+                                            onChange={() =>
+                                                setSelectedShowTableTimes({
+                                                    ...SelectedShowTableTimes,
+                                                    Public_Check: !SelectedShowTableTimes.Public_Check,
+                                                })
+                                            }
                                         ></input>
                                     </div>
                                 </div>

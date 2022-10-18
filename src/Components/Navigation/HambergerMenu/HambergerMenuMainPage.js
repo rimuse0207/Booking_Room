@@ -1,5 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import { LOGOUT_INFO_DATA_Changes } from '../../../Models/LoginInfoReducer/LoginInfoReducer';
+import { Title_Change_Func } from '../../../Models/TitleSelectorReducer/TitleSelectorReducer';
 
 const HambergerMenuMainPageMainDivBox = styled.div`
     .menubar {
@@ -133,15 +137,71 @@ const HambergerMenuMainPageMainDivBox = styled.div`
 
     .IsOpen_Menu_Cotainer {
         background-color: #368;
-        width: 300px;
+        width: 200px;
         height: 90vh;
-        position: fixed;
-        top: 60px;
-        left: 0px;
+        position: absolute;
+        top: 50px;
+        left: -20px;
+        font-size: 1em;
+        ul {
+            font-size: 0.6em;
+            padding-left: 0px;
+            li {
+                border-top: 0.5px solid #fff;
+                text-align: start;
+                a,
+                div {
+                    width: 100%;
+                    height: 100%;
+                    display: block;
+                    padding-top: 10px;
+                    padding-bottom: 10px;
+                    padding-left: 20px;
+                }
+                :hover {
+                    cursor: pointer;
+                    background-color: #fff;
+                    color: black;
+                }
+            }
+        }
+
+        animation-name: slideOn;
+        animation-duration: 1s;
+        @keyframes slideOn {
+            from {
+                left: -220px;
+            }
+
+            to {
+                left: -20px;
+            }
+        }
+    }
+    .IsClose_Menu_Cotainer {
+        background-color: #368;
+        width: 200px;
+        height: 90vh;
+        position: absolute;
+        top: 50px;
+        left: -220px;
+        animation-name: slideOff;
+        animation-duration: 0.5s;
+        @keyframes slideOff {
+            from {
+                left: -20px;
+            }
+
+            to {
+                left: -220px;
+            }
+        }
     }
 `;
 
 const HambergerMenuMainPage = () => {
+    const LoginInfo = useSelector(state => state.LoginInfoDataRedux.Infomation);
+    const dispatch = useDispatch();
     const myMenuRef = useRef('null');
     const [hambergerOpen, setHambergerOpen] = useState(false);
     const [menuStatus, setMenuStatus] = useState('');
@@ -167,9 +227,6 @@ const HambergerMenuMainPage = () => {
     return (
         <HambergerMenuMainPageMainDivBox ref={myMenuRef}>
             <div className="menubar">
-                {/* <div className="MainTitles">
-                    <h1>{titles}</h1>
-                </div> */}
                 <div className="hambclicker" onClick={e => _menuToggle(e)}></div>
                 <div id="hambmenu" className={menuStatus}>
                     <span></span>
@@ -179,7 +236,42 @@ const HambergerMenuMainPage = () => {
                 </div>
                 <div>{/* <Navigation menuStatus={menuStatus} setHambergerOpen={(e) => _menuToggle(e)} /> */}</div>
             </div>
-            {/* {hambergerOpen ? <div className="IsOpen_Menu_Cotainer">ddd</div> : <div className="IsClose_Menu_Cotainer">xxxxx</div>} */}
+            {hambergerOpen ? (
+                <div className="IsOpen_Menu_Cotainer">
+                    <ul>
+                        <li>
+                            <Link to="/">회의실 예약</Link>
+                        </li>
+                        {LoginInfo.Login_Admin_Access ? (
+                            <li>
+                                <Link to={`/User_Select_or_Add/${LoginInfo.Login_id}/Company_DHK`}>사용자 등록 및 조회</Link>
+                            </li>
+                        ) : (
+                            <></>
+                        )}
+
+                        {!LoginInfo.Login_id ? (
+                            <li style={{ borderBottom: '0.5px solid #fff' }}>
+                                <Link to="/Login_Page">로그인</Link>
+                            </li>
+                        ) : (
+                            <li
+                                style={{ borderBottom: '0.5px solid #fff' }}
+                                onClick={() => {
+                                    // setMenuStatus('');
+                                    // setHambergerOpen(false);
+                                    dispatch(Title_Change_Func('Company_Room'));
+                                    dispatch(LOGOUT_INFO_DATA_Changes());
+                                }}
+                            >
+                                <div>로그아웃</div>
+                            </li>
+                        )}
+                    </ul>
+                </div>
+            ) : (
+                <div className="IsClose_Menu_Cotainer"></div>
+            )}
         </HambergerMenuMainPageMainDivBox>
     );
 };

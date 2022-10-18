@@ -2,17 +2,17 @@ import axios from 'axios';
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
-import { LOGIN_INFO_DATA_Changes } from '../../../Models/LoginInfoReducer/LoginInfoReducer';
-import { toast } from '../../ToasMessage/ToastManager';
-
-const LoginModalMainPageMainDivBox = styled.div`
+import { LOGIN_INFO_DATA_Changes } from '../../Models/LoginInfoReducer/LoginInfoReducer';
+import { toast } from '../ToasMessage/ToastManager';
+import { useHistory } from 'react-router-dom';
+const LoginMainPageMainDivBox = styled.div`
     background-color: #efefef;
     font-size: 1.6rem;
     font-family: 'Open Sans', sans-serif;
     color: #2b3e51;
-    height: 100%;
     padding-top: 10px;
     border-radius: 5px;
+    min-height: 100vh;
     h2 {
         font-weight: 300;
         text-align: center;
@@ -53,6 +53,7 @@ const LoginModalMainPageMainDivBox = styled.div`
         box-shadow: 0px 30px 50px 0px rgba(0, 0, 0, 0.2);
         height: 90%;
         border-radius: 5px;
+        padding-bottom: 70px;
         @media only screen and (max-width: 800px) {
             width: 100%;
         }
@@ -60,10 +61,6 @@ const LoginModalMainPageMainDivBox = styled.div`
 
     #login-form {
         padding: 0 60px;
-        @media only screen and (max-width: 800px) {
-            padding-left: 10px;
-            padding-right: 10px;
-        }
     }
 
     input {
@@ -173,7 +170,8 @@ const LoginModalMainPageMainDivBox = styled.div`
     }
 `;
 
-const LoginModalMainPage = () => {
+const LoginMainPage = () => {
+    const history = useHistory();
     const dispatch = useDispatch();
     const [LoginInfoData, setLoginInfoData] = useState({
         ID: '',
@@ -190,7 +188,6 @@ const LoginModalMainPage = () => {
         if (CheckingLoginFromServer.data.dataSuccess) {
             if (!CheckingLoginFromServer.data.PasswordChange) {
                 //로그인 성공
-
                 const datas = {
                     Login_id: CheckingLoginFromServer.data.Getting_Brity_Works_User_Info_Rows[0].brity_works_user_info_id,
                     Login_name: CheckingLoginFromServer.data.Getting_Brity_Works_User_Info_Rows[0].brity_works_user_info_name,
@@ -198,14 +195,19 @@ const LoginModalMainPage = () => {
                     Login_epid: CheckingLoginFromServer.data.Getting_Brity_Works_User_Info_Rows[0].brity_works_user_info_epid,
                     Login_epid_id: CheckingLoginFromServer.data.Getting_Brity_Works_User_Info_Rows[0].brity_works_user_info_epid_id,
                     Login_token: CheckingLoginFromServer.data.Getting_Brity_Works_User_Info_Rows[0].brity_works_user_info_token,
+                    Login_Admin_Access:
+                        CheckingLoginFromServer.data.Getting_Brity_Works_User_Info_Rows[0].brity_works_user_info_amdin_access === 1
+                            ? true
+                            : false,
                 };
                 dispatch(LOGIN_INFO_DATA_Changes(datas));
+                history.push('/');
             } else {
                 //비밀번호 변경 요청
                 toast.show({
                     title: `초기비밀번호입니다. 비밀번호를 변경 해주세요.`,
                     successCheck: false,
-                    duration: 6000,
+                    duration: 9000,
                 });
             }
         } else {
@@ -218,7 +220,7 @@ const LoginModalMainPage = () => {
     };
 
     return (
-        <LoginModalMainPageMainDivBox>
+        <LoginMainPageMainDivBox>
             <div id="login-form-wrap" onSubmit={e => HandleSubmitLogin(e)}>
                 <h2>Login</h2>
                 <form id="login-form">
@@ -260,8 +262,8 @@ const LoginModalMainPage = () => {
                     </span>
                 </form>
             </div>
-        </LoginModalMainPageMainDivBox>
+        </LoginMainPageMainDivBox>
     );
 };
 
-export default LoginModalMainPage;
+export default LoginMainPage;

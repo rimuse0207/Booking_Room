@@ -7,18 +7,31 @@ const SelectModalContentMainDivBox = styled.div`
     .BookingCheck_Cotainer {
         display: flex;
         align-items: center;
+        @media only screen and (max-width: 800px) {
+            display: block;
+            width: 90%;
+        }
 
         .BookingCheck_Cotainer_Title {
             width: 130px;
             font-size: 1.1em;
+            @media only screen and (max-width: 800px) {
+                display: block;
+                width: 90%;
+            }
         }
         .BookingCheck_Cotainer_SubTitle {
             min-width: 500px;
             border: 1px solid lightgray;
             height: 40px;
-            line-height: 35px;
-            padding-left: 10px;
+            line-height: 42px;
+            padding-left: 15px;
             border-radius: 5px;
+            @media only screen and (max-width: 800px) {
+                display: block;
+                width: 100% !important;
+                min-width: 0px;
+            }
         }
     }
 `;

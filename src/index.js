@@ -10,6 +10,7 @@ import { PersistGate } from 'redux-persist/integration/react';
 import { createLogger } from 'redux-logger';
 import rootReducer from './Models/index';
 import { persistConfig } from './Configs/ReduxPersistConfig';
+import RouterPage from './RouterPage';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
@@ -22,6 +23,7 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}></PersistGate>
-        <App />
+        {/* <App /> */}
+        <RouterPage></RouterPage>
     </Provider>
 );

@@ -53,28 +53,6 @@ const ApplyFloorRoomTable = ({ Room_Datas, SelectedShowTableTimes, setApplyModal
         { colors: 'lightgray', Times: '23:30', businessCheck: false },
     ]);
 
-    // const HandleTableTimeClick = data => {
-    //     console.log(data);
-    //     if (!SelectedShowTableTimes.StartTime) {
-    //         //시작 시간이 있을때,
-    //         setApplyModalData({
-    //             ...ApplyModalData,
-    //             StartDate: ApplyModalData.StartDate,
-    //             EndDate: ApplyModalData.EndDate,
-    //             StartTime: data,
-    //         });
-    //     } else {
-    //         //시작 시간이 없을때,
-    //         setApplyModalData({
-    //             ...ApplyModalData,
-    //             StartDate: ApplyModalData.StartDate,
-    //             EndDate: ApplyModalData.EndDate,
-    //             EndTime: data,
-    //         });
-    //     }
-    // };
-    // console.log('APPLYROOM1', ApplyModalData);
-    // console.log('APPLYROOM2', SelectedShowTableTimes);
     return (
         <div className="Main_Room_title">
             <div className="TableInTableLine">
@@ -102,10 +80,25 @@ const ApplyFloorRoomTable = ({ Room_Datas, SelectedShowTableTimes, setApplyModal
                         >
                             <div className="Reservation_Room_date">
                                 <div className="ContentTextCotainer">
-                                    <div className="ContentTitle">{list.subject}</div>
-                                    <div className="Content_useId">{list.userId}</div>
+                                    <div className="ContentTitle">{list.class === 'PUBLIC' ? list.subject : '비공개'}</div>
+                                    <div className="Content_useId">
+                                        {list.subject.split('____').length > 1
+                                            ? list.subject.split('____')[1]
+                                            : list.attendees[0].displayName.split('/')[0]}
+                                    </div>
                                     <div className="Content_times">
-                                        {moment(list.startTime.dateTime).format('HH:mm')} ~ {moment(list.endTime.dateTime).format('HH:mm')}
+                                        {/* {moment(list.startTime.dateTime).format('HH:mm')} ~ {moment(list.endTime.dateTime).format('HH:mm')} */}
+                                        {list.allDayYn === 'Y' ? (
+                                            <div className="Content_times">
+                                                {moment(list.startTime.date).format('MM월 DD일')} ~{' '}
+                                                {moment(list.endTime.date).format('MM월 DD일')}
+                                            </div>
+                                        ) : (
+                                            <div className="Content_times">
+                                                {moment(list.startTime.dateTime).format('HH:mm')} ~{' '}
+                                                {moment(list.endTime.dateTime).format('HH:mm')}
+                                            </div>
+                                        )}
                                     </div>
                                 </div>
                             </div>

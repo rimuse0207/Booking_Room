@@ -43,13 +43,23 @@ const SelectModalMainDivBox = styled.div`
         min-width: 880px;
         background-color: #fff;
         position: relative;
+        @media only screen and (max-width: 800px) {
+            width: 100% !important;
+            min-width: 0px;
+        }
     }
     .Modal_Apply_Room_title_container {
         width: 190px;
+        @media only screen and (max-width: 800px) {
+            width: 80px !important;
+        }
         .Modal_Apply_Main_Room_Time_title {
             height: 50px;
             text-align: center;
             width: 190px;
+            @media only screen and (max-width: 800px) {
+                width: 80px !important;
+            }
         }
         .Main_Room_title {
             border: 1px solid #b0b0b0;
@@ -57,6 +67,11 @@ const SelectModalMainDivBox = styled.div`
             text-align: center;
             font-weight: bold;
             width: 190px;
+            line-height: 40px;
+            @media only screen and (max-width: 800px) {
+                width: 80px !important;
+                font-size: 0.7em;
+            }
         }
     }
     .Modal_Apply_Room_Content_container {
@@ -64,6 +79,11 @@ const SelectModalMainDivBox = styled.div`
 
         min-width: 880px;
         overflow-x: scroll;
+        @media only screen and (max-width: 800px) {
+            width: 90% !important;
+            font-size: 0.7em;
+            min-width: 0px;
+        }
         ::-webkit-scrollbar {
             width: 5px;
             height: 10px;
@@ -121,6 +141,7 @@ const SelectModalMainDivBox = styled.div`
                                 overflow: hidden;
                                 font-weight: light;
                                 white-space: nowrap;
+                                padding-top: 8px;
                                 .ContentTitle {
                                     overflow: hidden;
                                     text-overflow: ellipsis;
@@ -177,6 +198,7 @@ const SelectModalMainDivBox = styled.div`
         position: relative;
         .TableInTableLine_Hours {
             display: flex;
+            padding-top: 7px;
             .Main_TimeLine_Hour_content {
                 width: 80px;
                 text-align: center;
@@ -209,6 +231,7 @@ const SelectModalMainDivBox = styled.div`
         max-width: 800px;
         height: 40px;
         margin-bottom: 30px;
+
         ::after {
             display: block;
             content: '';
@@ -317,7 +340,7 @@ const SelectModal = ({
 
     const handleDeleteBooking = async () => {
         try {
-            const DeleteFromBookingData = await axios.post(`http://192.168.2.155:3003/users/BrityWorks_Delete_From_Data`, {
+            const DeleteFromBookingData = await axios.post(`${process.env.REACT_APP_DB_HOST}/users/BrityWorks_Delete_From_Data`, {
                 SelectModalData,
                 LoginInfo,
             });
@@ -338,6 +361,11 @@ const SelectModal = ({
             }
         } catch (error) {
             console.log(error);
+            toast.show({
+                title: `Error 발생. IT팀에 문의바랍니다. `,
+                successCheck: false,
+                duration: 5000,
+            });
         }
     };
 

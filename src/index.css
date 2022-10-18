@@ -12,6 +12,7 @@ code {
 
 * {
     box-sizing: border-box;
+    font-family: GangwonEdu_OTFBoldA;
 }
 
 #toast-container-main {
@@ -38,4 +39,25 @@ li {
 }
 .ReactModal__Overlay--after-open {
     z-index: 600;
+}
+
+@font-face {
+    font-family: 'GangwonEdu_OTFBoldA';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/GangwonEdu_OTFBoldA.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+select {
+    font-family: 'revert';
+}
+a {
+    color: #fff;
+    text-decoration: none;
+}
+
+a:visited {
+    color: #fff;
+}
+a:hover {
+    color: black;
 }

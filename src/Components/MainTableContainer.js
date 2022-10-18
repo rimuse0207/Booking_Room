@@ -22,10 +22,10 @@ import ApplyModal from './Modals/ApplyModal';
 import { useDispatch, useSelector } from 'react-redux';
 import { Loader_Check_For_False, Loader_Check_For_True } from '../Models/LoaderCheckReducer/LoaderCheckReducer';
 import SelectModal from './Modals/SelectModal';
+import { Title_Change_Func } from '../Models/TitleSelectorReducer/TitleSelectorReducer';
 
 const TestMainDivBox = styled.div`
-    min-height: 100vh;
-    padding: 10px;
+    margin-bottom: 30px;
     .Date_Show_Click_Main_Container {
         text-align: center;
         display: flex;
@@ -79,13 +79,24 @@ const TestMainDivBox = styled.div`
         min-width: 1510px;
         background-color: #fff;
         position: relative;
+        @media only screen and (max-width: 800px) {
+            min-width: 50px !important;
+        }
     }
     .Room_title_container {
         width: 190px;
+        @media only screen and (max-width: 800px) {
+            min-width: 100px !important;
+            font-size: 0.5em;
+            text-align: start;
+        }
         .Main_Room_Time_title {
             height: 50px;
             text-align: center;
             width: 190px;
+            @media only screen and (max-width: 800px) {
+                width: 100px !important;
+            }
         }
         .Main_Room_title {
             border: 1px solid #b0b0b0;
@@ -93,6 +104,10 @@ const TestMainDivBox = styled.div`
             text-align: center;
             font-weight: bold;
             width: 190px;
+            line-height: 43px;
+            @media only screen and (max-width: 800px) {
+                width: 100px !important;
+            }
         }
     }
     .Room_Content_container {
@@ -100,6 +115,11 @@ const TestMainDivBox = styled.div`
 
         min-width: 1260px;
         overflow-x: scroll;
+
+        @media only screen and (max-width: 800px) {
+            min-width: 100px !important;
+        }
+
         ::-webkit-scrollbar {
             width: 5px;
             height: 10px;
@@ -118,6 +138,7 @@ const TestMainDivBox = styled.div`
             height: 50px;
             text-align: center;
         }
+
         ///Room에 따른 시간 Table CSS
         .Main_TimeLine_Table_Contents {
             width: 2882px;
@@ -126,6 +147,9 @@ const TestMainDivBox = styled.div`
                 height: 70px;
                 text-align: center;
                 font-weight: bold;
+                @media only screen and (max-width: 800px) {
+                    min-width: 100px !important;
+                }
                 .TableInTableLine {
                     display: flex;
                     height: 100%;
@@ -152,10 +176,11 @@ const TestMainDivBox = styled.div`
                             }
 
                             .ContentTextCotainer {
-                                font-size: 0.7em;
+                                font-size: 0.9em;
                                 overflow: hidden;
                                 font-weight: light;
                                 white-space: nowrap;
+                                padding-top: 5px;
                                 .ContentTitle {
                                     overflow: hidden;
                                     text-overflow: ellipsis;
@@ -212,6 +237,7 @@ const TestMainDivBox = styled.div`
         position: relative;
         .TableInTableLine_Hours {
             display: flex;
+            padding-top: 10px;
             .Main_TimeLine_Hour_content {
                 width: 120px;
                 text-align: center;
@@ -235,14 +261,28 @@ const TestMainDivBox = styled.div`
     }
 
     .FloatingMenu_Container {
-        position: absolute;
+        position: fixed;
         bottom: 40px;
         right: 40px;
         z-index: 10;
+        @media only screen and (max-width: 800px) {
+            display: none;
+        }
         a,
         li {
             background-color: #fff;
         }
+    }
+
+    .Room_OR_Car_CheckTitle_Select {
+        width: 80%;
+        height: 100%;
+        font-size: 1.1em;
+        font-weight: bolder;
+        text-align: center;
+        border: none;
+        border-bottom: 1px solid gray;
+        outline: none;
     }
 `;
 
@@ -303,6 +343,48 @@ const MainTableContainer = () => {
     ];
     const CarData = [
         {
+            name: '(판교)_14나 1878',
+            value: '(판교)_14나 1878',
+            targetId: 'M220511064243A342636',
+            userId: 'a34car1.car5',
+            label: '판교 법인차량 ( (판교)_14나 1878 )',
+        },
+        {
+            name: '(판교)_155허 7879',
+            value: '(판교)_155허 7879',
+            targetId: 'M220511063838A347157',
+            userId: 'a34car1.car1',
+            label: '판교 법인차량 ( (판교)_155허 7879 )',
+        },
+        {
+            name: '(판교)_155허 7880',
+            value: '(판교)_155허 7880',
+            targetId: 'M220511063942A348400',
+            userId: 'a34car1.car2',
+            label: '판교 법인차량 ( (판교)_155허 7880 )',
+        },
+        {
+            name: '(판교)_155허 8053',
+            value: '(판교)_155허 8053',
+            targetId: 'M220511064109A345960',
+            userId: 'a34car1.car3',
+            label: '판교 법인차량 ( (판교)_155허 8053 )',
+        },
+        {
+            name: '(판교)_191허 3655',
+            value: '(판교)_191허 3655',
+            targetId: 'M220511064441A34933',
+            userId: 'a34car1.car7',
+            label: '판교 법인차량 ( (판교)_191허 3655 )',
+        },
+        {
+            name: '(판교)_45호 6144',
+            value: '(판교)_45호 6144',
+            targetId: 'M220511064534A346135',
+            userId: 'a34car1.car8',
+            label: '판교 법인차량 ( (판교)_45호 6144 )',
+        },
+        {
             name: '(아산)_155허 7765',
             value: '(아산)_155허 7765',
             targetId: 'M220511064156A344713',
@@ -351,61 +433,16 @@ const MainTableContainer = () => {
             userId: 'a34car1.car9',
             label: '아산 법인차량 ( (아산)_74러 3874 )',
         },
-        {
-            name: '(판교)_14나 1878',
-            value: '(판교)_14나 1878',
-            targetId: 'M220511064243A342636',
-            userId: 'a34car1.car5',
-            label: '판교 법인차량 ( (판교)_14나 1878 )',
-        },
-        {
-            name: '(판교)_155허 7879',
-            value: '(판교)_155허 7879',
-            targetId: 'M220511063838A347157',
-            userId: 'a34car1.car1',
-            label: '판교 법인차량 ( (판교)_155허 7879 )',
-        },
-        {
-            name: '(판교)_155허 7880',
-            value: '(판교)_155허 7880',
-            targetId: 'M220511063942A348400',
-            userId: 'a34car1.car2',
-            label: '판교 법인차량 ( (판교)_155허 7880 )',
-        },
-        {
-            name: '(판교)_155허 8053',
-            value: '(판교)_155허 8053',
-            targetId: 'M220511064109A345960',
-            userId: 'a34car1.car3',
-            label: '판교 법인차량 ( (판교)_155허 8053 )',
-        },
-        {
-            name: '(판교)_191허 3655',
-            value: '(판교)_191허 3655',
-            targetId: 'M220511064441A34933',
-            userId: 'a34car1.car7',
-            label: '판교 법인차량 ( (판교)_191허 3655 )',
-        },
-        {
-            name: '(판교)_45호 6144',
-            value: '(판교)_45호 6144',
-            targetId: 'M220511064534A346135',
-            userId: 'a34car1.car8',
-            label: '판교 법인차량 ( (판교)_45호 6144 )',
-        },
     ];
+    const SelectBasicTitle = useSelector(state => state.TitleSelectorRedux.SelectBasicTitle);
     const Loading = useSelector(state => state.LoaderCheckingRedux.loading);
-
+    const LoginInfo = useSelector(state => state.LoginInfoDataRedux.Infomation);
     const setScrollView = useRef(null);
     const [NowTimes, setNowTimes] = useState(new Date());
-    const [SelectBasicTitle, setSelectBasicTitle] = useState('Company_Room');
-    const [LeftHeaderInfo, setLeftHeaderInfo] = useState(CarData);
-
+    const [LeftHeaderInfo, setLeftHeaderInfo] = useState(RoomData);
     const [SelectLeftHeaderInfo, setSelectLeftHeaderInfo] = useState(null);
-    const [SelectRoom_Info_Data, setSelectRoom_Info_Data] = useState(null);
     const [RoomDatas, setRoomDatas] = useState([]);
     const [Room_8F_D_Data, setRoom_8F_D_Data] = useState([]);
-    // const [Loading, setLoading] = useState(false);
     const [FloatingMenuOnCheck, setFloatingMenuOnCheck] = useState(true);
     const [ApplyModalIsOpen, setApplyModalIsOpen] = useState(false);
     const [SelectModalIsOpen, setSelectModalIsOpen] = useState(false);
@@ -429,31 +466,27 @@ const MainTableContainer = () => {
 
     const getDatas = async () => {
         try {
-            // setLoading(true);
             dispatch(Loader_Check_For_True());
-
-            const getDatasFromServer = await axios.post(`http://192.168.2.155:3003/users/Test_Brity_works_Pims_API_Router`, {
+            const getDatasFromServer = await axios.post(`${process.env.REACT_APP_DB_HOST}/users/Test_Brity_works_Pims_API_Router`, {
                 Show_Date: moment(NowTimes).format('YYYY-MM-DD'),
                 LeftHeaderInfo,
+                SelectBasicTitle,
             });
             if (getDatasFromServer.data.dataSuccess) {
                 setRoomDatas(getDatasFromServer.data.RoomDatas);
-                // setLoading(false);
                 dispatch(Loader_Check_For_False());
             } else {
                 toast.show({
-                    title: `BrityWorks API Error발생. DHKS_IT팀(유성재)에게 문의바랍니다.`,
+                    title: `BrityWorks API Error발생. DHKS_IT팀에게 문의바랍니다.`,
                     successCheck: false,
                     duration: 6000,
                 });
                 dispatch(Loader_Check_For_False());
             }
-
-            console.log(getDatasFromServer);
         } catch (error) {
             console.log(error);
             toast.show({
-                title: `BrityWorks API Error발생. DHKS_IT팀(유성재)에게 문의바랍니다.`,
+                title: `BrityWorks API Error발생. DHKS_IT팀에게 문의바랍니다.`,
                 successCheck: false,
                 duration: 6000,
             });
@@ -556,17 +589,22 @@ const MainTableContainer = () => {
                 <div className="Room_title_container">
                     <div className="Main_Room_Time_title">
                         <div style={{ lineHeight: '50px', fontSize: '1.2em', fontWeight: 'bold', color: 'red' }}>
-                            {SelectBasicTitle === 'Company_Room' ? '회의실' : '법인차량'} 예약
-                            {/* <select
-                                value={SelectBasicTitle}
-                                onChange={e => {
-                                    setSelectBasicTitle(e.target.value);
-                                    setLeftHeaderInfo(e.target.value === 'Company_Room' ? RoomData : CarData);
-                                }}
-                            >
-                                <option value="Company_Room">회의실</option>
-                                <option value="Company_Car">법인차량</option>
-                            </select> */}
+                            {/* {SelectBasicTitle === 'Company_Room' ? '회의실' : '법인차량'} 예약 */}
+                            {LoginInfo.Login_company === 'DHKS' ? (
+                                <select
+                                    className="Room_OR_Car_CheckTitle_Select"
+                                    value={SelectBasicTitle}
+                                    onChange={e => {
+                                        dispatch(Title_Change_Func(e.target.value));
+                                        setLeftHeaderInfo(e.target.value === 'Company_Room' ? RoomData : CarData);
+                                    }}
+                                >
+                                    <option value="Company_Room">회의실</option>
+                                    <option value="Company_Car">법인차량</option>
+                                </select>
+                            ) : (
+                                '회의실'
+                            )}
                         </div>
                     </div>
                     {RoomDatas.map((list, i) => {
@@ -612,7 +650,7 @@ const MainTableContainer = () => {
                 <FloatingMenu slideSpeed={500} direction="up" spacing={8} isOpen={FloatingMenuOnCheck}>
                     <MainButton
                         iconResting={<TiThMenu style={{ fontSize: 20 }} nativeColor="white" />}
-                        iconActive={<IoCloseSharp style={{ fontSize: 20 }} nativeColor="white" />}
+                        iconActive={<IoCloseSharp style={{ fontSize: 20 }} nativeColor="white" color="black" />}
                         backgroundColor="black"
                         onClick={() => setFloatingMenuOnCheck(!FloatingMenuOnCheck)}
                         size={56}

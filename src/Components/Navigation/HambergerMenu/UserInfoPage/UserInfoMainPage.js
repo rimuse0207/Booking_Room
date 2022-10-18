@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { LOGOUT_INFO_DATA_Changes } from '../../../../Models/LoginInfoReducer/LoginInfoReducer';
+import { Title_Change_Func } from '../../../../Models/TitleSelectorReducer/TitleSelectorReducer';
 import LoginModal from '../../../Modals/LoginModal';
 
 const UserInfoMainPageMainDivBox = styled.div`
@@ -30,7 +31,13 @@ const UserInfoMainPage = () => {
                 <div>
                     <div className="">{LoginInfo.Login_company}</div>
                     <div className="">{LoginInfo.Login_name}</div>
-                    <div className="MenuList" onClick={() => dispatch(LOGOUT_INFO_DATA_Changes())}>
+                    <div
+                        className="MenuList"
+                        onClick={() => {
+                            dispatch(Title_Change_Func('Company_Room'));
+                            dispatch(LOGOUT_INFO_DATA_Changes());
+                        }}
+                    >
                         로그아웃
                     </div>
                 </div>
