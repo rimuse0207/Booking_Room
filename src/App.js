@@ -6,7 +6,6 @@ function App() {
         <div className="App">
             <NavigationMainPage></NavigationMainPage>
             <MainTableContainer></MainTableContainer>
-            {/* <Te></Te> */}
         </div>
     );
 }

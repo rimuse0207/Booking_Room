@@ -300,6 +300,10 @@ const SelectModalMainDivBox = styled.div`
             :hover {
                 cursor: pointer;
             }
+            @media only screen and (max-width: 800px) {
+                width: 90px !important;
+                font-size: 0.9em;
+            }
         }
         .Cancle {
             background-color: orange;
@@ -310,6 +314,9 @@ const SelectModalMainDivBox = styled.div`
                 background-color: #efefef;
                 color: orange;
             }
+            @media only screen and (max-width: 800px) {
+                margin-right: 10px;
+            }
         }
         .Delete {
             background-color: red;
@@ -319,6 +326,9 @@ const SelectModalMainDivBox = styled.div`
             :hover {
                 background-color: #efefef;
                 color: red;
+            }
+            @media only screen and (max-width: 800px) {
+                margin-left: 10px;
             }
         }
     }

@@ -461,6 +461,7 @@ const MainTableContainer = () => {
 
     useEffect(() => {
         // if (RoomDatas.length === 0) getDatas();
+
         getDatas();
     }, [NowTimes, LeftHeaderInfo]);
 

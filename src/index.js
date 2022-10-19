@@ -16,7 +16,10 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
-const store = createStore(persistedReducer, composeEnhancers(applyMiddleware(Thunk, createLogger())));
+//개발용
+// const store = createStore(persistedReducer, composeEnhancers(applyMiddleware(Thunk, createLogger())));
+//배포용
+const store = createStore(persistedReducer, composeEnhancers(applyMiddleware(Thunk)));
 const persistor = persistStore(store);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));

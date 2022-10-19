@@ -80,7 +80,7 @@ const ApplyFloorRoomTable = ({ Room_Datas, SelectedShowTableTimes, setApplyModal
                         >
                             <div className="Reservation_Room_date">
                                 <div className="ContentTextCotainer">
-                                    <div className="ContentTitle">{list.class === 'PUBLIC' ? list.subject : '비공개'}</div>
+                                    <div className="ContentTitle">{list.class === 'PUBLIC' ? list.subject.split('____')[0] : '비공개'}</div>
                                     <div className="Content_useId">
                                         {list.subject.split('____').length > 1
                                             ? list.subject.split('____')[1]
@@ -93,10 +93,20 @@ const ApplyFloorRoomTable = ({ Room_Datas, SelectedShowTableTimes, setApplyModal
                                                 {moment(list.startTime.date).format('MM월 DD일')} ~{' '}
                                                 {moment(list.endTime.date).format('MM월 DD일')}
                                             </div>
-                                        ) : (
+                                        ) : // <div className="Content_times">
+                                        //     {moment(list.startTime.dateTime).format('HH:mm')} ~{' '}
+                                        //     {moment(list.endTime.dateTime).format('HH:mm')}
+                                        // </div>
+                                        moment(list.startTime.dateTime).format('YYYY-MM-DD') ===
+                                          moment(list.endTime.dateTime).format('YYYY-MM-DD') ? (
                                             <div className="Content_times">
                                                 {moment(list.startTime.dateTime).format('HH:mm')} ~{' '}
                                                 {moment(list.endTime.dateTime).format('HH:mm')}
+                                            </div>
+                                        ) : (
+                                            <div className="Content_times">
+                                                {moment(list.startTime.dateTime).format('MM월 DD일')} ~{' '}
+                                                {moment(list.endTime.dateTime).format('MM월 DD일')}
                                             </div>
                                         )}
                                     </div>

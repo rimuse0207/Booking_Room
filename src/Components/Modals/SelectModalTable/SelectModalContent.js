@@ -49,7 +49,7 @@ const SelectModalContent = ({ SelectModalData }) => {
             <div className="BookingCheck_Cotainer">
                 <h4 className="BookingCheck_Cotainer_Title">예약 제목 : </h4>
                 <div className="BookingCheck_Cotainer_SubTitle">
-                    {SelectModalData.class === 'PUBLIC' ? SelectModalData.subject : '비공개'}
+                    {SelectModalData.class === 'PUBLIC' ? SelectModalData.subject.split('____')[0] : '비공개'}
                 </div>
             </div>
             <div className="BookingCheck_Cotainer">
@@ -68,10 +68,16 @@ const SelectModalContent = ({ SelectModalData }) => {
                             {moment(SelectModalData.startTime.date).format('MM월 DD일')} ~{' '}
                             {moment(SelectModalData.endTime.date).format('MM월 DD일')}
                         </div>
-                    ) : (
+                    ) : moment(SelectModalData.startTime.dateTime).format('YYYY-MM-DD') ===
+                      moment(SelectModalData.endTime.dateTime).format('YYYY-MM-DD') ? (
                         <div className="Content_times">
                             {moment(SelectModalData.startTime.dateTime).format('HH:mm')} ~{' '}
                             {moment(SelectModalData.endTime.dateTime).format('HH:mm')}
+                        </div>
+                    ) : (
+                        <div className="Content_times">
+                            {moment(SelectModalData.startTime.dateTime).format('MM월 DD일')} ~{' '}
+                            {moment(SelectModalData.endTime.dateTime).format('MM월 DD일')}
                         </div>
                     )}
                 </div>
