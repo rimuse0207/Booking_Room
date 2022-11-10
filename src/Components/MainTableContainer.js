@@ -76,7 +76,7 @@ const TestMainDivBox = styled.div`
         margin: 0;
         border: 1px solid #b0b0b0;
         display: flex;
-        min-width: 1510px;
+        /* min-width: 1510px; */
         background-color: #fff;
         position: relative;
         @media only screen and (max-width: 800px) {
@@ -113,7 +113,7 @@ const TestMainDivBox = styled.div`
     .Room_Content_container {
         /* width: calc(100%-300px); */
 
-        min-width: 1260px;
+        /* min-width: 1260px; */
         overflow-x: scroll;
 
         @media only screen and (max-width: 800px) {
@@ -343,32 +343,11 @@ const MainTableContainer = () => {
     ];
     const CarData = [
         {
-            name: '(판교)_14나 1878',
-            value: '(판교)_14나 1878',
-            targetId: 'M220511064243A342636',
-            userId: 'a34car1.car5',
-            label: '판교 법인차량 ( (판교)_14나 1878 )',
-        },
-        {
-            name: '(판교)_155허 7879',
-            value: '(판교)_155허 7879',
-            targetId: 'M220511063838A347157',
-            userId: 'a34car1.car1',
-            label: '판교 법인차량 ( (판교)_155허 7879 )',
-        },
-        {
             name: '(판교)_155허 7880',
             value: '(판교)_155허 7880',
             targetId: 'M220511063942A348400',
             userId: 'a34car1.car2',
             label: '판교 법인차량 ( (판교)_155허 7880 )',
-        },
-        {
-            name: '(판교)_155허 8053',
-            value: '(판교)_155허 8053',
-            targetId: 'M220511064109A345960',
-            userId: 'a34car1.car3',
-            label: '판교 법인차량 ( (판교)_155허 8053 )',
         },
         {
             name: '(판교)_191허 3655',
@@ -378,11 +357,32 @@ const MainTableContainer = () => {
             label: '판교 법인차량 ( (판교)_191허 3655 )',
         },
         {
-            name: '(판교)_45호 6144',
-            value: '(판교)_45호 6144',
+            name: '(동탄)_14나 1878',
+            value: '(동탄)_14나 1878',
+            targetId: 'M220511064243A342636',
+            userId: 'a34car1.car5',
+            label: '동탄 법인차량 ( (동탄)_14나 1878 )',
+        },
+        {
+            name: '(동탄)_155허 7879',
+            value: '(동탄)_155허 7879',
+            targetId: 'M220511063838A347157',
+            userId: 'a34car1.car1',
+            label: '동탄 법인차량 ( (동탄)_155허 7879 )',
+        },
+        {
+            name: '(동탄)_155허 8053',
+            value: '(동탄)_155허 8053',
+            targetId: 'M220511064109A345960',
+            userId: 'a34car1.car3',
+            label: '동탄 법인차량 ( (동탄)_155허 8053 )',
+        },
+        {
+            name: '(동탄)_45호 6144',
+            value: '(동탄)_45호 6144',
             targetId: 'M220511064534A346135',
             userId: 'a34car1.car8',
-            label: '판교 법인차량 ( (판교)_45호 6144 )',
+            label: '동탄 법인차량 ( (동탄)_45호 6144 )',
         },
         {
             name: '(아산)_155허 7765',

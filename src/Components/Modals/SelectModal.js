@@ -77,7 +77,7 @@ const SelectModalMainDivBox = styled.div`
     .Modal_Apply_Room_Content_container {
         /* width: calc(100%-300px); */
 
-        min-width: 880px;
+        /* min-width: 880px; */
         overflow-x: scroll;
         @media only screen and (max-width: 800px) {
             width: 90% !important;

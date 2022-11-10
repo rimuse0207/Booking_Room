@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { toast } from './Components/ToasMessage/ToastManager';
 import { Title_Change_Func } from './Models/TitleSelectorReducer/TitleSelectorReducer';
 import { LOGOUT_INFO_DATA_Changes } from './Models/LoginInfoReducer/LoginInfoReducer';
+import FoodSelectMainPage from './Components/FoodSelect/FoodSelectMainPage';
 
 const RouterPageMainContainer = styled.div``;
 
@@ -47,6 +48,7 @@ const RouterPage = () => {
                     <Route exact path="/" component={App}></Route>
                     <Route path="/Login_Page" component={LoginMainPage}></Route>
                     <Route path="/User_Select_or_Add/:UserId/:UserCompany" component={UserManageMainPage}></Route>
+                    <Route path="/Food_Select" component={FoodSelectMainPage}></Route>
                 </Switch>
             </BrowserRouter>
         </RouterPageMainContainer>

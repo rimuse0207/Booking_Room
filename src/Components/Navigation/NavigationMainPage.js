@@ -91,7 +91,7 @@ const NavigationMainPage = () => {
                     {UserCompany === 'Company_DHK' ? (
                         <h2>사용자 관리</h2>
                     ) : (
-                        <h2>{SelectBasicTitle === 'Company_Room' ? '회의실' : '법인차량'} 예약</h2>
+                        <h2>{SelectBasicTitle === 'Company_Room' ? '회의실 예약' : '법인차량 예약'}</h2>
                     )}
                 </div>
                 <div className="NAV_Display_Profile_Right">
