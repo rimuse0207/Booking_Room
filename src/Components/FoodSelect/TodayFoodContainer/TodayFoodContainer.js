@@ -16,14 +16,15 @@ import LoginModal from '../../Modals/LoginModal';
 const TodayFoodContainerMainDivBox = styled.div`
     border: 1px solid black;
     min-height: 100vh;
+    padding-bottom: 50px;
     .Today_Title {
         text-align: center;
         border-bottom: 1px solid lightgray;
         padding-bottom: 10px;
-        margin-top: 30px;
     }
     .ScrollView_Menu_Show {
         position: relative;
+        margin-top: 30px;
         .FoodMenuShow {
             width: 100%;
             table {
@@ -164,6 +165,7 @@ const TodayFoodContainer = ({ history }) => {
     const GetDateTimes = () => {
         const startTime = moment(TodayDate);
         const endTime = moment(`${moment().format('YYYY-MM-DD')} 11:30:00`);
+
         const years = startTime.diff(endTime, 'years');
         const months = startTime.diff(endTime, 'months');
         const days = startTime.diff(endTime, 'days');
@@ -183,7 +185,7 @@ const TodayFoodContainer = ({ history }) => {
     return (
         <TodayFoodContainerMainDivBox>
             <NavigationMainPage TitleName="식단표"></NavigationMainPage>
-            <h2 className="Today_Title">식단표</h2>
+            {/* <h2 className="Today_Title">식단표</h2> */}
             <div className="ScrollView_Menu_Show">
                 {TodayFoodState ? (
                     <div className="FoodMenuShow">
@@ -247,7 +249,7 @@ const TodayFoodContainer = ({ history }) => {
                         )}
                     </div>
                 ) : (
-                    <div className="Button_Select_Cotainer">{GetDateTimes()}</div>
+                    <div className="Button_Select_Cotainer">당일날만 사용가능합니다.</div>
                 )}
 
                 <div></div>
