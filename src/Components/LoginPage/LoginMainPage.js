@@ -220,7 +220,7 @@ const LoginMainPage = () => {
                                 : false,
                     };
                     dispatch(LOGIN_INFO_DATA_Changes(datas));
-                    history.push('/');
+                    history.goBack();
                 } else {
                     //비밀번호 변경 요청
                     setLogin_Password_Change_State(true);

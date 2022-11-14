@@ -4,7 +4,7 @@ import NavigationMainPage from './Components/Navigation/NavigationMainPage';
 function App() {
     return (
         <div className="App">
-            <NavigationMainPage></NavigationMainPage>
+            <NavigationMainPage TitleName="회의실 예약"></NavigationMainPage>
             <MainTableContainer></MainTableContainer>
         </div>
     );

@@ -11,7 +11,7 @@ const FoodSelectMainPageMainDivBox = styled.div`
 const FoodSelectMainPage = () => {
     return (
         <FoodSelectMainPageMainDivBox>
-            <NavigationMainPage></NavigationMainPage>
+            <NavigationMainPage TitleName="잔반 이미지 업로드"></NavigationMainPage>
             <FoodSelectContainer></FoodSelectContainer>
         </FoodSelectMainPageMainDivBox>
     );

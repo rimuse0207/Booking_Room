@@ -10,7 +10,9 @@ import { toast } from './Components/ToasMessage/ToastManager';
 import { Title_Change_Func } from './Models/TitleSelectorReducer/TitleSelectorReducer';
 import { LOGOUT_INFO_DATA_Changes } from './Models/LoginInfoReducer/LoginInfoReducer';
 import FoodSelectMainPage from './Components/FoodSelect/FoodSelectMainPage';
-
+import TodayFoodContainer from './Components/FoodSelect/TodayFoodContainer/TodayFoodContainer';
+import SurvayContainer from './Components/FoodSelect/SurvayContainer/SurvayContainer';
+import AdminImageShowMainPage from './Components/FoodSelect/AdminMainPage/AdminImageShowMainPage';
 const RouterPageMainContainer = styled.div``;
 
 const RouterPage = () => {
@@ -48,7 +50,10 @@ const RouterPage = () => {
                     <Route exact path="/" component={App}></Route>
                     <Route path="/Login_Page" component={LoginMainPage}></Route>
                     <Route path="/User_Select_or_Add/:UserId/:UserCompany" component={UserManageMainPage}></Route>
+                    <Route path="/Today_Food" component={TodayFoodContainer}></Route>
                     <Route path="/Food_Select" component={FoodSelectMainPage}></Route>
+                    <Route path="/Food_Survay" component={SurvayContainer}></Route>
+                    <Route path="/Admin_Image_Check" component={AdminImageShowMainPage}></Route>
                 </Switch>
             </BrowserRouter>
         </RouterPageMainContainer>

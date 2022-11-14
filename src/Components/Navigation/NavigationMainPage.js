@@ -72,7 +72,7 @@ const NavigationMainPageMainDivBox = styled.div`
     }
 `;
 
-const NavigationMainPage = () => {
+const NavigationMainPage = ({ TitleName }) => {
     const { UserId, UserCompany } = useParams();
     const LoginInfo = useSelector(state => state.LoginInfoDataRedux.Infomation);
     const SelectBasicTitle = useSelector(state => state.TitleSelectorRedux.SelectBasicTitle);
@@ -88,11 +88,12 @@ const NavigationMainPage = () => {
                     </div>
                 </div>
                 <div className="NAV_Display_Title_Center">
-                    {UserCompany === 'Company_DHK' ? (
+                    {/* {UserCompany === 'Company_DHK' ? (
                         <h2>사용자 관리</h2>
                     ) : (
                         <h2>{SelectBasicTitle === 'Company_Room' ? '회의실 예약' : '법인차량 예약'}</h2>
-                    )}
+                    )} */}
+                    <h2>{TitleName}</h2>
                 </div>
                 <div className="NAV_Display_Profile_Right">
                     <div onClick={() => setUserInfoMenuBarIsOpen(!UserInfoMenuBarIsOpen)}>

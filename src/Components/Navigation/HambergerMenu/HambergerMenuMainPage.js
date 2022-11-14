@@ -167,7 +167,7 @@ const HambergerMenuMainPageMainDivBox = styled.div`
         }
 
         animation-name: slideOn;
-        animation-duration: 1s;
+        animation-duration: 0.5s;
         @keyframes slideOn {
             from {
                 left: -220px;
@@ -242,9 +242,20 @@ const HambergerMenuMainPage = () => {
                         <li>
                             <Link to="/">회의실 예약</Link>
                         </li>
+                        <li>
+                            <Link to="/Today_Food">식단표</Link>
+                        </li>
                         {LoginInfo.Login_Admin_Access ? (
                             <li>
                                 <Link to={`/User_Select_or_Add/${LoginInfo.Login_id}/Company_DHK`}>사용자 등록 및 조회</Link>
+                            </li>
+                        ) : (
+                            <></>
+                        )}
+
+                        {LoginInfo.Login_id === 'sjyoo@dhk.co.kr' || LoginInfo.Login_id === 'jychoi@dhk.co.kr' ? (
+                            <li>
+                                <Link to="/Admin_Image_Check">잔반 이미지 확인</Link>
                             </li>
                         ) : (
                             <></>
@@ -262,6 +273,7 @@ const HambergerMenuMainPage = () => {
                                     // setHambergerOpen(false);
                                     dispatch(Title_Change_Func('Company_Room'));
                                     dispatch(LOGOUT_INFO_DATA_Changes());
+                                    window.location.href = '/Today_Food';
                                 }}
                             >
                                 <div>로그아웃</div>

@@ -1,9 +1,9 @@
 import axios from 'axios';
 import moment from 'moment';
-import 'moment/locale/ko';
 import React, { forwardRef, useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import { IoIosArrowForward, IoIosArrowBack } from 'react-icons/io';
+import 'moment/locale/ko';
 import { ko } from 'date-fns/esm/locale';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
