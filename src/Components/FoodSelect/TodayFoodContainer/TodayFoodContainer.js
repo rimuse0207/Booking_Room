@@ -116,7 +116,6 @@ const TodayFoodContainer = ({ history }) => {
                     Login_name: LoginInfo.Login_name,
                 },
             });
-            console.log(ServerWeekFoodMenu);
             if (ServerWeekFoodMenu.data.dataSuccess) {
                 setTodayFoodState(
                     ServerWeekFoodMenu.data.WeekFoodMenuSelectDBRows[0] ? ServerWeekFoodMenu.data.WeekFoodMenuSelectDBRows[0] : null
