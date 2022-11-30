@@ -153,7 +153,12 @@ const FloorRoomTable = ({
                                 >
                                     <div className="ContentTextCotainer">
                                         <div className="ContentTitle">
-                                            {list.class === 'PUBLIC' ? list.subject.split('____')[0] : '비공개'}
+                                            {list.class === 'PRIVATE'
+                                                ? LoginInfo.Login_name === list.subject.split('____')[1] ||
+                                                  LoginInfo.Login_name === list.attendees[0].displayName.split('/')[0]
+                                                    ? list.subject.split('____')[0]
+                                                    : '비공개'
+                                                : list.subject.split('____')[0]}
                                         </div>
                                         <div className="Content_useId">
                                             {list.subject.split('____').length > 1

@@ -1,5 +1,6 @@
 import moment from 'moment';
 import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 const SelectFloorRoomTableMainDivBox = styled.div``;
 
@@ -54,7 +55,7 @@ const SelectFloorRoomTable = ({ RoomDatas, SelectModalData, Room_Datas, setSelec
         { colors: 'lightgray', Times: '23:00', businessCheck: false },
         { colors: 'lightgray', Times: '23:30', businessCheck: false },
     ]);
-
+    const LoginInfo = useSelector(state => state.LoginInfoDataRedux.Infomation);
     return (
         <SelectFloorRoomTableMainDivBox>
             <div className="Main_Room_title">
@@ -87,7 +88,13 @@ const SelectFloorRoomTable = ({ RoomDatas, SelectModalData, Room_Datas, setSelec
                                 >
                                     <div className="ContentTextCotainer">
                                         <div className="ContentTitle">
-                                            {list.class === 'PUBLIC' ? list.subject.split('____')[0] : '비공개'}
+                                            {/* {list.class === 'PUBLIC' ? list.subject.split('____')[0] : '비공개'} */}
+                                            {list.class === 'PRIVATE'
+                                                ? LoginInfo.Login_name === list.subject.split('____')[1] ||
+                                                  LoginInfo.Login_name === list.attendees[0].displayName.split('/')[0]
+                                                    ? list.subject.split('____')[0]
+                                                    : '비공개'
+                                                : list.subject.split('____')[0]}
                                         </div>
                                         <div className="Content_useId">
                                             {list.subject.split('____').length > 1

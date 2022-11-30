@@ -1,5 +1,6 @@
 import moment from 'moment';
 import React from 'react';
+import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 
 const SelectModalContentMainDivBox = styled.div`
@@ -37,6 +38,7 @@ const SelectModalContentMainDivBox = styled.div`
 `;
 
 const SelectModalContent = ({ SelectModalData }) => {
+    const LoginInfo = useSelector(state => state.LoginInfoDataRedux.Infomation);
     return (
         <SelectModalContentMainDivBox>
             <div>
@@ -49,7 +51,13 @@ const SelectModalContent = ({ SelectModalData }) => {
             <div className="BookingCheck_Cotainer">
                 <h4 className="BookingCheck_Cotainer_Title">예약 제목 : </h4>
                 <div className="BookingCheck_Cotainer_SubTitle">
-                    {SelectModalData.class === 'PUBLIC' ? SelectModalData.subject.split('____')[0] : '비공개'}
+                    {/* {SelectModalData.class === 'PUBLIC' ? SelectModalData.subject.split('____')[0] : '비공개'} */}
+                    {SelectModalData.class === 'PRIVATE'
+                        ? LoginInfo.Login_name === SelectModalData.subject.split('____')[1] ||
+                          LoginInfo.Login_name === SelectModalData.attendees[0].displayName.split('/')[0]
+                            ? SelectModalData.subject.split('____')[0]
+                            : '비공개'
+                        : SelectModalData.subject.split('____')[0]}
                 </div>
             </div>
             <div className="BookingCheck_Cotainer">

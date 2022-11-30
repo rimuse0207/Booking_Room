@@ -97,7 +97,7 @@ const AdminImageShowMainPage = () => {
                 </div>
                 {ImageUrlInfo.map((list, i) => {
                     return (
-                        <div className="Main_Content_Container">
+                        <div className="Main_Content_Container" key={list.food_image_info_image_url}>
                             <div
                                 className="Image_Container"
                                 style={{

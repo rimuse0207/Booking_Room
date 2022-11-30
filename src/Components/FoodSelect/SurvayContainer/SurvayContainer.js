@@ -15,6 +15,7 @@ const SurvayContainerMainDivBox = styled.div`
         width: 80%;
         margin: 0 auto;
         margin-top: 30px;
+        font-size: 0.9em;
         ul {
             li {
                 list-style: decimal;
@@ -79,6 +80,7 @@ const SurvayContainerMainDivBox = styled.div`
 
 const SurvayContainer = () => {
     const [TodayFoodState, setTodayFoodState] = useState([]);
+    const [SubmitOneClick, setSubmitOneClick] = useState(true);
     const LoginInfo = useSelector(state => state.LoginInfoDataRedux.Infomation);
     const dispatch = useDispatch();
 
@@ -124,7 +126,7 @@ const SurvayContainer = () => {
 
     const SaveDataFromSurvay = async () => {
         try {
-            if (!SurvayState.company || !SurvayState.opinion || SurvayState.FoodSelect.length === 0) {
+            if (!SurvayState.company || !SurvayState.opinion || SurvayState.FoodSelect === null) {
                 toast.show({
                     title: `공란을 전부 작성바랍니다.`,
                     successCheck: false,
@@ -132,6 +134,7 @@ const SurvayContainer = () => {
                 });
                 return;
             }
+            setSubmitOneClick(false);
 
             const SaveDataFromSurvayFromServer = await axios.post(`${process.env.REACT_APP_DB_HOST}/FoodApp/SaveDataFromSurvayFromServer`, {
                 SurvayState,
@@ -139,23 +142,30 @@ const SurvayContainer = () => {
             });
 
             if (SaveDataFromSurvayFromServer.data.dataSuccess) {
-                toast.show({
-                    title: `${SaveDataFromSurvayFromServer.data.Will}Will에 당첨되셨습니다.`,
-                    successCheck: true,
-                    duration: 6000,
-                });
-                toast.show({
-                    title: `설문에 응해주셔서 감사합니다.`,
-                    successCheck: true,
-                    duration: 6000,
-                });
+                // toast.show({
+                //     title: `설문에 응해주셔서 감사합니다.`,
+                //     successCheck: true,
+                //     duration: 6000,
+                // });
+                alert(`설문에 응해주셔서 감사합니다.\n${SaveDataFromSurvayFromServer.data.Will}Will에 당첨되셨습니다.`);
+                // toast.show({
+                //     title: `${SaveDataFromSurvayFromServer.data.Will}Will에 당첨되셨습니다.`,
+                //     successCheck: true,
+                //     duration: 6000,
+                // });
 
-                setTimeout(() => {
-                    window.location.href = '/Today_Food';
-                }, 6000);
+                window.location.href = '/Today_Food';
+            } else {
+                toast.show({
+                    title: `Error발생. 다시 시도 해 주세요.`,
+                    successCheck: true,
+                    duration: 6000,
+                });
+                setSubmitOneClick(true);
             }
         } catch (error) {
             console.log(error);
+            setSubmitOneClick(true);
         }
     };
 
@@ -177,6 +187,7 @@ const SurvayContainer = () => {
                 </div>
                 <div>
                     <select value={SurvayState.company} onChange={e => setSurvayState({ ...SurvayState, company: e.target.value })}>
+                        <option value="">회사를 선택해주세요.</option>
                         <option value="DHK">DHK</option>
                         <option value="DHKS">DHKS</option>
                         <option value="YIKC">YIKC</option>
@@ -205,9 +216,13 @@ const SurvayContainer = () => {
                     ></textarea>
                 </div>
             </div>
-            <div className="Button_Container">
-                <button onClick={() => SaveDataFromSurvay()}>제출하기</button>
-            </div>
+            {SubmitOneClick ? (
+                <div className="Button_Container">
+                    <button onClick={() => SaveDataFromSurvay()}>제출하기</button>
+                </div>
+            ) : (
+                <div>-</div>
+            )}
         </SurvayContainerMainDivBox>
     );
 };

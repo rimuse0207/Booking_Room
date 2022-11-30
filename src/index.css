@@ -12,7 +12,7 @@ code {
 
 * {
     box-sizing: border-box;
-    font-family: GangwonEdu_OTFBoldA;
+    font-family: TextFontTest, LeeSeoyun, GangwonEdu_OTFBoldA;
 }
 
 #toast-container-main {
@@ -54,6 +54,21 @@ li {
     font-weight: normal;
     font-style: normal;
 }
+
+@font-face {
+    font-family: 'LeeSeoyun';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2202-2@1.0/LeeSeoyun.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'TextFontTest';
+    src: url('/public/Font/EF_YOONY_Window.ttf');
+    font-weight: normal;
+    font-style: normal;
+}
+
 select {
     font-family: 'revert';
 }
@@ -67,4 +82,8 @@ a:visited {
 }
 a:hover {
     color: black;
+}
+
+input[type='password'] {
+    font-family: LeeSeoyun, GangwonEdu_OTFBoldA, sans-serif !important;
 }

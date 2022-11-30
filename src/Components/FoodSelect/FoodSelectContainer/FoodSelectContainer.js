@@ -101,6 +101,7 @@ const FoodSelectContainer = ({ history }) => {
     const [FileStateData, setFileStateData] = useState(null);
     const LoginInfo = useSelector(state => state.LoginInfoDataRedux.Infomation);
     const Loading = useSelector(state => state.LoaderCheckingRedux.loading);
+    const [OneClickCheck, setOneClickCheck] = useState(true);
     const inputRef = useRef(null);
 
     const onUploadImage = useCallback(async e => {
@@ -171,27 +172,30 @@ const FoodSelectContainer = ({ history }) => {
             }
             dispatch(Loader_Check_For_True());
 
+            setOneClickCheck(false);
+
             const UploadDataFromServer = await axios.post(`${process.env.REACT_APP_DB_HOST}/FoodApp/FoodDataSend`, {
                 FileStateData,
                 LoginInfo,
             });
 
             if (UploadDataFromServer.data.dataSuccess) {
-                toast.show({
-                    title: `업로드가 완료되었습니다. 감사합니다.`,
-                    successCheck: true,
-                    duration: 6000,
-                });
-                setTimeout(() => {
-                    window.location.href = '/Today_Food';
-                }, 3000);
-
                 dispatch(Loader_Check_For_False());
+                setOneClickCheck(true);
+                alert(`업로드가 완료되었습니다. 감사합니다.`);
+                window.location.href = '/Today_Food';
+                // toast.show({
+                //     title: `업로드가 완료되었습니다. 감사합니다.`,
+                //     successCheck: true,
+                //     duration: 6000,
+                // });
             } else {
                 dispatch(Loader_Check_For_False());
+                setOneClickCheck(true);
             }
         } catch (error) {
             console.log(error);
+            setOneClickCheck(true);
             toast.show({
                 title: `업로드 실패 재 시도 바랍니다.`,
                 successCheck: false,
@@ -255,9 +259,14 @@ const FoodSelectContainer = ({ history }) => {
                 </div>
                 <div></div>
             </div>
-            <div className="UploadButtonDiv">
-                <button onClick={() => handleUploadDataFromServer()}>업로드</button>
-            </div>
+            {OneClickCheck ? (
+                <div className="UploadButtonDiv">
+                    <button onClick={() => handleUploadDataFromServer()}>업로드</button>
+                </div>
+            ) : (
+                <div>-</div>
+            )}
+
             {/* 로딩 컴포넌트 시작 */}
             <LoaderMainPage loading={Loading}></LoaderMainPage>
             {/* 로딩 컴포넌트 끝 */}

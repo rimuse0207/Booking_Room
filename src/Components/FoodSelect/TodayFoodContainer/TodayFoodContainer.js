@@ -58,7 +58,8 @@ const TodayFoodContainerMainDivBox = styled.div`
     .Button_Select_Cotainer {
         text-align: center;
         margin-top: 50px;
-        height: 40px;
+        height: 50px;
+
         display: flex;
         justify-content: space-around;
         button {
@@ -98,6 +99,7 @@ const TodayFoodContainer = ({ history }) => {
     const [ImageUploadCheck, setImageUploadCheck] = useState(false);
     const [SurvayCheck, setSurvayCheck] = useState(false);
     const [LoginModalOpen, setLoginModalOpen] = useState(false);
+    const [SurvayWillChecking, setSurvayWillChecking] = useState(null);
     const ModalPopUpClose = () => {
         setLoginModalOpen(false);
     };
@@ -114,13 +116,16 @@ const TodayFoodContainer = ({ history }) => {
                     Login_name: LoginInfo.Login_name,
                 },
             });
-
+            console.log(ServerWeekFoodMenu);
             if (ServerWeekFoodMenu.data.dataSuccess) {
                 setTodayFoodState(
                     ServerWeekFoodMenu.data.WeekFoodMenuSelectDBRows[0] ? ServerWeekFoodMenu.data.WeekFoodMenuSelectDBRows[0] : null
                 );
                 setImageUploadCheck(ServerWeekFoodMenu.data.ImageUploadCheck);
                 setSurvayCheck(ServerWeekFoodMenu.data.SurvayCheck);
+                setSurvayWillChecking(
+                    ServerWeekFoodMenu.data.SurvayChecking_Rows[0] ? ServerWeekFoodMenu.data.SurvayChecking_Rows[0] : null
+                );
                 dispatch(Loader_Check_For_False());
             } else {
                 dispatch(Loader_Check_For_False());
@@ -243,7 +248,10 @@ const TodayFoodContainer = ({ history }) => {
                             <button onClick={() => handleImageUploadMoving()}>잔반 이미지 업로드</button>
                         )}
                         {SurvayCheck ? (
-                            <button style={{ backgroundColor: 'orange' }}>식당 설문조사 완료</button>
+                            <button style={{ backgroundColor: 'orange' }}>
+                                식당 설문조사 완료
+                                <br />( {SurvayWillChecking.food_week_survay_will_price} Will )
+                            </button>
                         ) : (
                             <button onClick={() => handleSurvayUploadMoving()}>식당 설문조사</button>
                         )}
