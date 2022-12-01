@@ -406,8 +406,7 @@ const SelectModal = ({
                 </div>
                 <div className="Button_Cotainer">
                     {LoginInfo.Login_name === SelectModalData.subject.split('____')[1] ||
-                    LoginInfo.Login_name === SelectModalData.attendees[0].displayName.split('/')[0] ||
-                    LoginInfo.Login_epid === SelectModalData.attendees[0].userId ? (
+                    LoginInfo.Login_name === SelectModalData.attendees[0].displayName.split('/')[0] ? (
                         <button className="Delete" onClick={() => handleDeleteBooking()}>
                             삭제
                         </button>

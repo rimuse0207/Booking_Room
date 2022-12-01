@@ -58,7 +58,7 @@ const TodayFoodContainerMainDivBox = styled.div`
     .Button_Select_Cotainer {
         text-align: center;
         margin-top: 50px;
-        height: 50px;
+        height: 70px;
 
         display: flex;
         justify-content: space-around;
