@@ -83,16 +83,10 @@ const NavigationMainPage = ({ TitleName }) => {
             <div className="NAV_Display_Cotainer">
                 <div className="NAV_Display_Menu_Left">
                     <div>
-                        {/* <GiHamburgerMenu></GiHamburgerMenu> */}
                         <HambergerMenuMainPage></HambergerMenuMainPage>
                     </div>
                 </div>
                 <div className="NAV_Display_Title_Center">
-                    {/* {UserCompany === 'Company_DHK' ? (
-                        <h2>사용자 관리</h2>
-                    ) : (
-                        <h2>{SelectBasicTitle === 'Company_Room' ? '회의실 예약' : '법인차량 예약'}</h2>
-                    )} */}
                     <h2>{TitleName}</h2>
                 </div>
                 <div className="NAV_Display_Profile_Right">

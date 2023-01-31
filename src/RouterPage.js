@@ -13,6 +13,8 @@ import FoodSelectMainPage from './Components/FoodSelect/FoodSelectMainPage';
 import TodayFoodContainer from './Components/FoodSelect/TodayFoodContainer/TodayFoodContainer';
 import SurvayContainer from './Components/FoodSelect/SurvayContainer/SurvayContainer';
 import AdminImageShowMainPage from './Components/FoodSelect/AdminMainPage/AdminImageShowMainPage';
+import PimMainContainer from './Components/PIM/PimMainContainer';
+import PimRoomApplyMainContainer from './Components/PIM/PimRoomApplyContainer/PimRoomApplyMainContainer';
 const RouterPageMainContainer = styled.div``;
 
 const RouterPage = () => {
@@ -54,6 +56,8 @@ const RouterPage = () => {
                     <Route path="/Food_Select" component={FoodSelectMainPage}></Route>
                     <Route path="/Food_Survay" component={SurvayContainer}></Route>
                     <Route path="/Admin_Image_Check" component={AdminImageShowMainPage}></Route>
+                    <Route exact path="/PIM" component={PimMainContainer}></Route>
+                    <Route path="/PIM/PIMApplyRoom" component={PimRoomApplyMainContainer}></Route>
                 </Switch>
             </BrowserRouter>
         </RouterPageMainContainer>

@@ -152,19 +152,36 @@ const FloorRoomTable = ({
                                     }
                                 >
                                     <div className="ContentTextCotainer">
-                                        <div className="ContentTitle">
+                                        {LoginInfo.Login_epid ? (
+                                            <div className="ContentTitle">
+                                                {list.class === 'PRIVATE'
+                                                    ? LoginInfo.Login_name === list.subject.split('____')[1] ||
+                                                      LoginInfo.Login_name === list.attendees[0].displayName.split('/')[0]
+                                                        ? list.subject.split('____')[0]
+                                                        : '비공개'
+                                                    : list.subject.split('____')[0]}
+                                            </div>
+                                        ) : (
+                                            <div className="ContentTitle">로그인 후 확인 가능</div>
+                                        )}
+                                        {/* <div className="ContentTitle">
                                             {list.class === 'PRIVATE'
                                                 ? LoginInfo.Login_name === list.subject.split('____')[1] ||
                                                   LoginInfo.Login_name === list.attendees[0].displayName.split('/')[0]
                                                     ? list.subject.split('____')[0]
                                                     : '비공개'
                                                 : list.subject.split('____')[0]}
-                                        </div>
-                                        <div className="Content_useId">
-                                            {list.subject.split('____').length > 1
-                                                ? list.subject.split('____')[1]
-                                                : list.attendees[0].displayName.split('/')[0]}
-                                        </div>
+                                        </div> */}
+                                        {LoginInfo.Login_epid ? (
+                                            <div className="Content_useId">
+                                                {list.subject.split('____').length > 1
+                                                    ? list.subject.split('____')[1]
+                                                    : list.attendees[0].displayName.split('/')[0]}
+                                            </div>
+                                        ) : (
+                                            <div className="Content_useId">OOO</div>
+                                        )}
+
                                         {list.allDayYn === 'Y' ? (
                                             <div className="Content_times">
                                                 {moment(list.startTime.date).format('MM월 DD일')} ~{' '}

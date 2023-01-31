@@ -62,7 +62,6 @@ const ApplyFloorRoomTable = ({ Room_Datas, SelectedShowTableTimes, setApplyModal
                             key={list.Times}
                             className="Main_TimeLine_Content"
                             style={list.businessCheck ? {} : { backgroundColor: 'lightgray' }}
-                            // onClick={() => HandleTableTimeClick(list.Times)}
                         ></div>
                     );
                 })}
@@ -87,17 +86,12 @@ const ApplyFloorRoomTable = ({ Room_Datas, SelectedShowTableTimes, setApplyModal
                                             : list.attendees[0].displayName.split('/')[0]}
                                     </div>
                                     <div className="Content_times">
-                                        {/* {moment(list.startTime.dateTime).format('HH:mm')} ~ {moment(list.endTime.dateTime).format('HH:mm')} */}
                                         {list.allDayYn === 'Y' ? (
                                             <div className="Content_times">
                                                 {moment(list.startTime.date).format('MM월 DD일')} ~{' '}
                                                 {moment(list.endTime.date).format('MM월 DD일')}
                                             </div>
-                                        ) : // <div className="Content_times">
-                                        //     {moment(list.startTime.dateTime).format('HH:mm')} ~{' '}
-                                        //     {moment(list.endTime.dateTime).format('HH:mm')}
-                                        // </div>
-                                        moment(list.startTime.dateTime).format('YYYY-MM-DD') ===
+                                        ) : moment(list.startTime.dateTime).format('YYYY-MM-DD') ===
                                           moment(list.endTime.dateTime).format('YYYY-MM-DD') ? (
                                             <div className="Content_times">
                                                 {moment(list.startTime.dateTime).format('HH:mm')} ~{' '}
@@ -126,15 +120,7 @@ const ApplyFloorRoomTable = ({ Room_Datas, SelectedShowTableTimes, setApplyModal
                         }}
                         className="Reservation_Room_Container"
                         key={SelectedShowTableTimes.StartTime}
-                    >
-                        {/* <div className="Reservation_Room_date" onClick={() => alert('Selected')}>
-                            <div className="ContentTextCotainer">
-                                <div className="Content_times">
-                                    {SelectedShowTableTimes.StartTime} ~ {SelectedShowTableTimes.EndTime}
-                                </div>
-                            </div>
-                        </div> */}
-                    </div>
+                    ></div>
                 ) : (
                     <div></div>
                 )}

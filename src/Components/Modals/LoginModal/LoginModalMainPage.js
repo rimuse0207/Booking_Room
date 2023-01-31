@@ -249,7 +249,6 @@ const LoginModalMainPage = () => {
     const HandleChangePassword = async e => {
         try {
             e.preventDefault();
-            console.log(PasswordChangeData);
             var regExp = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{6,}$/;
 
             if (PasswordChangeData.New_PW !== PasswordChangeData.New_PW_Check) {

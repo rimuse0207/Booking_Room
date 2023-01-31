@@ -260,6 +260,13 @@ const HambergerMenuMainPage = () => {
                         ) : (
                             <></>
                         )}
+                        {LoginInfo.Login_id ? (
+                            <li>
+                                <Link to="/PIM">PIM로컬전</Link>
+                            </li>
+                        ) : (
+                            <></>
+                        )}
 
                         {!LoginInfo.Login_id ? (
                             <li style={{ borderBottom: '0.5px solid #fff' }}>

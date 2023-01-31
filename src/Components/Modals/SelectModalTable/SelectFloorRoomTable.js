@@ -88,7 +88,6 @@ const SelectFloorRoomTable = ({ RoomDatas, SelectModalData, Room_Datas, setSelec
                                 >
                                     <div className="ContentTextCotainer">
                                         <div className="ContentTitle">
-                                            {/* {list.class === 'PUBLIC' ? list.subject.split('____')[0] : '비공개'} */}
                                             {list.class === 'PRIVATE'
                                                 ? LoginInfo.Login_name === list.subject.split('____')[1] ||
                                                   LoginInfo.Login_name === list.attendees[0].displayName.split('/')[0]
@@ -106,11 +105,7 @@ const SelectFloorRoomTable = ({ RoomDatas, SelectModalData, Room_Datas, setSelec
                                                 {moment(list.startTime.date).format('MM월 DD일')} ~{' '}
                                                 {moment(list.endTime.date).format('MM월 DD일')}
                                             </div>
-                                        ) : // <div className="Content_times">
-                                        //     {moment(list.startTime.dateTime).format('HH:mm')} ~{' '}
-                                        //     {moment(list.endTime.dateTime).format('HH:mm')}
-                                        // </div>
-                                        moment(list.startTime.dateTime).format('YYYY-MM-DD') ===
+                                        ) : moment(list.startTime.dateTime).format('YYYY-MM-DD') ===
                                           moment(list.endTime.dateTime).format('YYYY-MM-DD') ? (
                                             <div className="Content_times">
                                                 {moment(list.startTime.dateTime).format('HH:mm')} ~{' '}
