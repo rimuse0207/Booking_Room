@@ -286,7 +286,7 @@ const PimRoomApply = () => {
 
             <div className="BookingCheck_Cotainer">
                 <h4 className="BookingCheck_Cotainer_Title">참가인원 : </h4>
-                {/* <div className="BookingCheck_Cotainer_SubTitle"> */}
+
                 <Select
                     ref={handleChangeRef}
                     className="basic-single"
@@ -299,7 +299,6 @@ const PimRoomApply = () => {
                     placeholder={'인원을 선택 해주세요.'}
                     onChange={value => InsertSelectData(value)}
                 />
-                {/* </div> */}
             </div>
             <div className="BookingCheck_Cotainer">
                 <div className="BookingCheck_Cotainer_SubTitle2">

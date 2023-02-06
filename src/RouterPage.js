@@ -15,6 +15,7 @@ import SurvayContainer from './Components/FoodSelect/SurvayContainer/SurvayConta
 import AdminImageShowMainPage from './Components/FoodSelect/AdminMainPage/AdminImageShowMainPage';
 import PimMainContainer from './Components/PIM/PimMainContainer';
 import PimRoomApplyMainContainer from './Components/PIM/PimRoomApplyContainer/PimRoomApplyMainContainer';
+import PimRoomEnterContainer from './Components/PIM/PimRoomEnter/PimRoomEnterContainer';
 const RouterPageMainContainer = styled.div``;
 
 const RouterPage = () => {
@@ -58,6 +59,7 @@ const RouterPage = () => {
                     <Route path="/Admin_Image_Check" component={AdminImageShowMainPage}></Route>
                     <Route exact path="/PIM" component={PimMainContainer}></Route>
                     <Route path="/PIM/PIMApplyRoom" component={PimRoomApplyMainContainer}></Route>
+                    <Route path="/PIM/RoomEnter/:Room_Keys/:Room_Title" component={PimRoomEnterContainer}></Route>
                 </Switch>
             </BrowserRouter>
         </RouterPageMainContainer>

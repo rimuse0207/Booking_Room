@@ -43,7 +43,7 @@ const PimRoomListMainDivBox = styled.div`
                 }
                 .Poistion_Right {
                     position: absolute;
-                    right: 30px;
+                    right: 10px;
                     top: 20%;
                     transform: translateY(-20%);
                     .Room_Maker {
@@ -107,58 +107,7 @@ const PimRoomListMainDivBox = styled.div`
 const PimRoomList = () => {
     const history = useHistory();
     const LoginInfo = useSelector(state => state.LoginInfoDataRedux.Infomation);
-    const [PimRoomData, setPimRoomData] = useState([
-        {
-            indexs: 1,
-            team_Name: 'Closer',
-            title: '202030130 PIM 로컬전',
-            Room_Maker: '유성재',
-            Room_Date: '2023-01-30',
-            Room_Department_Count: 3,
-            finished_Check: false,
-            Room_ID: 'sdfhjkcxhvuweroqi',
-        },
-        {
-            indexs: 1,
-            team_Name: 'Closer',
-            title: '202030130 PIM 로컬전',
-            Room_Maker: '유성재',
-            Room_Date: '2023-01-30',
-            Room_Department_Count: 3,
-            finished_Check: true,
-            Room_ID: 'sdfhjkcxhvuweroqi1',
-        },
-        {
-            indexs: 1,
-            team_Name: 'Closer',
-            title: '202030130 PIM 로컬전',
-            Room_Maker: '유성재',
-            Room_Date: '2023-01-30',
-            Room_Department_Count: 3,
-            finished_Check: true,
-            Room_ID: 'sdfhjkcxhvuweroqi2',
-        },
-        {
-            indexs: 1,
-            team_Name: 'Closer',
-            title: '202030130 PIM 로컬전',
-            Room_Maker: '유성재',
-            Room_Date: '2023-01-30',
-            Room_Department_Count: 3,
-            finished_Check: true,
-            Room_ID: 'sdfhjkcxhvuweroqi3',
-        },
-        {
-            indexs: 1,
-            team_Name: 'Closer',
-            title: '202030130 PIM 로컬전',
-            Room_Maker: '유성재',
-            Room_Date: '2023-01-30',
-            Room_Department_Count: 3,
-            finished_Check: true,
-            Room_ID: 'sdfhjkcxhvuweroqi4',
-        },
-    ]);
+    const [PimRoomData, setPimRoomData] = useState([]);
     const [FloatingMenuOnCheck, setFloatingMenuOnCheck] = useState(true);
 
     const GetRoomInfoData = async () => {
@@ -178,6 +127,16 @@ const PimRoomList = () => {
         }
     };
 
+    const handleMoveRoom = data => {
+        try {
+            console.log(data);
+
+            history.push(`/PIM/RoomEnter/${data.local_pim_room_info_room_key}/${data.local_pim_room_info_title}`);
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
     useEffect(() => {
         GetRoomInfoData();
     }, []);
@@ -187,22 +146,34 @@ const PimRoomList = () => {
             <ul className="Local_Pim_Lists_Ul">
                 {PimRoomData.map((list, i) => {
                     return (
-                        <li className={list.finished_Check ? 'finished' : 'not_finished'} key={list.local_pim_room_info_room_key}>
+                        <li
+                            className={
+                                list.finished_Check === 1 || list.local_pim_room_info_prepare_check === 0 ? 'finished' : 'not_finished'
+                            }
+                            key={list.local_pim_participate_user_room_key}
+                            onClick={() => handleMoveRoom(list)}
+                        >
                             <div className="Room_Container_List">
                                 <h3 className="Room_Title">{list.local_pim_room_info_title} </h3>
 
                                 <div className="Room_Participate_Count">
-                                    참가인원 : {list.brity_works_user_info_name} 외 {list.count}명
+                                    참가인원 : {list.brity_works_user_info_name} 외 {list.count - 1}명
                                 </div>
                                 <div className="Poistion_Right">
                                     <div className="Room_Maker">방장 : {list.brity_works_user_info_name}</div>
                                     <div className="Room_Date">
-                                        {' '}
                                         날짜 : {moment(list.local_pim_room_info_date).format('YYYY-MM-DD HH:mm:ss')}
                                     </div>
                                 </div>
                             </div>
-                            {list.finished_Check ? <div className="Finished_Text">종료</div> : <></>}
+
+                            {list.local_pim_room_info_finished_check === 1 ? (
+                                <div className="Finished_Text">종료</div>
+                            ) : list.local_pim_room_info_prepare_check === 0 ? (
+                                <div className="Finished_Text">준비중</div>
+                            ) : (
+                                <></>
+                            )}
                         </li>
                     );
                 })}
