@@ -119,7 +119,6 @@ const PimRoomList = () => {
             });
 
             if (GetRoomData_Axios.data.dataSuccess) {
-                console.log(GetRoomData_Axios);
                 setPimRoomData(GetRoomData_Axios.data.Pim_Room_Getting_Rows);
             }
         } catch (error) {
@@ -129,8 +128,6 @@ const PimRoomList = () => {
 
     const handleMoveRoom = data => {
         try {
-            console.log(data);
-
             history.push(`/PIM/RoomEnter/${data.local_pim_room_info_room_key}/${data.local_pim_room_info_title}`);
         } catch (error) {
             console.log(error);
@@ -138,7 +135,11 @@ const PimRoomList = () => {
     };
 
     useEffect(() => {
-        GetRoomInfoData();
+        if (!LoginInfo.Login_id) {
+            history.push('/Login_Page');
+        } else {
+            GetRoomInfoData();
+        }
     }, []);
 
     return (
@@ -148,7 +149,11 @@ const PimRoomList = () => {
                     return (
                         <li
                             className={
-                                list.finished_Check === 1 || list.local_pim_room_info_prepare_check === 0 ? 'finished' : 'not_finished'
+                                list.finished_Check === 1 ||
+                                list.local_pim_room_info_prepare_check === 0 ||
+                                list.local_pim_room_info_finished_check === 1
+                                    ? 'finished'
+                                    : 'not_finished'
                             }
                             key={list.local_pim_participate_user_room_key}
                             onClick={() => handleMoveRoom(list)}
@@ -182,15 +187,15 @@ const PimRoomList = () => {
             <div className="FloatingMenu_Container">
                 <FloatingMenu slideSpeed={500} direction="up" spacing={8} isOpen={FloatingMenuOnCheck}>
                     <MainButton
-                        iconResting={<TiThMenu style={{ fontSize: 20 }} nativeColor="white" />}
-                        iconActive={<IoCloseSharp style={{ fontSize: 20 }} nativeColor="white" color="black" />}
-                        backgroundColor="black"
+                        iconResting={<TiThMenu style={{ fontSize: 20 }} nativecolor="white" />}
+                        iconActive={<IoCloseSharp style={{ fontSize: 20 }} nativecolor="white" color="black" />}
+                        // backgroundColor="black"
                         onClick={() => setFloatingMenuOnCheck(!FloatingMenuOnCheck)}
                         size={56}
                     ></MainButton>
                     <ChildButton
-                        icon={<RiPlayListAddLine style={{ fontSize: 20 }} nativeColor="black" />}
-                        backgroundColor="white"
+                        icon={<RiPlayListAddLine style={{ fontSize: 20 }} nativecolor="black" />}
+                        // backgroundColor="white"
                         size={40}
                         onClick={() => history.push('/PIM/PIMApplyRoom')}
                     />

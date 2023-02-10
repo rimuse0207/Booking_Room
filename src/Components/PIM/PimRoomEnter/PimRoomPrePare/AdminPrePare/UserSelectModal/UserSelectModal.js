@@ -35,24 +35,10 @@ const UserSelectModal = ({
     const handleChangeRef = useRef(null);
     const [UserSelectData, setUserSelectData] = useState([]);
 
-    const GetSelect_Person = async () => {
-        try {
-            const Get_Select_Person_Data_Axios = await axios.get(`${process.env.REACT_APP_DB_HOST}/LocalPim/Pim_Preson_Keys`, {
-                params: {
-                    Room_Keys,
-                },
-            });
-
-            if (Get_Select_Person_Data_Axios.data.dataSuccess) {
-                console.log(Get_Select_Person_Data_Axios);
-                setUserSelectData(Get_Select_Person_Data_Axios.data.Select_Data);
-            }
-        } catch (error) {
-            console.log(error);
-        }
-    };
-
     const InsertSelectData = data => {
+        if (!data) {
+            return;
+        }
         if (SelectedTeam === 'Blue') {
             const ChangeData = MatchState.map(list =>
                 list.Room_Keys === SelectedData.Room_Keys
@@ -76,7 +62,21 @@ const UserSelectModal = ({
             setUserSelectModalOpen();
         }
     };
+    const GetSelect_Person = async () => {
+        try {
+            const Get_Select_Person_Data_Axios = await axios.get(`${process.env.REACT_APP_DB_HOST}/LocalPim/Pim_Preson_Keys`, {
+                params: {
+                    Room_Keys,
+                },
+            });
 
+            if (Get_Select_Person_Data_Axios.data.dataSuccess) {
+                setUserSelectData(Get_Select_Person_Data_Axios.data.Select_Data);
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    };
     useEffect(() => {
         GetSelect_Person();
         if (handleChangeRef.current) {
@@ -97,6 +97,7 @@ const UserSelectModal = ({
                     className="basic-single"
                     classNamePrefix="이쪽에서 선택 해주세요."
                     // defaultValue={SelectLeftHeaderInfo}
+                    value={null}
                     isClearable={true}
                     isSearchable={true}
                     name="Person"

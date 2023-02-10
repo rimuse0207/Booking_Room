@@ -5,7 +5,9 @@ import Select from 'react-select';
 import axios from 'axios';
 import { TiUserAdd, TiUserDelete } from 'react-icons/ti';
 import { useHistory } from 'react-router-dom';
-
+import { toast } from '../../../ToasMessage/ToastManager';
+import { confirmAlert } from 'react-confirm-alert'; // Import
+import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
 const PimRoomApplyMainDivBox = styled.div`
     .BookingCheck_Cotainer {
         display: flex;
@@ -85,6 +87,15 @@ const PimRoomApplyMainDivBox = styled.div`
                 @media only screen and (max-width: 800px) {
                     display: none;
                 }
+                .Add_User_Click {
+                    :hover {
+                        cursor: pointer;
+                        opacity: 0.7;
+                        .user_icons {
+                            color: green;
+                        }
+                    }
+                }
             }
             .Select_Right {
                 float: right;
@@ -103,6 +114,16 @@ const PimRoomApplyMainDivBox = styled.div`
                 @media only screen and (max-width: 800px) {
                     float: left;
                     width: 100%;
+                }
+
+                .Add_User_Click {
+                    :hover {
+                        cursor: pointer;
+                        opacity: 0.7;
+                        .user_icons {
+                            color: red;
+                        }
+                    }
                 }
             }
         }
@@ -180,6 +201,16 @@ const PimRoomApplyMainDivBox = styled.div`
             }
         }
     }
+
+    .VideoClickRoom {
+        color: #368;
+        font-weight: bolder;
+        padding-bottom: 5px;
+        margin-left: 20px;
+        :hover {
+            color: gray;
+        }
+    }
 `;
 const PimRoomApply = () => {
     const handleChangeRef = useRef(null);
@@ -188,6 +219,7 @@ const PimRoomApply = () => {
     const [RoomInfoData, setRoomInfoData] = useState({
         team_name: '',
         title: '',
+        VideoCheck: false,
     });
     const [SelectLeftHeaderInfo, setSelectLeftHeaderInfo] = useState(null);
     const [LeftHeaderInfo, setLeftHeaderInfo] = useState([]);
@@ -201,7 +233,8 @@ const PimRoomApply = () => {
             const GetPersonData_Axios = await axios.get(`${process.env.REACT_APP_DB_HOST}/LocalPim/Pim_Preson_Getting`);
 
             if (GetPersonData_Axios.data.dataSuccess) {
-                setLeftHeaderInfo(GetPersonData_Axios.data.Select_Data);
+                const datas = GetPersonData_Axios.data.Select_Data.filter(list => list.value !== LoginInfo.Login_id);
+                setLeftHeaderInfo(datas);
             } else {
                 alert('error발생.');
             }
@@ -212,16 +245,55 @@ const PimRoomApply = () => {
 
     // Select창 엔터 시
     const InsertSelectData = data => {
+        if (data) {
+            setSelectedLists(SelectedLists.concat(data));
+            setLeftHeaderInfo(LeftHeaderInfo.filter(user => user.value !== data.value));
+        }
+    };
+
+    //마우스 User 선택 시 (선택가능 인원 -> 선택된 인원)
+    const handleUserAdd = data => {
         setSelectedLists(SelectedLists.concat(data));
+        setLeftHeaderInfo(LeftHeaderInfo.filter(user => user.value !== data.value));
+    };
+
+    //마우스 User 선택 시 (선택 된 인원 -> 선택가능 인원)
+    const handleUserMinus = data => {
+        if (data.value === LoginInfo.Login_id) {
+            toast.show({
+                title: `자기자신을 삭제 할 수 없습니다.`,
+                successCheck: false,
+                duration: 4500,
+            });
+            return;
+        }
+        const Concat_Data = LeftHeaderInfo.concat(data);
+
+        setSelectedLists(SelectedLists.filter(user => user.value !== data.value));
+        let pensByColors = Concat_Data.sort((a, b) => {
+            if (a.value > b.value) return 1;
+            if (a.value < b.value) return -1;
+            return 0;
+        });
+        setLeftHeaderInfo(pensByColors);
     };
 
     //Room생성
     const handleCreateRoom = async () => {
         if (!RoomInfoData.team_name || !RoomInfoData.title) {
-            alert('공란을 전부 입력 해주세요.');
+            toast.show({
+                title: `공란을 전부 입력 해주세요.`,
+                successCheck: false,
+                duration: 4500,
+            });
             return;
         } else if (SelectedLists.length < 2) {
-            alert('참가인원을 선택 해주세요.');
+            toast.show({
+                title: `참가인원을 선택 해주세요.`,
+                successCheck: false,
+                duration: 4500,
+            });
+
             return;
         }
         try {
@@ -232,8 +304,12 @@ const PimRoomApply = () => {
             });
 
             if (Sending_Room_Info_Data_Axios.data.dataSuccess) {
-                alert('Room생성');
-                history.push('/PIM');
+                toast.show({
+                    title: `방을 생성하였습니다.`,
+                    successCheck: true,
+                    duration: 4500,
+                });
+                history.push(`/PIM/RoomEnter/${Sending_Room_Info_Data_Axios.data.RoomKeys}/${RoomInfoData.title}`);
             }
         } catch (error) {
             console.log(error);
@@ -242,11 +318,19 @@ const PimRoomApply = () => {
 
     //Room생성 취소
     const handleCancleRoom = async () => {
-        if (!window.confirm('정말 취소하시겠습니까?')) {
-            return;
-        } else {
-            history.push('/PIM');
-        }
+        confirmAlert({
+            title: '정말 취소하시겠습니까?',
+            message: '확인 시 기존 데이터는 사라집니다.',
+            buttons: [
+                {
+                    label: '확인',
+                    onClick: () => history.push('/PIM'),
+                },
+                {
+                    label: '취소',
+                },
+            ],
+        });
     };
 
     useEffect(() => {
@@ -285,13 +369,42 @@ const PimRoomApply = () => {
             </div>
 
             <div className="BookingCheck_Cotainer">
+                <h4 className="BookingCheck_Cotainer_Title">화상회의 만들기: </h4>
+                <div className="BookingCheck_Cotainer_SubTitle2" style={{ marginTop: '0px' }}>
+                    <label name="Yes" style={{ marginRight: '20px' }}>
+                        <input
+                            type="radio"
+                            name="Video"
+                            value="Yes"
+                            checked={RoomInfoData.VideoCheck}
+                            onChange={() => setRoomInfoData({ ...RoomInfoData, VideoCheck: true })}
+                        ></input>
+                        예
+                    </label>
+                    <label name="No">
+                        <input
+                            type="radio"
+                            name="Video"
+                            value="No"
+                            checked={!RoomInfoData.VideoCheck}
+                            onChange={() => setRoomInfoData({ ...RoomInfoData, VideoCheck: false })}
+                        ></input>
+                        아니오
+                    </label>
+                </div>
+            </div>
+            <div className="BookingCheck_Cotainer">
+                {RoomInfoData.VideoCheck ? <div className="VideoClickRoom">회의실 접속은 URL로 생성됩니다.</div> : <></>}
+            </div>
+
+            <div className="BookingCheck_Cotainer">
                 <h4 className="BookingCheck_Cotainer_Title">참가인원 : </h4>
 
                 <Select
                     ref={handleChangeRef}
                     className="basic-single"
                     classNamePrefix="이쪽에서 선택 해주세요."
-                    defaultValue={SelectLeftHeaderInfo}
+                    value={SelectLeftHeaderInfo}
                     isClearable={true}
                     isSearchable={true}
                     name="Person"
@@ -309,9 +422,9 @@ const PimRoomApply = () => {
                                 <ul>
                                     {LeftHeaderInfo.map((list, i) => {
                                         return (
-                                            <li>
+                                            <li className="Add_User_Click" onClick={() => handleUserAdd(list)} key={list.value}>
                                                 <div>{list.label}</div>
-                                                <div>
+                                                <div className="user_icons">
                                                     <TiUserAdd></TiUserAdd>
                                                 </div>
                                             </li>
@@ -326,9 +439,9 @@ const PimRoomApply = () => {
                                 <ul>
                                     {SelectedLists.map((list, i) => {
                                         return (
-                                            <li>
+                                            <li className="Add_User_Click" onClick={() => handleUserMinus(list)} key={list.value}>
                                                 <div>{list.label}</div>
-                                                <div>
+                                                <div className="user_icons">
                                                     <TiUserDelete></TiUserDelete>
                                                 </div>
                                             </li>
