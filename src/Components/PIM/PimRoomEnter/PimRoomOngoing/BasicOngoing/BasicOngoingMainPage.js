@@ -4,9 +4,10 @@ import Modal from 'react-modal';
 import styled from 'styled-components';
 import UserBattingModal from './UserSelectModal/UserBattingModal';
 import { FaArrowLeft } from 'react-icons/fa';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import RoomNav from '../../../PimNav/RoomNav';
+import { IoQrCodeSharp } from 'react-icons/io5';
 const customStyles = {
     content: {
         top: '50%',
@@ -48,6 +49,7 @@ const BasicOngoingMainPageMainDivBox = styled.div`
 `;
 
 const BasicOngoingMainPage = ({ Room_Keys }) => {
+    const { Room_Title } = useParams();
     const [MatchState, setMatchState] = useState([]);
     const [BattingModalOpen, setBattingModalOpen] = useState(false);
     const [SelectedBattingData, setSelectedBattingData] = useState(null);
@@ -82,14 +84,15 @@ const BasicOngoingMainPage = ({ Room_Keys }) => {
                 },
             });
             if (Get_Pim_Room_Info_Axios.data.dataSuccess) {
-                console.log(Get_Pim_Room_Info_Axios);
                 setMatchState(Get_Pim_Room_Info_Axios.data.Match_lists_Rows);
             }
         } catch (error) {
             console.log(error);
         }
     };
-
+    const handleQRCode_Make = () => {
+        window.open(`/PIM/QRCode/${Room_Keys}/${Room_Title}`);
+    };
     useEffect(() => {
         Get_Pim_Room_Now_Match_Lists();
     }, []);
@@ -97,6 +100,12 @@ const BasicOngoingMainPage = ({ Room_Keys }) => {
     return (
         <BasicOngoingMainPageMainDivBox>
             <RoomNav Attention={Attention}></RoomNav>
+            <div>
+                <div>
+                    <IoQrCodeSharp></IoQrCodeSharp>
+                </div>
+                <button onClick={() => handleQRCode_Make()}>QR코드 생성</button>
+            </div>
 
             <div className="Fight_Box">
                 <div className="Fighter_Team_Division">

@@ -93,7 +93,7 @@ const PimRoomEnterContainer = () => {
                     <></>
                 )}
                 {/* 투표종료 시 */}
-                {PimState.finished ? <PimRoomFinishContainer></PimRoomFinishContainer> : <></>}
+                {PimState.finished ? <PimRoomFinishContainer Room_Keys={Room_Keys}></PimRoomFinishContainer> : <></>}
             </div>
         </PimRoomEnterContainerMainDivBox>
     );

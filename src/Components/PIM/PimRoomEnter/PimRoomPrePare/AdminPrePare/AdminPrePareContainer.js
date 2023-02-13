@@ -485,6 +485,7 @@ const AdminPrePareContainer = ({ Room_Keys }) => {
             if (RoomDetailInfo_Send_Axios.data.dataSuccess) {
                 RoomInfoDataGetting();
                 onClose();
+                history.push('/PIM');
             }
         } catch (error) {
             console.log(error);

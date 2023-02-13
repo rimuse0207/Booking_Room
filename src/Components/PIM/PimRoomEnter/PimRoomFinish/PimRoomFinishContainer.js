@@ -7,10 +7,10 @@ const PimRoomFinishContainerMainDivBox = styled.div`
     border: 1px solid black;
 `;
 
-const PimRoomFinishContainer = () => {
+const PimRoomFinishContainer = ({ Room_Keys }) => {
     return (
         <AdminPrePareContainerMainDivBox>
-            <BasicFinishMainPage></BasicFinishMainPage>
+            <BasicFinishMainPage Room_Keys={Room_Keys}></BasicFinishMainPage>
         </AdminPrePareContainerMainDivBox>
     );
 };

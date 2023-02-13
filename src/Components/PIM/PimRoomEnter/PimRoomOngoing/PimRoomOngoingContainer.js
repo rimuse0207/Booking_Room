@@ -4,10 +4,9 @@ import BasicOngoingMainPage from './BasicOngoing/BasicOngoingMainPage';
 import { confirmAlert } from 'react-confirm-alert'; // Import
 import axios from 'axios';
 import { toast } from '../../../ToasMessage/ToastManager';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 
 const PimRoomOngoingContainer = ({ Room_Keys, CheckingMaker }) => {
-    console.log(CheckingMaker);
     const history = useHistory();
     const handleFinishedMatch = () => {
         try {

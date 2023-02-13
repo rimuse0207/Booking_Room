@@ -167,8 +167,16 @@ const UserBattingModal = ({ SelectedBattingData, setBattingModalOpen, Get_Pim_Ro
                 BattingWill,
                 ID: LoginInfo.Login_id,
             });
-
-            if (Batting_Update_Axios.data.dataSuccess) {
+            if (Batting_Update_Axios.data.dataSuccess && Batting_Update_Axios.data.FinishData) {
+                toast.show({
+                    title: `투표가 마감되었습니다. 잠시 후 결과페이지로 이동됩니다.`,
+                    successCheck: false,
+                    duration: 4000,
+                });
+                setTimeout(() => {
+                    window.location.reload();
+                }, 4000);
+            } else if (Batting_Update_Axios.data.dataSuccess && !Batting_Update_Axios.data.FinishData) {
                 Get_Pim_Room_Now_Match_Lists();
                 setBattingModalOpen();
                 toast.show({
@@ -202,7 +210,16 @@ const UserBattingModal = ({ SelectedBattingData, setBattingModalOpen, Get_Pim_Ro
                 ID: LoginInfo.Login_id,
             });
 
-            if (Batting_Save_Axios.data.dataSuccess) {
+            if (Batting_Save_Axios.data.dataSuccess && Batting_Save_Axios.data.FinishData) {
+                toast.show({
+                    title: `투표가 마감되었습니다. 잠시 후 결과페이지로 이동됩니다.`,
+                    successCheck: false,
+                    duration: 4000,
+                });
+                setTimeout(() => {
+                    window.location.reload();
+                }, 4000);
+            } else if (Batting_Save_Axios.data.dataSuccess && !Batting_Save_Axios.data.FinishData) {
                 Get_Pim_Room_Now_Match_Lists();
                 setBattingModalOpen();
                 toast.show({
