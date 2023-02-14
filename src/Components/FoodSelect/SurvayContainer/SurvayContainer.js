@@ -9,7 +9,7 @@ import axios from 'axios';
 import { Loader_Check_For_False, Loader_Check_For_True } from '../../../Models/LoaderCheckReducer/LoaderCheckReducer';
 import { useState } from 'react';
 import { toast } from '../../ToasMessage/ToastManager';
-const SurvayContainerMainDivBox = styled.div`
+export const SurvayContainerMainDivBox = styled.div`
     min-height: 100vh;
     .Survay_Main_Content {
         width: 80%;

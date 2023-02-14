@@ -34,6 +34,10 @@ const NavigationMainPageMainDivBox = styled.div`
             left: 0px;
             right: 0px;
             top: -16px;
+            @media only screen and (max-width: 800px) {
+                font-size: 0.8em;
+                top: 5px;
+            }
         }
         .NAV_Display_Profile_Right {
             position: absolute;

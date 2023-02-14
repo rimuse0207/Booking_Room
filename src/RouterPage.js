@@ -17,6 +17,7 @@ import PimMainContainer from './Components/PIM/PimMainContainer';
 import PimRoomApplyMainContainer from './Components/PIM/PimRoomApplyContainer/PimRoomApplyMainContainer';
 import PimRoomEnterContainer from './Components/PIM/PimRoomEnter/PimRoomEnterContainer';
 import PimQRCodeMaker from './Components/PIM/PimQRCodeMaker/PimQRCodeMaker';
+import UserBreakFastMainPage from './Components/BreakFast/UserBreakFast/UserBreakFastMainPage';
 const RouterPageMainContainer = styled.div``;
 
 const RouterPage = () => {
@@ -62,6 +63,7 @@ const RouterPage = () => {
                     <Route path="/PIM/PIMApplyRoom" component={PimRoomApplyMainContainer}></Route>
                     <Route path="/PIM/RoomEnter/:Room_Keys/:Room_Title" component={PimRoomEnterContainer}></Route>
                     <Route path="/PIM/QRCode/:Room_keys/:Room_Title" component={PimQRCodeMaker}></Route>
+                    <Route path="/BreakFast/UserSlect" component={UserBreakFastMainPage}></Route>
                 </Switch>
             </BrowserRouter>
         </RouterPageMainContainer>

@@ -10,6 +10,7 @@ import BasicPrePareContainer from './PimRoomPrePare/BasicPrePare/BasicPrePareCon
 import { FaArrowLeft } from 'react-icons/fa';
 import PimRoomPrePareContainer from './PimRoomPrePare/PimRoomPrePareContainer';
 import PimRoomFinishContainer from './PimRoomFinish/PimRoomFinishContainer';
+import { toast } from '../../ToasMessage/ToastManager';
 
 const PimRoomEnterContainerMainDivBox = styled.div`
     .Container {
@@ -35,11 +36,19 @@ const PimRoomEnterContainer = () => {
             const Checking_Room_Start_Axios = await axios.get(`${process.env.REACT_APP_DB_HOST}/LocalPim/Pim_Room_Checking_Start`, {
                 params: {
                     Room_Keys,
+                    ID: LoginInfo.Login_id,
                 },
             });
 
             if (Checking_Room_Start_Axios.data.dataSuccess) {
-                if (Checking_Room_Start_Axios.data.Room_Checking_Start_Rows[0]) {
+                if (!Checking_Room_Start_Axios.data.access_Permison) {
+                    toast.show({
+                        title: `방에 접속 권한이 없습니다. 다시 시도해주세요.`,
+                        successCheck: false,
+                        duration: 3000,
+                    });
+                    history.push('/PIM');
+                } else if (Checking_Room_Start_Axios.data.Room_Checking_Start_Rows[0]) {
                     if (Checking_Room_Start_Axios.data.Room_Checking_Start_Rows[0].local_pim_room_info_prepare_check === 0) {
                         // 준비중
                         if (Checking_Room_Start_Axios.data.Room_Checking_Start_Rows[0].local_pim_room_info_maker !== LoginInfo.Login_id) {
@@ -69,7 +78,7 @@ const PimRoomEnterContainer = () => {
 
     useEffect(() => {
         Checking_Room_Start();
-    }, []);
+    }, [Room_Keys]);
 
     return (
         <PimRoomEnterContainerMainDivBox>

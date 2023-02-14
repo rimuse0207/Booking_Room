@@ -541,7 +541,7 @@ const AdminPrePareContainer = ({ Room_Keys }) => {
                 <div className="List_Move_Advance">
                     <div>* 주의사항</div>
                     <ul style={{ fontSize: '0.7em', paddingLeft: '10px', marginTop: '5px' }}>
-                        <li>저장 시 투표가 개시됩니다.</li>
+                        <li>저장과 동시에 투표가 개시됩니다.</li>
                         <li>저장과 동시에 수정 및 삭제가 불가합니다.</li>
                     </ul>
                 </div>

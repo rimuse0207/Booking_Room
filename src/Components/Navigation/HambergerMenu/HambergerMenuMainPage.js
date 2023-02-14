@@ -260,7 +260,7 @@ const HambergerMenuMainPage = () => {
                         ) : (
                             <></>
                         )}
-                        {LoginInfo.Login_id ? (
+                        {LoginInfo.Login_id && LoginInfo.Login_company === 'DHKS' ? (
                             <li>
                                 <Link to="/PIM">PIM로컬전</Link>
                             </li>

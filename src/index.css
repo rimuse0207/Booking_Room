@@ -12,7 +12,8 @@ code {
 
 * {
     box-sizing: border-box;
-    font-family: TextFontTest, LeeSeoyun, GangwonEdu_OTFBoldA;
+    font-family: TextFontTest, LeeSeoyun, GangwonEdu_OTFBoldA, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans',
+        'Droid Sans', 'Helvetica Neue', sans-serif;
 }
 
 #toast-container-main {
