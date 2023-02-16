@@ -260,10 +260,24 @@ const HambergerMenuMainPage = () => {
                         ) : (
                             <></>
                         )}
-                        {LoginInfo.Login_id && LoginInfo.Login_company === 'DHKS' ? (
+                        {LoginInfo.Login_id === 'sjyoo@dhk.co.kr' ||
+                        LoginInfo.Login_id === 'jychoi@dhk.co.kr' ||
+                        LoginInfo.Login_id === 'dikim@dhk.co.kr' ? (
                             <li>
-                                <Link to="/PIM">PIM로컬전</Link>
+                                <Link to="/Admin/BreakFast">조식 재고 확인</Link>
                             </li>
+                        ) : (
+                            <></>
+                        )}
+                        {LoginInfo.Login_id && LoginInfo.Login_company === 'DHKS' ? (
+                            <>
+                                <li>
+                                    <Link to="/PIM">PIM로컬전</Link>
+                                </li>
+                                <li>
+                                    <Link to="/BreakFast/UserSlect">조식신청</Link>
+                                </li>
+                            </>
                         ) : (
                             <></>
                         )}
