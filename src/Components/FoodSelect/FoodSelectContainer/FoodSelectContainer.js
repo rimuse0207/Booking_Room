@@ -9,6 +9,7 @@ import 'moment/locale/ko';
 import { ko } from 'date-fns/esm/locale';
 import { Loader_Check_For_False, Loader_Check_For_True } from '../../../Models/LoaderCheckReducer/LoaderCheckReducer';
 import LoaderMainPage from '../../Loader/LoaderMainPage';
+import { request } from '../../../API';
 
 moment.locale('ko');
 const FoodSelectContainerMainDivBox = styled.div`
@@ -114,7 +115,7 @@ const FoodSelectContainer = ({ history }) => {
         const formData = new FormData();
         formData.append('image', e.target.files[0]);
 
-        const dataSendImageFromServer = await axios.post(`${process.env.REACT_APP_DB_HOST}/FoodApp/FoodImageUpload`, formData, {
+        const dataSendImageFromServer = await request.post(`/FoodApp/FoodImageUpload`, formData, {
             headers: {
                 'Content-Type': 'multipart/form-data',
             },
@@ -132,7 +133,7 @@ const FoodSelectContainer = ({ history }) => {
     const handleDeleteFromServerImage = async () => {
         dispatch(Loader_Check_For_True());
         try {
-            const DeleteFromServerImage = await axios.post(`${process.env.REACT_APP_DB_HOST}/FoodApp/FoodImageDelete`, FileStateData);
+            const DeleteFromServerImage = await request.post(`/FoodApp/FoodImageDelete`, FileStateData);
 
             if (DeleteFromServerImage.data.dataSuccess) {
                 dispatch(Loader_Check_For_False());
@@ -174,7 +175,7 @@ const FoodSelectContainer = ({ history }) => {
 
             setOneClickCheck(false);
 
-            const UploadDataFromServer = await axios.post(`${process.env.REACT_APP_DB_HOST}/FoodApp/FoodDataSend`, {
+            const UploadDataFromServer = await request.post(`/FoodApp/FoodDataSend`, {
                 FileStateData,
                 LoginInfo,
             });

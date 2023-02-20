@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useState } from 'react';
 import Modal from 'react-modal';
 import styled from 'styled-components';
+import { request } from '../../../API';
 import { toast } from '../../ToasMessage/ToastManager';
 
 const UserAddMainModalMainDivBox = styled.div`
@@ -137,7 +138,7 @@ const UserAddMainModal = ({ AddUserModalIsOpen, setAddUserModalIsOpen, getUserIn
 
     const HandleUserAdd = async () => {
         try {
-            const UserAddInfoDataFromServer = await axios.post(`${process.env.REACT_APP_DB_HOST}/users/User_Data_Add_From_Admin`, {
+            const UserAddInfoDataFromServer = await request.post(`/users/User_Data_Add_From_Admin`, {
                 AddUserInfoData,
             });
 

@@ -8,6 +8,7 @@ import { useHistory, useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import RoomNav from '../../../PimNav/RoomNav';
 import { IoQrCodeSharp } from 'react-icons/io5';
+import { request } from '../../../../../API';
 const customStyles = {
     content: {
         top: '50%',
@@ -77,7 +78,7 @@ const BasicOngoingMainPage = ({ Room_Keys }) => {
 
     const Get_Pim_Room_Now_Match_Lists = async () => {
         try {
-            const Get_Pim_Room_Info_Axios = await axios.get(`${process.env.REACT_APP_DB_HOST}/LocalPim/Pim_Room_Now_Match_Lists`, {
+            const Get_Pim_Room_Info_Axios = await request.get(`/LocalPim/Pim_Room_Now_Match_Lists`, {
                 params: {
                     Room_Keys,
                     ID: LoginInfo.Login_id,

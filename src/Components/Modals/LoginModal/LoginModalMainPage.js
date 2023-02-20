@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
+import { request } from '../../../API';
 import { LOGIN_INFO_DATA_Changes } from '../../../Models/LoginInfoReducer/LoginInfoReducer';
 import { toast } from '../../ToasMessage/ToastManager';
 
@@ -196,7 +197,7 @@ const LoginModalMainPage = () => {
         e.preventDefault();
 
         try {
-            const CheckingLoginFromServer = await axios.post(`${process.env.REACT_APP_DB_HOST}/users/Rooms_Booking_Login_Router`, {
+            const CheckingLoginFromServer = await request.post(`/users/Rooms_Booking_Login_Router`, {
                 LoginInfoData,
             });
 
@@ -249,7 +250,7 @@ const LoginModalMainPage = () => {
     const HandleChangePassword = async e => {
         try {
             e.preventDefault();
-            var regExp = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{6,}$/;
+            var regExp = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&^]{6,}$/;
 
             if (PasswordChangeData.New_PW !== PasswordChangeData.New_PW_Check) {
                 setPasswordChangeData({ ...PasswordChangeData, New_PW_Check: '' });
@@ -270,7 +271,7 @@ const LoginModalMainPage = () => {
                 });
                 return;
             } else {
-                const LoginPasswordChangeFromServer = await axios.post(`${process.env.REACT_APP_DB_HOST}/users/User_Password_Change`, {
+                const LoginPasswordChangeFromServer = await request.post(`/users/User_Password_Change`, {
                     PasswordChangeData,
                 });
 

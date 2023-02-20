@@ -8,6 +8,7 @@ import SelectModalTable from './SelectModalTable/SelectModalTable';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
 import { toast } from '../ToasMessage/ToastManager';
+import { request } from '../../API';
 const customStyles = {
     content: {
         top: '50%',
@@ -350,7 +351,7 @@ const SelectModal = ({
 
     const handleDeleteBooking = async () => {
         try {
-            const DeleteFromBookingData = await axios.post(`${process.env.REACT_APP_DB_HOST}/users/BrityWorks_Delete_From_Data`, {
+            const DeleteFromBookingData = await request.post(`/users/BrityWorks_Delete_From_Data`, {
                 SelectModalData,
                 LoginInfo,
             });

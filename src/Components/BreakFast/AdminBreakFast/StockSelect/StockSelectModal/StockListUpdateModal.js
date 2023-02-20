@@ -3,10 +3,10 @@ import styled from 'styled-components';
 import { CgCloseO } from 'react-icons/cg';
 import { useState } from 'react';
 import moment from 'moment';
-import axios from 'axios';
 import { useEffect } from 'react';
 import { StockSelectMainPageMainDivBox } from '../StockSelectMainPage';
 import { UserApplySelectMainPageMainDivBox } from '../../UserApplySelect/UserApplySelectMainPage';
+import { request } from '../../../../../API';
 const StockListUpdateModalMainDivBox = styled.div`
     .Close_button_container {
         position: fixed;
@@ -26,7 +26,7 @@ const StockListUpdateModal = ({ SelectList, OnClose }) => {
 
     const History_Stock_Show = async () => {
         try {
-            const History_Stock_Show_Axios = await axios.get(`${process.env.REACT_APP_DB_HOST}/FoodApp/History_Stock_Show`, {
+            const History_Stock_Show_Axios = await request.get(`/FoodApp/History_Stock_Show`, {
                 params: {
                     breakfast_info_name: SelectList.breakfast_info_name,
                 },

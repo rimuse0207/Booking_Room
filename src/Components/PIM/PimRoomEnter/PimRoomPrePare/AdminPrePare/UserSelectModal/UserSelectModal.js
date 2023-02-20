@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { CgCloseO } from 'react-icons/cg';
 import Select from 'react-select';
 import axios from 'axios';
+import { request } from '../../../../../../API';
 
 const UserSelectModalMainDivBox = styled.div`
     .Close_button_container {
@@ -64,7 +65,7 @@ const UserSelectModal = ({
     };
     const GetSelect_Person = async () => {
         try {
-            const Get_Select_Person_Data_Axios = await axios.get(`${process.env.REACT_APP_DB_HOST}/LocalPim/Pim_Preson_Keys`, {
+            const Get_Select_Person_Data_Axios = await request.get(`/LocalPim/Pim_Preson_Keys`, {
                 params: {
                     Room_Keys,
                 },

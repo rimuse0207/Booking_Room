@@ -6,6 +6,7 @@ import { toast } from '../../ToasMessage/ToastManager';
 import { TiUserDelete } from 'react-icons/ti';
 import { RiLockPasswordFill } from 'react-icons/ri';
 import UserAddMainModal from '../UserAddModal/UserAddMainModal';
+import { request } from '../../../API';
 
 const UserManageTableMainDivBox = styled.div`
     width: 95%;
@@ -124,7 +125,7 @@ const UserManageTable = ({ AddUserModalIsOpen, setAddUserModalIsOpen }) => {
     ///데이터 조회
     const getUserInfoData = async () => {
         try {
-            const GetUserInfoDataFromServer = await axios.get(`${process.env.REACT_APP_DB_HOST}/users/User_Data_Getting_From_Admin`);
+            const GetUserInfoDataFromServer = await request.get(`/users/User_Data_Getting_From_Admin`);
 
             if (GetUserInfoDataFromServer.data.dataSuccess) {
                 setUsersInfoDatas(GetUserInfoDataFromServer.data.Datas);
@@ -152,7 +153,7 @@ const UserManageTable = ({ AddUserModalIsOpen, setAddUserModalIsOpen }) => {
                 return;
             }
 
-            const DeleteUserInfoDataFromServer = await axios.post(`${process.env.REACT_APP_DB_HOST}/users/User_Data_Delete_From_Admin`, {
+            const DeleteUserInfoDataFromServer = await request.post(`/users/User_Data_Delete_From_Admin`, {
                 UserInfoData,
             });
 
@@ -187,12 +188,9 @@ const UserManageTable = ({ AddUserModalIsOpen, setAddUserModalIsOpen }) => {
                 return;
             }
 
-            const ResetPasswordUserInfoDataFromServer = await axios.post(
-                `${process.env.REACT_APP_DB_HOST}/users/User_Data_Reset_Password_From_Admin`,
-                {
-                    UserInfoData,
-                }
-            );
+            const ResetPasswordUserInfoDataFromServer = await request.post(`/users/User_Data_Reset_Password_From_Admin`, {
+                UserInfoData,
+            });
 
             if (ResetPasswordUserInfoDataFromServer.data.dataSuccess) {
                 toast.show({

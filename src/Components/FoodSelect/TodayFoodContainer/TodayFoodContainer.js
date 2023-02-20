@@ -12,6 +12,7 @@ import { ko } from 'date-fns/esm/locale';
 import { Loader_Check_For_False, Loader_Check_For_True } from '../../../Models/LoaderCheckReducer/LoaderCheckReducer';
 import { toast } from '../../ToasMessage/ToastManager';
 import LoginModal from '../../Modals/LoginModal';
+import { request } from '../../../API';
 
 const TodayFoodContainerMainDivBox = styled.div`
     border: 1px solid black;
@@ -109,7 +110,7 @@ const TodayFoodContainer = ({ history }) => {
     const GetFromServerWeekFoodMenu = async () => {
         try {
             dispatch(Loader_Check_For_True());
-            const ServerWeekFoodMenu = await axios.get(`${process.env.REACT_APP_DB_HOST}/FoodApp/WeekFoodMenu`, {
+            const ServerWeekFoodMenu = await request.get(`/FoodApp/WeekFoodMenu`, {
                 params: {
                     start_time: moment(TodayDate).format('YYYY-MM-DD'),
                     Login_id: LoginInfo.Login_id,

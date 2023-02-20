@@ -1,11 +1,12 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import { request } from '../../../../../API';
 
 const BasicPrePareContainer = ({ Room_Keys }) => {
     const [VideoRoom, setVideoRoom] = useState(false);
     const RoomVideoChecking = async () => {
         try {
-            const Video_Room_Checking_Axios = await axios.get(`${process.env.REACT_APP_DB_HOST}/LocalPim/Pim_Room_Video_Room_Checking`, {
+            const Video_Room_Checking_Axios = await request.get(`/LocalPim/Pim_Room_Video_Room_Checking`, {
                 params: {
                     Room_Keys,
                 },

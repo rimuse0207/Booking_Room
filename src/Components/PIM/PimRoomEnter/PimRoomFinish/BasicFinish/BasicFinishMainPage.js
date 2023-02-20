@@ -7,6 +7,7 @@ import { GiFloorHatch } from 'react-icons/gi';
 import axios from 'axios';
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
+import { request } from '../../../../../API';
 
 const BasicFinishMainPageMainDivBox = styled.div`
     .topyo_money_container {
@@ -28,7 +29,7 @@ const BasicFinishMainPage = ({ Room_Keys }) => {
 
     const getData = async () => {
         try {
-            const getData_Result_From_Axios = await axios.get(`${process.env.REACT_APP_DB_HOST}/LocalPim/Pim_Room_Result_Match_Lists`, {
+            const getData_Result_From_Axios = await request.get(`/LocalPim/Pim_Room_Result_Match_Lists`, {
                 params: {
                     Room_Keys,
                     ID: LoginInfo.Login_id,

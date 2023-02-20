@@ -8,6 +8,7 @@ import { useHistory } from 'react-router-dom';
 import { toast } from '../../../ToasMessage/ToastManager';
 import { confirmAlert } from 'react-confirm-alert'; // Import
 import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
+import { request } from '../../../../API';
 const PimRoomApplyMainDivBox = styled.div`
     .BookingCheck_Cotainer {
         display: flex;
@@ -230,7 +231,7 @@ const PimRoomApply = () => {
     //사용자 인원 조회
     const GetPersonData = async () => {
         try {
-            const GetPersonData_Axios = await axios.get(`${process.env.REACT_APP_DB_HOST}/LocalPim/Pim_Preson_Getting`);
+            const GetPersonData_Axios = await request.get(`/LocalPim/Pim_Preson_Getting`);
 
             if (GetPersonData_Axios.data.dataSuccess) {
                 const datas = GetPersonData_Axios.data.Select_Data.filter(list => list.value !== LoginInfo.Login_id);
@@ -297,7 +298,7 @@ const PimRoomApply = () => {
             return;
         }
         try {
-            const Sending_Room_Info_Data_Axios = await axios.post(`${process.env.REACT_APP_DB_HOST}/LocalPim/Pim_Room_Info_Data`, {
+            const Sending_Room_Info_Data_Axios = await request.post(`/LocalPim/Pim_Room_Info_Data`, {
                 RoomInfoData,
                 LoginInfo,
                 SelectedLists,

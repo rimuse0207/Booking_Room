@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import { LOGIN_INFO_DATA_Changes } from '../../Models/LoginInfoReducer/LoginInfoReducer';
 import { toast } from '../ToasMessage/ToastManager';
 import { useHistory } from 'react-router-dom';
+import { request } from '../../API';
 const LoginMainPageMainDivBox = styled.div`
     background-color: #efefef;
     font-size: 1.6rem;
@@ -200,7 +201,7 @@ const LoginMainPage = () => {
         e.preventDefault();
 
         try {
-            const CheckingLoginFromServer = await axios.post(`${process.env.REACT_APP_DB_HOST}/users/Rooms_Booking_Login_Router`, {
+            const CheckingLoginFromServer = await request.post(`/users/Rooms_Booking_Login_Router`, {
                 LoginInfoData,
             });
 
@@ -274,7 +275,7 @@ const LoginMainPage = () => {
                 });
                 return;
             } else {
-                const LoginPasswordChangeFromServer = await axios.post(`${process.env.REACT_APP_DB_HOST}/users/User_Password_Change`, {
+                const LoginPasswordChangeFromServer = await request.post(`/users/User_Password_Change`, {
                     PasswordChangeData,
                 });
 

@@ -2,7 +2,7 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import moment from 'moment';
-import { RiSlideshowFill } from 'react-icons/ri';
+import { RiSlideshowFill, RiDeleteBin2Fill } from 'react-icons/ri';
 import Modal from 'react-modal';
 import StockListUpdateModal from './StockSelectModal/StockListUpdateModal';
 import { BsCartPlusFill } from 'react-icons/bs';
@@ -12,6 +12,8 @@ import { HiViewGridAdd } from 'react-icons/hi';
 import { TiThMenu } from 'react-icons/ti';
 import { IoCloseSharp } from 'react-icons/io5';
 import StockAddDataModal from './StockSelectModal/StockAddDataModal';
+import { request } from '../../../../API';
+import { confirmAlert } from 'react-confirm-alert';
 
 const customStyles = {
     content: {
@@ -84,13 +86,42 @@ const StockSelectMainPage = () => {
 
     const Get_NowDates_Apply_User_Select = async () => {
         try {
-            const Get_Now_Dates_Apply_User_Select_Axios = await axios.get(`${process.env.REACT_APP_DB_HOST}/FoodApp/Stock_List_Select`);
+            const Get_Now_Dates_Apply_User_Select_Axios = await request.get(`/FoodApp/Stock_List_Select`);
             if (Get_Now_Dates_Apply_User_Select_Axios.data.dataSuccess) {
                 setStockSelect(Get_Now_Dates_Apply_User_Select_Axios.data.Stock_List_Select_Rows);
             }
         } catch (error) {
             console.log(error);
         }
+    };
+
+    const HandleDeleteStockData = async data => {
+        try {
+            const Delete_Stock_List_Axios = await request.post(`/FoodApp/Delete_Stock_List`, {
+                data,
+            });
+            if (Delete_Stock_List_Axios.data.dataSuccess) {
+                Get_NowDates_Apply_User_Select();
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+    const DeleteConfirm = data => {
+        confirmAlert({
+            title: '정말 취소하시겠습니까?',
+            message: '확인 시 기존 데이터는 사라집니다.',
+            buttons: [
+                {
+                    label: '확인',
+                    onClick: () => HandleDeleteStockData(data),
+                },
+                {
+                    label: '취소',
+                },
+            ],
+        });
     };
 
     useEffect(() => {
@@ -122,6 +153,9 @@ const StockSelectMainPage = () => {
                             </div>
                             <div className="Update_Icons" style={{ top: '60px', color: '#368' }} onClick={() => AddModalOpen(list)}>
                                 <BsCartPlusFill></BsCartPlusFill>
+                            </div>
+                            <div className="Update_Icons" style={{ top: '120px', color: 'red' }} onClick={() => DeleteConfirm(list)}>
+                                <RiDeleteBin2Fill></RiDeleteBin2Fill>
                             </div>
                         </div>
                     );

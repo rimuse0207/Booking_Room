@@ -23,6 +23,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Loader_Check_For_False, Loader_Check_For_True } from '../Models/LoaderCheckReducer/LoaderCheckReducer';
 import SelectModal from './Modals/SelectModal';
 import { Title_Change_Func } from '../Models/TitleSelectorReducer/TitleSelectorReducer';
+import { request } from '../API';
 
 const TestMainDivBox = styled.div`
     margin-bottom: 30px;
@@ -468,7 +469,7 @@ const MainTableContainer = () => {
     const getDatas = async () => {
         try {
             dispatch(Loader_Check_For_True());
-            const getDatasFromServer = await axios.post(`${process.env.REACT_APP_DB_HOST}/users/Test_Brity_works_Pims_API_Router`, {
+            const getDatasFromServer = await request.post(`/users/Test_Brity_works_Pims_API_Router`, {
                 Show_Date: moment(NowTimes).format('YYYY-MM-DD'),
                 LeftHeaderInfo,
                 SelectBasicTitle,

@@ -8,6 +8,7 @@ import { Loader_Check_For_False, Loader_Check_For_True } from '../../../../../Mo
 import { useDispatch } from 'react-redux';
 import { BiMinusCircle, BiPlusCircle } from 'react-icons/bi';
 import { toast } from '../../../../ToasMessage/ToastManager';
+import { request } from '../../../../../API';
 
 const StockAddDataModalMainDivBox = styled.div`
     .Close_button_container {
@@ -138,13 +139,10 @@ const StockAddDataModal = ({ OnClose, Get_NowDates_Apply_User_Select }) => {
                 return;
             }
 
-            const BreakFast_Stock_Data_Insert_Axios = await axios.post(
-                `${process.env.REACT_APP_DB_HOST}/FoodApp/BreakFast_Stock_Data_Insert`,
-                {
-                    FileStateData,
-                    BreakFast_Data,
-                }
-            );
+            const BreakFast_Stock_Data_Insert_Axios = await request.post(`/FoodApp/BreakFast_Stock_Data_Insert`, {
+                FileStateData,
+                BreakFast_Data,
+            });
 
             if (BreakFast_Stock_Data_Insert_Axios.data.dataSuccess) {
                 Get_NowDates_Apply_User_Select();
@@ -176,7 +174,7 @@ const StockAddDataModal = ({ OnClose, Get_NowDates_Apply_User_Select }) => {
         const formData = new FormData();
         formData.append('image', e.target.files[0]);
 
-        const dataSendImageFromServer = await axios.post(`${process.env.REACT_APP_DB_HOST}/FoodApp/BreakFast_Image_Upload`, formData, {
+        const dataSendImageFromServer = await request.post(`/FoodApp/BreakFast_Image_Upload`, formData, {
             headers: {
                 'Content-Type': 'multipart/form-data',
             },

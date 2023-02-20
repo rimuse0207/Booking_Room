@@ -10,6 +10,7 @@ import axios from 'axios';
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import moment from 'moment';
+import { request } from '../../../API';
 
 const PimRoomListMainDivBox = styled.div`
     .Local_Pim_Lists_Ul {
@@ -94,9 +95,9 @@ const PimRoomListMainDivBox = styled.div`
         bottom: 40px;
         right: 40px;
         z-index: 10;
-        @media only screen and (max-width: 800px) {
+        /* @media only screen and (max-width: 800px) {
             display: none;
-        }
+        } */
         a,
         li {
             background-color: #fff;
@@ -112,7 +113,7 @@ const PimRoomList = () => {
 
     const GetRoomInfoData = async () => {
         try {
-            const GetRoomData_Axios = await axios.get(`${process.env.REACT_APP_DB_HOST}/LocalPim/Pim_Room_Getting`, {
+            const GetRoomData_Axios = await request.get(`/LocalPim/Pim_Room_Getting`, {
                 params: {
                     id: LoginInfo.Login_id,
                 },

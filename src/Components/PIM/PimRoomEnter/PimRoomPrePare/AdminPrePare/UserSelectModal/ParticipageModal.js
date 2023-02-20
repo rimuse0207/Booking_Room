@@ -8,6 +8,7 @@ import Select from 'react-select';
 import axios from 'axios';
 import { toast } from '../../../../../ToasMessage/ToastManager';
 import { useSelector } from 'react-redux';
+import { request } from '../../../../../../API';
 
 const ParticipateModalMainDivBox = styled.div`
     .BookingCheck_Cotainer {
@@ -67,7 +68,7 @@ const ParticipateModal = ({ setParticipateModalOpen, Room_Keys, Now_Room_User, s
             return !ChangeParticipateUser.some(other => other.brity_works_user_info_id === item.brity_works_user_info_id);
         });
         try {
-            const ParticipateDataSaved_Axios = await axios.post(`${process.env.REACT_APP_DB_HOST}/LocalPim/Pim_Room_Getting_Info_Data`, {
+            const ParticipateDataSaved_Axios = await request.post(`/LocalPim/Pim_Room_Getting_Info_Data`, {
                 Room_Keys,
                 AddUserData: result,
                 DeleteUserData: M_result,
@@ -89,7 +90,7 @@ const ParticipateModal = ({ setParticipateModalOpen, Room_Keys, Now_Room_User, s
 
     const RoomInfoDataGetting = async () => {
         try {
-            const RoomInfoData_Getting_Axios = await axios.get(`${process.env.REACT_APP_DB_HOST}/LocalPim/Pim_Room_Getting_Info_Data`, {
+            const RoomInfoData_Getting_Axios = await request.get(`/LocalPim/Pim_Room_Getting_Info_Data`, {
                 params: {
                     Room_Keys,
                 },

@@ -11,6 +11,7 @@ import { FaArrowLeft } from 'react-icons/fa';
 import PimRoomPrePareContainer from './PimRoomPrePare/PimRoomPrePareContainer';
 import PimRoomFinishContainer from './PimRoomFinish/PimRoomFinishContainer';
 import { toast } from '../../ToasMessage/ToastManager';
+import { request } from '../../../API';
 
 const PimRoomEnterContainerMainDivBox = styled.div`
     .Container {
@@ -33,7 +34,7 @@ const PimRoomEnterContainer = () => {
     const [CheckingMaker, setCheckingMaker] = useState(false);
     const Checking_Room_Start = async () => {
         try {
-            const Checking_Room_Start_Axios = await axios.get(`${process.env.REACT_APP_DB_HOST}/LocalPim/Pim_Room_Checking_Start`, {
+            const Checking_Room_Start_Axios = await request.get(`/LocalPim/Pim_Room_Checking_Start`, {
                 params: {
                     Room_Keys,
                     ID: LoginInfo.Login_id,

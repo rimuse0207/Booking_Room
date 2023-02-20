@@ -5,6 +5,7 @@ import axios from 'axios';
 import { HiOutlinePlusCircle, HiOutlineMinusCircle } from 'react-icons/hi';
 import { TbArrowsRandom, TbClick } from 'react-icons/tb';
 import { toast } from '../../../../../ToasMessage/ToastManager';
+import { request } from '../../../../../../API';
 
 export const RandomUserSelectModalMainDivBox = styled.div`
     .Close_button_container {
@@ -128,7 +129,7 @@ const RandomUserSelectModal = ({
     const [RandomSelectData, setRandomSelectData] = useState([]);
     const GetSelect_Person = async () => {
         try {
-            const Get_Select_Person_Data_Axios = await axios.get(`${process.env.REACT_APP_DB_HOST}/LocalPim/Pim_Preson_Keys`, {
+            const Get_Select_Person_Data_Axios = await request.get(`/LocalPim/Pim_Preson_Keys`, {
                 params: {
                     Room_Keys,
                 },

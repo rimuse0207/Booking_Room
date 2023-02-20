@@ -11,6 +11,7 @@ import { useSelector } from 'react-redux';
 import axios from 'axios';
 import { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
+import { request } from '../../../API';
 
 const UserBreakFastMainPageMainDivBox = styled.div`
     border: 1px solid black;
@@ -147,8 +148,9 @@ const UserBreakFastMainPage = () => {
     };
 
     const SaveDataFromSurvay = async () => {
+        setSubmitOneClickChecking(true);
         try {
-            const Send_Select_Food_Data_Axios = await axios.post(`${process.env.REACT_APP_DB_HOST}/FoodApp/SendBreakfastFoodSelect`, {
+            const Send_Select_Food_Data_Axios = await request.post(`/FoodApp/SendBreakfastFoodSelect`, {
                 InsertDataState,
                 SelectBreakFast,
             });
@@ -159,10 +161,12 @@ const UserBreakFastMainPage = () => {
                     successCheck: true,
                     duration: 6000,
                 });
-                history.push('/Today_Food');
+                setSubmitOneClickChecking(false);
+                history.push('/BreakFast/Finished');
             }
         } catch (error) {
             console.log(error);
+            setSubmitOneClickChecking(false);
         }
     };
 
@@ -186,7 +190,7 @@ const UserBreakFastMainPage = () => {
         }
 
         try {
-            const GetSelect_Food_Data_Axios = await axios.get(`${process.env.REACT_APP_DB_HOST}/FoodApp/getBreakfastFoodLists`);
+            const GetSelect_Food_Data_Axios = await request.get(`/FoodApp/getBreakfastFoodLists`);
             if (GetSelect_Food_Data_Axios.data.dataSuccess) {
                 setBreakFastList(GetSelect_Food_Data_Axios.data.Select_Lists);
             }
@@ -215,7 +219,12 @@ const UserBreakFastMainPage = () => {
                             </li>
                             <li>
                                 <div className="Word_DIV">비치된 식품을 식당 외부로 반출을 절대 금지합니다.</div>
-                                <div style={{ textAlign: 'end', color: 'red' }}>*무단 취식 및 반출시 패널티 부과 예정.</div>
+                            </li>
+                            <li>
+                                <div className="Word_DIV">원활한 조식 운영을 위해 1식당 1,000Will이 청구됩니다.</div>
+                                <div style={{ textAlign: 'end', color: 'red', marginTop: '20px' }}>
+                                    *무단 취식 및 반출시 패널티 부과 예정.
+                                </div>
                             </li>
                         </ul>
                     </div>

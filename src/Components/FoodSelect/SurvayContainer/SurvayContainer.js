@@ -9,6 +9,7 @@ import axios from 'axios';
 import { Loader_Check_For_False, Loader_Check_For_True } from '../../../Models/LoaderCheckReducer/LoaderCheckReducer';
 import { useState } from 'react';
 import { toast } from '../../ToasMessage/ToastManager';
+import { request } from '../../../API';
 export const SurvayContainerMainDivBox = styled.div`
     min-height: 100vh;
     .Survay_Main_Content {
@@ -94,7 +95,7 @@ const SurvayContainer = () => {
     const GetFromServerWeekFoodMenu = async () => {
         try {
             dispatch(Loader_Check_For_True());
-            const ServerWeekFoodMenu = await axios.get(`${process.env.REACT_APP_DB_HOST}/FoodApp/TodayFoodMenu`, {
+            const ServerWeekFoodMenu = await request.get(`/FoodApp/TodayFoodMenu`, {
                 params: {
                     start_time: moment().format('YYYY-MM-DD'),
                     Login_id: LoginInfo.Login_id,
@@ -136,7 +137,7 @@ const SurvayContainer = () => {
             }
             setSubmitOneClick(false);
 
-            const SaveDataFromSurvayFromServer = await axios.post(`${process.env.REACT_APP_DB_HOST}/FoodApp/SaveDataFromSurvayFromServer`, {
+            const SaveDataFromSurvayFromServer = await request.post(`/FoodApp/SaveDataFromSurvayFromServer`, {
                 SurvayState,
                 LoginInfo,
             });

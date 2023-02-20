@@ -15,6 +15,7 @@ import ParticipateModal from './UserSelectModal/ParticipageModal';
 import { toast } from '../../../../ToasMessage/ToastManager';
 import { confirmAlert } from 'react-confirm-alert'; // Import
 import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
+import { request } from '../../../../../API';
 
 const customStyles = {
     content: {
@@ -476,7 +477,7 @@ const AdminPrePareContainer = ({ Room_Keys }) => {
 
     const Server_Send_Data = async onClose => {
         try {
-            const RoomDetailInfo_Send_Axios = await axios.post(`${process.env.REACT_APP_DB_HOST}/LocalPim/Pim_Room_Info_Detail_Send`, {
+            const RoomDetailInfo_Send_Axios = await request.post(`/LocalPim/Pim_Room_Info_Detail_Send`, {
                 Room_Keys,
                 RoomDetailInfoData,
                 MatchState,
@@ -494,7 +495,7 @@ const AdminPrePareContainer = ({ Room_Keys }) => {
 
     const RoomInfoDataGetting = async () => {
         try {
-            const RoomInfoData_Getting_Axios = await axios.get(`${process.env.REACT_APP_DB_HOST}/LocalPim/Pim_Room_Getting_Info_Data`, {
+            const RoomInfoData_Getting_Axios = await request.get(`/LocalPim/Pim_Room_Getting_Info_Data`, {
                 params: {
                     Room_Keys,
                 },

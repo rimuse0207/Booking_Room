@@ -5,6 +5,7 @@ import { useState } from 'react';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
 import { toast } from '../../../../../ToasMessage/ToastManager';
+import { request } from '../../../../../../API';
 
 const UserBattingModalMainDivBox = styled.div`
     .Close_button_container {
@@ -162,7 +163,7 @@ const UserBattingModal = ({ SelectedBattingData, setBattingModalOpen, Get_Pim_Ro
 
     const handleClickBatingUpdate = async () => {
         try {
-            const Batting_Update_Axios = await axios.post(`${process.env.REACT_APP_DB_HOST}/LocalPim/Pim_Batting_Person_Update`, {
+            const Batting_Update_Axios = await request.post(`/LocalPim/Pim_Batting_Person_Update`, {
                 SelectedBattingData,
                 BattingWill,
                 ID: LoginInfo.Login_id,
@@ -204,7 +205,7 @@ const UserBattingModal = ({ SelectedBattingData, setBattingModalOpen, Get_Pim_Ro
             return;
         }
         try {
-            const Batting_Save_Axios = await axios.post(`${process.env.REACT_APP_DB_HOST}/LocalPim/Pim_Batting_Person`, {
+            const Batting_Save_Axios = await request.post(`/LocalPim/Pim_Batting_Person`, {
                 SelectedBattingData,
                 BattingWill,
                 ID: LoginInfo.Login_id,

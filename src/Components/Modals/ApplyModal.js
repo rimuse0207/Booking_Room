@@ -13,6 +13,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Loader_Check_For_False, Loader_Check_For_True } from '../../Models/LoaderCheckReducer/LoaderCheckReducer';
 import LoginModalMainPage from './LoginModal/LoginModalMainPage';
 import { LOGOUT_INFO_DATA_Changes } from '../../Models/LoginInfoReducer/LoginInfoReducer';
+import { request } from '../../API';
 
 const customStyles = {
     content: {
@@ -621,7 +622,7 @@ const ApplyModal = ({
                 return;
             }
             dispatch(Loader_Check_For_True());
-            const ReserverationForServer = await axios.post(`${process.env.REACT_APP_DB_HOST}/users/BrityWorksBooking_For_API`, {
+            const ReserverationForServer = await request.post(`/users/BrityWorksBooking_For_API`, {
                 ApplyModalData,
                 SelectedShowTableTimes,
                 SelectLeftHeaderInfo,
