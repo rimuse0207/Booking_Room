@@ -24,6 +24,7 @@ import { Loader_Check_For_False, Loader_Check_For_True } from '../Models/LoaderC
 import SelectModal from './Modals/SelectModal';
 import { Title_Change_Func } from '../Models/TitleSelectorReducer/TitleSelectorReducer';
 import { request } from '../API';
+import UserSelectMainPage from './UserSelect/UserSelectMainPage';
 
 const TestMainDivBox = styled.div`
     margin-bottom: 30px;
@@ -461,8 +462,6 @@ const MainTableContainer = () => {
     ///API 호출후 데이터 가져오기
 
     useEffect(() => {
-        // if (RoomDatas.length === 0) getDatas();
-
         getDatas();
     }, [NowTimes, LeftHeaderInfo]);
 
@@ -546,7 +545,7 @@ const MainTableContainer = () => {
     return (
         <TestMainDivBox>
             {/* 날짜 선택 시작 */}
-            <div style={{ textAlign: 'center' }}>
+            <div style={{ textAlign: 'center', position: 'relative' }}>
                 <div className="Date_Show_Click_Main_Container">
                     <div
                         className="Date_Show_Click_Before"
@@ -585,6 +584,9 @@ const MainTableContainer = () => {
                     </div>
                 </div>
                 {/* 날짜 선택 끝 */}
+                {/* 유저 검색 시작 */}
+                <UserSelectMainPage></UserSelectMainPage>
+                {/* 유저 검색 끝 */}
             </div>
             <div className="Mian_Table_Container">
                 {/* 테이블 목록 왼쪽 제목 시작 */}
