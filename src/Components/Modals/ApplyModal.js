@@ -14,6 +14,7 @@ import { Loader_Check_For_False, Loader_Check_For_True } from '../../Models/Load
 import LoginModalMainPage from './LoginModal/LoginModalMainPage';
 import { LOGOUT_INFO_DATA_Changes } from '../../Models/LoginInfoReducer/LoginInfoReducer';
 import { request } from '../../API';
+import ResiMailSendingMainPage from './ResiMailSending/ResiMailSendingMainPage';
 
 const customStyles = {
     content: {
@@ -404,7 +405,6 @@ const ApplyModal = ({
     getDatas,
 }) => {
     const dispatch = useDispatch();
-
     const LoginInfo = useSelector(state => state.LoginInfoDataRedux.Infomation);
     const [TimesStateData, setTimesStateData] = useState([
         { value: '00:00', label: '00:00' },
@@ -474,7 +474,12 @@ const ApplyModal = ({
     });
 
     const [TitleBooking, setTitleBooking] = useState('');
-
+    const [Reservation_Mail_Checking, setReservation_Mail_Checking] = useState(false);
+    const [DetailInfo, setDetailInfo] = useState(null);
+    const [Mail_State, setMail_State] = useState(
+        '<p>--------------------------------------------------------------------------------------</p><p><strong>본문</strong></p><br><br>'
+    );
+    const [Selected_User_State, setSelected_User_State] = useState([]);
     //Modal 종료
     const ModalPopUpClose = () => {
         setApplyModalOpenData();
@@ -628,6 +633,10 @@ const ApplyModal = ({
                 SelectLeftHeaderInfo,
                 TitleBooking,
                 LoginInfo,
+                Reservation_Mail_Checking,
+                DetailInfo,
+                Mail_State,
+                Selected_User_State,
             });
 
             if (ReserverationForServer.data.dataSuccess) {
@@ -856,6 +865,45 @@ const ApplyModal = ({
                                     </div>
                                 </div>
                             </div>
+                            <div className="Float_cotainer_box">
+                                <div className="Float_cotainer_box_Left">메일 발송</div>
+                                <div className="Float_cotainer_box_Right">
+                                    <div className="" style={{ paddingTop: '10px' }}>
+                                        <label onClick={() => setReservation_Mail_Checking(true)} style={{ marginRight: '30px' }}>
+                                            <input
+                                                type="radio"
+                                                value="Mail_send"
+                                                name="mail_checking"
+                                                readOnly
+                                                checked={Reservation_Mail_Checking}
+                                            ></input>
+                                            예
+                                        </label>
+                                        <label onClick={() => setReservation_Mail_Checking(false)}>
+                                            <input
+                                                type="radio"
+                                                value="Not_send"
+                                                name="mail_checking"
+                                                readOnly
+                                                checked={!Reservation_Mail_Checking}
+                                            ></input>
+                                            아니오
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {Reservation_Mail_Checking ? (
+                                <ResiMailSendingMainPage
+                                    Mail_State={Mail_State}
+                                    setMail_State={data => setMail_State(data)}
+                                    setDetailInfo={data => setDetailInfo(data)}
+                                    Selected_User_State={Selected_User_State}
+                                    setSelected_User_State={data => setSelected_User_State(data)}
+                                ></ResiMailSendingMainPage>
+                            ) : (
+                                <div></div>
+                            )}
 
                             <div className="Button_Cotainer">
                                 <button className="Submit" onClick={() => handleRoomReservation()}>

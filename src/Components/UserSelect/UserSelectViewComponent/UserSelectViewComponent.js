@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { BsPersonSquare } from 'react-icons/bs';
 import { request } from '../../../API';
 import { useEffect } from 'react';
+import { toast } from '../../ToasMessage/ToastManager';
 
 const UserSelectViewComponentMainDivBox = styled.div`
     border-radius: 10px;
@@ -52,6 +53,14 @@ const UserSelectViewComponentMainDivBox = styled.div`
 const UserSelectViewComponent = ({ SearchTitle }) => {
     const [UserList, setUserList] = useState([]);
 
+    const handleClicks = () => {
+        toast.show({
+            title: `추가 개발 예정입니다.`,
+            successCheck: false,
+            duration: 1000,
+        });
+    };
+
     const Get_User_Info_Data = async () => {
         try {
             const Get_User_Info_Data_Axios = await request.get('/users/Get_User_Info_Data');
@@ -78,7 +87,7 @@ const UserSelectViewComponent = ({ SearchTitle }) => {
                         item.team.toLowerCase().includes(SearchTitle.toLowerCase())
                 ).map(list => {
                     return (
-                        <li className="User_Select_View_li Show_Boxs" key={list.email_address}>
+                        <li className="User_Select_View_li Show_Boxs" key={list.email_address} onClick={handleClicks}>
                             <div className="User_Select_View_Info_Container Show_Boxs">
                                 <div className="User_Select_View_Info_Left Show_Boxs">
                                     <BsPersonSquare></BsPersonSquare>

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import moment from 'moment';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
+import { toast } from '../../ToasMessage/ToastManager';
 
 const FloorRoomTableMainDivBox = styled.div`
     .tooltip {
@@ -112,6 +113,21 @@ const FloorRoomTable = ({
         };
         handleTableTimeSelect(datas);
     };
+
+    const HandleLoginChecking = list => {
+        if (!LoginInfo.Login_token) {
+            toast.show({
+                title: `로그인 이후에 조회가 가능합니다.`,
+                successCheck: false,
+                duration: 6000,
+            });
+        } else {
+            setSelectModalIsOpen();
+            setSelectModalData(list);
+            setSelectModalRomms_Data({ SelectRoom: Room_Name, SelectRoomInfo: Room_Datas });
+        }
+    };
+
     return (
         <FloorRoomTableMainDivBox className="Main_Room_title">
             <div className="TableInTableLine">
@@ -140,9 +156,7 @@ const FloorRoomTable = ({
                                 <div
                                     className="Reservation_Room_date"
                                     onClick={() => {
-                                        setSelectModalIsOpen();
-                                        setSelectModalData(list);
-                                        setSelectModalRomms_Data({ SelectRoom: Room_Name, SelectRoomInfo: Room_Datas });
+                                        HandleLoginChecking(list);
                                     }}
                                     style={
                                         LoginInfo.Login_name === list.subject.split('____')[1] ||

@@ -16,6 +16,9 @@ const UserSelectMainPageMainDivBox = styled.div`
     height: 100%;
     text-align: start;
     padding: 5px;
+    @media only screen and (max-width: 800px) {
+        display: none;
+    }
     .Search_Input_Box {
         height: 75%;
         display: flex;
