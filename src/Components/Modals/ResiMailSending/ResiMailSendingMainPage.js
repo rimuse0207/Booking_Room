@@ -19,6 +19,7 @@ const ResiMailSendingMainPageMainDivBox = styled.div`
         border: 1px solid lightgray;
         overflow: auto;
     }
+
     .Select_User_Show_Container {
         display: flex;
         align-items: center;

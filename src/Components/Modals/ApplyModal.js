@@ -388,6 +388,11 @@ const ApplyModalMainDivBox = styled.div`
             }
         }
     }
+    .Booking_mail {
+        @media only screen and (max-width: 800px) {
+            display: none;
+        }
+    }
 `;
 
 const ApplyModal = ({
@@ -865,7 +870,7 @@ const ApplyModal = ({
                                     </div>
                                 </div>
                             </div>
-                            <div className="Float_cotainer_box">
+                            <div className="Float_cotainer_box Booking_mail">
                                 <div className="Float_cotainer_box_Left">메일 발송</div>
                                 <div className="Float_cotainer_box_Right">
                                     <div className="" style={{ paddingTop: '10px' }}>

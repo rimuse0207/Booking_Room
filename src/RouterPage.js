@@ -20,6 +20,7 @@ import PimQRCodeMaker from './Components/PIM/PimQRCodeMaker/PimQRCodeMaker';
 import UserBreakFastMainPage from './Components/BreakFast/UserBreakFast/UserBreakFastMainPage';
 import AdminBreakFastMainPage from './Components/BreakFast/AdminBreakFast/AdminBreakFastMainPage';
 import UserApplyFinishedMainPage from './Components/BreakFast/UserBreakFast/UserApplyFinishedMainPage';
+import FloorLayoutMainPage from './Components/FloorLayout/FloorLayoutMainPage';
 const RouterPageMainContainer = styled.div``;
 
 const RouterPage = () => {
@@ -68,6 +69,7 @@ const RouterPage = () => {
                     <Route path="/BreakFast/UserSlect" component={UserBreakFastMainPage}></Route>
                     <Route path="/BreakFast/Finished" component={UserApplyFinishedMainPage}></Route>
                     <Route path="/Admin/BreakFast" component={AdminBreakFastMainPage}></Route>
+                    <Route path="/FloorLayout" component={FloorLayoutMainPage}></Route>
                 </Switch>
             </BrowserRouter>
         </RouterPageMainContainer>
