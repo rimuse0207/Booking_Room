@@ -156,7 +156,7 @@ const FloorLayoutContainer = () => {
 
     const Get_Floor_Room_Position = async (req, res) => {
         try {
-            const Get_Floor_Room_Position_State_Axios = await request(`/users/Get_Floor_Room_Position_State`);
+            const Get_Floor_Room_Position_State_Axios = await request.get(`/users/Get_Floor_Room_Position_State`);
             if (Get_Floor_Room_Position_State_Axios.data.dataSuccess) {
                 setPlaceState(Get_Floor_Room_Position_State_Axios.data.PlaceState);
                 setPlace_Chair_State(Get_Floor_Room_Position_State_Axios.data.Place_Chair_State);
