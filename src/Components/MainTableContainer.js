@@ -299,6 +299,7 @@ const MainTableContainer = () => {
             targetId: 'M220506085327A348577',
             userId: 'a34dhk02.a',
             label: '판교 2층 A룸  (  2F_A_ROOM )',
+            Reservation_Permissions: true,
         },
         {
             name: '2F_B_ROOM',
@@ -306,6 +307,7 @@ const MainTableContainer = () => {
             targetId: 'M220511051804A346734',
             userId: 'a34dhk02.b',
             label: '판교 2층 B룸  (  2F_B_ROOM )',
+            Reservation_Permissions: true,
         },
         {
             name: '2F_C_ROOM',
@@ -313,6 +315,7 @@ const MainTableContainer = () => {
             targetId: 'M220511052330A343086',
             userId: 'a34dhk02.c',
             label: '판교 2층 C룸   ( 2F_C_ROOM )',
+            Reservation_Permissions: true,
         },
         {
             name: '2F_D_ROOM',
@@ -320,6 +323,7 @@ const MainTableContainer = () => {
             targetId: 'M220511052716A342216',
             userId: 'a34dhk02.d',
             label: '판교 2층 D룸  ( 2F_D_ROOM )',
+            Reservation_Permissions: true,
         },
         {
             name: '8F_A_ROOM',
@@ -327,6 +331,7 @@ const MainTableContainer = () => {
             targetId: 'M220511053254A341850',
             userId: 'a34dhk08.a',
             label: '판교 8층 A룸 ( 8F_A_ROOM )',
+            Reservation_Permissions: true,
         },
         {
             name: '8F_C_ROOM',
@@ -334,6 +339,7 @@ const MainTableContainer = () => {
             targetId: 'M220511053429A342914',
             userId: 'a34dhk08.c',
             label: '판교 8층 C룸 ( 8F_C_ROOM )',
+            Reservation_Permissions: true,
         },
         {
             name: '8F_D_ROOM',
@@ -341,6 +347,15 @@ const MainTableContainer = () => {
             targetId: 'M220511053957A341367',
             userId: 'a34dhk08.d',
             label: '판교 8층 D룸 ( 8F_D_ROOM )',
+            Reservation_Permissions: true,
+        },
+        {
+            name: 'B1F_ROOM',
+            value: 'B1F_ROOM',
+            targetId: 'M220506083209A349980',
+            userId: 'a34dhkb1.g',
+            label: '판교 B1층 강당 ( B1F_ROOM )',
+            Reservation_Permissions: false,
         },
     ];
     const CarData = [
@@ -350,6 +365,7 @@ const MainTableContainer = () => {
             targetId: 'M220511063942A348400',
             userId: 'a34car1.car2',
             label: '판교 법인차량 ( (판교)_155허 7880 )',
+            Reservation_Permissions: true,
         },
         {
             name: '(판교)_191허 3655',
@@ -357,6 +373,7 @@ const MainTableContainer = () => {
             targetId: 'M220511064441A34933',
             userId: 'a34car1.car7',
             label: '판교 법인차량 ( (판교)_191허 3655 )',
+            Reservation_Permissions: true,
         },
         {
             name: '(동탄)_14나 1878',
@@ -364,6 +381,7 @@ const MainTableContainer = () => {
             targetId: 'M220511064243A342636',
             userId: 'a34car1.car5',
             label: '동탄 법인차량 ( (동탄)_14나 1878 )',
+            Reservation_Permissions: true,
         },
         {
             name: '(동탄)_155허 7879',
@@ -371,6 +389,7 @@ const MainTableContainer = () => {
             targetId: 'M220511063838A347157',
             userId: 'a34car1.car1',
             label: '동탄 법인차량 ( (동탄)_155허 7879 )',
+            Reservation_Permissions: true,
         },
         {
             name: '(동탄)_155허 8053',
@@ -378,6 +397,7 @@ const MainTableContainer = () => {
             targetId: 'M220511064109A345960',
             userId: 'a34car1.car3',
             label: '동탄 법인차량 ( (동탄)_155허 8053 )',
+            Reservation_Permissions: true,
         },
         {
             name: '(동탄)_45호 6144',
@@ -385,6 +405,7 @@ const MainTableContainer = () => {
             targetId: 'M220511064534A346135',
             userId: 'a34car1.car8',
             label: '동탄 법인차량 ( (동탄)_45호 6144 )',
+            Reservation_Permissions: true,
         },
         {
             name: '(아산)_155허 7765',
@@ -392,6 +413,7 @@ const MainTableContainer = () => {
             targetId: 'M220511064156A344713',
             userId: 'a34car1.car4',
             label: '아산 법인차량 ( (아산)_155허 7765 )',
+            Reservation_Permissions: true,
         },
         {
             name: '(아산)_191허 3152',
@@ -399,6 +421,7 @@ const MainTableContainer = () => {
             targetId: 'M220511065112A342288',
             userId: 'a34car1.car10',
             label: '아산 법인차량 ( (아산)_191허 3152 )',
+            Reservation_Permissions: true,
         },
         {
             name: '(아산)_191허 3153',
@@ -406,6 +429,7 @@ const MainTableContainer = () => {
             targetId: 'M220511064348A348000',
             userId: 'a34car1.car6',
             label: '아산 법인차량 ( (아산)_191허 3153 )',
+            Reservation_Permissions: true,
         },
         {
             name: '(아산)_45호 6140',
@@ -413,6 +437,7 @@ const MainTableContainer = () => {
             targetId: 'M220511065222A346350',
             userId: 'a34car1.car11',
             label: '아산 법인차량 ( (아산)_45호 6140 )',
+            Reservation_Permissions: true,
         },
         {
             name: '(아산)_45호 6141',
@@ -420,6 +445,7 @@ const MainTableContainer = () => {
             targetId: 'M220511065331A342699',
             userId: 'a34car1.car12',
             label: '아산 법인차량 ( (아산)_45호 6141 )',
+            Reservation_Permissions: true,
         },
         {
             name: '(아산)_45호 6142',
@@ -427,6 +453,7 @@ const MainTableContainer = () => {
             targetId: 'M220511065431A343884',
             userId: 'a34car1.car13',
             label: '아산 법인차량 ( (아산)_45호 6142 )',
+            Reservation_Permissions: true,
         },
         {
             name: '(아산)_74러 3874',
@@ -434,6 +461,7 @@ const MainTableContainer = () => {
             targetId: 'M220511065002A343682',
             userId: 'a34car1.car9',
             label: '아산 법인차량 ( (아산)_74러 3874 )',
+            Reservation_Permissions: true,
         },
     ];
     const SelectBasicTitle = useSelector(state => state.TitleSelectorRedux.SelectBasicTitle);
@@ -530,16 +558,24 @@ const MainTableContainer = () => {
 
     //Table의 시간 선택 시
     const handleTableTimeSelect = data => {
-        setSelectLeftHeaderInfo(LeftHeaderInfo.filter(list => list.value === data.SelectRoom)[0]);
-        setSelectDate({
-            StartDate: new Date(NowTimes),
-            StartTime: data.StartTime,
-            EndDate: new Date(NowTimes),
-            EndTime: moment(`${moment(NowTimes).format('YYYY-MM-DD')} ${data.StartTime}`)
-                .add(30, 'minutes')
-                .format('HH:mm'),
-        });
-        setApplyModalIsOpen(true);
+        if (data.Reservation_Permissions) {
+            setSelectLeftHeaderInfo(LeftHeaderInfo.filter(list => list.value === data.SelectRoom)[0]);
+            setSelectDate({
+                StartDate: new Date(NowTimes),
+                StartTime: data.StartTime,
+                EndDate: new Date(NowTimes),
+                EndTime: moment(`${moment(NowTimes).format('YYYY-MM-DD')} ${data.StartTime}`)
+                    .add(30, 'minutes')
+                    .format('HH:mm'),
+            });
+            setApplyModalIsOpen(true);
+        } else {
+            toast.show({
+                title: `B1F 강당은 권한을 받고 사용이 가능합니다.`,
+                successCheck: false,
+                duration: 6000,
+            });
+        }
     };
 
     return (
@@ -633,6 +669,7 @@ const MainTableContainer = () => {
                                     key={list.name}
                                     Room_Name={list.name}
                                     Room_Datas={list.Datas}
+                                    Reservation_Permissions={list.Reservation_Permissions}
                                     handleTableTimeSelect={data => handleTableTimeSelect(data)}
                                     setSelectModalIsOpen={() => setSelectModalIsOpen(true)}
                                     setSelectModalData={data => setSelectModalData(data)}

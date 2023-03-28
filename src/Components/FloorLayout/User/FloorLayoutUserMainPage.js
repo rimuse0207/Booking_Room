@@ -56,7 +56,13 @@ const FloorLayoutUserMainPage = () => {
                     setUserSelect={data => setUserSelect(data)}
                 ></FloorLayoutUserContent>
             </FloorLayoutUserMainPageMainDivBox>
-            <FloorLayoutUserSelect id="text" UserSelect={UserSelect}></FloorLayoutUserSelect>
+            <FloorLayoutUserSelect
+                id="text"
+                UserSelect={UserSelect}
+                setUserSelect={data => setUserSelect(data)}
+                handleClicksNotUser={e => handleClicksNotUser(e)}
+                Get_Floor_Room_Position={() => Get_Floor_Room_Position()}
+            ></FloorLayoutUserSelect>
         </div>
     );
 };

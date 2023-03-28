@@ -52,6 +52,7 @@ const FloorRoomTable = ({
     setSelectModalIsOpen,
     setSelectModalData,
     setSelectModalRomms_Data,
+    Reservation_Permissions,
 }) => {
     const LoginInfo = useSelector(state => state.LoginInfoDataRedux.Infomation);
     const [TimeContents, setTimeContents] = useState([
@@ -110,6 +111,7 @@ const FloorRoomTable = ({
             StartTime: times,
             SelectRoom: Room_Name,
             SelectRoomInfo: Room_Datas,
+            Reservation_Permissions,
         };
         handleTableTimeSelect(datas);
     };
@@ -178,14 +180,7 @@ const FloorRoomTable = ({
                                         ) : (
                                             <div className="ContentTitle">로그인 후 확인 가능</div>
                                         )}
-                                        {/* <div className="ContentTitle">
-                                            {list.class === 'PRIVATE'
-                                                ? LoginInfo.Login_name === list.subject.split('____')[1] ||
-                                                  LoginInfo.Login_name === list.attendees[0].displayName.split('/')[0]
-                                                    ? list.subject.split('____')[0]
-                                                    : '비공개'
-                                                : list.subject.split('____')[0]}
-                                        </div> */}
+
                                         {LoginInfo.Login_epid ? (
                                             <div className="Content_useId">
                                                 {list.subject.split('____').length > 1
@@ -214,9 +209,6 @@ const FloorRoomTable = ({
                                             </div>
                                         )}
                                     </div>
-                                    {/* <div className="Reservation_Room_date tooltip">
-                                        <div className="tooltiptext">Tooltip text</div>
-                                    </div> */}
                                 </div>
                             </div>
                         </div>

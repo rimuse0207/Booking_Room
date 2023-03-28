@@ -4,7 +4,6 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import App from './App';
 import LoginMainPage from './Components/LoginPage/LoginMainPage';
 import UserManageMainPage from './Components/UserManage/UserManageMainPage';
-import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from './Components/ToasMessage/ToastManager';
 import { Title_Change_Func } from './Models/TitleSelectorReducer/TitleSelectorReducer';
@@ -21,6 +20,8 @@ import UserBreakFastMainPage from './Components/BreakFast/UserBreakFast/UserBrea
 import AdminBreakFastMainPage from './Components/BreakFast/AdminBreakFast/AdminBreakFastMainPage';
 import UserApplyFinishedMainPage from './Components/BreakFast/UserBreakFast/UserApplyFinishedMainPage';
 import FloorLayoutMainPage from './Components/FloorLayout/FloorLayoutMainPage';
+import { request } from './API';
+import FloorLayoutAdminMinPage from './Components/FloorLayout/FloorLayoutAdminMainPage';
 const RouterPageMainContainer = styled.div``;
 
 const RouterPage = () => {
@@ -32,7 +33,7 @@ const RouterPage = () => {
 
     const TokenCheckFromServer = async () => {
         try {
-            const TokenCheckFromServerVerify = await axios.post(`${process.env.REACT_APP_DB_HOST}/users/Token_Checking_Router`, {
+            const TokenCheckFromServerVerify = await request.post(`${process.env.REACT_APP_DB_HOST}/users/Token_Checking_Router`, {
                 token: LoginInfo.Login_token,
             });
 
@@ -69,7 +70,8 @@ const RouterPage = () => {
                     <Route path="/BreakFast/UserSlect" component={UserBreakFastMainPage}></Route>
                     <Route path="/BreakFast/Finished" component={UserApplyFinishedMainPage}></Route>
                     <Route path="/Admin/BreakFast" component={AdminBreakFastMainPage}></Route>
-                    <Route path="/FloorLayout" component={FloorLayoutMainPage}></Route>
+                    <Route exact path="/FloorLayout" component={FloorLayoutMainPage}></Route>
+                    <Route path="/FloorLayout/AdminChange" component={FloorLayoutAdminMinPage}></Route>
                 </Switch>
             </BrowserRouter>
         </RouterPageMainContainer>

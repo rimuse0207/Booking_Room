@@ -20,6 +20,7 @@ const FloorLayoutUserContentMainDivBox = styled.div`
         position: absolute;
         border-radius: 10px;
         color: black;
+        word-break: keep-all;
         :hover {
             cursor: pointer;
             color: #368;
@@ -34,13 +35,14 @@ const FloorLayoutUserContentMainDivBox = styled.div`
             height: 100%;
             text-align: center;
             .User_Working_Checking {
-                width: 30px;
+                width: 60%;
                 height: 2px;
                 border-radius: 5px;
                 background-color: lime;
                 position: absolute;
-                top: 5px;
-                right: 8px;
+                top: 3px;
+                left: 20%;
+                /* right: 8px; */
             }
             .User_Working_Checking_Room {
                 width: 4px;
@@ -79,7 +81,7 @@ const FloorLayoutUserContent = ({ PlaceState, setUserSelect, UserSelect }) => {
             <div onClick={e => handleClickUser(e, null, 'NotUserSelect')}>
                 {PlaceState.map((list, i) => {
                     return (
-                        <div className="sdavc">
+                        <div className="sdavc" key={list.state_id}>
                             <div
                                 className="box"
                                 style={{
