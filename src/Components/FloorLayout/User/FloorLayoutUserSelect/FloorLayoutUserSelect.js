@@ -95,7 +95,7 @@ const FloorLayoutUserSelectMainDivBox = styled.div`
             .ImageDeleteButton {
                 display: inline;
                 position: absolute;
-                top: 0px;
+                top: -15px;
                 right: 50px;
                 color: red;
                 font-size: 0.5em;

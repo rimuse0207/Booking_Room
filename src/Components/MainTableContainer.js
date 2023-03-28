@@ -571,7 +571,7 @@ const MainTableContainer = () => {
             setApplyModalIsOpen(true);
         } else {
             toast.show({
-                title: `B1F 강당은 권한을 받고 사용이 가능합니다.`,
+                title: `B1F강당 예약은 예약 조회만 가능합니다. `,
                 successCheck: false,
                 duration: 6000,
             });
