@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import NavigationMainPage from '../Navigation/NavigationMainPage';
 import FloorLayoutContainer from './FloorLayoutContainer/FloorLayoutContainer';
 import FloorLayoutUserMainPage from './User/FloorLayoutUserMainPage';
+import { BrowserView, MobileView } from 'react-device-detect';
 
 const FloorLayoutMainPageMainDivBox = styled.div`
     border: 1px solid black;
@@ -14,12 +15,20 @@ const FloorLayoutMainPageMainDivBox = styled.div`
 `;
 
 const FloorLayoutMainPage = () => {
-    const LoginInfo = useSelector(state => state.LoginInfoDataRedux.Infomation);
     return (
         <FloorLayoutMainPageMainDivBox>
             <NavigationMainPage TitleName="자리배치도"></NavigationMainPage>
             {/* <FloorLayoutContainer></FloorLayoutContainer> */}
-            <FloorLayoutUserMainPage></FloorLayoutUserMainPage>
+
+            {/* PC환경 시작*/}
+            <BrowserView>
+                <FloorLayoutUserMainPage></FloorLayoutUserMainPage>
+            </BrowserView>
+            {/* PC환경 끝*/}
+
+            {/* 모바일 환경 시작 */}
+            <MobileView>모바일 환경에서 지원하지 않습니다.</MobileView>
+            {/* 모바일 환경 끝 */}
         </FloorLayoutMainPageMainDivBox>
     );
 };

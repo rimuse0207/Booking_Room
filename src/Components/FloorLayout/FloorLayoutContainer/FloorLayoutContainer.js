@@ -7,6 +7,8 @@ import RoomLayout from './FloorLayoutContent/RoomLayout';
 import WindowLayout from './FloorLayoutContent/WindowLayout';
 import FloorLayoutModal from './FloorLayoutModals/FloorLayoutModal';
 import { request } from '../../../API';
+import { useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 const FloorLayoutContainerMainDivBox = styled.div`
     margin-top: 10px;
     padding: 10px;
@@ -50,6 +52,8 @@ const FloorLayoutContainerMainDivBox = styled.div`
 `;
 
 const FloorLayoutContainer = () => {
+    const history = useHistory();
+    const LoginInfo = useSelector(state => state.LoginInfoDataRedux.Infomation);
     const [PlaceState, setPlaceState] = useState([]);
     const [Place_Chair_State, setPlace_Chair_State] = useState([]);
     const [Place_Room_State, setPlace_Room_State] = useState([]);
@@ -146,7 +150,6 @@ const FloorLayoutContainer = () => {
             });
 
             if (handleSave_data_Axios.data.dataSuccess) {
-                console.log(handleSave_data_Axios);
                 alert('저장 되었습니다.');
             }
         } catch (error) {
@@ -169,7 +172,16 @@ const FloorLayoutContainer = () => {
     };
 
     useEffect(() => {
-        Get_Floor_Room_Position();
+        if (LoginInfo.Login_token) {
+            if (LoginInfo.Login_Admin_Access) {
+                Get_Floor_Room_Position();
+            } else {
+                alert('권한이 없습니다.');
+                history.push('/FloorLayout');
+            }
+        } else {
+            history.push('/Login_Page');
+        }
     }, []);
 
     return (

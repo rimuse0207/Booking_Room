@@ -64,6 +64,34 @@ const FloorLayoutUserContentMainDivBox = styled.div`
             }
         }
     }
+    .Explane_Container {
+        position: absolute;
+        top: 10px;
+        right: 300px;
+        .Person_Green {
+            display: flex;
+            align-items: center;
+            font-weight: bolder;
+            .Person_Color {
+                width: 50px;
+                height: 10px;
+                background-color: lime;
+                border-radius: 10px;
+            }
+        }
+        .Person_Red {
+            display: flex;
+            align-items: center;
+            font-weight: bolder;
+            margin-top: 10px;
+            .Person_Color {
+                width: 50px;
+                height: 10px;
+                background-color: red;
+                border-radius: 10px;
+            }
+        }
+    }
 `;
 
 const FloorLayoutUserContent = ({ PlaceState, setUserSelect, UserSelect }) => {
@@ -106,20 +134,23 @@ const FloorLayoutUserContent = ({ PlaceState, setUserSelect, UserSelect }) => {
                                             {list?.team}
                                         </div>
                                     ) : (
-                                        <div>-</div>
-                                    )}
-                                    {list.name && list.type === 'table' ? (
-                                        <div className="User_Working_Checking" style={i % 3 === 1 ? { backgroundColor: 'red' } : {}}></div>
-                                    ) : (
                                         <div></div>
                                     )}
-                                    {list.type === 'room' ? (
+                                    {list.name && list.type === 'table' ? (
                                         <div
-                                            className="User_Working_Checking_Room"
+                                            className="User_Working_Checking"
                                             style={
-                                                i % 3 === 1
-                                                    ? { backgroundColor: 'red', height: `${list.height / 3}px` }
-                                                    : { height: `${list.height / 3}px` }
+                                                list.company === 'DHK'
+                                                    ? list?.person_state.length > 0
+                                                        ? list.person_state[0].status === '판교'
+                                                            ? {}
+                                                            : { backgroundColor: 'red' }
+                                                        : { backgroundColor: 'red' }
+                                                    : list.company === 'DHKS'
+                                                    ? list?.person_state.length > 0
+                                                        ? { backgroundColor: 'red' }
+                                                        : {}
+                                                    : {}
                                             }
                                         ></div>
                                     ) : (
@@ -134,6 +165,16 @@ const FloorLayoutUserContent = ({ PlaceState, setUserSelect, UserSelect }) => {
                         </div>
                     );
                 })}
+                <div className="Explane_Container">
+                    <div className="Person_Green">
+                        <div className="Person_Color"></div>
+                        <div style={{ marginLeft: '10px' }}> : 출근</div>
+                    </div>
+                    <div className="Person_Red">
+                        <div className="Person_Color"></div>
+                        <div style={{ marginLeft: '10px' }}> : 휴가</div>
+                    </div>
+                </div>
             </div>
         </FloorLayoutUserContentMainDivBox>
     );

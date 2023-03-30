@@ -202,7 +202,7 @@ const FloorLayoutUserSelect = ({ UserSelect, handleClicksNotUser, setUserSelect,
     return (
         <FloorLayoutUserSelectMainDivBox UserSelect={UserSelect}>
             <div className="User_Detail_Info">
-                {LoginInfo.Login_Admin_Access ? (
+                {/* {LoginInfo.Login_Admin_Access ? (
                     <div className="User_Image_Container">
                         <h2 style={{ fontSize: '3em', marginBottom: '10px' }}>
                             {UserSelect?.person_Image ? (
@@ -254,7 +254,16 @@ const FloorLayoutUserSelect = ({ UserSelect, handleClicksNotUser, setUserSelect,
                             )}
                         </h2>
                     </div>
-                )}
+                )} */}
+                <div className="User_Image_Container">
+                    <h2 style={{ fontSize: '3em', marginBottom: '10px' }}>
+                        <div>
+                            <div className="ClickUserIcon">
+                                <BsPersonSquare></BsPersonSquare>
+                            </div>
+                        </div>
+                    </h2>
+                </div>
                 <div className="Text_Flex_Container">
                     <div className="Text_Flex_Label">소속 : </div>
                     <div className="Text_Flex_Content">{UserSelect?.company}</div>

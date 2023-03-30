@@ -245,6 +245,21 @@ const HambergerMenuMainPage = () => {
                         <li>
                             <Link to="/Today_Food">식단표</Link>
                         </li>
+                        <li>
+                            <Link to="/FloorLayout">자리배치도</Link>
+                        </li>
+                        {LoginInfo.Login_id && LoginInfo.Login_company === 'DHKS' ? (
+                            <>
+                                <li>
+                                    <Link to="/BreakFast/UserSlect">조식신청</Link>
+                                </li>
+                                <li>
+                                    <Link to="/PIM">PIM로컬전</Link>
+                                </li>
+                            </>
+                        ) : (
+                            <></>
+                        )}
                         {LoginInfo.Login_Admin_Access ? (
                             <li>
                                 <Link to={`/User_Select_or_Add/${LoginInfo.Login_id}/Company_DHK`}>사용자 등록 및 조회</Link>
@@ -266,18 +281,6 @@ const HambergerMenuMainPage = () => {
                             <li>
                                 <Link to="/Admin/BreakFast">조식 재고 확인</Link>
                             </li>
-                        ) : (
-                            <></>
-                        )}
-                        {LoginInfo.Login_id && LoginInfo.Login_company === 'DHKS' ? (
-                            <>
-                                <li>
-                                    <Link to="/PIM">PIM로컬전</Link>
-                                </li>
-                                <li>
-                                    <Link to="/BreakFast/UserSlect">조식신청</Link>
-                                </li>
-                            </>
                         ) : (
                             <></>
                         )}
