@@ -22,14 +22,13 @@ import UserApplyFinishedMainPage from './Components/BreakFast/UserBreakFast/User
 import FloorLayoutMainPage from './Components/FloorLayout/FloorLayoutMainPage';
 import { request } from './API';
 import FloorLayoutAdminMinPage from './Components/FloorLayout/FloorLayoutAdminMainPage';
+import { CookiesProvider } from 'react-cookie';
+
 const RouterPageMainContainer = styled.div``;
 
 const RouterPage = () => {
     const LoginInfo = useSelector(state => state.LoginInfoDataRedux.Infomation);
     const dispatch = useDispatch();
-    useEffect(() => {
-        if (LoginInfo.Login_token) TokenCheckFromServer();
-    }, [LoginInfo]);
 
     const TokenCheckFromServer = async () => {
         try {
@@ -52,28 +51,34 @@ const RouterPage = () => {
         }
     };
 
+    useEffect(() => {
+        if (LoginInfo.Login_token) TokenCheckFromServer();
+    }, [LoginInfo]);
+
     return (
         <RouterPageMainContainer>
-            <BrowserRouter>
-                <Switch>
-                    <Route exact path="/" component={App}></Route>
-                    <Route path="/Login_Page" component={LoginMainPage}></Route>
-                    <Route path="/User_Select_or_Add/:UserId/:UserCompany" component={UserManageMainPage}></Route>
-                    <Route path="/Today_Food" component={TodayFoodContainer}></Route>
-                    <Route path="/Food_Select" component={FoodSelectMainPage}></Route>
-                    <Route path="/Food_Survay" component={SurvayContainer}></Route>
-                    <Route path="/Admin_Image_Check" component={AdminImageShowMainPage}></Route>
-                    <Route exact path="/PIM" component={PimMainContainer}></Route>
-                    <Route path="/PIM/PIMApplyRoom" component={PimRoomApplyMainContainer}></Route>
-                    <Route path="/PIM/RoomEnter/:Room_Keys/:Room_Title" component={PimRoomEnterContainer}></Route>
-                    <Route path="/PIM/QRCode/:Room_keys/:Room_Title" component={PimQRCodeMaker}></Route>
-                    <Route path="/BreakFast/UserSlect" component={UserBreakFastMainPage}></Route>
-                    <Route path="/BreakFast/Finished" component={UserApplyFinishedMainPage}></Route>
-                    <Route path="/Admin/BreakFast" component={AdminBreakFastMainPage}></Route>
-                    <Route exact path="/FloorLayout" component={FloorLayoutMainPage}></Route>
-                    <Route path="/FloorLayout/AdminChange" component={FloorLayoutAdminMinPage}></Route>
-                </Switch>
-            </BrowserRouter>
+            <CookiesProvider>
+                <BrowserRouter>
+                    <Switch>
+                        <Route exact path="/" component={App}></Route>
+                        <Route path="/Login_Page" component={LoginMainPage}></Route>
+                        <Route path="/User_Select_or_Add/:UserId/:UserCompany" component={UserManageMainPage}></Route>
+                        <Route path="/Today_Food" component={TodayFoodContainer}></Route>
+                        <Route path="/Food_Select" component={FoodSelectMainPage}></Route>
+                        <Route path="/Food_Survay" component={SurvayContainer}></Route>
+                        <Route path="/Admin_Image_Check" component={AdminImageShowMainPage}></Route>
+                        <Route exact path="/PIM" component={PimMainContainer}></Route>
+                        <Route path="/PIM/PIMApplyRoom" component={PimRoomApplyMainContainer}></Route>
+                        <Route path="/PIM/RoomEnter/:Room_Keys/:Room_Title" component={PimRoomEnterContainer}></Route>
+                        <Route path="/PIM/QRCode/:Room_keys/:Room_Title" component={PimQRCodeMaker}></Route>
+                        <Route path="/BreakFast/UserSlect" component={UserBreakFastMainPage}></Route>
+                        <Route path="/BreakFast/Finished" component={UserApplyFinishedMainPage}></Route>
+                        <Route path="/Admin/BreakFast" component={AdminBreakFastMainPage}></Route>
+                        <Route exact path="/FloorLayout" component={FloorLayoutMainPage}></Route>
+                        <Route path="/FloorLayout/AdminChange" component={FloorLayoutAdminMinPage}></Route>
+                    </Switch>
+                </BrowserRouter>
+            </CookiesProvider>
         </RouterPageMainContainer>
     );
 };

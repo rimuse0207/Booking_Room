@@ -18,6 +18,7 @@ const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 //개발용
 // const store = createStore(persistedReducer, composeEnhancers(applyMiddleware(Thunk, createLogger())));
+
 //배포용
 const store = createStore(persistedReducer, composeEnhancers(applyMiddleware(Thunk)));
 const persistor = persistStore(store);

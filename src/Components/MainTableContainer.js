@@ -25,6 +25,7 @@ import SelectModal from './Modals/SelectModal';
 import { Title_Change_Func } from '../Models/TitleSelectorReducer/TitleSelectorReducer';
 import { request } from '../API';
 import UserSelectMainPage from './UserSelect/UserSelectMainPage';
+import { BrowserView } from 'react-device-detect';
 
 const TestMainDivBox = styled.div`
     margin-bottom: 30px;
@@ -487,47 +488,6 @@ const MainTableContainer = () => {
         EndTime: null,
     });
 
-    ///API 호출후 데이터 가져오기
-
-    useEffect(() => {
-        getDatas();
-    }, [NowTimes, LeftHeaderInfo]);
-
-    const getDatas = async () => {
-        try {
-            dispatch(Loader_Check_For_True());
-            const getDatasFromServer = await request.post(`/users/Test_Brity_works_Pims_API_Router`, {
-                Show_Date: moment(NowTimes).format('YYYY-MM-DD'),
-                LeftHeaderInfo,
-                SelectBasicTitle,
-            });
-            if (getDatasFromServer.data.dataSuccess) {
-                setRoomDatas(getDatasFromServer.data.RoomDatas);
-                dispatch(Loader_Check_For_False());
-            } else {
-                toast.show({
-                    title: `BrityWorks API Error발생. DHKS_IT팀에게 문의바랍니다.`,
-                    successCheck: false,
-                    duration: 6000,
-                });
-                dispatch(Loader_Check_For_False());
-            }
-        } catch (error) {
-            console.log(error);
-            toast.show({
-                title: `BrityWorks API Error발생. DHKS_IT팀에게 문의바랍니다.`,
-                successCheck: false,
-                duration: 6000,
-            });
-            dispatch(Loader_Check_For_False());
-        }
-    };
-
-    //Table ScrollView 초기화
-    useEffect(() => {
-        if (setScrollView.current) setScrollView.current.scrollLeft = 980.8;
-    }, [RoomDatas]);
-
     ///date-picker 버튼 컴포넌트
     const ExampleCustomInput = forwardRef(({ value, onClick }, ref) => (
         <button className="example-custom-input" onClick={onClick} ref={ref}>
@@ -577,6 +537,46 @@ const MainTableContainer = () => {
             });
         }
     };
+    ///API 호출후 데이터 가져오기
+
+    useEffect(() => {
+        getDatas();
+    }, [NowTimes, LeftHeaderInfo]);
+
+    const getDatas = async () => {
+        try {
+            dispatch(Loader_Check_For_True());
+            const getDatasFromServer = await request.post(`/users/Test_Brity_works_Pims_API_Router`, {
+                Show_Date: moment(NowTimes).format('YYYY-MM-DD'),
+                LeftHeaderInfo,
+                SelectBasicTitle,
+            });
+            if (getDatasFromServer.data.dataSuccess) {
+                setRoomDatas(getDatasFromServer.data.RoomDatas);
+                dispatch(Loader_Check_For_False());
+            } else {
+                toast.show({
+                    title: `BrityWorks API Error발생. DHKS_IT팀에게 문의바랍니다.`,
+                    successCheck: false,
+                    duration: 6000,
+                });
+                dispatch(Loader_Check_For_False());
+            }
+        } catch (error) {
+            console.log(error);
+            toast.show({
+                title: `BrityWorks API Error발생. DHKS_IT팀에게 문의바랍니다.`,
+                successCheck: false,
+                duration: 6000,
+            });
+            dispatch(Loader_Check_For_False());
+        }
+    };
+
+    //Table ScrollView 초기화
+    useEffect(() => {
+        if (setScrollView.current) setScrollView.current.scrollLeft = 980.8;
+    }, [RoomDatas]);
 
     return (
         <TestMainDivBox>
@@ -620,9 +620,11 @@ const MainTableContainer = () => {
                     </div>
                 </div>
                 {/* 날짜 선택 끝 */}
-                {/* 유저 검색 시작 */}
-                <UserSelectMainPage></UserSelectMainPage>
-                {/* 유저 검색 끝 */}
+                <BrowserView>
+                    {/* 유저 검색 시작 */}
+                    <UserSelectMainPage></UserSelectMainPage>
+                    {/* 유저 검색 끝 */}
+                </BrowserView>
             </div>
             <div className="Mian_Table_Container">
                 {/* 테이블 목록 왼쪽 제목 시작 */}

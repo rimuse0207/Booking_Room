@@ -1,4 +1,3 @@
-import axios from 'axios';
 import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
@@ -6,6 +5,8 @@ import { LOGIN_INFO_DATA_Changes } from '../../Models/LoginInfoReducer/LoginInfo
 import { toast } from '../ToasMessage/ToastManager';
 import { useHistory } from 'react-router-dom';
 import { request } from '../../API';
+import { useCookies } from 'react-cookie';
+
 const LoginMainPageMainDivBox = styled.div`
     background-color: #efefef;
     font-size: 1.6rem;
@@ -174,12 +175,12 @@ const LoginMainPageMainDivBox = styled.div`
 const LoginMainPage = () => {
     const Login_ID_Focus = useRef(null);
     const Login_Password_Focus = useRef(null);
-
     const New_Password_Focus = useRef(null);
     const New_Password_Check_Focus = useRef(null);
 
     const history = useHistory();
     const dispatch = useDispatch();
+    const [cookies, setCookie] = useCookies(['Login_token']);
     const [LoginInfoData, setLoginInfoData] = useState({
         ID: '',
         PW: '',
@@ -220,6 +221,8 @@ const LoginMainPage = () => {
                                 ? true
                                 : false,
                     };
+                    localStorage.setItem('Login_token', CheckingLoginFromServer.data.token);
+                    setCookie('Login_token', CheckingLoginFromServer.data.token);
                     dispatch(LOGIN_INFO_DATA_Changes(datas));
                     history.goBack();
                 } else {

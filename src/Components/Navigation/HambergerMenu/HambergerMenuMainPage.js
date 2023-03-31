@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { BrowserView, MobileView } from 'react-device-detect';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
@@ -245,9 +246,11 @@ const HambergerMenuMainPage = () => {
                         <li>
                             <Link to="/Today_Food">식단표</Link>
                         </li>
-                        <li>
-                            <Link to="/FloorLayout">자리배치도</Link>
-                        </li>
+                        <BrowserView>
+                            <li>
+                                <Link to="/FloorLayout">자리배치도</Link>
+                            </li>
+                        </BrowserView>
                         {LoginInfo.Login_id && LoginInfo.Login_company === 'DHKS' ? (
                             <>
                                 <li>
@@ -293,8 +296,6 @@ const HambergerMenuMainPage = () => {
                             <li
                                 style={{ borderBottom: '0.5px solid #fff' }}
                                 onClick={() => {
-                                    // setMenuStatus('');
-                                    // setHambergerOpen(false);
                                     dispatch(Title_Change_Func('Company_Room'));
                                     dispatch(LOGOUT_INFO_DATA_Changes());
                                     window.location.href = '/Today_Food';
