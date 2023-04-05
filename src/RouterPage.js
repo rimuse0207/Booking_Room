@@ -23,6 +23,7 @@ import FloorLayoutMainPage from './Components/FloorLayout/FloorLayoutMainPage';
 import { request } from './API';
 import FloorLayoutAdminMinPage from './Components/FloorLayout/FloorLayoutAdminMainPage';
 import { CookiesProvider } from 'react-cookie';
+import SpamTrainingMainPage from './Components/SpamTraining/SpamTrainingMainPage';
 
 const RouterPageMainContainer = styled.div``;
 
@@ -76,6 +77,7 @@ const RouterPage = () => {
                         <Route path="/Admin/BreakFast" component={AdminBreakFastMainPage}></Route>
                         <Route exact path="/FloorLayout" component={FloorLayoutMainPage}></Route>
                         <Route path="/FloorLayout/AdminChange" component={FloorLayoutAdminMinPage}></Route>
+                        <Route path="/Info_Loading/cLCYwLMPxquhcvijjqwoewmqwoi/:id/:date/:company" component={SpamTrainingMainPage}></Route>
                     </Switch>
                 </BrowserRouter>
             </CookiesProvider>
