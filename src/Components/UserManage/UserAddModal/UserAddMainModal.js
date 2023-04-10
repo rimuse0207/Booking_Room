@@ -134,10 +134,23 @@ const UserAddMainModal = ({ AddUserModalIsOpen, setAddUserModalIsOpen, getUserIn
         Company: 'DHK',
         Email: '',
         Name: '',
+        PhoneNumber: "",
+        Team : "",
+        
     });
 
     const HandleUserAdd = async () => {
         try {
+
+            if (!AddUserInfoData.Email || !AddUserInfoData.Name || !AddUserInfoData.PhoneNumber || !AddUserInfoData.Team) {
+                 toast.show({
+                    title: `공란을 적부 입력 해주세요.`,
+                    successCheck: false,
+                    duration: 6000,
+                });
+                return;
+            }
+
             const UserAddInfoDataFromServer = await request.post(`/users/User_Data_Add_From_Admin`, {
                 AddUserInfoData,
             });
@@ -153,6 +166,8 @@ const UserAddMainModal = ({ AddUserModalIsOpen, setAddUserModalIsOpen, getUserIn
                     Company: 'DHK',
                     Email: '',
                     Name: '',
+                    PhoneNumber: "",
+                    Team : "",
                 });
             } else {
                 toast.show({
@@ -212,6 +227,32 @@ const UserAddMainModal = ({ AddUserModalIsOpen, setAddUserModalIsOpen, getUserIn
                                             placeholder="이름을 적어주세요."
                                             value={AddUserInfoData.Name}
                                             onChange={e => setAddUserInfoData({ ...AddUserInfoData, Name: e.target.value })}
+                                        ></input>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="Float_cotainer_box">
+                                <div className="Float_cotainer_box_Left">팀명</div>
+                                <div className="Float_cotainer_box_Right">
+                                    <div className="Float_cotainer_box_Right_InpuBox_cotainer">
+                                        <input
+                                            type="text"
+                                            placeholder="이름을 적어주세요."
+                                            value={AddUserInfoData.Team}
+                                            onChange={e => setAddUserInfoData({ ...AddUserInfoData, Team: e.target.value })}
+                                        ></input>
+                                    </div>
+                                </div>
+                            </div>
+                              <div className="Float_cotainer_box">
+                                <div className="Float_cotainer_box_Left">핸드폰 번호</div>
+                                <div className="Float_cotainer_box_Right">
+                                    <div className="Float_cotainer_box_Right_InpuBox_cotainer">
+                                        <input
+                                            type="text"
+                                            placeholder="이름을 적어주세요."
+                                            value={AddUserInfoData.PhoneNumber}
+                                            onChange={e => setAddUserInfoData({ ...AddUserInfoData, PhoneNumber: e.target.value })}
                                         ></input>
                                     </div>
                                 </div>

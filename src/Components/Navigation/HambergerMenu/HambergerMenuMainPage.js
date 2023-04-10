@@ -264,9 +264,14 @@ const HambergerMenuMainPage = () => {
                             <></>
                         )}
                         {LoginInfo.Login_Admin_Access ? (
-                            <li>
-                                <Link to={`/User_Select_or_Add/${LoginInfo.Login_id}/Company_DHK`}>사용자 등록 및 조회</Link>
-                            </li>
+                            <>
+                                <li>
+                                    <Link to={`/User_Select_or_Add/${LoginInfo.Login_id}/Company_DHK`}>사용자 등록 및 조회</Link>
+                                </li>
+                                <li>
+                                    <Link to={`/FloorLayout/AdminChange`}>자리배치도 수정</Link>
+                                </li>
+                            </>
                         ) : (
                             <></>
                         )}

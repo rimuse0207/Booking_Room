@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io';
 import { useEffect } from 'react';
 import { request } from '../../../../API';
+import { FaFileExcel } from "react-icons/fa";
 
 export const UserApplySelectMainPageMainDivBox = styled.div`
     .DateClickContainer {
@@ -45,11 +46,38 @@ export const UserApplySelectMainPageMainDivBox = styled.div`
         vertical-align: center;
         border-bottom: 1px solid #ccc;
     }
+    .Select_Table_Container{
+        
+         .ExcelDownload{
+        color:green;
+        font-size:2em;
+        text-align:end;
+        margin-top:40px;
+        margin-bottom:40px;
+        max-width: 400px;
+            
+        :hover{
+            cursor: pointer;
+            color:lime;
+        }
+    }
+    }
+   
 `;
 
 const UserApplySelectMainPage = () => {
     const [NowDates, setNowDates] = useState(moment().format('YYYY-MM'));
     const [TableData, setTableData] = useState([]);
+
+    const handleClickExcelDownload = async() => {
+        try {
+            window.open(`${process.env.REACT_APP_DB_HOST}/FoodApp/Break_Fast_Excel?Select_Date=${NowDates}`);
+            
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     const Get_NowDates_Apply_User_Select = async () => {
         try {
             const Get_Now_Dates_Apply_User_Select_Axios = await request.get(`/FoodApp/Now_Dates_Apply_User_Select`, {
@@ -85,7 +113,6 @@ const UserApplySelectMainPage = () => {
                     <thead>
                         <tr className="PostionFixedFromScroll">
                             <th scope="cols">No.</th>
-                            {/* <th scope="cols">회사명</th> */}
                             <th scope="cols">이름</th>
                             <th scope="cols">메뉴명</th>
                             <th scope="cols">수량</th>
@@ -107,6 +134,7 @@ const UserApplySelectMainPage = () => {
                         })}
                     </tbody>
                 </table>
+                <div className="ExcelDownload" onClick={()=>handleClickExcelDownload()}><FaFileExcel></FaFileExcel></div>
             </div>
         </UserApplySelectMainPageMainDivBox>
     );
