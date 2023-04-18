@@ -50,15 +50,15 @@ const UserSelectViewComponentMainDivBox = styled.div`
         }
     }
 `;
-const UserSelectViewComponent = ({ SearchTitle }) => {
+const UserSelectViewComponent = ({ SearchTitle,setUserSearchModalOn,setClickedUser }) => {
     const [UserList, setUserList] = useState([]);
 
-    const handleClicks = () => {
-        toast.show({
-            title: `추가 개발 예정입니다.`,
-            successCheck: false,
-            duration: 1000,
-        });
+    const handleClicks = (list) => {
+        
+        setUserSearchModalOn(true)
+        setClickedUser(list)
+        console.log()
+    
     };
 
     const Get_User_Info_Data = async () => {
@@ -87,7 +87,7 @@ const UserSelectViewComponent = ({ SearchTitle }) => {
                         item.team.toLowerCase().includes(SearchTitle.toLowerCase())
                 ).map(list => {
                     return (
-                        <li className="User_Select_View_li Show_Boxs" key={list.email_address} onClick={handleClicks}>
+                        <li className="User_Select_View_li Show_Boxs" key={list.email_address} onClick={()=>handleClicks(list)}>
                             <div className="User_Select_View_Info_Container Show_Boxs">
                                 <div className="User_Select_View_Info_Left Show_Boxs">
                                     <BsPersonSquare></BsPersonSquare>

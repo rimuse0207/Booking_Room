@@ -541,6 +541,7 @@ const MainTableContainer = () => {
 
     useEffect(() => {
         getDatas();
+        // dispatch(Loader_Check_For_False());
     }, [NowTimes, LeftHeaderInfo]);
 
     const getDatas = async () => {

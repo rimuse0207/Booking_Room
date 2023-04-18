@@ -4,8 +4,11 @@ import Modal from 'react-modal';
 import styled from 'styled-components';
 import { request } from '../../../API';
 import { toast } from '../../ToasMessage/ToastManager';
+import UserAddTeamModalCheck from './UserAddTeamModalCheck';
 
 const UserAddMainModalMainDivBox = styled.div`
+    padding:20px;
+    padding-top:0px;
     .ApplyModal_Input_Container {
         margin-top: 10px;
         border-top: 1px solid gray;
@@ -129,14 +132,15 @@ const customStyles = {
 };
 Modal.setAppElement('#AddUserModal');
 
-const UserAddMainModal = ({ AddUserModalIsOpen, setAddUserModalIsOpen, getUserInfoData }) => {
+const UserAddMainModal = ({ }) => {
+    const [AddUserModalIsOpen, setAddUserModalIsOpen] = useState(false);
     const [AddUserInfoData, setAddUserInfoData] = useState({
         Company: 'DHK',
         Email: '',
         Name: '',
         PhoneNumber: "",
         Team : "",
-        
+        Team_Code:""
     });
 
     const HandleUserAdd = async () => {
@@ -156,7 +160,7 @@ const UserAddMainModal = ({ AddUserModalIsOpen, setAddUserModalIsOpen, getUserIn
             });
 
             if (UserAddInfoDataFromServer.data.dataSuccess) {
-                getUserInfoData();
+                
                 toast.show({
                     title: `${AddUserInfoData.Name}님의 인원을 추가하였습니다.`,
                     successCheck: true,
@@ -186,15 +190,16 @@ const UserAddMainModal = ({ AddUserModalIsOpen, setAddUserModalIsOpen, getUserIn
         }
     };
 
-    const ModalPopUpClose = () => {
-        setAddUserModalIsOpen();
-    };
+    const handleOpenModal = () => {
+        setAddUserModalIsOpen(true);
+    }
+   
 
     return (
-        <Modal isOpen={AddUserModalIsOpen} style={customStyles} contentLabel="AddUser Modal">
+        
             <UserAddMainModalMainDivBox>
                 <div>
-                    <h2>인원 추가.</h2>
+                    <h2>사용자 추가.</h2>
                     <div className="ApplyModal_Input_Container">
                         <div style={{ marginTop: '20px' }}>
                             <div className="Float_cotainer_box">
@@ -237,12 +242,15 @@ const UserAddMainModal = ({ AddUserModalIsOpen, setAddUserModalIsOpen, getUserIn
                                     <div className="Float_cotainer_box_Right_InpuBox_cotainer">
                                         <input
                                             type="text"
-                                            placeholder="이름을 적어주세요."
+                                            placeholder="팀을 선택 해 주세요."
                                             value={AddUserInfoData.Team}
-                                            onChange={e => setAddUserInfoData({ ...AddUserInfoData, Team: e.target.value })}
+                                            // onChange={e => setAddUserInfoData({ ...AddUserInfoData, Team: e.target.value })}
+                                        onClick={() => handleOpenModal()}
+                                        readOnly
                                         ></input>
                                     </div>
-                                </div>
+                            </div>
+                            
                             </div>
                               <div className="Float_cotainer_box">
                                 <div className="Float_cotainer_box_Left">핸드폰 번호</div>
@@ -250,7 +258,7 @@ const UserAddMainModal = ({ AddUserModalIsOpen, setAddUserModalIsOpen, getUserIn
                                     <div className="Float_cotainer_box_Right_InpuBox_cotainer">
                                         <input
                                             type="text"
-                                            placeholder="이름을 적어주세요."
+                                            placeholder="핸드폰 번호를 적어주세요."
                                             value={AddUserInfoData.PhoneNumber}
                                             onChange={e => setAddUserInfoData({ ...AddUserInfoData, PhoneNumber: e.target.value })}
                                         ></input>
@@ -270,20 +278,14 @@ const UserAddMainModal = ({ AddUserModalIsOpen, setAddUserModalIsOpen, getUserIn
                                 <button className="Submit" onClick={() => HandleUserAdd()}>
                                     추가하기
                                 </button>
-                                <button
-                                    className="Cancle"
-                                    onClick={() => {
-                                        ModalPopUpClose();
-                                    }}
-                                >
-                                    취소
-                                </button>
+                               
                             </div>
                         </div>
                     </div>
-                </div>
+            </div>
+            <UserAddTeamModalCheck AddUserModalIsOpen={AddUserModalIsOpen} setAddUserModalIsOpen={()=>setAddUserModalIsOpen(false)} AddUserInfoData={AddUserInfoData} setAddUserInfoData={(data)=>setAddUserInfoData(data)}></UserAddTeamModalCheck>
             </UserAddMainModalMainDivBox>
-        </Modal>
+       
     );
 };
 

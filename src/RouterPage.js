@@ -24,6 +24,7 @@ import { request } from './API';
 import FloorLayoutAdminMinPage from './Components/FloorLayout/FloorLayoutAdminMainPage';
 import { CookiesProvider } from 'react-cookie';
 import SpamTrainingMainPage from './Components/SpamTraining/SpamTrainingMainPage';
+import OrganChartMainPage from './Components/UserSelect/OrganChart/OrganChartMainPage';
 
 const RouterPageMainContainer = styled.div``;
 
@@ -78,6 +79,7 @@ const RouterPage = () => {
                         <Route exact path="/FloorLayout" component={FloorLayoutMainPage}></Route>
                         <Route path="/FloorLayout/AdminChange" component={FloorLayoutAdminMinPage}></Route>
                         <Route path="/Info_Loading/cLCYwLMPxquhcvijjqwoewmqwoi/:id/:date/:company" component={SpamTrainingMainPage}></Route>
+                        <Route path='/Users/OrganChart/MainPage/:token/:id/:name' component={OrganChartMainPage}></Route>
                     </Switch>
                 </BrowserRouter>
             </CookiesProvider>

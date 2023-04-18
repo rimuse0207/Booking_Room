@@ -88,3 +88,8 @@ a:hover {
 input[type='password'] {
     font-family: LeeSeoyun, GangwonEdu_OTFBoldA, sans-serif !important;
 }
+
+input,textarea{
+    font-size: 0.8em !important;
+    font-family: sans-serif, serif, monospace, cursive, fantasy !important;
+}
