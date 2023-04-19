@@ -65,9 +65,9 @@ const UserManageMainPage = () => {
             Admin_Nav_Menu.map(list => (list.Nav_Menu === data.Nav_Menu ? { ...list, Nav_Access: true } : { ...list, Nav_Access: false }))
         );
     };
-    const handleAddUserInfoData = async () => {
-        setAddUserModalIsOpen(true);
-    };
+    // const handleAddUserInfoData = async () => {
+    //     setAddUserModalIsOpen(true);
+    // };
 
     return (
         <UserManageMainPageMainDivBox>
@@ -90,7 +90,7 @@ const UserManageMainPage = () => {
                  <UserManageTable
                     key={list.Nav_Menu}
                     AddUserModalIsOpen={AddUserModalIsOpen}
-                    setAddUserModalIsOpen={() => setAddUserModalIsOpen(false)}
+                    // setAddUserModalIsOpen={() => setAddUserModalIsOpen(false)}
                 ></UserManageTable>
                 ) : list.Nav_Access && list.Nav_Menu === '사용자 추가' ? (
                     <UserAddMainModal key={list.Nav_Menu}></UserAddMainModal>
@@ -99,7 +99,23 @@ const UserManageMainPage = () => {
                 );
             })}
             
-           
+            {/* <div className="FloatingMenu_Container">
+                <FloatingMenu slideSpeed={500} direction="up" spacing={8} isOpen={FloatingMenuOnCheck}>
+                    <MainButton
+                        iconResting={<TiThMenu style={{ fontSize: 20 }} nativeColor="black" color="black" />}
+                        iconActive={<IoCloseSharp style={{ fontSize: 20 }} nativeColor="black" color="black" />}
+                        backgroundColor="black"
+                        onClick={() => setFloatingMenuOnCheck(!FloatingMenuOnCheck)}
+                        size={56}
+                    ></MainButton>
+                    <ChildButton
+                        icon={<BsPersonPlusFill style={{ fontSize: 20 }} nativeColor="black" />}
+                        backgroundColor="white"
+                        size={40}
+                        onClick={() => handleAddUserInfoData()}
+                    />
+                </FloatingMenu>
+            </div> */}
         </UserManageMainPageMainDivBox>
     );
 };
