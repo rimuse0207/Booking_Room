@@ -89,7 +89,7 @@ const UserManageMainPage = () => {
                 return list.Nav_Access && list.Nav_Menu === '사용자 조회' ? (
                  <UserManageTable
                     key={list.Nav_Menu}
-                    AddUserModalIsOpen={AddUserModalIsOpen}
+                    // AddUserModalIsOpen={AddUserModalIsOpen}
                     // setAddUserModalIsOpen={() => setAddUserModalIsOpen(false)}
                 ></UserManageTable>
                 ) : list.Nav_Access && list.Nav_Menu === '사용자 추가' ? (
