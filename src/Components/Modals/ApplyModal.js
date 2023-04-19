@@ -632,6 +632,8 @@ const ApplyModal = ({
                 return;
             }
             dispatch(Loader_Check_For_True());
+        
+
             const ReserverationForServer = await request.post(`/users/BrityWorksBooking_For_API`, {
                 ApplyModalData,
                 SelectedShowTableTimes,
@@ -647,6 +649,39 @@ const ApplyModal = ({
             if (ReserverationForServer.data.dataSuccess) {
                 getDatas();
                 ModalPopUpClose();
+                
+            if (SelectedShowTableTimes.AlldayChecking) {
+                const StartTime = new Date(`${moment(ApplyModalData.StartDate).format('YYYY-MM-DD')} 00:00:00`)
+                const EndTime = new Date(`${moment(ApplyModalData.EndDate).add(1,"day").format('YYYY-MM-DD')} 00:00:00`)
+                
+                const diffMSec = EndTime.getTime() - StartTime.getTime();
+                const diffHour = diffMSec / (60 * 60 * 1000);
+                Booking_Reservation_Insert_Time( ApplyModalData,
+                SelectedShowTableTimes,
+                SelectLeftHeaderInfo,
+                TitleBooking,
+                LoginInfo,
+                Reservation_Mail_Checking,
+                DetailInfo,
+                Mail_State,
+                Selected_User_State,diffHour)
+            } else {
+                const StartTime = new Date(`${moment(ApplyModalData.StartDate).format('YYYY-MM-DD')} ${SelectedShowTableTimes.StartTime}:00`)
+                const EndTime = new Date(`${moment(ApplyModalData.EndDate).format('YYYY-MM-DD')} ${SelectedShowTableTimes.EndTime}:00`)
+                
+                const diffMSec = EndTime.getTime() - StartTime.getTime();
+                const diffHour = diffMSec / (60 * 60 * 1000);
+                  Booking_Reservation_Insert_Time( ApplyModalData,
+                SelectedShowTableTimes,
+                SelectLeftHeaderInfo,
+                TitleBooking,
+                LoginInfo,
+                Reservation_Mail_Checking,
+                DetailInfo,
+                Mail_State,
+                Selected_User_State,diffHour)
+            }
+            
                 dispatch(Loader_Check_For_False());
                 toast.show({
                     title: `${SelectLeftHeaderInfo.label}의 ${moment(ApplyModalData.StartDate).format('YYYY-MM-DD')} ${
@@ -677,6 +712,39 @@ const ApplyModal = ({
             });
         }
     };
+
+
+    const Booking_Reservation_Insert_Time = async(ApplyModalData,
+                SelectedShowTableTimes,
+                SelectLeftHeaderInfo,
+                TitleBooking,
+                LoginInfo,
+                Reservation_Mail_Checking,
+                DetailInfo,
+                Mail_State,
+                Selected_User_State,diffHour) => {
+        try {
+                
+            const Booking_Reservation_Insert_Time_Axios = await request.post('/users/Booking_Reservation_Insert_Time', {
+             ApplyModalData,
+                SelectedShowTableTimes,
+                SelectLeftHeaderInfo,
+                TitleBooking,
+                LoginInfo,
+                Reservation_Mail_Checking,
+                DetailInfo,
+                Mail_State,
+                Selected_User_State,
+                diffHour
+            })
+            if (Booking_Reservation_Insert_Time_Axios.data.dataSuccess) {
+                
+            }
+
+        } catch (error) {
+            console.log(error);
+        }
+    }
 
     return (
         <Modal isOpen={ApplyModalOpenData} style={customStyles} contentLabel="Apply Modal">

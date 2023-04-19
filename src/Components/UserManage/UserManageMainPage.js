@@ -48,7 +48,7 @@ const UserManageMainPageMainDivBox = styled.div`
 
 const UserManageMainPage = () => {
     const [FloatingMenuOnCheck, setFloatingMenuOnCheck] = useState(true);
-    const [AddUserModalIsOpen, setAddUserModalIsOpen] = useState(false);
+    
      const [Admin_Nav_Menu, setAdmin_Nav_Menu] = useState([
         {
             Nav_Menu: '사용자 조회',
