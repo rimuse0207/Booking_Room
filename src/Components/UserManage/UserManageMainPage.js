@@ -99,23 +99,7 @@ const UserManageMainPage = () => {
                 );
             })}
             
-            {/* <div className="FloatingMenu_Container">
-                <FloatingMenu slideSpeed={500} direction="up" spacing={8} isOpen={FloatingMenuOnCheck}>
-                    <MainButton
-                        iconResting={<TiThMenu style={{ fontSize: 20 }} nativeColor="black" color="black" />}
-                        iconActive={<IoCloseSharp style={{ fontSize: 20 }} nativeColor="black" color="black" />}
-                        backgroundColor="black"
-                        onClick={() => setFloatingMenuOnCheck(!FloatingMenuOnCheck)}
-                        size={56}
-                    ></MainButton>
-                    <ChildButton
-                        icon={<BsPersonPlusFill style={{ fontSize: 20 }} nativeColor="black" />}
-                        backgroundColor="white"
-                        size={40}
-                        onClick={() => handleAddUserInfoData()}
-                    />
-                </FloatingMenu>
-            </div> */}
+           
         </UserManageMainPageMainDivBox>
     );
 };
