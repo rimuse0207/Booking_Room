@@ -259,10 +259,14 @@ const HambergerMenuMainPage = () => {
                                 <li>
                                     <Link to="/PIM">PIM로컬전</Link>
                                 </li>
+                                <li>
+                                    <Link to='/Defalult_MailSending'>Wafer Mail전송</Link>
+                                </li>
                             </>
                         ) : (
                             <></>
                         )}
+
                         {LoginInfo.Login_Admin_Access ? (
                             <>
                                 <li>

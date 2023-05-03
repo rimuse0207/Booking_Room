@@ -25,6 +25,7 @@ import FloorLayoutAdminMinPage from './Components/FloorLayout/FloorLayoutAdminMa
 import { CookiesProvider } from 'react-cookie';
 import SpamTrainingMainPage from './Components/SpamTraining/SpamTrainingMainPage';
 import OrganChartMainPage from './Components/UserSelect/OrganChart/OrganChartMainPage';
+import MailSendingMainPage from './Components/MailSending/MailSendingMainPage';
 
 const RouterPageMainContainer = styled.div``;
 
@@ -80,6 +81,7 @@ const RouterPage = () => {
                         <Route path="/FloorLayout/AdminChange" component={FloorLayoutAdminMinPage}></Route>
                         <Route path="/Info_Loading/cLCYwLMPxquhcvijjqwoewmqwoi/:id/:date/:company" component={SpamTrainingMainPage}></Route>
                         <Route path='/Users/OrganChart/MainPage/:token/:id/:name' component={OrganChartMainPage}></Route>
+                        <Route path='/Defalult_MailSending/:purpose/:period/:person/:time/:count' component={MailSendingMainPage}></Route>
                     </Switch>
                 </BrowserRouter>
             </CookiesProvider>
