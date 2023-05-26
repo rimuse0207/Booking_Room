@@ -26,6 +26,9 @@ import { CookiesProvider } from 'react-cookie';
 import SpamTrainingMainPage from './Components/SpamTraining/SpamTrainingMainPage';
 import OrganChartMainPage from './Components/UserSelect/OrganChart/OrganChartMainPage';
 import MailSendingMainPage from './Components/MailSending/MailSendingMainPage';
+import KizukiNotepadMainPage from './Components/KizukiNotepad/KizukiNotepadMainPage';
+import KizukiRoomListMainPage from './Components/KizukiNotepad/Kizuki_Room_List/KizukiRoomListMainPage';
+import KizukiContentMainPage from './Components/KizukiNotepad/Kizuki_Content/KizukiContentMainPage';
 
 const RouterPageMainContainer = styled.div``;
 
@@ -70,6 +73,9 @@ const RouterPage = () => {
                         <Route path="/Food_Select" component={FoodSelectMainPage}></Route>
                         <Route path="/Food_Survay" component={SurvayContainer}></Route>
                         <Route path="/Admin_Image_Check" component={AdminImageShowMainPage}></Route>
+                        <Route exact path="/KIZUKI_Notepad" component={KizukiNotepadMainPage} ></Route>
+                        <Route exact path="/KIZUKI_Notepad/:team_code" component={KizukiRoomListMainPage} ></Route>
+                        <Route  path="/KIZUKI_Notepad/:team_code/:kizuki_code" component={KizukiContentMainPage} ></Route>
                         <Route exact path="/PIM" component={PimMainContainer}></Route>
                         <Route path="/PIM/PIMApplyRoom" component={PimRoomApplyMainContainer}></Route>
                         <Route path="/PIM/RoomEnter/:Room_Keys/:Room_Title" component={PimRoomEnterContainer}></Route>

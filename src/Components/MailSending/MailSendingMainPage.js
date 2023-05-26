@@ -1,7 +1,7 @@
 import React,{ useState,useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
-import ReactQuill from 'react-quill';
+import ReactQuill,{Quill} from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import Select from 'react-select';
 import { useRef } from 'react';
@@ -9,6 +9,8 @@ import { GrFormClose } from 'react-icons/gr';
 import NavigationMainPage from "../Navigation/NavigationMainPage";
 import { toast } from '../ToasMessage/ToastManager';
 import { useHistory, useParams } from 'react-router-dom';
+import 'react-quill/dist/quill.snow.css';
+import Editor from './Editor';
 
 const MailSendingMainPageMainDivBox = styled.div`
     min-height:95vh;
@@ -53,6 +55,8 @@ const MailSendingMainPageMainDivBox = styled.div`
         
     }
 `
+
+
 
 const MailSendingMainPage = () => {
     const history = useHistory();
@@ -121,34 +125,63 @@ const MailSendingMainPage = () => {
         { value: "shpark@winpac.co.kr", name: "박신호", company: "WINPAC", position: "과장", id: "shpark@winpac.co.kr", from: true, cc: false, bcc: false },
         { value:LoginInfo.Login_id,name:LoginInfo.Login_name,company:"DHKS",position:"프로",id:LoginInfo.Login_id,from:false,cc:true,bcc:false},
     ]);
-    const modules = {
-        toolbar: [
-            // [{ font: ['arial', 'comic-sans', 'courier-new', 'georgia', 'helvetica', 'lucida'] }],
-            [{ header: [1, 2, false] }],
-            ['bold', 'italic', 'underline', 'strike', 'blockquote'],
-            [{ list: 'ordered' }, { list: 'bullet' }, { indent: '-1' }, { indent: '+1' }],
-            ['link'],
-            [{ align: [] }, { color: [] }], // dropdown with defaults from theme
-            ['clean'],
-        ],
-    };
+    // const modules = {
+    //     toolbar: {
+    //         container:
+    //             [
+    //                 // [{ font: ['arial', 'comic-sans', 'courier-new', 'georgia', 'helvetica', 'lucida'] }],
+    //                 [{ 'size': ['8', '10', '12', '14', '16', '18', '20', '22', '24', '26', '28', '30', '32', '36', '40', '48', '56', '64', '72'] }],
+    //                 [{ header: [1, 2, false] }],
+    //                 ['bold', 'italic', 'underline', 'strike', 'blockquote'],
+    //                 [{ list: 'ordered' }, { list: 'bullet' }, { indent: '-1' }, { indent: '+1' }],
+    //                 ['link'],
+    //                 [{ align: [] }, { color: [] }], // dropdown with defaults from theme
+    //                 ['clean'],
+    //             ]
+    //         , handlers: {
+    //         'size': function (value) {
+    //             if (value) {
+    //                 this.quill.format('size', value);
+    //             }
+    //         }
+    //     }
+    //     }
+    // }
+  const modules = {
+  toolbar: {
+    container: [
+      [{ 'size': ['8', '10', '12', '14', '16', '18', '20', '22', '24', '26', '28', '30', '32', '36', '40', '48', '56', '64', '72'] }],
+      [{ header: [1, 2, false] }],
+      ['bold', 'italic', 'underline', 'strike', 'blockquote'],
+      [{ list: 'ordered' }, { list: 'bullet' }, { indent: '-1' }, { indent: '+1' }],
+      ['link'],
+      [{ align: [] }, { color: [] }],
+      ['clean'],
+    ],
+    handlers: {
+      size: function (value) {
+        console.log(value)
+        if (value) {
+          this.quill.format('size', value);
+        }
+      },
+      align: function (value) {
+        if (['left', 'center', 'right', 'justify'].includes(value)) {
+          this.quill.format('align', value);
+        } else {
+          this.quill.format('align', false);
+        }
+      },
+    },
+  },
+};
     const formats = [
-        // 'font',
-        'header',
-        'bold',
-        'italic',
-        'underline',
-        'strike',
-        'blockquote',
-        'list',
-        'bullet',
-        'indent',
-        'link',
-        // 'image',
-        'align',
-        'color',
-        // 'background',
-    ];
+    'header',
+    'bold', 'italic', 'underline', 'strike', 'blockquote',
+    'list', 'bullet', 'indent',
+    'link', 'color', 'size',
+  ];
+
 
     const onChange = data => {
         setMail_State(data);
@@ -227,7 +260,7 @@ const MailSendingMainPage = () => {
    
     return (
         <MailSendingMainPageMainDivBox>
-            <NavigationMainPage TitleName="Wafer 메일전송"></NavigationMainPage>
+            {/* <NavigationMainPage TitleName="Wafer 메일전송"></NavigationMainPage>
             <div className="Mail_Container">
             <div>
                 <h4>받는 사람</h4>
@@ -288,14 +321,15 @@ const MailSendingMainPage = () => {
             <div style={{ minHeight: '350px' }} ref={ScrollView}>
                 <ReactQuill
                     style={{ minHeight: '350px', marginBottom: '40px',overflowY:"auto",maxHeight:"70vh" }}
-                    theme="snow"
+                    // theme="snow"
                     modules={modules}
                     formats={formats}
                     value={Mail_State}
                     onChange={(content, delta, source, editor) => onChange(editor.getHTML())}
                 />
                 </div>
-                </div>
+                </div> */}
+            <Editor></Editor>
         </MailSendingMainPageMainDivBox>
     )
 }

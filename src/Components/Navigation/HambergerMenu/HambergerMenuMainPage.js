@@ -259,6 +259,9 @@ const HambergerMenuMainPage = () => {
                                 <li>
                                     <Link to="/PIM">PIM로컬전</Link>
                                 </li>
+                                <li>
+                                    <Link to="/KIZUKI_Notepad">KIZUKI 노트</Link>
+                                </li>
                                 {/* <li>
                                     <Link to='/Defalult_MailSending'>Wafer Mail전송</Link>
                                 </li> */}
