@@ -281,11 +281,11 @@ const UserManageTable = ({ AddUserModalIsOpen, setAddUserModalIsOpen }) => {
                         })}
                 </tbody>
             </table>
-            <UserAddMainModal
+            {/* <UserAddMainModal
                 getUserInfoData={() => getUserInfoData()}
                 AddUserModalIsOpen={AddUserModalIsOpen}
                 setAddUserModalIsOpen={() => setAddUserModalIsOpen(false)}
-            ></UserAddMainModal>
+            ></UserAddMainModal> */}
         </UserManageTableMainDivBox>
     );
 };

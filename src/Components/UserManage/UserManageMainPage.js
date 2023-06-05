@@ -7,6 +7,7 @@ import { TiThMenu } from 'react-icons/ti';
 import { IoCloseSharp } from 'react-icons/io5';
 import { BsPersonPlusFill } from 'react-icons/bs';
 import UserAddMainModal from './UserAddModal/UserAddMainModal';
+import UserLoginCheck from './UserManageTable/UserLoginCheck';
 
 const UserManageMainPageMainDivBox = styled.div`
 .Nav_Menu_Container {
@@ -23,7 +24,7 @@ const UserManageMainPageMainDivBox = styled.div`
         }
 
         li {
-            width: 45%;
+            width: 30%;
             border-bottom: 2px solid #368;
             text-align: center;
             padding: 10px;
@@ -58,7 +59,10 @@ const UserManageMainPage = () => {
             Nav_Menu: '사용자 추가',
             Nav_Access: false,
         },
-
+        {
+            Nav_Menu: '로그인 확인',
+            Nav_Access: false,
+        },
     ]);
     const handleMoveToMenu = data => {
         setAdmin_Nav_Menu(
@@ -94,7 +98,9 @@ const UserManageMainPage = () => {
                 ></UserManageTable>
                 ) : list.Nav_Access && list.Nav_Menu === '사용자 추가' ? (
                     <UserAddMainModal key={list.Nav_Menu}></UserAddMainModal>
-                )  : (
+                )  : list.Nav_Access && list.Nav_Menu === '로그인 확인' ? (
+                    <UserLoginCheck key={list.Nav_Menu}></UserLoginCheck>
+                ) : (
                     <div key={list.Nav_Menu}></div>
                 );
             })}

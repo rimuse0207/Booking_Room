@@ -13,19 +13,25 @@ import { Loader_Check_For_False, Loader_Check_For_True } from '../../../Models/L
 import { toast } from '../../ToasMessage/ToastManager';
 import LoginModal from '../../Modals/LoginModal';
 import { request } from '../../../API';
+import WeekFoodCount from './WeekFoodCount/WeekFoodCount';
 
 const TodayFoodContainerMainDivBox = styled.div`
     border: 1px solid black;
     min-height: 100vh;
     padding-bottom: 50px;
+    
+    
     .Today_Title {
         text-align: center;
         border-bottom: 1px solid lightgray;
         padding-bottom: 10px;
     }
     .ScrollView_Menu_Show {
+        max-width:700px;
+    margin:0 auto;
         position: relative;
         margin-top: 30px;
+        
         .FoodMenuShow {
             width: 100%;
             table {
@@ -190,7 +196,7 @@ const TodayFoodContainer = ({ history }) => {
     return (
         <TodayFoodContainerMainDivBox>
             <NavigationMainPage TitleName="식단표"></NavigationMainPage>
-            {/* <h2 className="Today_Title">식단표</h2> */}
+            <WeekFoodCount></WeekFoodCount>
             <div className="ScrollView_Menu_Show">
                 {TodayFoodState ? (
                     <div className="FoodMenuShow">
@@ -240,7 +246,7 @@ const TodayFoodContainer = ({ history }) => {
                     </div>
                 </div>
 
-                {moment().format('YYYY-MM-DD') === moment(TodayDate).format('YYYY-MM-DD') ? (
+                {moment().format('YYYY-MM-DD') === moment(TodayDate).format('YYYY-MM-DD') && TodayFoodState  ? (
                     <div className="Button_Select_Cotainer">
                         {ImageUploadCheck ? (
                             <button style={{ backgroundColor: 'orange' }}>잔반 이미지 업로드 완료</button>

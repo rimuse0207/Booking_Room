@@ -29,6 +29,7 @@ import MailSendingMainPage from './Components/MailSending/MailSendingMainPage';
 import KizukiNotepadMainPage from './Components/KizukiNotepad/KizukiNotepadMainPage';
 import KizukiRoomListMainPage from './Components/KizukiNotepad/Kizuki_Room_List/KizukiRoomListMainPage';
 import KizukiContentMainPage from './Components/KizukiNotepad/Kizuki_Content/KizukiContentMainPage';
+import SelectWeekFoodCount from './Components/FoodSelect/TodayFoodContainer/SelectWeekFoodCount/SelectWeekFoodCount';
 
 const RouterPageMainContainer = styled.div``;
 
@@ -68,8 +69,9 @@ const RouterPage = () => {
                     <Switch>
                         <Route exact path="/" component={App}></Route>
                         <Route path="/Login_Page" component={LoginMainPage}></Route>
-                        <Route path="/User_Select_or_Add/:UserId/:UserCompany" component={UserManageMainPage}></Route>
-                        <Route path="/Today_Food" component={TodayFoodContainer}></Route>
+                        <Route exact path="/User_Select_or_Add/:UserId/:UserCompany" component={UserManageMainPage}></Route>
+                        <Route exact path="/Today_Food" component={TodayFoodContainer}></Route>
+                        <Route path="/Today_Food/SelectWeekFoodCount" component={SelectWeekFoodCount}></Route>
                         <Route path="/Food_Select" component={FoodSelectMainPage}></Route>
                         <Route path="/Food_Survay" component={SurvayContainer}></Route>
                         <Route path="/Admin_Image_Check" component={AdminImageShowMainPage}></Route>
