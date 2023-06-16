@@ -110,7 +110,10 @@ const UserSelectMainPage = () => {
     }
 
 
-    const HandleSumitData = async(e) => {
+    const HandleSumitData = async (e) => {
+        if (!LoginInfo.Login_token) {
+            return;
+        }
         try {
             e.preventDefault();
 

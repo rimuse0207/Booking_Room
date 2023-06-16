@@ -30,6 +30,7 @@ import KizukiNotepadMainPage from './Components/KizukiNotepad/KizukiNotepadMainP
 import KizukiRoomListMainPage from './Components/KizukiNotepad/Kizuki_Room_List/KizukiRoomListMainPage';
 import KizukiContentMainPage from './Components/KizukiNotepad/Kizuki_Content/KizukiContentMainPage';
 import SelectWeekFoodCount from './Components/FoodSelect/TodayFoodContainer/SelectWeekFoodCount/SelectWeekFoodCount';
+import KizukiWriteMainPage from './Components/KizukiNotepad/Kizuki_Write/KizukiWriteMainPage';
 
 const RouterPageMainContainer = styled.div``;
 
@@ -77,7 +78,8 @@ const RouterPage = () => {
                         <Route path="/Admin_Image_Check" component={AdminImageShowMainPage}></Route>
                         <Route exact path="/KIZUKI_Notepad" component={KizukiNotepadMainPage} ></Route>
                         <Route exact path="/KIZUKI_Notepad/:team_code" component={KizukiRoomListMainPage} ></Route>
-                        <Route  path="/KIZUKI_Notepad/:team_code/:kizuki_code" component={KizukiContentMainPage} ></Route>
+                        <Route path="/KIZUKI_Notepad_List_Select/:team_code/:kizuki_code" component={KizukiContentMainPage} ></Route>
+                        <Route path="/KIZUKI_Notepad_Write" component={KizukiWriteMainPage}></Route>
                         <Route exact path="/PIM" component={PimMainContainer}></Route>
                         <Route path="/PIM/PIMApplyRoom" component={PimRoomApplyMainContainer}></Route>
                         <Route path="/PIM/RoomEnter/:Room_Keys/:Room_Title" component={PimRoomEnterContainer}></Route>

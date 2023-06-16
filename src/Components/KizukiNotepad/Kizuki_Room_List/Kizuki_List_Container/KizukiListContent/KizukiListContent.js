@@ -12,10 +12,14 @@ const KizukiListContentMainDivBox = styled.div`
 `
 
 
-const KizukiListContent = () => {
+const KizukiListContent = ({ item }) => {
+    
+
     return (
         <KizukiListContentMainDivBox>
-            Kizuki 1
+            <div>
+                { item.kizuki_notepad_kizuki_list_title}
+            </div>
         </KizukiListContentMainDivBox>
     )
 }

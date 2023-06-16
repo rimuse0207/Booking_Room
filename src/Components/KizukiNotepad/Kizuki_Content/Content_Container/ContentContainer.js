@@ -7,17 +7,11 @@ const ContentContainerMainDivBox = styled.div`
     min-height:200px;
     padding:20px;
 `
-const ContentContainer = () => {
+const ContentContainer = ({list}) => {
     return (
         <ContentContainerMainDivBox>
-            <pre>
-                dadadasdasdasdasdasd
-                dadadasdasdasdasdasd
-                dadadasdasdasdasdasd
-                dadadasdasdasdasdasd
-                dadadasdasdasdasdasd
-            </pre>
-          
+            <div dangerouslySetInnerHTML={{ __html: list.kizuki_notepad_kizuki_content_main }}></div>
+            
         </ContentContainerMainDivBox>
     )
 }

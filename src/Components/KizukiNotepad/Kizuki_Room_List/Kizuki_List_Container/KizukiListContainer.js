@@ -2,6 +2,11 @@ import React from "react";
 import styled from "styled-components";
 import KizukiListContent from "./KizukiListContent/KizukiListContent";
 import { Link } from "react-router-dom";
+import { request } from "../../../../API";
+import { useParams } from "react-router-dom";
+import { useEffect } from "react";
+import { useState } from "react";
+import KizukiList from "./KizukiLst";
 
 const KizukiListContainerMainDivBox = styled.div`
     padding:10px;
@@ -12,70 +17,36 @@ const KizukiListContainerMainDivBox = styled.div`
    
 `
 
-const KizukiListContainer = () => {
+const KizukiListContainer = ({Kizuki_Division_State}) => {
+    
+    const { team_code } = useParams();
+    
+    const [Kizuki_List_State, setKizuki_List_State] = useState([]);
+
+
+    const Kizuki_list_Getting = async () => {
+        const Kizuki_list_Getting_Axios = await request.get(`/LocalPim/Kizuki_list_Getting`, {
+            params: {
+               team_code
+           }
+        })
+        console.log(Kizuki_list_Getting_Axios)
+        if (Kizuki_list_Getting_Axios.data.dataSuccess) {
+            setKizuki_List_State(Kizuki_list_Getting_Axios.data.Kizuki_list_Getting_Rows);
+        }
+    }
+
+    useEffect(() => {
+        if(team_code) Kizuki_list_Getting(); 
+    },[team_code])
+
     return (
         <KizukiListContainerMainDivBox>
             <div><input type="text" placeholder="Search..."></input></div>
-            <div >
-                <fieldset className="Kizuki_List_Container">
-                    <legend>
-                        <h2>미발표</h2>
-                    </legend>
-                    <div>
-                    <div>
-                        <Link to='/KIZUKI_Notepad/Closer/ad'>
-                            <KizukiListContent></KizukiListContent>
-                        </Link>
-                            <KizukiListContent></KizukiListContent>
-                            <KizukiListContent></KizukiListContent>
-                        </div>
-                            <div style={{textAlign:'end'}}>
-                                    ...더보기
-                            </div>
-                        </div>
-                        
-                </fieldset>
-                 <fieldset className="Kizuki_List_Container">
-                    <legend>
-                        <h2>발표 완료</h2>
-                    </legend>
-                    <div>
-                    <div>
-                        <Link to='/KIZUKI_Notepad/Closer/ad'>
-                            <KizukiListContent></KizukiListContent>
-                        </Link>
-                            <KizukiListContent></KizukiListContent>
-                            <KizukiListContent></KizukiListContent>
-                        </div>
-                            <div style={{textAlign:'end'}}>
-                                    ...더보기
-                            </div>
-                        </div>
-                        
-                </fieldset>
-                 <fieldset className="Kizuki_List_Container">
-                    <legend>
-                        <h2>폐기 처리</h2>
-                    </legend>
-                    <div>
-                    <div>
-                        <Link to='/KIZUKI_Notepad/Closer/ad'>
-                            <KizukiListContent></KizukiListContent>
-                        </Link>
-                            <KizukiListContent></KizukiListContent>
-                            <KizukiListContent></KizukiListContent>
-                        </div>
-                            <div style={{textAlign:'end'}}>
-                                    ...더보기
-                            </div>
-                        </div>
-                        
-                </fieldset>
+          
             
-            </div>
-            
-            
-            
+            <KizukiList Kizuki_Division_State={Kizuki_Division_State} Kizuki_List_State={Kizuki_List_State}></KizukiList>
+          
         </KizukiListContainerMainDivBox>
     )
 }

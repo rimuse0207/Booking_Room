@@ -40,7 +40,7 @@ const TeamRoomListMainPage = () => {
         <TeamRoomListMainPageMainDivBox>
             <h2>PIM팀 선택</h2>
             {Team_List.map((list) => {
-                return <Link to='/KIZUKI_Notepad/Closer' key={list.kizuki_notepad_team_info_key}>
+                return <Link to={`/KIZUKI_Notepad/${list.kizuki_notepad_team_info_key}`} key={list.kizuki_notepad_team_info_key}>
                 <ListContainer data={list}></ListContainer>
             </Link>
             })}

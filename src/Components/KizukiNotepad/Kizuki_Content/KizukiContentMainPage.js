@@ -5,6 +5,10 @@ import ContentContainer from './Content_Container/ContentContainer';
 import { BsArrow90DegUp } from "react-icons/bs";
 import { FaArrowLeft } from "react-icons/fa";
 import { useHistory } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
+import { request } from '../../../API';
+import { useEffect } from 'react';
+import { useState } from 'react';
 
 
 
@@ -40,13 +44,38 @@ const KizukiListMainPageMainDivBox = styled.div`
 `
 
 const KizukiContentMainPage = () => {
+    const { team_code ,kizuki_code} = useParams();
     const history = useHistory();
-    const dada = [1,2,3,4];
+    const [Kizuki_Content, setKizuki_Content] = useState([]);
+    
+    const Get_Kizuki_list_Data = async () => {
+        try {
+            
+            const Get_Kizuki_list_Data_Axios = await request.get('/LocalPim/Get_Kizuki_list_Data', {
+                params: {
+                    kizuki_code
+                }
+            })
+
+            if (Get_Kizuki_list_Data_Axios.data.dataSuccess) {
+                console.log(Get_Kizuki_list_Data_Axios);
+                setKizuki_Content(Get_Kizuki_list_Data_Axios.data.Get_Kizuki_list_Data_Rows)
+            }
+
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    useEffect(() => {
+        Get_Kizuki_list_Data();
+    },[])
+
     return (
         <KizukiListMainPageMainDivBox>
             <NavigationMainPage TitleName="KIZUKI 노트"></NavigationMainPage>
              <div className="List_Move_Container">
-                <h2 className="List_Move" onClick={() => history.push('/KIZUKI_Notepad/Closer')}>
+                <h2 className="List_Move" onClick={() => history.push(`/KIZUKI_Notepad/${team_code}`)}>
                     <FaArrowLeft></FaArrowLeft>
                 </h2>
                 <h2>Closer 팀</h2>
@@ -57,10 +86,11 @@ const KizukiContentMainPage = () => {
                     <button>발표</button>
                     <button>폐기</button>
                 </div>
-                {dada.map((list,j) => {
+                {Kizuki_Content.map((list, j) => {
+
                     return <div className="Content_Container" style={{width:`calc(100% - ${j*35}px)`,marginLeft:`${j * 35 }px`,marginTop:`${j * 3}px`}}>
-                    <ContentContainer></ContentContainer>
-                        { j === dada.length -1 ?<div></div>:<div className="Arrow_Icons_Cotainer">
+                    <ContentContainer list={list}></ContentContainer>
+                        { j === Kizuki_Content.length -1 ?<div></div>:<div className="Arrow_Icons_Cotainer">
                         <BsArrow90DegUp></BsArrow90DegUp>
                     </div> }
                 </div>
