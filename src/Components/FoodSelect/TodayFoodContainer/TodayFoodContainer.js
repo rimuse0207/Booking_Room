@@ -196,7 +196,7 @@ const TodayFoodContainer = ({ history }) => {
     return (
         <TodayFoodContainerMainDivBox>
             <NavigationMainPage TitleName="식단표"></NavigationMainPage>
-            <WeekFoodCount></WeekFoodCount>
+            {/* <WeekFoodCount></WeekFoodCount> */}
             <div className="ScrollView_Menu_Show">
                 {TodayFoodState ? (
                     <div className="FoodMenuShow">

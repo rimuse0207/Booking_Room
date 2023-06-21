@@ -1,28 +1,24 @@
-import React, { useEffect, useMemo, useRef } from "react";
-import styled from "styled-components";
-import { IoClose } from "react-icons/io5";
-import { useState } from "react";
-import Select from "react-select";
-import { request } from "../../../API";
-import uuid from "react-uuid";
-import moment from 'moment';
-import { useSelector } from "react-redux";
-import 'react-quill/dist/quill.snow.css';
+import React, { useState } from 'react';
+import styled from 'styled-components';
+import { IoClose } from 'react-icons/io5';
 import ReactQuill from 'react-quill';
+import { request } from '../../../../API';
+import { useSelector } from 'react-redux';
+import moment from "moment"; 
+import uuid from 'react-uuid';
+import 'react-quill/dist/quill.snow.css';
 import Quill from 'quill';
 import ImageResize from '@looop/quill-image-resize-module-react';
 import QuillImageDropAndPaste from 'quill-image-drop-and-paste'
-import { toast } from "../../ToasMessage/ToastManager";
+import { useRef } from 'react';
+import { useMemo } from 'react';
 
 Quill.register('modules/ImageResize', ImageResize);
 Quill.register('modules/imageDropAndPaste', QuillImageDropAndPaste)
 
-const KizukiWriteMainPageMainDivBox = styled.div`
 
-    position:relative;
-
-    
-
+const KizukiContentModalMainBox = styled.div`
+     position:relative;
     .Close_Icons{
         position:absolute;
         top:0px;
@@ -34,7 +30,21 @@ const KizukiWriteMainPageMainDivBox = styled.div`
     }
 
 
-    .Kizuki_Title_Container{
+    .quill {
+        min-height:350px;
+        .ql-container,.ql-editor {
+            min-height:350px;
+            font-family: 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif !important;
+            
+        }
+    }
+    .Save_Button_Container{
+        margin-top:50px;
+        margin-bottom:50px;
+        text-align:end;
+    }
+
+  .Kizuki_Title_Container{
         width:100%;
         max-width:600px;
         height:40px;
@@ -51,28 +61,7 @@ const KizukiWriteMainPageMainDivBox = styled.div`
         }
 
     }
-    .Kizuki_User_Container{
-          margin-top:10px;
-        margin-bottom:10px;
-        width:100%;
-        max-width:600px;
-        height:40px;
-    }
-
-
-
-    .quill {
-        min-height:350px;
-        .ql-container,.ql-editor {
-            min-height:350px;
-            font-family: 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif !important;
-            
-        }
-    }
-    .Save_Button_Container{
-        margin-top:50px;
-        margin-bottom:50px;
-        button{
+ button{
         width:50px;
         height:50px;
         border-radius:10px;
@@ -85,21 +74,18 @@ const KizukiWriteMainPageMainDivBox = styled.div`
             color:#368;
         }
     }
-    }
 `
 
-const KizukiWriteMainPage = ({ OnClose, team_code }) => {
+  
+
+const KizukiContentModal = ({ OnClose, Select_Kizuki }) => {
     const quillRef = useRef();
-    const [New_Kizuki, setNew_Kizuki] = useState("");
-    const [User_Select_Options, setUser_Select_Options] = useState([]);
-    const [User_Select, setUser_Select] = useState(null);
-    const [Kizuki_Title, setKizuki_Title] = useState('');
     const Login_Info = useSelector((state) => state.LoginInfoDataRedux.Infomation);
-    const onChange = (content, delta, source, data) => {
-        setNew_Kizuki(data);
-    };
-
-
+    const [Content, setContent] = useState(`
+    ${Select_Kizuki.kizuki_notepad_kizuki_content_main}
+    `)
+    const [Change_Title, setChange_Title] = useState(Select_Kizuki.kizuki_notepad_kizuki_content_title);
+    
     const HandlePaste = async(imageDataUrl, type, imageData) => {
        const blob = imageData.toBlob()
         const file = imageData.toFile()
@@ -215,105 +201,58 @@ const KizukiWriteMainPage = ({ OnClose, team_code }) => {
         'background',
     ];
 
-    const Kizuki_New_Write = async() => {
-        try {
-            
-            if (!Kizuki_Title || !User_Select) {
-                 toast.show({
-                    title: `공란을 전부 적어주세요.`,
-                    successCheck: false,
-                    duration: 6000,
-                });
-            
-                return;
-                
-            }
+    const onChange = (data) => {
+        setContent(data);
+    }
 
-            const Random_code = uuid().split("-");
-            const Random_Key = `${moment().format("YYYYMMDD")}_${Random_code[0]}${Random_code[1]}`
+    const Kizuki_Add_Write = async () => {
+        try {
             const Random_Content_code = uuid().split("-");
             const Random_key_content = `${moment().format("YYYYMMDD")}_${Random_Content_code[0]}${Random_Content_code[1]}`
 
-            const Kizuki_New_Write_Axios = await request.post('/LocalPim/Kizuki_New_Write', {
-                New_Kizuki,
-                Random_Key,
-                User_Select,
-                team_code,
-                Kizuki_Title,
-                write_id: Login_Info.Login_id,
-                Random_key_content
+            const Kizuki_Add_Write_Axios = await request.post('/LocalPim/Kizuki_Add_Write', {
+                Content,
+                id: Login_Info.Login_id,
+                Random_key_content,
+                Select_Kizuki,
+                Change_Title
+                
             })
-            if (Kizuki_New_Write_Axios.data.dataSuccess) {
+            if (Kizuki_Add_Write_Axios.data.dataSuccess) {
                 OnClose();
             }
-        } catch (error) {
-            console.log(error);
-        }
-    }
-
-    
-
-   
-    
-    const Pim_Preson_Getting = async () => {
-        try {
             
-            const Pim_Preson_Getting_Axios = await request.get('/LocalPim/Pim_Preson_Getting');
-            if (Pim_Preson_Getting_Axios.data.dataSuccess) {
-                setUser_Select_Options(Pim_Preson_Getting_Axios.data.Select_Data)
-            }
-
         } catch (error) {
             console.log(error);
         }
     }
-
-    useEffect(() => {
-        Pim_Preson_Getting(); 
-    },[])
-
 
     return (
-        <KizukiWriteMainPageMainDivBox>
-            <div className="Close_Icons" onClick={()=>OnClose()}>
+        <KizukiContentModalMainBox>
+              <div className="Close_Icons" onClick={()=>OnClose()}>
                     <IoClose></IoClose>
             </div>
-            <div>
-                <div className="Kizuki_Title_Container">
-                    <input placeholder="KIZUKI 제목..." value={Kizuki_Title} onChange={(e)=>setKizuki_Title(e.target.value)}></input>
+            
+            <div className="Kizuki_Title_Container">
+                    <input placeholder="KIZUKI 제목..." value={Change_Title} onChange={(e)=>setChange_Title(e.target.value)}></input>
                 </div>
-                <div className="Kizuki_User_Container">
-                     <Select
-                        value={User_Select}
-                        onChange={e => setUser_Select(e)}
-                        name="colors"
-                        options={User_Select_Options}
-                        className="basic-multi-select"
-                        classNamePrefix="select"
-                        isClearable={true}
-                        placeholder={"발안자 선택"}
-                    />
-                </div>
-                <div>
-                    <ReactQuill
+            
+            
+               <ReactQuill
                             ref={quillRef}
                             style={{ fontFamily:"'sans-serif', 'serif', 'monospace', 'cursive', 'fantasy'" }}
                             theme="snow"
                             modules={modules}
                             formats={formats}
-                            value={New_Kizuki}
+                            value={Content}
                             onChange={(content, delta, source, editor) => onChange(content, delta, source,editor.getHTML())}
                             
                         />
-                </div>
-                
-
-            </div>
             <div className="Save_Button_Container">
-                <button onClick={() => Kizuki_New_Write()}>등 록</button>
+                <button onClick={() => Kizuki_Add_Write()}>추가 등록</button>
             </div>
-        </KizukiWriteMainPageMainDivBox>
+        </KizukiContentModalMainBox>
     )
 }
 
-export default KizukiWriteMainPage;
+export default KizukiContentModal;

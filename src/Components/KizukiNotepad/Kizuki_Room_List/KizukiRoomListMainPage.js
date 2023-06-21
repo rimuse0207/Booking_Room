@@ -57,10 +57,40 @@ const KizukiRoomListMainPage = () => {
     const [Kizuki_List_State, setKizuki_List_State] = useState([]);
     const [FloatingMenuOnCheck, setFloatingMenuOnCheck] = useState(true);
     const [AddDataModalIsOpen, setAddDataModalIsOpen] = useState(false);
+    const [Search_kizuki, setSearch_kizuki] = useState("");
 
  const OnClose = () => {
-        setAddDataModalIsOpen(false);
+    setAddDataModalIsOpen(false);
+    Kizuki_Division_Data_Getting()  
+    Kizuki_list_Getting();
     };
+  
+    useEffect(() => {
+        if (AddDataModalIsOpen) {
+            document.body.style.overflow = 'hidden'; // 스크롤 방지        
+        } else {
+            document.body.style.overflow = ''; // 스크롤 방지 스타일 제거 
+        }   
+    
+  }, [AddDataModalIsOpen]);
+
+    const Handle_Submit_For_Search = (e) => {
+        e.preventDefault();
+        Kizuki_list_Getting();
+    }
+
+
+    const Kizuki_list_Getting = async () => {
+        const Kizuki_list_Getting_Axios = await request.get(`/LocalPim/Kizuki_list_Getting`, {
+            params: {
+                team_code,
+                Search_kizuki
+           }
+        })
+        if (Kizuki_list_Getting_Axios.data.dataSuccess) {
+            setKizuki_List_State(Kizuki_list_Getting_Axios.data.Kizuki_list_Getting_Rows);
+        }
+    }
 
 
     const Kizuki_Division_Data_Getting = async () => {
@@ -83,7 +113,8 @@ const KizukiRoomListMainPage = () => {
 
     useEffect(() => {
         if (team_code) {
-            Kizuki_Division_Data_Getting()      
+            Kizuki_Division_Data_Getting()  
+            Kizuki_list_Getting();
         }
        
     },[team_code])
@@ -94,9 +125,9 @@ const KizukiRoomListMainPage = () => {
                 <h2 className="List_Move" onClick={() => history.push('/KIZUKI_Notepad')}>
                     <FaArrowLeft></FaArrowLeft>
                 </h2>
-                <h2>Closer 팀</h2>
+                <h2>팀 조회</h2>
             </div>
-            <KizukiListContainer Kizuki_Division_State={Kizuki_Division_State}></KizukiListContainer>
+            <KizukiListContainer Kizuki_Division_State={Kizuki_Division_State} Kizuki_List_State={Kizuki_List_State} Search_kizuki={Search_kizuki} setSearch_kizuki={(data)=>setSearch_kizuki(data)} Handle_Submit_For_Search={(e)=>Handle_Submit_For_Search(e)}></KizukiListContainer>
 
             <div className="FloatingMenu_Container">
                 <FloatingMenu slideSpeed={500} direction="up" spacing={8} isOpen={FloatingMenuOnCheck}>
@@ -116,8 +147,13 @@ const KizukiRoomListMainPage = () => {
                 </FloatingMenu>
             </div>
 
+            <div style={{marginBottom:"50px",marginTop:"50px"}}>
+
+            </div>
+            <div></div>
+
             <Modal isOpen={AddDataModalIsOpen} style={customStyles} contentLabel="Select Modal">
-                <KizukiWriteMainPage OnClose={()=>OnClose()}></KizukiWriteMainPage>
+                <KizukiWriteMainPage OnClose={()=>OnClose()} team_code={team_code}></KizukiWriteMainPage>
             </Modal>
         </KizukiRoomListMainPageMainDivBox>
     )

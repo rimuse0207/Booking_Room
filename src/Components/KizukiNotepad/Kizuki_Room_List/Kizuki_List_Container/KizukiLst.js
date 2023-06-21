@@ -7,12 +7,32 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Kizuki_Show_Count_Change_Func } from '../../../../Models/Kizuki_Show_Count_Reducer/KizukiShowCountReducer';
 import { useParams } from 'react-router-dom';
+import styled from 'styled-components';
+
+const KizukiListMainDivBox = styled.div`
+    
+    .MoreSomthingRoom_Container{
+        button{
+            border:none;
+            font-size:1.3em;
+            color:gray;
+            background-color:#fff;
+            margin-left:30px;
+            :hover{
+                cursor: pointer;
+                color:blue;
+            }
+        }
+    }
+
+
+`
 
 const KizukiList = ({ Kizuki_Division_State, Kizuki_List_State }) => {
+    const ScrollDown = useRef();
     const { team_code } = useParams();
     const dispatch = useDispatch();
     const showCounts = useSelector((state)=>state.KizukiShowCountRedux.showCounts)
-    //  const [showCounts, setShowCounts] = useState({});
         const groupedData = {};
 
         for (const division of Kizuki_Division_State) {
@@ -34,10 +54,13 @@ const KizukiList = ({ Kizuki_Division_State, Kizuki_List_State }) => {
       ...showCounts,
       [code]: (showCounts[code] || 0) + 3,
     }))
+
+       
+        
     };
 
     return (
-        <div>
+        <KizukiListMainDivBox>
             {Object.keys(groupedData).map((code) => {
                const division = groupedData[code];
                 const items = division.items ? division.items.slice(0, showCounts[code] ? showCounts[code] + 3 : 3) : [];
@@ -54,16 +77,19 @@ const KizukiList = ({ Kizuki_Division_State, Kizuki_List_State }) => {
                                     <Link to={`/KIZUKI_Notepad_List_Select/${team_code}/${item.kizuki_notepad_kizuki_list_key}`} key={item.kizuki_notepad_kizuki_list_indexs}>
                                         <KizukiListContent item={item}></KizukiListContent>
                                     </Link>
-                                 ))}
-                               {division.items.length > items.length && (
-                                <button onClick={() => handleItemClick(code)}>더 보기</button>
+                                ))}
+                                <div ref={ScrollDown}></div>
+                                {division.items.length > items.length && (
+                                    <div className="MoreSomthingRoom_Container" >
+                                        <button onClick={() => handleItemClick(code)}>...more</button>
+                                    </div>
                                 )}
                             </div>
                     </fieldset>
                 </div>
             );
             })}
-        </div>
+        </KizukiListMainDivBox>
     )
 }
 

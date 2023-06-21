@@ -14,38 +14,34 @@ const KizukiListContainerMainDivBox = styled.div`
         border:1px dashed black;
         padding:10px;
     }
+
+    .Search_Container{
+        input{
+            width:100%;
+            border:1px solid gray;
+            height:50px;
+            border-radius:10px;
+            padding-left:20px;
+            font-size:1.2em;
+        }
+    }
    
 `
 
-const KizukiListContainer = ({Kizuki_Division_State}) => {
+const KizukiListContainer = ({Kizuki_Division_State,Kizuki_List_State,Search_kizuki,setSearch_kizuki,Handle_Submit_For_Search}) => {
     
-    const { team_code } = useParams();
     
-    const [Kizuki_List_State, setKizuki_List_State] = useState([]);
-
-
-    const Kizuki_list_Getting = async () => {
-        const Kizuki_list_Getting_Axios = await request.get(`/LocalPim/Kizuki_list_Getting`, {
-            params: {
-               team_code
-           }
-        })
-        console.log(Kizuki_list_Getting_Axios)
-        if (Kizuki_list_Getting_Axios.data.dataSuccess) {
-            setKizuki_List_State(Kizuki_list_Getting_Axios.data.Kizuki_list_Getting_Rows);
-        }
-    }
-
-    useEffect(() => {
-        if(team_code) Kizuki_list_Getting(); 
-    },[team_code])
 
     return (
         <KizukiListContainerMainDivBox>
-            <div><input type="text" placeholder="Search..."></input></div>
+            <div className="Search_Container">
+                <form onSubmit={(e)=>Handle_Submit_For_Search(e)}>
+                    <input type="text" placeholder="Search..." value={Search_kizuki} onChange={(e) => setSearch_kizuki(e.target.value)}></input>
+                </form>
+            </div>
           
             
-            <KizukiList Kizuki_Division_State={Kizuki_Division_State} Kizuki_List_State={Kizuki_List_State}></KizukiList>
+            <KizukiList Kizuki_Division_State={Kizuki_Division_State} Kizuki_List_State={Kizuki_List_State} Search_kizuki={Search_kizuki}></KizukiList>
           
         </KizukiListContainerMainDivBox>
     )

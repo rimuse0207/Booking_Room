@@ -9,6 +9,7 @@ import { useLayoutEffect } from 'react';
 import { useSelector } from 'react-redux';
 import OrganChartMainPage from './OrganChart/OrganChartMainPage';
 import { request } from '../../API';
+import { toast } from '../ToasMessage/ToastManager';
 
 const UserSelectMainPageMainDivBox = styled.div`
     position: absolute;
@@ -111,11 +112,13 @@ const UserSelectMainPage = () => {
 
 
     const HandleSumitData = async (e) => {
+        e.preventDefault();
         if (!LoginInfo.Login_token) {
+            
             return;
         }
         try {
-            e.preventDefault();
+            
 
             
             const Get_User_Info_Data_Axios = await request.get('/users/Get_User_Info_Data_Select', {

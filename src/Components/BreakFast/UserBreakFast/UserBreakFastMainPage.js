@@ -12,6 +12,7 @@ import axios from 'axios';
 import { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { request } from '../../../API';
+import { useRef } from 'react';
 
 const UserBreakFastMainPageMainDivBox = styled.div`
     border: 1px solid black;
@@ -70,6 +71,7 @@ const UserBreakFastMainPageMainDivBox = styled.div`
 `;
 
 const UserBreakFastMainPage = () => {
+    const ScrollFocus = useRef();
     const history = useHistory();
     const LoginInfo = useSelector(state => state.LoginInfoDataRedux.Infomation);
     const [SelectBreakFast, setSelectBreakFast] = useState([]);
@@ -82,6 +84,14 @@ const UserBreakFastMainPage = () => {
     });
 
     const [SubmitOneClickChecking, setSubmitOneClickChecking] = useState(false);
+
+
+    const HandleFocusOn = () => {
+        if (ScrollFocus.current) {
+            
+        }
+    }
+
 
     const handleChangeData = data => {
         try {
@@ -235,7 +245,7 @@ const UserBreakFastMainPage = () => {
                         <input value={LoginInfo.Login_name} readOnly></input>
                     </div>
 
-                    <div style={{ marginBottom: '20px' }}>
+                    <div style={{ marginBottom: '20px' }} onFocus={()=>{HandleFocusOn()}}>
                         <Select
                             // value={SurvayState.FoodSelect}
                             onChange={e => handleChangeData(e)}
@@ -244,6 +254,8 @@ const UserBreakFastMainPage = () => {
                             options={BreakFastList}
                             className="basic-multi-select"
                             classNamePrefix="select"
+                            isReadOnly={true}
+                            isSearchable={false}
                         />
                     </div>
                     {SelectBreakFast.length > 0 ? (
@@ -289,7 +301,7 @@ const UserBreakFastMainPage = () => {
                         <></>
                     )}
 
-                    <div style={{ marginTop: '50px' }}>
+                    <div style={{ marginTop: '50px' }} ref={ScrollFocus}>
                         <h4>문의사항</h4>
                         <textarea
                             placeholder="문의사항 또는 건의사항은 작성 부탁드립니다."
