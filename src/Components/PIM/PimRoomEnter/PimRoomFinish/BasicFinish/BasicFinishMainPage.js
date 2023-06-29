@@ -8,13 +8,22 @@ import axios from 'axios';
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { request } from '../../../../../API';
-
+import { FaFileExcel } from "react-icons/fa";
+import { BrowserView, MobileView } from 'react-device-detect';
 const BasicFinishMainPageMainDivBox = styled.div`
     .topyo_money_container {
         background: lightgray;
         padding-top: 10px;
         border-radius: 10px;
         padding-bottom: 10px;
+    }
+    position:relative;
+    .Excel_Download_Container{
+        position:absolute;
+        top:10px;
+        right:10px;
+        font-size:2em;
+        color:green;
     }
 `;
 
@@ -26,6 +35,27 @@ const BasicFinishMainPage = ({ Room_Keys }) => {
         { title: '유효한 투표금액은 자기자신에게 투표한 금액을 제외한 투표금액입니다.' },
     ]);
     const [MatchState, setMatchState] = useState([]);
+
+
+    const Handle_Excel_Download_Batting_Data = async () => {
+        try {
+            
+            const Handle_Excel_Download_Batting_Data_Axios = await request.get(`/LocalPim/Handle_Excel_Download_Batting_Data`, {
+                params: {
+                    Room_Keys,
+                    ID: LoginInfo.Login_id,
+                },
+            })
+
+            if (Handle_Excel_Download_Batting_Data_Axios.data.dataSuccess) {
+                console.log(Handle_Excel_Download_Batting_Data_Axios)
+            }
+
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
 
     const getData = async () => {
         try {
@@ -46,11 +76,18 @@ const BasicFinishMainPage = ({ Room_Keys }) => {
 
     useEffect(() => {
         getData();
+        
     }, []);
 
     return (
         <BasicFinishMainPageMainDivBox>
             <RoomNav Attention={Attention}></RoomNav>
+            <BrowserView>
+                <div className="Excel_Download_Container" onClick={()=>Handle_Excel_Download_Batting_Data()}>
+                    <FaFileExcel></FaFileExcel>
+                </div>
+            </BrowserView>
+            
             <div className="Fight_Box">
                 <div className="Fighter_Team_Division">
                     <h3 style={{ color: 'blue' }}>Blue 팀</h3>

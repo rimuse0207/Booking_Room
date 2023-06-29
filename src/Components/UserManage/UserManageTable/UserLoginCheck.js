@@ -4,9 +4,10 @@ import styled from "styled-components";
 import { request } from "../../../API";
 import { useState } from "react";
 import moment from "moment";
-import {IoIosArrowBack,IoIosArrowForward} from "react-icons/io"
+import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io"
+import { FaFileExcel } from "react-icons/fa";
 
-const UserLoginCheckMainDivBox = styled.div`
+export const UserLoginCheckMainDivBox = styled.div`
 .Date_Show_Click_Main_Container {
         text-align: center;
         display: flex;
@@ -82,6 +83,22 @@ const UserLoginCheck = () => {
     const [Month_Date, setMonth_Date] = useState(moment().format("YYYY-MM"));
     const [Login_Check_Data, setLogin_Check_Data] = useState([]);
 
+    const HandleClickExcelDownload = async () => {
+        try {
+            const Login_User_Data_Checking_Excel_Download_Axios = await request.get('/users/Login_User_Data_Checking_Excel_Download', {
+                params: {
+                    Month_Date
+                }
+            })
+            if (Login_User_Data_Checking_Excel_Download_Axios.data.dataSuccess) {
+                window.open(`${process.env.REACT_APP_DB_HOST}/${Login_User_Data_Checking_Excel_Download_Axios.data.URL}`)
+            }
+
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     const Login_User_Data_Checking = async () => {
         try {
             
@@ -91,7 +108,6 @@ const UserLoginCheck = () => {
                 }
             })
             if(Login_User_Data_Checking_Axios.data.dataSuccess){
-                console.log(Login_User_Data_Checking_Axios);
                 setLogin_Check_Data(Login_User_Data_Checking_Axios.data.Login_User_Data_Checking_Rows);
 
             }
@@ -107,6 +123,13 @@ const UserLoginCheck = () => {
 
     return (
         <UserLoginCheckMainDivBox>
+            <div>
+                <div style={{ textAlign: "end",marginRight:"30px" }}>
+                    <span style={{color:"green",fontSize:"2em"}} onClick={()=>HandleClickExcelDownload()}>
+                        <FaFileExcel></FaFileExcel>
+                    </span>
+                </div>
+            </div>
              <div style={{ textAlign: 'center', position: 'relative' }}>
                 <div className="Date_Show_Click_Main_Container">
                     <div
@@ -143,7 +166,7 @@ const UserLoginCheck = () => {
                             <td>{j + 1}</td>
                             <td>{list.brity_works_login_access_info_id}</td>
                             <td>{list.brity_works_login_access_info_name}</td>
-                            <td>{moment( list.brity_works_login_access_info_date).format("YYYY-MM-DD HH:mm:ss")}</td>
+                            <td>{moment( list.brity_works_login_access_info_date).format("YYYY-MM-DD HH:mm")}</td>
                         </tr>
                     })}
                 </tbody>

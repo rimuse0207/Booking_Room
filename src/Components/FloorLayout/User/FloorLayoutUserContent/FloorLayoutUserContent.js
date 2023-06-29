@@ -34,6 +34,16 @@ const FloorLayoutUserContentMainDivBox = styled.div`
             width: 100%;
             height: 100%;
             text-align: center;
+            
+            .Chair{
+                position:relative;
+            }
+            .Chair_container{
+                position:absolute;
+                top:-30px;
+                left:-10px;
+            }
+
             .User_Working_Checking {
                 width: 60%;
                 height: 2px;
@@ -99,6 +109,8 @@ const FloorLayoutUserContent = ({ PlaceState, setUserSelect, UserSelect }) => {
         e.stopPropagation();
         if (type === 'UserSelect' && data.user_id) {
             setUserSelect(data);
+        } else if ( data.type === 'chair') {
+            window.open("/2021Civil_5_4_FireExtinguisher.mp4")
         } else {
             setUserSelect(null);
         }
@@ -121,9 +133,9 @@ const FloorLayoutUserContent = ({ PlaceState, setUserSelect, UserSelect }) => {
                                             ? UserSelect?.user_id === list.user_id
                                                 ? '1px solid #368'
                                                 : ''
-                                            : '2px solid darkgray'
+                                            : list.type==="chair"?'1px solid red':"2px solid darkgray"
                                     }`,
-                                    backgroundColor: `${UserSelect?.user_id === list.user_id ? 'lightgray' : ''}`,
+                                    backgroundColor: `${UserSelect?.user_id === list.user_id ? 'lightgray' : list.type==='chair'?"red":""}`,
                                     color: `${UserSelect?.user_id === list.user_id ? '#368' : ''}`,
                                 }}
                                 onClick={e => handleClickUser(e, list, 'UserSelect')}
@@ -134,7 +146,7 @@ const FloorLayoutUserContent = ({ PlaceState, setUserSelect, UserSelect }) => {
                                             {list?.team}
                                         </div>
                                     ) : (
-                                        <div></div>
+                                            <div className="Chair">{ list.type==='chair'?<div className="Chair_container">소화기</div>:<div></div>}</div>
                                     )}
                                     {list.name && list.type === 'table' ? (
                                         <div

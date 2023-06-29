@@ -4,6 +4,11 @@ import Draggable from 'react-draggable';
 import { TiDelete } from 'react-icons/ti';
 
 const ChairPickerMainDivBox = styled.div`
+
+    .box{
+            background-color:red !important;
+            border:1px solid red;
+    }
     .delete_button {
         display: none;
     }
@@ -13,6 +18,7 @@ const ChairPickerMainDivBox = styled.div`
             position: absolute;
             top: -15px;
             right: -15px;
+            
             :hover {
                 cursor: pointer;
                 color: red;

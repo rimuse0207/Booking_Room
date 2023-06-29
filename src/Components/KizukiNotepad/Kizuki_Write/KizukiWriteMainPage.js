@@ -13,9 +13,27 @@ import Quill from 'quill';
 import ImageResize from '@looop/quill-image-resize-module-react';
 import QuillImageDropAndPaste from 'quill-image-drop-and-paste'
 import { toast } from "../../ToasMessage/ToastManager";
+import quillTable from "quill-table";
+import './quill.table.css';
 
 Quill.register('modules/ImageResize', ImageResize);
 Quill.register('modules/imageDropAndPaste', QuillImageDropAndPaste)
+
+Quill.register(quillTable.TableCell);
+Quill.register(quillTable.TableRow);
+Quill.register(quillTable.Table);
+Quill.register(quillTable.Contain);
+Quill.register('modules/table', quillTable.TableModule);
+
+const maxRows = 10;
+const maxCols = 5;
+const tableOptions = [];
+for (let r = 1; r <= maxRows; r++) {
+    for (let c = 1; c <= maxCols; c++) {
+        tableOptions.push('newtable_' + r + '_' + c);
+    }
+}
+
 
 const KizukiWriteMainPageMainDivBox = styled.div`
 
@@ -101,7 +119,6 @@ const KizukiWriteMainPage = ({ OnClose, team_code }) => {
 
 
     const HandlePaste = async(imageDataUrl, type, imageData) => {
-       const blob = imageData.toBlob()
         const file = imageData.toFile()
         const formData = new FormData()
         formData.append('image', file)
@@ -175,8 +192,8 @@ const KizukiWriteMainPage = ({ OnClose, team_code }) => {
             toolbar: {
                 handlers: { image: imageHandler, paste: HandlePaste },
                 onPaste: { image: HandlePaste },
-                
-               container: [
+                container: [
+                // [{table: tableOptions}, {table: 'append-row'}, {table: 'append-col'}],
                 // [{ font: ['arial', 'comic-sans', 'courier-new', 'georgia', 'helvetica', 'lucida'] }],
                 [{ header: [1, 2, false] }],
                 ['bold', 'italic', 'underline', 'strike', 'blockquote'],
@@ -186,7 +203,7 @@ const KizukiWriteMainPage = ({ OnClose, team_code }) => {
                 [{ color: [] }, { background: [] }], // dropdown with defaults from theme
                 ['clean'],
              ]},
-          
+          table:true,
          clipboard: {
             matchVisual: false, // 이벤트가 발생하도록 설정
             },

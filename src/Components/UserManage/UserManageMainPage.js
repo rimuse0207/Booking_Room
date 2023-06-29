@@ -8,11 +8,12 @@ import { IoCloseSharp } from 'react-icons/io5';
 import { BsPersonPlusFill } from 'react-icons/bs';
 import UserAddMainModal from './UserAddModal/UserAddMainModal';
 import UserLoginCheck from './UserManageTable/UserLoginCheck';
+import UserBookingCheck from './UserManageTable/UserBookingCheck';
 
 const UserManageMainPageMainDivBox = styled.div`
 .Nav_Menu_Container {
         display: flex;
-        max-width: 400px;
+        max-width: 800px;
         min-height: 50px;
         justify-content: space-between;
         align-items: center;
@@ -63,6 +64,10 @@ const UserManageMainPage = () => {
             Nav_Menu: '로그인 확인',
             Nav_Access: false,
         },
+           {
+            Nav_Menu: '월별 예약 확인',
+            Nav_Access: false,
+        },
     ]);
     const handleMoveToMenu = data => {
         setAdmin_Nav_Menu(
@@ -100,6 +105,8 @@ const UserManageMainPage = () => {
                     <UserAddMainModal key={list.Nav_Menu}></UserAddMainModal>
                 )  : list.Nav_Access && list.Nav_Menu === '로그인 확인' ? (
                     <UserLoginCheck key={list.Nav_Menu}></UserLoginCheck>
+                ) : list.Nav_Access && list.Nav_Menu === '월별 예약 확인' ? (
+                    <UserBookingCheck key={list.Nav_Menu}></UserBookingCheck>
                 ) : (
                     <div key={list.Nav_Menu}></div>
                 );
