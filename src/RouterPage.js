@@ -31,6 +31,8 @@ import KizukiRoomListMainPage from './Components/KizukiNotepad/Kizuki_Room_List/
 import KizukiContentMainPage from './Components/KizukiNotepad/Kizuki_Content/KizukiContentMainPage';
 import SelectWeekFoodCount from './Components/FoodSelect/TodayFoodContainer/SelectWeekFoodCount/SelectWeekFoodCount';
 import KizukiWriteMainPage from './Components/KizukiNotepad/Kizuki_Write/KizukiWriteMainPage';
+import VehicleOperationMainPage from './Components/VehicleOperation/VehicleOperationMainPage';
+import CarContact from './Components/Car_Contact/CarContact';
 
 const RouterPageMainContainer = styled.div``;
 
@@ -68,30 +70,40 @@ const RouterPage = () => {
             <CookiesProvider>
                 <BrowserRouter>
                     <Switch>
-                        <Route exact path="/" component={App}></Route>
                         <Route path="/Login_Page" component={LoginMainPage}></Route>
+                        {/* 회의실 관련 */}
+                        <Route exact path="/" component={App}></Route>
                         <Route exact path="/User_Select_or_Add/:UserId/:UserCompany" component={UserManageMainPage}></Route>
+                        {/* 식단 관련 */}
                         <Route exact path="/Today_Food" component={TodayFoodContainer}></Route>
                         <Route path="/Today_Food/SelectWeekFoodCount" component={SelectWeekFoodCount}></Route>
                         <Route path="/Food_Select" component={FoodSelectMainPage}></Route>
                         <Route path="/Food_Survay" component={SurvayContainer}></Route>
                         <Route path="/Admin_Image_Check" component={AdminImageShowMainPage}></Route>
+                        {/* 조식관련 */}
+                        <Route path="/BreakFast/UserSlect" component={UserBreakFastMainPage}></Route>
+                        <Route path="/BreakFast/Finished" component={UserApplyFinishedMainPage}></Route>
+                        <Route path="/Admin/BreakFast" component={AdminBreakFastMainPage}></Route>
+                        {/* 키즈키 노트 */}
                         <Route exact path="/KIZUKI_Notepad" component={KizukiNotepadMainPage} ></Route>
                         <Route exact path="/KIZUKI_Notepad/:team_code" component={KizukiRoomListMainPage} ></Route>
                         <Route path="/KIZUKI_Notepad_List_Select/:team_code/:kizuki_code" component={KizukiContentMainPage} ></Route>
                         <Route path="/KIZUKI_Notepad_Write" component={KizukiWriteMainPage}></Route>
+                        {/* PIM 로컬전 */}
                         <Route exact path="/PIM" component={PimMainContainer}></Route>
                         <Route path="/PIM/PIMApplyRoom" component={PimRoomApplyMainContainer}></Route>
                         <Route path="/PIM/RoomEnter/:Room_Keys/:Room_Title" component={PimRoomEnterContainer}></Route>
                         <Route path="/PIM/QRCode/:Room_keys/:Room_Title" component={PimQRCodeMaker}></Route>
-                        <Route path="/BreakFast/UserSlect" component={UserBreakFastMainPage}></Route>
-                        <Route path="/BreakFast/Finished" component={UserApplyFinishedMainPage}></Route>
-                        <Route path="/Admin/BreakFast" component={AdminBreakFastMainPage}></Route>
+                        {/* 자리배치도 */}
                         <Route exact path="/FloorLayout" component={FloorLayoutMainPage}></Route>
                         <Route path="/FloorLayout/AdminChange" component={FloorLayoutAdminMinPage}></Route>
+                        {/* 차량운행 */}
+                        <Route path="/VehicleOperaion" component={VehicleOperationMainPage}></Route>
+                        {/* 기타 */}
                         <Route path="/Info_Loading/cLCYwLMPxquhcvijjqwoewmqwoi/:id/:date/:company" component={SpamTrainingMainPage}></Route>
                         <Route path='/Users/OrganChart/MainPage/:token/:id/:name' component={OrganChartMainPage}></Route>
                         <Route path='/Defalult_MailSending/:purpose/:period/:person/:time/:count' component={MailSendingMainPage}></Route>
+                        <Route path="/cLCYwLMPxquhcvijjqwoewmqwoi/CarContact/cLCYwLMPxquhcvijjqwoewmqwoi/123989aus98zxkqnwmeqnmmbvao/:car_Target_ID/:car_User_ID" component={CarContact}></Route>
                     </Switch>
                 </BrowserRouter>
             </CookiesProvider>
