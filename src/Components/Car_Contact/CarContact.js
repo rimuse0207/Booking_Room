@@ -3,6 +3,9 @@ import styled from "styled-components";
 import { request } from "../../API";
 import { BsFillTelephoneOutboundFill } from "react-icons/bs";
 import {useParams} from 'react-router-dom'
+import { useDispatch, useSelector } from "react-redux";
+import { Loader_Check_For_False, Loader_Check_For_True } from "../../Models/LoaderCheckReducer/LoaderCheckReducer";
+import LoaderMainPage from "../Loader/LoaderMainPage";
 
 const CarContactMainDivBox = styled.div`
     text-align:center;
@@ -31,30 +34,42 @@ const CarContactMainDivBox = styled.div`
 `
 
 const CarContact = () => {
+    const dispatch = useDispatch();
     const {car_Target_ID,car_User_ID} = useParams();
-    const [PhoneNumber, setPhoneNumber] = useState(null);
+    const [PhoneNumber, setPhoneNumber] = useState("+82-31-639-9026");
+    const Loading = useSelector(state => state.LoaderCheckingRedux.loading);
     const Contact_Reservation = async () => {
         try {
-            
+            dispatch(Loader_Check_For_True());
             const Contact_Reservation_Axios = await request.get('/DepartmentRouter/Contact_Reservation', {
                 params: {
                     car_Target_ID,
                     car_User_ID
                 }
             });            
+            console.log(Contact_Reservation_Axios);
             if (Contact_Reservation_Axios.data.dataSuccess) {
                 if (Contact_Reservation_Axios.data.dataNothing) {
                     setPhoneNumber("+82-31-639-9026");
+                    dispatch(Loader_Check_For_False());
                 } else {
-                    setPhoneNumber(Contact_Reservation_Axios.data.User_Info_Gettings.mobile);
+                    if (Contact_Reservation_Axios.data.User_Info_Gettings.mobile) {
+                        setPhoneNumber(Contact_Reservation_Axios.data.User_Info_Gettings.mobile);    
+                    } else {
+                        setPhoneNumber("+82-31-639-9026");
+                    }
+                    
+                    dispatch(Loader_Check_For_False());
                 }
             } else {
-                    setPhoneNumber("+82-31-639-9026");
+                setPhoneNumber("+82-31-639-9026");
+                dispatch(Loader_Check_For_False());
             }
 
         } catch (error) {
             console.log(error);
-                setPhoneNumber("+82-31-639-9026");
+            setPhoneNumber("+82-31-639-9026");
+            dispatch(Loader_Check_For_False());
         }
     }
 
@@ -83,6 +98,8 @@ const CarContact = () => {
                 </div>
                
             </div>
+            {/* 로딩 컴포넌트 시작 */}
+            <LoaderMainPage loading={Loading}></LoaderMainPage>
         </CarContactMainDivBox>
 
     )
