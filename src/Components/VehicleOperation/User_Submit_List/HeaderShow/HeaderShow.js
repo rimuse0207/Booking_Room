@@ -1,0 +1,72 @@
+import React, { useState } from 'react';
+import styled from 'styled-components';
+import moment from 'moment';
+import { RiArrowRightSFill,RiArrowLeftSFill } from 'react-icons/ri';
+
+const HeaderShowMainDivBox = styled.div`
+    width:90%;
+    margin:0 auto;
+    background-color:#002FEF;
+    margin-top:20px;
+    color:#fff;
+    border-radius:20px;
+    font-weight:bolder;
+    margin-bottom:20px;
+    .Main_Header_Container{
+        display:flex;
+        .Sub_Header_Container{
+            text-align:center;
+            padding:15px;
+            .Date_Container{
+                display:flex;
+                justify-content:space-around;
+                margin-top: 10px;
+                font-size: 1.3em;
+            }
+            .Sub_Text_Container{
+                display:flex;
+                padding-left:20px;
+                align-items:center;
+                .Sub_Text_Title{
+                    margin-right:20px;
+                    color:lightgray;
+                }
+            }
+        }
+    }
+`
+
+const HeaderShow = () => {
+    const [NowDate, setNowDate] = useState(moment());
+    return (
+        <HeaderShowMainDivBox> 
+            <div className="Main_Header_Container">
+                <div className="Sub_Header_Container" style={{width:"30%"}}>
+                    <div style={{fontSize:"0.7em"}}>{ moment(NowDate).format("YYYY")}</div>
+                    <div className="Date_Container">
+                        <div>
+                            <RiArrowLeftSFill></RiArrowLeftSFill>
+                        </div>
+                        <div>{ moment(NowDate).format("M")}월</div>
+                        <div>
+                            <RiArrowRightSFill></RiArrowRightSFill>
+                        </div>
+                    </div>
+                </div>
+                <div className="Sub_Header_Container" style={{width:"70%",borderLeft:"1px solid black"}}>
+                    <div className="Sub_Text_Container">
+                        <div className="Sub_Text_Title">운행거리</div>
+                        <div className="Sub_Text_Content">79KM</div>
+                    </div>
+                    <div className="Sub_Text_Container" style={{marginTop:"15px"}}>
+                        <div className="Sub_Text_Title">운행기록</div>
+                        <div className="Sub_Text_Content">3건</div>
+                    </div>
+                </div>
+            </div>
+
+        </HeaderShowMainDivBox>
+    )
+}
+
+export default HeaderShow;

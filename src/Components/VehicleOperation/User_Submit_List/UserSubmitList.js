@@ -1,14 +1,18 @@
 import React from "react";
 import styled from "styled-components";
+import HeaderShow from "./HeaderShow/HeaderShow";
+import BodyShow from "./BodyShow/BodyShow";
+import CarSelector from "./CarSelector/CarSelector";
 
 const UserSubmitListMainDivBox = styled.div`
-    border:1px solid black;
 `
 
 const UserSubmitList = () => {
     return (
         <UserSubmitListMainDivBox>
-            
+            <CarSelector></CarSelector>
+            <HeaderShow></HeaderShow>
+            <BodyShow></BodyShow>
         </UserSubmitListMainDivBox>
     )
 }

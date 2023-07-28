@@ -38,7 +38,7 @@ const UserInputInfo = () => {
             <OilCost></OilCost>
             <RoadCost></RoadCost>
             <EtcCost></EtcCost>
-            <div>
+            <div style={{marginBottom:"50px",marginTop:"50px"}}>
                 <div className="Submit_Button">저장</div>
             </div>
                 

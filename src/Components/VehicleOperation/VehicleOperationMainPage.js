@@ -7,14 +7,21 @@ import UserInputInfo from "./User_Input_Info/UserInputInfo";
 
 const VehicleOperationMainPageMainDivBox = styled.div`
     background-color:#efefef;
+    .Show_Container{
+        max-width:1000px;
+        margin:0 auto;
+    }
 `
 
 const VehicleOperationMainPage = () => {
     return (
         <VehicleOperationMainPageMainDivBox>
             <NavigationMainPage TitleName="차량운행 일지"></NavigationMainPage>
-            <UserSubmitList></UserSubmitList>
-            <UserInputInfo></UserInputInfo>
+            <div className="Show_Container">
+                <UserSubmitList></UserSubmitList>
+            </div>
+            
+            {/* <UserInputInfo></UserInputInfo> */}
         </VehicleOperationMainPageMainDivBox>
     )
 }
