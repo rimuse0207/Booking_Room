@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { BsCircle,BsArrowDown } from "react-icons/bs";
+import { useSelector } from "react-redux";
 
 const BodyShowMainDivBox = styled.div`
     margin-top:20px;
@@ -69,9 +70,13 @@ const BodyShowMainDivBox = styled.div`
 `
 
 const BodyShow = () => {
+    const Vehicle_Operation_State = useSelector((state) => state.VehicleOperationShowContentReduxThunk.Vehicle_Operation_Getting_Data_State);
     return (
         <BodyShowMainDivBox>
             
+            {Vehicle_Operation_State?.Vehicle_Operation_State.map((list) => {
+                return <div></div>
+            })}
             <div className="Body_Container">
                 <div>
                     <div className="Body_Header_Container">
@@ -83,6 +88,9 @@ const BodyShow = () => {
 
                 <div className="Body_Main_Container">
                     <div className="Body_Box_Container">
+                         <div>
+                            <h4 style={{marginTop:"0px"}}>[법인] 14나 1878</h4>
+                        </div>
                         <div>
                             <div className="Content_Time_Explain_Container">
                                 <div className="Time">07:29</div>

@@ -20,8 +20,7 @@ const VehicleOperationMainPage = () => {
             <div className="Show_Container">
                 <UserSubmitList></UserSubmitList>
             </div>
-            
-            {/* <UserInputInfo></UserInputInfo> */}
+        
         </VehicleOperationMainPageMainDivBox>
     )
 }

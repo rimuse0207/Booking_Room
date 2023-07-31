@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { TbSquareMinus,TbSquarePlus } from "react-icons/tb";
 import { useDispatch, useSelector } from "react-redux";
-import { Vehicle_Operation_State_Change_Func } from "../../../../Models/VehicleOperationReducer/VehicleOperationReducer";
+import { Vehicle_Operation_State_Change_Func } from "../../../../Models/ReduxThunk/VehicleOperationReducer/VehicleOperationReducer";
 
 export const DistanceMainDivBox = styled.div`
     padding-bottom:10px;
@@ -53,7 +53,7 @@ const Distance = () => {
         if (place === 'start') {
                  const Change_Data = {
                     ...VehicleOperationState,
-                    company_car_start_dispatnce:e.target.value
+                    company_car_start_dispatnce:Number(e.target.value)
                 }
 
                 dispatch(Vehicle_Operation_State_Change_Func(Change_Data))     

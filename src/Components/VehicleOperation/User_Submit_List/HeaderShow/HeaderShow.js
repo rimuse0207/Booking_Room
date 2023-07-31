@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import moment from 'moment';
 import { RiArrowRightSFill,RiArrowLeftSFill } from 'react-icons/ri';
+import { useDispatch, useSelector } from 'react-redux';
+import { Vehicle_Operation_Date_Change_Func } from '../../../../Models/ReduxThunk/VehicleOperationShowContentRedux/VehicleOperationShowContent';
 
 const HeaderShowMainDivBox = styled.div`
     width:90%;
@@ -37,23 +39,35 @@ const HeaderShowMainDivBox = styled.div`
 `
 
 const HeaderShow = () => {
-    const [NowDate, setNowDate] = useState(moment());
+    const dispatch = useDispatch();
+    const Vehicle_Operation_State = useSelector((state) => state.VehicleOperationShowContentReduxThunk.Vehicle_Operation_Getting_Data_State);
+
+    const HandlePreDateChange = () => {
+        const Change_Date = moment(Vehicle_Operation_State.Vehilce_Selected_Date).subtract(1, 'months')
+        dispatch(Vehicle_Operation_Date_Change_Func(Change_Date))
+    }
+
+    const HandleNextDateChange = () => {
+         const Change_Date = moment(Vehicle_Operation_State.Vehilce_Selected_Date).add(1, 'months')
+        dispatch(Vehicle_Operation_Date_Change_Func(Change_Date))
+    }
+
     return (
         <HeaderShowMainDivBox> 
             <div className="Main_Header_Container">
-                <div className="Sub_Header_Container" style={{width:"30%"}}>
-                    <div style={{fontSize:"0.7em"}}>{ moment(NowDate).format("YYYY")}</div>
+                <div className="Sub_Header_Container" style={{width:"35%"}}>
+                    <div style={{fontSize:"0.7em"}}>{ moment(Vehicle_Operation_State.Vehilce_Selected_Date).format("YYYY")}</div>
                     <div className="Date_Container">
-                        <div>
+                        <div onClick={()=>HandlePreDateChange()}>
                             <RiArrowLeftSFill></RiArrowLeftSFill>
                         </div>
-                        <div>{ moment(NowDate).format("M")}월</div>
-                        <div>
+                        <div>{ moment(Vehicle_Operation_State.Vehilce_Selected_Date).format("M")}월</div>
+                        <div onClick={()=>HandleNextDateChange()}>
                             <RiArrowRightSFill></RiArrowRightSFill>
                         </div>
                     </div>
                 </div>
-                <div className="Sub_Header_Container" style={{width:"70%",borderLeft:"1px solid black"}}>
+                <div className="Sub_Header_Container" style={{width:"65%",borderLeft:"1px solid black"}}>
                     <div className="Sub_Text_Container">
                         <div className="Sub_Text_Title">운행거리</div>
                         <div className="Sub_Text_Content">79KM</div>

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import  Select  from 'react-select';
 import { useDispatch, useSelector } from "react-redux";
-import { Vehicle_Operation_State_Change_Func } from "../../../../Models/VehicleOperationReducer/VehicleOperationReducer";
+import { Vehicle_Operation_State_Change_Func } from "../../../../Models/ReduxThunk/VehicleOperationReducer/VehicleOperationReducer";
 
 export const PurposeMainDivBox = styled.div`
 

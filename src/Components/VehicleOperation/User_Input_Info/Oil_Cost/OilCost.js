@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { PurposeMainDivBox } from "../Purpose/Purpose";
 import { useDispatch, useSelector } from "react-redux";
-import { Vehicle_Operation_State_Change_Func } from "../../../../Models/VehicleOperationReducer/VehicleOperationReducer";
+import { Vehicle_Operation_State_Change_Func } from "../../../../Models/ReduxThunk/VehicleOperationReducer/VehicleOperationReducer";
 
 export const OilCostMainDivBox = styled.div`
     margin-top:10px;
@@ -35,7 +35,7 @@ const OilCost = () => {
     const HandleChangePlace = (e) => {
                  const Change_Data = {
                     ...VehicleOperationState,
-                    company_car_oil_cost:e.target.value
+                    company_car_oil_cost:Number(e.target.value)
                 }
 
                 dispatch(Vehicle_Operation_State_Change_Func(Change_Data))     

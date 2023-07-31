@@ -8,7 +8,7 @@ import { useState } from "react";
 import "react-datepicker/dist/react-datepicker.css";
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
-import { Vehicle_Operation_State_Change_Func } from "../../../../Models/VehicleOperationReducer/VehicleOperationReducer";
+import { Vehicle_Operation_State_Change_Func } from "../../../../Models/ReduxThunk/VehicleOperationReducer/VehicleOperationReducer";
 
 const DateMainDivBox = styled.div`
 background-color:#fff;

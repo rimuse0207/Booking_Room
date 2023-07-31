@@ -33,6 +33,8 @@ import SelectWeekFoodCount from './Components/FoodSelect/TodayFoodContainer/Sele
 import KizukiWriteMainPage from './Components/KizukiNotepad/Kizuki_Write/KizukiWriteMainPage';
 import VehicleOperationMainPage from './Components/VehicleOperation/VehicleOperationMainPage';
 import CarContact from './Components/Car_Contact/CarContact';
+import BreakfastAlert from './Components/BreakFast/Alert/BreakfastAlert';
+import VehicleOperationSubmitMainPage from './Components/VehicleOperation/VehicleOperationSubmit/VehicleOperationSubmitMainPage';
 
 const RouterPageMainContainer = styled.div``;
 
@@ -98,12 +100,15 @@ const RouterPage = () => {
                         <Route exact path="/FloorLayout" component={FloorLayoutMainPage}></Route>
                         <Route path="/FloorLayout/AdminChange" component={FloorLayoutAdminMinPage}></Route>
                         {/* 차량운행 */}
-                        <Route path="/VehicleOperaion" component={VehicleOperationMainPage}></Route>
+                        <Route exact path="/VehicleOperaion" component={VehicleOperationMainPage}></Route>
+                        <Route path="/VehicleOperaion/NewVehicleOperation/:company_car_epid" component={VehicleOperationSubmitMainPage}></Route>
+                        <Route path="/VehicleOperaion/NewVehicleOperation" component={VehicleOperationSubmitMainPage}></Route>
                         {/* 기타 */}
                         <Route path="/Info_Loading/cLCYwLMPxquhcvijjqwoewmqwoi/:id/:date/:company" component={SpamTrainingMainPage}></Route>
                         <Route path='/Users/OrganChart/MainPage/:token/:id/:name' component={OrganChartMainPage}></Route>
                         <Route path='/Defalult_MailSending/:purpose/:period/:person/:time/:count' component={MailSendingMainPage}></Route>
                         <Route path="/cLCYwLMPxquhcvijjqwoewmqwoi/CarContact/cLCYwLMPxquhcvijjqwoewmqwoi/123989aus98zxkqnwmeqnmmbvao/:car_Target_ID/:car_User_ID" component={CarContact}></Route>
+                        <Route path='/BreakFast/cLCYwLMPxquhcvijjqwoewmqwoi/cLCYwLMPxquhcvijjqwoewmqwoi/:Food_Data' component={BreakfastAlert}></Route>
                     </Switch>
                 </BrowserRouter>
             </CookiesProvider>

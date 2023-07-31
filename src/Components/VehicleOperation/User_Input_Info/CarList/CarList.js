@@ -7,7 +7,7 @@ import { useEffect } from "react";
 import { request } from "../../../../API";
 import { useParams } from "react-router-dom/cjs/react-router-dom.min";
 import { useDispatch, useSelector } from "react-redux";
-import {Vehicle_Operation_State_Change_Func} from "../../../../Models/VehicleOperationReducer/VehicleOperationReducer"
+import {Vehicle_Operation_Input_Content_Reduce_Thunk, Vehicle_Operation_State_Change_Func} from "../../../../Models/ReduxThunk/VehicleOperationReducer/VehicleOperationReducer"
 
 const CarListMainPage = styled.div`
 `
@@ -15,6 +15,7 @@ const CarListMainPage = styled.div`
 const CarList = () => {
     const dispatch = useDispatch();
     const VehicleOperationState = useSelector(state => state.VehicleOperationRedux.Vehicle_Operation_Input_State);
+    const LoginInfo = useSelector(state => state.LoginInfoDataRedux.Infomation);
     const {car_info } = useParams();
     const [CarList_State, setCarList_State] = useState([]);
 
@@ -32,8 +33,15 @@ const CarList = () => {
             }
         }
 
+        dispatch(Vehicle_Operation_Input_Content_Reduce_Thunk(e.value, LoginInfo.Login_id, Vehicle_Operation_State.company_car_use_date));
         dispatch(Vehicle_Operation_State_Change_Func(Change_Data))
     }
+
+      const Vehicle_Operation_State = useSelector((state) => state.VehicleOperationRedux.Vehicle_Operation_Input_State);
+    
+
+
+    
 
 
     const Car_Info_Data_Getting = async () => {
@@ -66,8 +74,8 @@ const CarList = () => {
                             classNamePrefix="select"
                             isReadOnly={true}
                             isSearchable={false}
-                        placeholder="선택바랍니다."
-                        value={VehicleOperationState.company_select}
+                            placeholder="선택바랍니다."
+                            value={VehicleOperationState.company_select}
                             />
                 </div>
                 <div style={{marginTop:"15px",lineHeight:"25px"}}>
