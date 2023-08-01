@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
 import NavigationMainPage from "../../Navigation/NavigationMainPage";
-import UserInputInfo from "../User_Input_Info/UserInputInfo";
+import UserInputInfo from "./UserInputInfo";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { Vehicle_Operation_Input_Content_Reduce_Thunk } from "../../../Models/ReduxThunk/VehicleOperationReducer/VehicleOperationReducer";
@@ -24,9 +24,9 @@ const VehicleOperationSubmitMainPage = () => {
     
 
 
-    useEffect(() => {           
-        dispatch(Vehicle_Operation_Input_Content_Reduce_Thunk(company_car_epid,LoginInfo.Login_id,Vehicle_Operation_State.company_car_use_date));
-    },[company_car_epid])
+    // useEffect(() => {           
+    //     dispatch(Vehicle_Operation_Input_Content_Reduce_Thunk(company_car_epid,LoginInfo.Login_id,Vehicle_Operation_State.company_car_use_date));
+    // },[company_car_epid])
 
     return (
         <VehicleOperationSubmitMainPageMainDivBox>

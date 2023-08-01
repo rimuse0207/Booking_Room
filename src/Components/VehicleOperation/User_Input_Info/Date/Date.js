@@ -9,6 +9,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
 import { Vehicle_Operation_State_Change_Func } from "../../../../Models/ReduxThunk/VehicleOperationReducer/VehicleOperationReducer";
+import { request } from "../../../../API";
 
 const DateMainDivBox = styled.div`
 background-color:#fff;
@@ -43,18 +44,59 @@ height:60px;
 const Date = () => {
     const dispatch = useDispatch();
     const VehicleOperationState = useSelector(state => state.VehicleOperationRedux.Vehicle_Operation_Input_State);
-    
+    const LoginInfo = useSelector(state => state.LoginInfoDataRedux.Infomation);
 
-       const handleChangeData = (e) => {
-        const Change_Data = {
+
+    const handleChangeData = async(e) => {
+
+        const Vehicle_Operation_Car_Change_Rendering_Axios = await request.get(`/DepartmentRouter/Vehicle_Operation_Car_Change_Rendering`, {
+            params: {
+                car_id:VehicleOperationState.company_car_epid ,
+                Login_id: LoginInfo.Login_id,
+                selcet_date: e,
+                company_car_erp_id:VehicleOperationState.company_car_erp_id
+            }
+        })
+        const Change_Datas = {
             ...VehicleOperationState,
-            company_car_use_date:e
+             company_car_keys:"",
+                        company_car_start_dispatnce:Vehicle_Operation_Car_Change_Rendering_Axios.data.Last_Distance,
+                        company_car_end_dispatnce:Vehicle_Operation_Car_Change_Rendering_Axios.data.Last_Distance,
+                        company_car_use_date:e
+        }
+        if (Vehicle_Operation_Car_Change_Rendering_Axios.data.dataSuccess) {
+            if (Vehicle_Operation_Car_Change_Rendering_Axios.data.Vehicle_Operation_Car_Change_Rendering_Rows.length > 0) {
+               const Change_Data = {
+                        ...VehicleOperationState,
+                     
+                        company_car_keys:Vehicle_Operation_Car_Change_Rendering_Axios.data.Vehicle_Operation_Car_Change_Rendering_Rows[0].company_input_list_keys,
+                        company_car_use_purpose_select: {
+                            value: Vehicle_Operation_Car_Change_Rendering_Axios.data.Vehicle_Operation_Car_Change_Rendering_Rows[0].company_input_list_purpose,
+                            label:Vehicle_Operation_Car_Change_Rendering_Axios.data.Vehicle_Operation_Car_Change_Rendering_Rows[0].company_input_list_purpose
+                        },
+                        company_car_start_place:Vehicle_Operation_Car_Change_Rendering_Axios.data.Vehicle_Operation_Car_Change_Rendering_Rows[0].company_input_start_history_place,
+                        company_car_end_place:Vehicle_Operation_Car_Change_Rendering_Axios.data.Vehicle_Operation_Car_Change_Rendering_Rows[0].company_input_end_history_place,
+                        company_car_start_dispatnce:Vehicle_Operation_Car_Change_Rendering_Axios.data.Last_Distance,
+                        company_car_end_dispatnce:Vehicle_Operation_Car_Change_Rendering_Axios.data.Last_Distance,
+                        company_car_oil_cost:Vehicle_Operation_Car_Change_Rendering_Axios.data.Vehicle_Operation_Car_Change_Rendering_Rows[0].company_input_list_oil_cost,
+                        company_car_road_cost:Vehicle_Operation_Car_Change_Rendering_Axios.data.Vehicle_Operation_Car_Change_Rendering_Rows[0].company_input_list_road_cost,
+                        company_car_etc_cost: Vehicle_Operation_Car_Change_Rendering_Axios.data.Vehicle_Operation_Car_Change_Rendering_Rows[0].company_input_list_etc_cost,
+                        company_car_use_date:e
+                }
+                dispatch(Vehicle_Operation_State_Change_Func(Change_Data))
+            } else {
+                dispatch(Vehicle_Operation_State_Change_Func(Change_Datas))    
+            }
+
+        } else {
+                dispatch(Vehicle_Operation_State_Change_Func(Change_Datas))
         }
 
-        dispatch(Vehicle_Operation_State_Change_Func(Change_Data))
+        
     }
 
-          const ExampleCustomInput = forwardRef(({ value, onClick }, ref) => (
+
+    const ExampleCustomInput = forwardRef(({ value, onClick }, ref) => (
         <button className="example-custom-input" onClick={onClick} ref={ref}>
             {value}
         </button>

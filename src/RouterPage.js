@@ -34,7 +34,7 @@ import KizukiWriteMainPage from './Components/KizukiNotepad/Kizuki_Write/KizukiW
 import VehicleOperationMainPage from './Components/VehicleOperation/VehicleOperationMainPage';
 import CarContact from './Components/Car_Contact/CarContact';
 import BreakfastAlert from './Components/BreakFast/Alert/BreakfastAlert';
-import VehicleOperationSubmitMainPage from './Components/VehicleOperation/VehicleOperationSubmit/VehicleOperationSubmitMainPage';
+import VehicleOperationSubmitMainPage from './Components/VehicleOperation/User_Input_Info/VehicleOperationSubmitMainPage';
 
 const RouterPageMainContainer = styled.div``;
 

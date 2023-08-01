@@ -5,7 +5,7 @@ import styled from "styled-components";
 import Select from "react-select";
 import { request } from "../../../../API";
 import { useDispatch, useSelector } from "react-redux";
-import { Vehicle_Operation_Select_Car_Change_Func } from "../../../../Models/ReduxThunk/VehicleOperationShowContentRedux/VehicleOperationShowContent";
+import { Vehicle_Operation_Select_Car_Change_Func, Vehicle_Operation_Show_Content_Reduce_Thunk } from "../../../../Models/ReduxThunk/VehicleOperationShowContentRedux/VehicleOperationShowContent";
 
 const CarSelectorMainDivBox = styled.div`
 background-color:#fff;
@@ -35,6 +35,7 @@ padding-left:20px;
 const CarSelector = () => {
     const dispatch = useDispatch();
     const Vehicle_Operation_State = useSelector((state) => state.VehicleOperationShowContentReduxThunk.Vehicle_Operation_Getting_Data_State);
+    const LoginInfo = useSelector(state => state.LoginInfoDataRedux.Infomation);
     const [CarList_State, setCarList_State] = useState([{
         company_car_epid: "All",
         company_car_explain: "",
@@ -50,6 +51,7 @@ const CarSelector = () => {
     const handleChangeData = (e) => {
         
         dispatch(Vehicle_Operation_Select_Car_Change_Func(e.target.value))
+        dispatch(Vehicle_Operation_Show_Content_Reduce_Thunk(e.target.value,Vehicle_Operation_State.Vehilce_Selected_Date,LoginInfo.Login_id))
         
     }
 
@@ -75,6 +77,7 @@ const CarSelector = () => {
 
     useEffect(() => {
         Car_Info_Data_Getting();
+        dispatch(Vehicle_Operation_Show_Content_Reduce_Thunk("All",Vehicle_Operation_State.Vehilce_Selected_Date,LoginInfo.Login_id))
     },[])
     return (
         <CarSelectorMainDivBox>
