@@ -28,7 +28,7 @@ const CarList = () => {
                 car_id: e.value,
                 Login_id: LoginInfo.Login_id,
                 selcet_date: Vehicle_Operation_State.company_car_use_date,
-                company_car_erp_id:Vehicle_Operation_State.company_car_erp_id
+                company_car_erp_id:e.company_car_erp_id
             }
         })
         const Change_Datas = {
