@@ -10,7 +10,11 @@ import { RiPlayListAddLine,RiFileExcel2Fill } from "react-icons/ri";
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { request } from "../../../API";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { toast } from "../../ToasMessage/ToastManager";
+import { BrowserView } from "react-device-detect";
+import { Vehicle_Operation_State_Reset_Func } from "../../../Models/ReduxThunk/VehicleOperationReducer/VehicleOperationReducer";
+import { confirmAlert } from "react-confirm-alert";
 
 const UserSubmitListMainDivBox = styled.div`
 .FloatingMenu_Container{
@@ -21,12 +25,54 @@ const UserSubmitListMainDivBox = styled.div`
 `
 
 const UserSubmitList = () => {
+    const dispatch = useDispatch();
     const history = useHistory();
     const [FloatingMenuOnCheck, setFloatingMenuOnCheck] = useState(true);
     const Vehicle_Operation_State = useSelector((state) => state.VehicleOperationShowContentReduxThunk.Vehicle_Operation_Getting_Data_State);
     const LoginInfo = useSelector(state => state.LoginInfoDataRedux.Infomation);
+
+
+
+    const Move_to_New_Write = () => {
+        dispatch(Vehicle_Operation_State_Reset_Func())
+        history.push('/VehicleOperaion/NewVehicleOperation');
+    }
+
+
+
     const HandleExcelDownload = async () => {
         
+        confirmAlert({
+                    title: `차량 운행일지 Excel  `,
+                    message: `Excel 다운로드를 하시려면 '예'를 눌러주세요. `,
+                    buttons: [
+                        {
+                        label: '예',
+                            onClick: () => {
+                                Excel_Down_Start();
+                        }
+                        },
+                        {
+                        label: '아니오',
+                            onClick: () => {
+                           
+                        }
+                        }
+                    ]
+                    });
+    }
+
+
+    const Excel_Down_Start = async () => {
+         if (Vehicle_Operation_State.Vehicle_Selected_Car === "All") {
+                toast.show({
+                    title: `차량을 선택 후 다운로드 부탁드립니다.`,
+                    successCheck: true,
+                    duration: 6000,
+                });
+            return;
+        }
+
         try {
 
             const Vehicle_Operation_Excel_Download_Axios = await request.get('/DepartmentRouter/Vehicle_Operation_Excel_Download', {
@@ -38,7 +84,7 @@ const UserSubmitList = () => {
                 }
             });
             if (Vehicle_Operation_Excel_Download_Axios.data.dataSuccess) {
-                console.log(Vehicle_Operation_Excel_Download_Axios);
+                
                 window.open(`${process.env.REACT_APP_DB_HOST}/${Vehicle_Operation_Excel_Download_Axios.data.URL}`)
             }
             
@@ -66,14 +112,19 @@ const UserSubmitList = () => {
                         icon={<RiPlayListAddLine style={{ fontSize: 20 }} nativecolor="black" />}
                         // backgroundColor="white"
                         size={40}
-                        onClick={() => history.push('/VehicleOperaion/NewVehicleOperation/Cars')}
+                        onClick={() => {
+                            Move_to_New_Write();
+                        }
+                        }
                     />
-                    <ChildButton
-                        icon={<RiFileExcel2Fill style={{ fontSize: 20,color:"green" }} nativecolor="green" />}
-                        // backgroundColor="white"
-                        size={40}
-                        onClick={()=>{HandleExcelDownload()}}
-                    />
+                    
+                        <ChildButton
+                            icon={<RiFileExcel2Fill style={{ fontSize: 20,color:"green" }} nativecolor="green" />}
+                            // backgroundColor="white"
+                            size={40}
+                            onClick={()=>{HandleExcelDownload()}}
+                            />
+                    
                 </FloatingMenu>
             </div>
         </UserSubmitListMainDivBox>

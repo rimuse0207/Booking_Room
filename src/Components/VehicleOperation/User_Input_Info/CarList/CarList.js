@@ -16,7 +16,7 @@ const CarListMainPage = styled.div`
 
 const CarList = () => {
     const dispatch = useDispatch();
-    const {car_info } = useParams();
+    const {car_info,company_car_epid } = useParams();
     const Vehicle_Operation_State = useSelector((state) => state.VehicleOperationRedux.Vehicle_Operation_Input_State);
     const VehicleOperationState = useSelector(state => state.VehicleOperationRedux.Vehicle_Operation_Input_State);
     const LoginInfo = useSelector(state => state.LoginInfoDataRedux.Infomation);
@@ -123,6 +123,15 @@ const CarList = () => {
         
         if (Car_Info_Data_Getting_Axios.data.dataSuccess) {
             setCarList_State(Car_Info_Data_Getting_Axios.data.Car_Info_Data_Getting_Rows);
+            if (company_car_epid) {
+                const a = Car_Info_Data_Getting_Axios.data.Car_Info_Data_Getting_Rows.filter((list) => {
+                if (list.company_car_epid === company_car_epid) {
+                    return handleChangeData(list)
+                } 
+            })    
+            }
+            
+            
         }
 
     }
@@ -131,6 +140,7 @@ const CarList = () => {
         Car_Info_Data_Getting();
     }, [])
     
+
 
  
 
@@ -151,11 +161,11 @@ const CarList = () => {
                             value={VehicleOperationState.company_select}
                             />
                 </div>
-                <div style={{marginTop:"15px",lineHeight:"25px"}}>
+            </div>
+            <div style={{marginTop:"15px",lineHeight:"25px"}}>
                     <div>차량 위치 : <strong>{VehicleOperationState.company_car_place}</strong></div>
                     <div>차량 종류 : <strong>{VehicleOperationState.company_car_explain }</strong></div>
                 </div>
-            </div>
             
         </PurposeMainDivBox>
     )

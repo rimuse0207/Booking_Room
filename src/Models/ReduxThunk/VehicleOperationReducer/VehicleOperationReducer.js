@@ -2,7 +2,7 @@ import { createAsyncAction, createReducer } from 'typesafe-actions';
 import { request } from '../../../API';
 
 export const VEHICLE_OPERATION_REDUCER_UPDATE = 'VEHICLE_OPERATION_REDUCER_UPDATE';
-
+export const VEHICLE_OPERATION_REDUCER_RESET = 'VEHICLE_OPERATION_REDUCER_RESET';
 
 
 const initState = {
@@ -35,6 +35,11 @@ export const Vehicle_Operation_State_Change_Func = data => ({
     payload: data,
 });
 
+export const Vehicle_Operation_State_Reset_Func = () => ({
+    type: VEHICLE_OPERATION_REDUCER_RESET,
+
+})
+
 const Vehicle_Operation_State = (state = initState, action) => {
     switch (action.type) {
        
@@ -43,6 +48,8 @@ const Vehicle_Operation_State = (state = initState, action) => {
                 ...state,
                 Vehicle_Operation_Input_State: action.payload,
             };
+        case VEHICLE_OPERATION_REDUCER_RESET:
+            return initState;
         default:
             return state;
     }

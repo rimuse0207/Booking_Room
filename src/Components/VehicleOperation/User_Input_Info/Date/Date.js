@@ -10,6 +10,7 @@ import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
 import { Vehicle_Operation_State_Change_Func } from "../../../../Models/ReduxThunk/VehicleOperationReducer/VehicleOperationReducer";
 import { request } from "../../../../API";
+import { confirmAlert } from "react-confirm-alert";
 
 const DateMainDivBox = styled.div`
 background-color:#fff;
@@ -83,7 +84,25 @@ const Date = () => {
                         company_car_etc_cost: Vehicle_Operation_Car_Change_Rendering_Axios.data.Vehicle_Operation_Car_Change_Rendering_Rows[0].company_input_list_etc_cost,
                         company_car_use_date:e
                 }
-                dispatch(Vehicle_Operation_State_Change_Func(Change_Data))
+                 confirmAlert({
+                    title: `법인차량 운행일지 확인 `,
+                    message: ` 작성하였던 데이터가 있습니다. 데이터를 불러오시겠습니까?`,
+                    buttons: [
+                        {
+                        label: '예',
+                            onClick: () => {
+                            dispatch(Vehicle_Operation_State_Change_Func(Change_Data))
+                        }
+                        },
+                        {
+                        label: '아니오',
+                            onClick: () => {
+                            dispatch(Vehicle_Operation_State_Change_Func(Change_Datas))    
+                        }
+                        }
+                    ]
+                    });
+                
             } else {
                 dispatch(Vehicle_Operation_State_Change_Func(Change_Datas))    
             }

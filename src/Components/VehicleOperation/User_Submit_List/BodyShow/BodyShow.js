@@ -111,7 +111,8 @@ const BodyShow = () => {
         company_car_etc_cost: data.company_input_list_etc_cost,
     }
         dispatch(Vehicle_Operation_State_Change_Func(Changes_Data));
-        history.push(`/VehicleOperaion/NewVehicleOperation/${data.company_car_epid}`);
+        // history.push(`/VehicleOperaion/NewVehicleOperation/${data.company_car_epid}`);
+        history.push(`/VehicleOperaion/NewVehicleOperation`);
     }
 
     return (
