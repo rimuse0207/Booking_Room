@@ -5,6 +5,8 @@ import UserInputInfo from "./UserInputInfo";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { Vehicle_Operation_Input_Content_Reduce_Thunk } from "../../../Models/ReduxThunk/VehicleOperationReducer/VehicleOperationReducer";
+import { toast } from "../../ToasMessage/ToastManager";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 
 
@@ -17,6 +19,7 @@ const VehicleOperationSubmitMainPageMainDivBox = styled.div`
 `
 
 const VehicleOperationSubmitMainPage = () => {
+    const history = useHistory();
     const dispatch = useDispatch();
     const { company_car_epid } = useParams();
     const LoginInfo = useSelector(state => state.LoginInfoDataRedux.Infomation);
@@ -24,9 +27,23 @@ const VehicleOperationSubmitMainPage = () => {
     
 
 
-    // useEffect(() => {           
-    //     dispatch(Vehicle_Operation_Input_Content_Reduce_Thunk(company_car_epid,LoginInfo.Login_id,Vehicle_Operation_State.company_car_use_date));
-    // },[company_car_epid])
+    useEffect(() => {           
+        if (!LoginInfo.Login_token) {
+              toast.show({
+                    title: `로그인 후 이용 가능합니다.`,
+                    successCheck: false,
+                    duration: 6000,
+              });
+            history.push("/Login_Page")
+        } else if(LoginInfo.Login_company !== 'DHKS') {
+               toast.show({
+                    title: `로그인 후 이용 가능합니다.`,
+                    successCheck: false,
+                    duration: 6000,
+               });
+            history.push("/Today_Food");
+        }
+    },[])
 
     return (
         <VehicleOperationSubmitMainPageMainDivBox>
