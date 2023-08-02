@@ -9,6 +9,7 @@ import { useParams } from "react-router-dom/cjs/react-router-dom.min";
 import { useDispatch, useSelector } from "react-redux";
 import {Vehicle_Operation_Input_Content_Reduce_Thunk, Vehicle_Operation_State_Change_Func} from "../../../../Models/ReduxThunk/VehicleOperationReducer/VehicleOperationReducer"
 import { confirmAlert } from "react-confirm-alert";
+import { toast } from "../../../ToasMessage/ToastManager";
 
 const CarListMainPage = styled.div`
 `
@@ -103,7 +104,11 @@ const CarList = () => {
                 dispatch(Vehicle_Operation_State_Change_Func(Change_Datas))
         }
 
-        
+         toast.show({
+                title: `출발,도착 누적거리가 초기화 됩니다.`,
+                successCheck: true,
+                duration: 6000,
+                });
     }
 
 

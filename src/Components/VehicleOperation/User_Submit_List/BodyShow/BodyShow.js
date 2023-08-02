@@ -102,8 +102,8 @@ const BodyShow = () => {
                 label:data.company_input_list_purpose
         },
         company_car_use_date: new Date(data.company_input_list_date),
-        company_car_start_place: data.company_car_start_place,
-        company_car_end_place: data.company_input_start_history_place,
+        company_car_start_place: data.company_input_start_history_place,
+        company_car_end_place: data.company_input_end_history_place,
         company_car_start_dispatnce: data.company_input_start_history_distance,
         company_car_end_dispatnce: data.company_input_end_history_distance,
         company_car_oil_cost: data.company_input_list_oil_cost,

@@ -58,10 +58,7 @@ const Purpose = () => {
             value: "f",
             label:"f:교육.훈련등 기타위에서 정하지 않은 업무"
         },
-        {
-            value: "g",
-            label:"g:비업무용"
-        }
+    
     ])
     const handleChangeData = (e) => {
         const Change_Data = {
