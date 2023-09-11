@@ -87,9 +87,9 @@ const RouterPage = () => {
                         <Route path="/BreakFast/Finished" component={UserApplyFinishedMainPage}></Route>
                         <Route path="/Admin/BreakFast" component={AdminBreakFastMainPage}></Route>
                         {/* 키즈키 노트 */}
-                        <Route exact path="/KIZUKI_Notepad" component={KizukiNotepadMainPage} ></Route>
-                        <Route exact path="/KIZUKI_Notepad/:team_code" component={KizukiRoomListMainPage} ></Route>
-                        <Route path="/KIZUKI_Notepad_List_Select/:team_code/:kizuki_code" component={KizukiContentMainPage} ></Route>
+                        <Route exact path="/KIZUKI_Notepad" component={KizukiNotepadMainPage}></Route>
+                        <Route exact path="/KIZUKI_Notepad/:team_code" component={KizukiRoomListMainPage}></Route>
+                        <Route path="/KIZUKI_Notepad_List_Select/:team_code/:kizuki_code" component={KizukiContentMainPage}></Route>
                         <Route path="/KIZUKI_Notepad_Write" component={KizukiWriteMainPage}></Route>
                         {/* PIM 로컬전 */}
                         <Route exact path="/PIM" component={PimMainContainer}></Route>
@@ -100,15 +100,21 @@ const RouterPage = () => {
                         <Route exact path="/FloorLayout" component={FloorLayoutMainPage}></Route>
                         <Route path="/FloorLayout/AdminChange" component={FloorLayoutAdminMinPage}></Route>
                         {/* 차량운행 */}
-                        <Route exact path="/VehicleOperaion" component={VehicleOperationMainPage}></Route>
+                        {/* <Route exact path="/VehicleOperaion" component={VehicleOperationMainPage}></Route>
                         <Route path="/VehicleOperaion/NewVehicleOperation/:company_car_epid" component={VehicleOperationSubmitMainPage}></Route>
-                        <Route path="/VehicleOperaion/NewVehicleOperation" component={VehicleOperationSubmitMainPage}></Route>
+                        <Route path="/VehicleOperaion/NewVehicleOperation" component={VehicleOperationSubmitMainPage}></Route> */}
                         {/* 기타 */}
                         <Route path="/Info_Loading/cLCYwLMPxquhcvijjqwoewmqwoi/:id/:date/:company" component={SpamTrainingMainPage}></Route>
-                        <Route path='/Users/OrganChart/MainPage/:token/:id/:name' component={OrganChartMainPage}></Route>
-                        <Route path='/Defalult_MailSending/:purpose/:period/:person/:time/:count' component={MailSendingMainPage}></Route>
-                        <Route path="/cLCYwLMPxquhcvijjqwoewmqwoi/CarContact/cLCYwLMPxquhcvijjqwoewmqwoi/123989aus98zxkqnwmeqnmmbvao/:car_Target_ID/:car_User_ID" component={CarContact}></Route>
-                        <Route path='/BreakFast/cLCYwLMPxquhcvijjqwoewmqwoi/cLCYwLMPxquhcvijjqwoewmqwoi/:Food_Data' component={BreakfastAlert}></Route>
+                        <Route path="/Users/OrganChart/MainPage/:token/:id/:name" component={OrganChartMainPage}></Route>
+                        <Route path="/Defalult_MailSending/:purpose/:period/:person/:time/:count" component={MailSendingMainPage}></Route>
+                        <Route
+                            path="/cLCYwLMPxquhcvijjqwoewmqwoi/CarContact/cLCYwLMPxquhcvijjqwoewmqwoi/123989aus98zxkqnwmeqnmmbvao/:car_Target_ID/:car_User_ID"
+                            component={CarContact}
+                        ></Route>
+                        <Route
+                            path="/BreakFast/cLCYwLMPxquhcvijjqwoewmqwoi/cLCYwLMPxquhcvijjqwoewmqwoi/:Food_Data"
+                            component={BreakfastAlert}
+                        ></Route>
                     </Switch>
                 </BrowserRouter>
             </CookiesProvider>

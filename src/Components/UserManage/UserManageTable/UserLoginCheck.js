@@ -1,14 +1,14 @@
-import React from "react";
-import { useEffect } from "react";
-import styled from "styled-components";
-import { request } from "../../../API";
-import { useState } from "react";
-import moment from "moment";
-import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io"
-import { FaFileExcel } from "react-icons/fa";
+import React from 'react';
+import { useEffect } from 'react';
+import styled from 'styled-components';
+import { Axios_Get_Moduls, request } from '../../../API';
+import { useState } from 'react';
+import moment from 'moment';
+import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io';
+import { FaFileExcel } from 'react-icons/fa';
 
 export const UserLoginCheckMainDivBox = styled.div`
-.Date_Show_Click_Main_Container {
+    .Date_Show_Click_Main_Container {
         text-align: center;
         display: flex;
         justify-content: center;
@@ -26,11 +26,8 @@ export const UserLoginCheckMainDivBox = styled.div`
                 font-size: 1.5em;
                 border: none;
                 background: none;
-              
             }
             margin-top: 12px;
-          
-
         }
         .Date_Show_Click_After {
             margin-left: 10px;
@@ -42,9 +39,7 @@ export const UserLoginCheckMainDivBox = styled.div`
         }
     }
 
-
-
- table {
+    table {
         font-size: 0.8em;
         position: relative;
         width: 100%;
@@ -76,82 +71,74 @@ export const UserLoginCheckMainDivBox = styled.div`
         vertical-align: center;
         border-bottom: 1px solid #ccc;
     }
-
-`
+`;
 
 const UserLoginCheck = () => {
-    const [Month_Date, setMonth_Date] = useState(moment().format("YYYY-MM"));
+    const [Month_Date, setMonth_Date] = useState(moment().format('YYYY-MM'));
     const [Login_Check_Data, setLogin_Check_Data] = useState([]);
 
     const HandleClickExcelDownload = async () => {
         try {
-            const Login_User_Data_Checking_Excel_Download_Axios = await request.get('/users/Login_User_Data_Checking_Excel_Download', {
-                params: {
-                    Month_Date
-                }
-            })
-            if (Login_User_Data_Checking_Excel_Download_Axios.data.dataSuccess) {
-                window.open(`${process.env.REACT_APP_DB_HOST}/${Login_User_Data_Checking_Excel_Download_Axios.data.URL}`)
-            }
+            const Login_User_Data_Checking_Excel_Download_Axios = await Axios_Get_Moduls('/users/Login_User_Data_Checking_Excel_Download', {
+                Month_Date,
+            });
 
+            if (Login_User_Data_Checking_Excel_Download_Axios) {
+                window.open(`${process.env.REACT_APP_DB_HOST}/${Login_User_Data_Checking_Excel_Download_Axios.URL}`);
+            }
         } catch (error) {
             console.log(error);
         }
-    }
+    };
 
     const Login_User_Data_Checking = async () => {
         try {
-            
-            const Login_User_Data_Checking_Axios = await request.get('/users/Login_User_Data_Checking', {
-                params: {
-                    Month_Date
-                }
-            })
-            if(Login_User_Data_Checking_Axios.data.dataSuccess){
-                setLogin_Check_Data(Login_User_Data_Checking_Axios.data.Login_User_Data_Checking_Rows);
+            const Login_User_Data_Checking_Axios = await Axios_Get_Moduls('/users/Login_User_Data_Checking', {
+                Month_Date,
+            });
 
+            if (Login_User_Data_Checking_Axios) {
+                setLogin_Check_Data(Login_User_Data_Checking_Axios);
             }
-
         } catch (error) {
             console.log(error);
         }
-    }
+    };
 
     useEffect(() => {
-        Login_User_Data_Checking()
-    },[Month_Date])
+        Login_User_Data_Checking();
+    }, [Month_Date]);
 
     return (
         <UserLoginCheckMainDivBox>
             <div>
-                <div style={{ textAlign: "end",marginRight:"30px" }}>
-                    <span style={{color:"green",fontSize:"2em"}} onClick={()=>HandleClickExcelDownload()}>
+                <div style={{ textAlign: 'end', marginRight: '30px' }}>
+                    <span style={{ color: 'green', fontSize: '2em' }} onClick={() => HandleClickExcelDownload()}>
                         <FaFileExcel></FaFileExcel>
                     </span>
                 </div>
             </div>
-             <div style={{ textAlign: 'center', position: 'relative' }}>
+            <div style={{ textAlign: 'center', position: 'relative' }}>
                 <div className="Date_Show_Click_Main_Container">
                     <div
                         className="Date_Show_Click_Before"
                         onClick={() => {
-                            setMonth_Date((moment(Month_Date).subtract(1, 'months').format("YYYY-MM")));
+                            setMonth_Date(moment(Month_Date).subtract(1, 'months').format('YYYY-MM'));
                         }}
                     >
                         <IoIosArrowBack></IoIosArrowBack>
                     </div>
-                    <h3 className="Date_Show_Content">
-                        {Month_Date}
-                    </h3>
-                    <div className="Date_Show_Click_After" onClick={() => setMonth_Date(moment(Month_Date).add(1, 'months').format("YYYY-MM"))}>
+                    <h3 className="Date_Show_Content">{Month_Date}</h3>
+                    <div
+                        className="Date_Show_Click_After"
+                        onClick={() => setMonth_Date(moment(Month_Date).add(1, 'months').format('YYYY-MM'))}
+                    >
                         <IoIosArrowForward></IoIosArrowForward>
                     </div>
                 </div>
                 {/* 날짜 선택 끝 */}
-             
-                  
             </div>
-             <table className="type09">
+            <table className="type09">
                 <thead>
                     <tr className="PostionFixedFromScroll">
                         <th scope="cols">No.</th>
@@ -161,18 +148,20 @@ const UserLoginCheck = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {Login_Check_Data.map((list,j) => {
-                        return <tr>
-                            <td>{j + 1}</td>
-                            <td>{list.brity_works_login_access_info_id}</td>
-                            <td>{list.brity_works_login_access_info_name}</td>
-                            <td>{moment( list.brity_works_login_access_info_date).format("YYYY-MM-DD HH:mm")}</td>
-                        </tr>
+                    {Login_Check_Data.map((list, j) => {
+                        return (
+                            <tr>
+                                <td>{j + 1}</td>
+                                <td>{list.brity_works_login_access_info_id}</td>
+                                <td>{list.brity_works_login_access_info_name}</td>
+                                <td>{moment(list.brity_works_login_access_info_date).format('YYYY-MM-DD HH:mm')}</td>
+                            </tr>
+                        );
                     })}
                 </tbody>
             </table>
         </UserLoginCheckMainDivBox>
-    )
-}
+    );
+};
 
 export default UserLoginCheck;

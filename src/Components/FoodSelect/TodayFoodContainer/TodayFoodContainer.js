@@ -12,26 +12,25 @@ import { ko } from 'date-fns/esm/locale';
 import { Loader_Check_For_False, Loader_Check_For_True } from '../../../Models/LoaderCheckReducer/LoaderCheckReducer';
 import { toast } from '../../ToasMessage/ToastManager';
 import LoginModal from '../../Modals/LoginModal';
-import { request } from '../../../API';
+import { Axios_Get_Moduls, request } from '../../../API';
 import WeekFoodCount from './WeekFoodCount/WeekFoodCount';
 
 const TodayFoodContainerMainDivBox = styled.div`
     border: 1px solid black;
     min-height: 100vh;
     padding-bottom: 50px;
-    
-    
+
     .Today_Title {
         text-align: center;
         border-bottom: 1px solid lightgray;
         padding-bottom: 10px;
     }
     .ScrollView_Menu_Show {
-        max-width:700px;
-    margin:0 auto;
+        max-width: 700px;
+        margin: 0 auto;
         position: relative;
         margin-top: 30px;
-        
+
         .FoodMenuShow {
             width: 100%;
             table {
@@ -116,7 +115,7 @@ const TodayFoodContainer = ({ history }) => {
     const GetFromServerWeekFoodMenu = async () => {
         try {
             dispatch(Loader_Check_For_True());
-            const ServerWeekFoodMenu = await request.get(`/FoodApp/WeekFoodMenu`, {
+            const ServerWeekFoodMenu = await request.get('/FoodApp/WeekFoodMenu', {
                 params: {
                     start_time: moment(TodayDate).format('YYYY-MM-DD'),
                     Login_id: LoginInfo.Login_id,
@@ -246,7 +245,7 @@ const TodayFoodContainer = ({ history }) => {
                     </div>
                 </div>
 
-                {moment().format('YYYY-MM-DD') === moment(TodayDate).format('YYYY-MM-DD') && TodayFoodState  ? (
+                {moment().format('YYYY-MM-DD') === moment(TodayDate).format('YYYY-MM-DD') && TodayFoodState ? (
                     <div className="Button_Select_Cotainer">
                         {ImageUploadCheck ? (
                             <button style={{ backgroundColor: 'orange' }}>잔반 이미지 업로드 완료</button>

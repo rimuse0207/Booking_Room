@@ -6,7 +6,7 @@ import moment from 'moment';
 import { useEffect } from 'react';
 import { StockSelectMainPageMainDivBox } from '../StockSelectMainPage';
 import { UserApplySelectMainPageMainDivBox } from '../../UserApplySelect/UserApplySelectMainPage';
-import { request } from '../../../../../API';
+import { Axios_Get_Moduls, request } from '../../../../../API';
 const StockListUpdateModalMainDivBox = styled.div`
     .Close_button_container {
         position: fixed;
@@ -26,13 +26,12 @@ const StockListUpdateModal = ({ SelectList, OnClose }) => {
 
     const History_Stock_Show = async () => {
         try {
-            const History_Stock_Show_Axios = await request.get(`/FoodApp/History_Stock_Show`, {
-                params: {
-                    breakfast_info_name: SelectList.breakfast_info_name,
-                },
+            const History_Stock_Show_Axios = await Axios_Get_Moduls(`/FoodApp/History_Stock_Show`, {
+                breakfast_info_name: SelectList.breakfast_info_name,
             });
-            if (History_Stock_Show_Axios.data.dataSuccess) {
-                setAfterUpdateData(History_Stock_Show_Axios.data.History_Stock_Show_Rows);
+
+            if (History_Stock_Show_Axios) {
+                setAfterUpdateData(History_Stock_Show_Axios);
             }
         } catch (error) {
             console.log(error);

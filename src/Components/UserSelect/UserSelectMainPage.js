@@ -8,7 +8,7 @@ import { useEffect } from 'react';
 import { useLayoutEffect } from 'react';
 import { useSelector } from 'react-redux';
 import OrganChartMainPage from './OrganChart/OrganChartMainPage';
-import { request } from '../../API';
+import { Axios_Get_Moduls, request } from '../../API';
 import { toast } from '../ToasMessage/ToastManager';
 
 const UserSelectMainPageMainDivBox = styled.div`
@@ -24,29 +24,27 @@ const UserSelectMainPageMainDivBox = styled.div`
     }
     .Search_Input_Box {
         height: 75%;
-        
 
-        form{
+        form {
             display: flex;
-            width:100%;  
-             label {
-            padding-top: 5px;
-            border: 1px solid lightgray;
-            font-size: 1.5em;
-            :hover{
-                cursor: pointer;
-                opacity:0.5;
+            width: 100%;
+            label {
+                padding-top: 5px;
+                border: 1px solid lightgray;
+                font-size: 1.5em;
+                :hover {
+                    cursor: pointer;
+                    opacity: 0.5;
+                }
+            }
+            input {
+                padding-left: 10px;
+                background-color: none;
+                width: 100%;
+                border: 1px solid lightgray;
+                outline: 1px solid lightgray;
             }
         }
-        input {
-            padding-left: 10px;
-            background-color: none;
-            width: 100%;
-            border: 1px solid lightgray;
-            outline: 1px solid lightgray;
-        }
-        }
-       
     }
     .View_Show {
         position: absolute;
@@ -78,7 +76,7 @@ const UserSelectMainPage = () => {
         if (!UserSearchModalOn) {
             setClickedUser(null);
         }
-    },[UserSearchModalOn])
+    }, [UserSearchModalOn]);
 
     useEffect(() => {
         const handler = e => {
@@ -108,49 +106,39 @@ const UserSelectMainPage = () => {
 
     const handleClickUserSelecthandleClickUserSelect = async () => {
         setUserSearchModalOn(true);
-    }
+    };
 
-
-    const HandleSumitData = async (e) => {
+    const HandleSumitData = async e => {
         e.preventDefault();
         if (!LoginInfo.Login_token) {
-            
             return;
         }
         try {
-            
-
-            
-            const Get_User_Info_Data_Axios = await request.get('/users/Get_User_Info_Data_Select', {
-                params: {
-                    SearchTitle
-                }
+            const Get_User_Info_Data_Axios = await Axios_Get_Moduls('/users/Get_User_Info_Data_Select', {
+                SearchTitle,
             });
 
-                if (Get_User_Info_Data_Axios.data.dataSuccess) {
-                    if (Get_User_Info_Data_Axios.data.Get_User_Info_Data_Rows.length > 0) {
-                        setClickedUser({
-                             email_address: Get_User_Info_Data_Axios.data.Get_User_Info_Data_Rows[0].brity_works_user_info_id ,
-                            department_code :Get_User_Info_Data_Axios.data.Get_User_Info_Data_Rows[0].department_code 
-                        })
-                        setUserSearchModalOn(true);
-                    }
+            if (Get_User_Info_Data_Axios) {
+                if (Get_User_Info_Data_Axios.length > 0) {
+                    setClickedUser({
+                        email_address: Get_User_Info_Data_Axios[0].brity_works_user_info_id,
+                        department_code: Get_User_Info_Data_Axios[0].department_code,
+                    });
+                    setUserSearchModalOn(true);
+                }
             }
-            
         } catch (error) {
             console.log(error);
         }
-    }
-   
-
+    };
 
     return (
         <UserSelectMainPageMainDivBox>
             <div ref={ViewFocus} onClick={handleInputClick}>
                 <div style={{ fontWeight: 'bolder' }}>유저 검색</div>
                 <div className="Search_Input_Box">
-                    <form onSubmit={(e)=>HandleSumitData(e)}>
-                        <label onClick={()=>handleClickUserSelecthandleClickUserSelect()} className="OrganModalOpen">
+                    <form onSubmit={e => HandleSumitData(e)}>
+                        <label onClick={() => handleClickUserSelecthandleClickUserSelect()} className="OrganModalOpen">
                             <FcSearch></FcSearch>
                         </label>
                         <input
@@ -166,13 +154,21 @@ const UserSelectMainPage = () => {
 
                 {FocusChecking && LoginInfo.Login_token ? (
                     <div className="View_Show">
-                        <UserSelectViewComponent SearchTitle={SearchTitle} setUserSearchModalOn={()=>setUserSearchModalOn(true)} setClickedUser={(data)=>setClickedUser(data)}></UserSelectViewComponent>
+                        <UserSelectViewComponent
+                            SearchTitle={SearchTitle}
+                            setUserSearchModalOn={() => setUserSearchModalOn(true)}
+                            setClickedUser={data => setClickedUser(data)}
+                        ></UserSelectViewComponent>
                     </div>
                 ) : (
                     <></>
                 )}
             </div>
-            <OrganChartMainPage UserSearchModalOn={UserSearchModalOn} setUserSearchModalOn={()=>setUserSearchModalOn(false)} ClickedUser={ClickedUser}></OrganChartMainPage>
+            <OrganChartMainPage
+                UserSearchModalOn={UserSearchModalOn}
+                setUserSearchModalOn={() => setUserSearchModalOn(false)}
+                ClickedUser={ClickedUser}
+            ></OrganChartMainPage>
         </UserSelectMainPageMainDivBox>
     );
 };

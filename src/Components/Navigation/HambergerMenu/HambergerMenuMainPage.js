@@ -262,9 +262,9 @@ const HambergerMenuMainPage = () => {
                                 <li>
                                     <Link to="/KIZUKI_Notepad">KIZUKI 노트</Link>
                                 </li>
-                                <li>
+                                {/* <li>
                                     <Link to="/VehicleOperaion">차량운행</Link>
-                                </li>
+                                </li> */}
                                 {/* <li>
                                     <Link to='/Defalult_MailSending'>Wafer Mail전송</Link>
                                 </li> */}
@@ -275,7 +275,6 @@ const HambergerMenuMainPage = () => {
 
                         {LoginInfo.Login_Admin_Access ? (
                             <BrowserView>
-                                
                                 <li>
                                     <Link to={`/User_Select_or_Add/${LoginInfo.Login_id}/Company_DHK`}>사용자 등록 및 조회</Link>
                                 </li>

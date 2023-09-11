@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import NavigationMainPage from '../../Navigation/NavigationMainPage';
-import { request } from '../../../API/index';
+import { Axios_Get_Moduls, request } from '../../../API/index';
 import { useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { useState } from 'react';
@@ -37,14 +37,12 @@ const UserApplyFinishedMainPage = () => {
     const [Apply_Lists, setApply_Lists] = useState([]);
     const getToday_BreakFast_Data = async () => {
         try {
-            const getToday_BreakFast_Data_Axios = await request.get(`/FoodApp/Finished_Apply_Now_Data`, {
-                params: {
-                    ID: LoginInfo.Login_id,
-                },
+            const getToday_BreakFast_Data_Axios = await Axios_Get_Moduls(`/FoodApp/Finished_Apply_Now_Data`, {
+                ID: LoginInfo.Login_id,
             });
 
-            if (getToday_BreakFast_Data_Axios.data.dataSuccess) {
-                setApply_Lists(getToday_BreakFast_Data_Axios.data.Finished_Apply_Now_Data_Rows);
+            if (getToday_BreakFast_Data_Axios) {
+                setApply_Lists(getToday_BreakFast_Data_Axios);
             }
         } catch (error) {
             console.log(error);

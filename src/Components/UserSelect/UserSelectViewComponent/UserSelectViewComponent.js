@@ -2,7 +2,7 @@ import React from 'react';
 import { useState } from 'react';
 import styled from 'styled-components';
 import { BsPersonSquare } from 'react-icons/bs';
-import { request } from '../../../API';
+import { Axios_Get_Moduls, request } from '../../../API';
 import { useEffect } from 'react';
 import { toast } from '../../ToasMessage/ToastManager';
 
@@ -50,22 +50,19 @@ const UserSelectViewComponentMainDivBox = styled.div`
         }
     }
 `;
-const UserSelectViewComponent = ({ SearchTitle,setUserSearchModalOn,setClickedUser }) => {
+const UserSelectViewComponent = ({ SearchTitle, setUserSearchModalOn, setClickedUser }) => {
     const [UserList, setUserList] = useState([]);
 
-    const handleClicks = (list) => {
-        
-        setUserSearchModalOn(true)
-        setClickedUser(list)
-        console.log()
-    
+    const handleClicks = list => {
+        setUserSearchModalOn(true);
+        setClickedUser(list);
     };
 
     const Get_User_Info_Data = async () => {
         try {
-            const Get_User_Info_Data_Axios = await request.get('/users/Get_User_Info_Data');
-            if (Get_User_Info_Data_Axios.data.dataSuccess) {
-                setUserList(Get_User_Info_Data_Axios.data.Data_Importing);
+            const Get_User_Info_Data_Axios = await Axios_Get_Moduls('/users/Get_User_Info_Data', {});
+            if (Get_User_Info_Data_Axios) {
+                setUserList(Get_User_Info_Data_Axios);
             }
         } catch (error) {
             console.log(error);
@@ -87,7 +84,7 @@ const UserSelectViewComponent = ({ SearchTitle,setUserSearchModalOn,setClickedUs
                         item.team.toLowerCase().includes(SearchTitle.toLowerCase())
                 ).map(list => {
                     return (
-                        <li className="User_Select_View_li Show_Boxs" key={list.email_address} onClick={()=>handleClicks(list)}>
+                        <li className="User_Select_View_li Show_Boxs" key={list.email_address} onClick={() => handleClicks(list)}>
                             <div className="User_Select_View_Info_Container Show_Boxs">
                                 <div className="User_Select_View_Info_Left Show_Boxs">
                                     <BsPersonSquare></BsPersonSquare>

@@ -8,7 +8,7 @@ import { Loader_Check_For_False, Loader_Check_For_True } from '../../../../../Mo
 import { useDispatch } from 'react-redux';
 import { BiMinusCircle, BiPlusCircle } from 'react-icons/bi';
 import { toast } from '../../../../ToasMessage/ToastManager';
-import { request } from '../../../../../API';
+import { Axios_Post_Moduls, request } from '../../../../../API';
 
 const StockAddDataModalMainDivBox = styled.div`
     .Close_button_container {
@@ -139,12 +139,12 @@ const StockAddDataModal = ({ OnClose, Get_NowDates_Apply_User_Select }) => {
                 return;
             }
 
-            const BreakFast_Stock_Data_Insert_Axios = await request.post(`/FoodApp/BreakFast_Stock_Data_Insert`, {
+            const BreakFast_Stock_Data_Insert_Axios = await Axios_Post_Moduls(`/FoodApp/BreakFast_Stock_Data_Insert`, {
                 FileStateData,
                 BreakFast_Data,
             });
 
-            if (BreakFast_Stock_Data_Insert_Axios.data.dataSuccess) {
+            if (BreakFast_Stock_Data_Insert_Axios) {
                 Get_NowDates_Apply_User_Select();
                 OnClose();
                 toast.show({

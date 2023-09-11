@@ -13,7 +13,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Loader_Check_For_False, Loader_Check_For_True } from '../../Models/LoaderCheckReducer/LoaderCheckReducer';
 import LoginModalMainPage from './LoginModal/LoginModalMainPage';
 import { LOGOUT_INFO_DATA_Changes } from '../../Models/LoginInfoReducer/LoginInfoReducer';
-import { request } from '../../API';
+import { Axios_Post_Moduls, request } from '../../API';
 import ResiMailSendingMainPage from './ResiMailSending/ResiMailSendingMainPage';
 
 const customStyles = {
@@ -632,9 +632,8 @@ const ApplyModal = ({
                 return;
             }
             dispatch(Loader_Check_For_True());
-        
 
-            const ReserverationForServer = await request.post(`/users/BrityWorksBooking_For_API`, {
+            const ReserverationForServer = await Axios_Post_Moduls(`/users/BrityWorksBooking_For_API`, {
                 ApplyModalData,
                 SelectedShowTableTimes,
                 SelectLeftHeaderInfo,
@@ -645,62 +644,73 @@ const ApplyModal = ({
                 Mail_State,
                 Selected_User_State,
             });
+            if (ReserverationForServer) {
+                if (ReserverationForServer.errorCode) {
+                    dispatch(Loader_Check_For_False());
+                    toast.show({
+                        title: `${ReserverationForServer.detailMessages ? ReserverationForServer.detailMessages : ''} ${
+                            ReserverationForServer.errorMessage
+                        } ( ERROR CODE : ${ReserverationForServer.errorCode} ) `,
+                        successCheck: false,
+                        duration: 12000,
+                    });
+                } else {
+                    getDatas();
+                    ModalPopUpClose();
 
-            if (ReserverationForServer.data.dataSuccess) {
-                getDatas();
-                ModalPopUpClose();
-                
-            if (SelectedShowTableTimes.AlldayChecking) {
-                const StartTime = new Date(`${moment(ApplyModalData.StartDate).format('YYYY-MM-DD')} 00:00:00`)
-                const EndTime = new Date(`${moment(ApplyModalData.EndDate).add(1,"day").format('YYYY-MM-DD')} 00:00:00`)
-                
-                const diffMSec = EndTime.getTime() - StartTime.getTime();
-                const diffHour = diffMSec / (60 * 60 * 1000);
-                Booking_Reservation_Insert_Time( ApplyModalData,
-                SelectedShowTableTimes,
-                SelectLeftHeaderInfo,
-                TitleBooking,
-                LoginInfo,
-                Reservation_Mail_Checking,
-                DetailInfo,
-                Mail_State,
-                Selected_User_State,diffHour)
-            } else {
-                const StartTime = new Date(`${moment(ApplyModalData.StartDate).format('YYYY-MM-DD')} ${SelectedShowTableTimes.StartTime}:00`)
-                const EndTime = new Date(`${moment(ApplyModalData.EndDate).format('YYYY-MM-DD')} ${SelectedShowTableTimes.EndTime}:00`)
-                
-                const diffMSec = EndTime.getTime() - StartTime.getTime();
-                const diffHour = diffMSec / (60 * 60 * 1000);
-                  Booking_Reservation_Insert_Time( ApplyModalData,
-                SelectedShowTableTimes,
-                SelectLeftHeaderInfo,
-                TitleBooking,
-                LoginInfo,
-                Reservation_Mail_Checking,
-                DetailInfo,
-                Mail_State,
-                Selected_User_State,diffHour)
-            }
-            
-                dispatch(Loader_Check_For_False());
-                toast.show({
-                    title: `${SelectLeftHeaderInfo.label}의 ${moment(ApplyModalData.StartDate).format('YYYY-MM-DD')} ${
-                        SelectedShowTableTimes.StartTime
-                    } ~ ${moment(ApplyModalData.EndDate).format('YYYY-MM-DD')} ${
-                        SelectedShowTableTimes.EndTime
-                    }으로 예약이 완료되었습니다.`,
-                    successCheck: true,
-                    duration: 8000,
-                });
-            } else {
-                dispatch(Loader_Check_For_False());
-                toast.show({
-                    title: `${ReserverationForServer.data.result.detailMessages ? ReserverationForServer.data.result.detailMessages : ''} ${
-                        ReserverationForServer.data.result.errorMessage
-                    } ( ERROR CODE : ${ReserverationForServer.data.result.errorCode} ) `,
-                    successCheck: false,
-                    duration: 12000,
-                });
+                    if (SelectedShowTableTimes.AlldayChecking) {
+                        const StartTime = new Date(`${moment(ApplyModalData.StartDate).format('YYYY-MM-DD')} 00:00:00`);
+                        const EndTime = new Date(`${moment(ApplyModalData.EndDate).add(1, 'day').format('YYYY-MM-DD')} 00:00:00`);
+
+                        const diffMSec = EndTime.getTime() - StartTime.getTime();
+                        const diffHour = diffMSec / (60 * 60 * 1000);
+                        Booking_Reservation_Insert_Time(
+                            ApplyModalData,
+                            SelectedShowTableTimes,
+                            SelectLeftHeaderInfo,
+                            TitleBooking,
+                            LoginInfo,
+                            Reservation_Mail_Checking,
+                            DetailInfo,
+                            Mail_State,
+                            Selected_User_State,
+                            diffHour
+                        );
+                    } else {
+                        const StartTime = new Date(
+                            `${moment(ApplyModalData.StartDate).format('YYYY-MM-DD')} ${SelectedShowTableTimes.StartTime}:00`
+                        );
+                        const EndTime = new Date(
+                            `${moment(ApplyModalData.EndDate).format('YYYY-MM-DD')} ${SelectedShowTableTimes.EndTime}:00`
+                        );
+
+                        const diffMSec = EndTime.getTime() - StartTime.getTime();
+                        const diffHour = diffMSec / (60 * 60 * 1000);
+                        Booking_Reservation_Insert_Time(
+                            ApplyModalData,
+                            SelectedShowTableTimes,
+                            SelectLeftHeaderInfo,
+                            TitleBooking,
+                            LoginInfo,
+                            Reservation_Mail_Checking,
+                            DetailInfo,
+                            Mail_State,
+                            Selected_User_State,
+                            diffHour
+                        );
+                    }
+
+                    dispatch(Loader_Check_For_False());
+                    toast.show({
+                        title: `${SelectLeftHeaderInfo.label}의 ${moment(ApplyModalData.StartDate).format('YYYY-MM-DD')} ${
+                            SelectedShowTableTimes.StartTime
+                        } ~ ${moment(ApplyModalData.EndDate).format('YYYY-MM-DD')} ${
+                            SelectedShowTableTimes.EndTime
+                        }으로 예약이 완료되었습니다.`,
+                        successCheck: true,
+                        duration: 8000,
+                    });
+                }
             }
         } catch (error) {
             console.log(error);
@@ -713,20 +723,21 @@ const ApplyModal = ({
         }
     };
 
-
-    const Booking_Reservation_Insert_Time = async(ApplyModalData,
-                SelectedShowTableTimes,
-                SelectLeftHeaderInfo,
-                TitleBooking,
-                LoginInfo,
-                Reservation_Mail_Checking,
-                DetailInfo,
-                Mail_State,
-                Selected_User_State,diffHour) => {
+    const Booking_Reservation_Insert_Time = async (
+        ApplyModalData,
+        SelectedShowTableTimes,
+        SelectLeftHeaderInfo,
+        TitleBooking,
+        LoginInfo,
+        Reservation_Mail_Checking,
+        DetailInfo,
+        Mail_State,
+        Selected_User_State,
+        diffHour
+    ) => {
         try {
-                
-            const Booking_Reservation_Insert_Time_Axios = await request.post('/users/Booking_Reservation_Insert_Time', {
-             ApplyModalData,
+            const Booking_Reservation_Insert_Time_Axios = await Axios_Post_Moduls('/users/Booking_Reservation_Insert_Time', {
+                ApplyModalData,
                 SelectedShowTableTimes,
                 SelectLeftHeaderInfo,
                 TitleBooking,
@@ -735,16 +746,12 @@ const ApplyModal = ({
                 DetailInfo,
                 Mail_State,
                 Selected_User_State,
-                diffHour
-            })
-            if (Booking_Reservation_Insert_Time_Axios.data.dataSuccess) {
-                
-            }
-
+                diffHour,
+            });
         } catch (error) {
             console.log(error);
         }
-    }
+    };
 
     return (
         <Modal isOpen={ApplyModalOpenData} style={customStyles} contentLabel="Apply Modal">

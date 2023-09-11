@@ -6,7 +6,7 @@ import ChairLayout from './FloorLayoutContent/ChairLayout';
 import RoomLayout from './FloorLayoutContent/RoomLayout';
 import WindowLayout from './FloorLayoutContent/WindowLayout';
 import FloorLayoutModal from './FloorLayoutModals/FloorLayoutModal';
-import { request } from '../../../API';
+import { Axios_Get_Moduls, Axios_Post_Moduls, request } from '../../../API';
 import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 const FloorLayoutContainerMainDivBox = styled.div`
@@ -141,7 +141,7 @@ const FloorLayoutContainer = () => {
 
     const handleSave = async () => {
         try {
-            const handleSave_data_Axios = await request.post(`/users/Floor_Layout_Save`, {
+            const handleSave_data_Axios = await Axios_Post_Moduls(`/users/Floor_Layout_Save`, {
                 PlaceState,
                 Place_Chair_State,
                 Place_Room_State,
@@ -149,7 +149,7 @@ const FloorLayoutContainer = () => {
                 Delete_Data,
             });
 
-            if (handleSave_data_Axios.data.dataSuccess) {
+            if (handleSave_data_Axios) {
                 alert('저장 되었습니다.');
             }
         } catch (error) {
@@ -157,14 +157,15 @@ const FloorLayoutContainer = () => {
         }
     };
 
-    const Get_Floor_Room_Position = async (req, res) => {
+    const Get_Floor_Room_Position = async () => {
         try {
-            const Get_Floor_Room_Position_State_Axios = await request.get(`/users/Get_Floor_Room_Position_State`);
-            if (Get_Floor_Room_Position_State_Axios.data.dataSuccess) {
-                setPlaceState(Get_Floor_Room_Position_State_Axios.data.PlaceState);
-                setPlace_Chair_State(Get_Floor_Room_Position_State_Axios.data.Place_Chair_State);
-                setPlace_Room_State(Get_Floor_Room_Position_State_Axios.data.Place_Room_State);
-                setPlace_Window_State(Get_Floor_Room_Position_State_Axios.data.Place_Window_State);
+            const Get_Floor_Room_Position_State_Axios = await Axios_Get_Moduls('/users/Get_Floor_Room_Position_State', {});
+
+            if (Get_Floor_Room_Position_State_Axios) {
+                setPlaceState(Get_Floor_Room_Position_State_Axios.PlaceState);
+                setPlace_Chair_State(Get_Floor_Room_Position_State_Axios.Place_Chair_State);
+                setPlace_Room_State(Get_Floor_Room_Position_State_Axios.Place_Room_State);
+                setPlace_Window_State(Get_Floor_Room_Position_State_Axios.Place_Window_State);
             }
         } catch (error) {
             console.log(error);

@@ -12,7 +12,7 @@ import { HiViewGridAdd } from 'react-icons/hi';
 import { TiThMenu } from 'react-icons/ti';
 import { IoCloseSharp } from 'react-icons/io5';
 import StockAddDataModal from './StockSelectModal/StockAddDataModal';
-import { request } from '../../../../API';
+import { Axios_Get_Moduls, Axios_Post_Moduls, request } from '../../../../API';
 import { confirmAlert } from 'react-confirm-alert';
 
 const customStyles = {
@@ -86,9 +86,10 @@ const StockSelectMainPage = () => {
 
     const Get_NowDates_Apply_User_Select = async () => {
         try {
-            const Get_Now_Dates_Apply_User_Select_Axios = await request.get(`/FoodApp/Stock_List_Select`);
-            if (Get_Now_Dates_Apply_User_Select_Axios.data.dataSuccess) {
-                setStockSelect(Get_Now_Dates_Apply_User_Select_Axios.data.Stock_List_Select_Rows);
+            const Get_Now_Dates_Apply_User_Select_Axios = await Axios_Get_Moduls(`/FoodApp/Stock_List_Select`, {});
+
+            if (Get_Now_Dates_Apply_User_Select_Axios) {
+                setStockSelect(Get_Now_Dates_Apply_User_Select_Axios);
             }
         } catch (error) {
             console.log(error);
@@ -97,10 +98,11 @@ const StockSelectMainPage = () => {
 
     const HandleDeleteStockData = async data => {
         try {
-            const Delete_Stock_List_Axios = await request.post(`/FoodApp/Delete_Stock_List`, {
+            const Delete_Stock_List_Axios = await Axios_Post_Moduls(`/FoodApp/Delete_Stock_List`, {
                 data,
             });
-            if (Delete_Stock_List_Axios.data.dataSuccess) {
+
+            if (Delete_Stock_List_Axios) {
                 Get_NowDates_Apply_User_Select();
             }
         } catch (error) {

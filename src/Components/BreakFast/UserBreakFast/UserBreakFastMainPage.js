@@ -11,7 +11,7 @@ import { useSelector } from 'react-redux';
 import axios from 'axios';
 import { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
-import { request } from '../../../API';
+import { Axios_Get_Moduls, Axios_Post_Moduls, request } from '../../../API';
 import { useRef } from 'react';
 
 const UserBreakFastMainPageMainDivBox = styled.div`
@@ -85,13 +85,10 @@ const UserBreakFastMainPage = () => {
 
     const [SubmitOneClickChecking, setSubmitOneClickChecking] = useState(false);
 
-
     const HandleFocusOn = () => {
         if (ScrollFocus.current) {
-            
         }
-    }
-
+    };
 
     const handleChangeData = data => {
         try {
@@ -160,12 +157,12 @@ const UserBreakFastMainPage = () => {
     const SaveDataFromSurvay = async () => {
         setSubmitOneClickChecking(true);
         try {
-            const Send_Select_Food_Data_Axios = await request.post(`/FoodApp/SendBreakfastFoodSelect`, {
+            const Send_Select_Food_Data_Axios = await Axios_Post_Moduls(`/FoodApp/SendBreakfastFoodSelect`, {
                 InsertDataState,
                 SelectBreakFast,
             });
 
-            if (Send_Select_Food_Data_Axios.data.dataSuccess) {
+            if (Send_Select_Food_Data_Axios) {
                 toast.show({
                     title: `조식신청이 서버에 저장 되었습니다.`,
                     successCheck: true,
@@ -200,9 +197,10 @@ const UserBreakFastMainPage = () => {
         }
 
         try {
-            const GetSelect_Food_Data_Axios = await request.get(`/FoodApp/getBreakfastFoodLists`);
-            if (GetSelect_Food_Data_Axios.data.dataSuccess) {
-                setBreakFastList(GetSelect_Food_Data_Axios.data.Select_Lists);
+            const GetSelect_Food_Data_Axios = await Axios_Get_Moduls(`/FoodApp/getBreakfastFoodLists`, {});
+
+            if (GetSelect_Food_Data_Axios) {
+                setBreakFastList(GetSelect_Food_Data_Axios);
             }
         } catch (error) {
             console.log(error);
@@ -245,7 +243,12 @@ const UserBreakFastMainPage = () => {
                         <input value={LoginInfo.Login_name} readOnly></input>
                     </div>
 
-                    <div style={{ marginBottom: '20px' }} onFocus={()=>{HandleFocusOn()}}>
+                    <div
+                        style={{ marginBottom: '20px' }}
+                        onFocus={() => {
+                            HandleFocusOn();
+                        }}
+                    >
                         <Select
                             // value={SurvayState.FoodSelect}
                             onChange={e => handleChangeData(e)}

@@ -4,7 +4,7 @@ import { CgCloseO } from 'react-icons/cg';
 import { BiMinusCircle, BiPlusCircle } from 'react-icons/bi';
 import { useState } from 'react';
 import axios from 'axios';
-import { request } from '../../../../../API';
+import { Axios_Post_Moduls, request } from '../../../../../API';
 
 const StockListAddModalMainDivBox = styled.div`
     .Close_button_container {
@@ -113,12 +113,12 @@ const StockListAddModal = ({ SelectList, OnClose, Get_NowDates_Apply_User_Select
 
     const HandleListAdd = async () => {
         try {
-            const HandleSendCount_Axios = await request.post(`/FoodApp/Stock_List_Add`, {
+            const HandleSendCount_Axios = await Axios_Post_Moduls(`/FoodApp/Stock_List_Add`, {
                 CountList,
                 SelectList,
             });
 
-            if (HandleSendCount_Axios.data.dataSuccess) {
+            if (HandleSendCount_Axios) {
                 Get_NowDates_Apply_User_Select();
                 OnClose();
             }

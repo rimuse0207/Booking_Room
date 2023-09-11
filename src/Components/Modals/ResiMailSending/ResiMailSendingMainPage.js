@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
-import { request } from '../../../API';
+import { Axios_Get_Moduls, request } from '../../../API';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import Select from 'react-select';
@@ -135,24 +135,23 @@ const ResiMailSendingMainPage = ({ Mail_State, setMail_State, setDetailInfo, set
 
     const handleSending_getting_Detail_Info = async () => {
         try {
-            const handleSending_getting_Detail_Info_Axios = await request.get('/users/handleSending_getting_Detail_Info', {
-                params: {
-                    ID: LoginInfo.Login_id,
-                },
+            const handleSending_getting_Detail_Info_Axios = await Axios_Get_Moduls('/users/handleSending_getting_Detail_Info', {
+                ID: LoginInfo.Login_id,
             });
-            if (handleSending_getting_Detail_Info_Axios.data.dataSuccess) {
-                setDetailInfo(handleSending_getting_Detail_Info_Axios.data.datas);
+
+            if (handleSending_getting_Detail_Info_Axios) {
+                setDetailInfo(handleSending_getting_Detail_Info_Axios.datas);
                 setUserSelect_Option(
-                    handleSending_getting_Detail_Info_Axios.data.AlluserData_Select_Option.filter(item => item.id !== LoginInfo.Login_id)
+                    handleSending_getting_Detail_Info_Axios.AlluserData_Select_Option.filter(item => item.id !== LoginInfo.Login_id)
                 );
                 setSelected_User_State([
                     {
-                        label: `${handleSending_getting_Detail_Info_Axios.data.datas.brity_works_user_info_name}   ||   ${handleSending_getting_Detail_Info_Axios.data.datas.brity_works_detail_user_info_team}   ||   ${handleSending_getting_Detail_Info_Axios.data.datas.brity_works_detail_user_info_id}`,
-                        value: handleSending_getting_Detail_Info_Axios.data.datas.brity_works_detail_user_info_id,
-                        name: handleSending_getting_Detail_Info_Axios.data.datas.brity_works_user_info_name,
-                        team: handleSending_getting_Detail_Info_Axios.data.datas.brity_works_detail_user_info_team,
-                        id: handleSending_getting_Detail_Info_Axios.data.datas.brity_works_detail_user_info_id,
-                        company: handleSending_getting_Detail_Info_Axios.data.datas.brity_works_user_info_company,
+                        label: `${handleSending_getting_Detail_Info_Axios.datas.brity_works_user_info_name}   ||   ${handleSending_getting_Detail_Info_Axios.datas.brity_works_detail_user_info_team}   ||   ${handleSending_getting_Detail_Info_Axios.datas.brity_works_detail_user_info_id}`,
+                        value: handleSending_getting_Detail_Info_Axios.datas.brity_works_detail_user_info_id,
+                        name: handleSending_getting_Detail_Info_Axios.datas.brity_works_user_info_name,
+                        team: handleSending_getting_Detail_Info_Axios.datas.brity_works_detail_user_info_team,
+                        id: handleSending_getting_Detail_Info_Axios.datas.brity_works_detail_user_info_id,
+                        company: handleSending_getting_Detail_Info_Axios.datas.brity_works_user_info_company,
                         from: true,
                         cc: false,
                         bcc: false,

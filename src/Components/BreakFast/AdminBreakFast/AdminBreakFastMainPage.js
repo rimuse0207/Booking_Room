@@ -6,6 +6,7 @@ import NavigationMainPage from '../../Navigation/NavigationMainPage';
 import StockSelectMainPage from './StockSelect/StockSelectMainPage';
 import UserApplySelectMainPage from './UserApplySelect/UserApplySelectMainPage';
 import ExcelDownloadMainPage from './ExcelDownload/ExcelDownloadMainPage';
+import AdminFoodDataInsertPage from './AdminFoodDataInsertPage';
 
 const AdminBreakFastMainPageMainDivBox = styled.div`
     .Nav_Menu_Container {
@@ -44,7 +45,10 @@ const AdminBreakFastMainPage = () => {
             Nav_Menu: '재고현황',
             Nav_Access: false,
         },
-
+        {
+            Nav_Menu: '식단표입력',
+            Nav_Access: false,
+        },
     ]);
 
     const handleMoveToMenu = data => {
@@ -74,7 +78,9 @@ const AdminBreakFastMainPage = () => {
                     <UserApplySelectMainPage key={list.Nav_Menu}></UserApplySelectMainPage>
                 ) : list.Nav_Access && list.Nav_Menu === '재고현황' ? (
                     <StockSelectMainPage key={list.Nav_Menu}></StockSelectMainPage>
-                )  : (
+                ) : list.Nav_Access && list.Nav_Menu === '식단표입력' ? (
+                    <AdminFoodDataInsertPage key={list.Nav_Menu}></AdminFoodDataInsertPage>
+                ) : (
                     <div key={list.Nav_Menu}></div>
                 );
             })}

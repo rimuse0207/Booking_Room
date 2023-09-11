@@ -23,7 +23,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Loader_Check_For_False, Loader_Check_For_True } from '../Models/LoaderCheckReducer/LoaderCheckReducer';
 import SelectModal from './Modals/SelectModal';
 import { Title_Change_Func } from '../Models/TitleSelectorReducer/TitleSelectorReducer';
-import { request } from '../API';
+import { Axios_Post_Moduls, request } from '../API';
 import UserSelectMainPage from './UserSelect/UserSelectMainPage';
 import { BrowserView } from 'react-device-detect';
 
@@ -547,13 +547,14 @@ const MainTableContainer = () => {
     const getDatas = async () => {
         try {
             dispatch(Loader_Check_For_True());
-            const getDatasFromServer = await request.post(`/users/Test_Brity_works_Pims_API_Router`, {
+            const getDatasFromServer = await Axios_Post_Moduls(`/users/Test_Brity_works_Pims_API_Router`, {
                 Show_Date: moment(NowTimes).format('YYYY-MM-DD'),
                 LeftHeaderInfo,
                 SelectBasicTitle,
             });
-            if (getDatasFromServer.data.dataSuccess) {
-                setRoomDatas(getDatasFromServer.data.RoomDatas);
+
+            if (getDatasFromServer) {
+                setRoomDatas(getDatasFromServer);
                 dispatch(Loader_Check_For_False());
             } else {
                 toast.show({

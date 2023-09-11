@@ -20,12 +20,7 @@ const VehicleOperationSubmitMainPageMainDivBox = styled.div`
 
 const VehicleOperationSubmitMainPage = () => {
     const history = useHistory();
-    const dispatch = useDispatch();
-    const { company_car_epid } = useParams();
     const LoginInfo = useSelector(state => state.LoginInfoDataRedux.Infomation);
-    const Vehicle_Operation_State = useSelector((state) => state.VehicleOperationRedux.Vehicle_Operation_Input_State);
-    
-
 
     useEffect(() => {           
         if (!LoginInfo.Login_token) {

@@ -132,129 +132,13 @@ const FloorLayoutUserSelectMainDivBox = styled.div`
 `;
 
 const FloorLayoutUserSelect = ({ UserSelect, handleClicksNotUser, setUserSelect, Get_Floor_Room_Position }) => {
-    const LoginInfo = useSelector(state => state.LoginInfoDataRedux.Infomation);
-    const FileUploadInput = useRef(null);
-    const [ImageCheckingModal, setImageCheckingModal] = useState(false);
-
     const handleSlideOut = e => {
         handleClicksNotUser(e);
-    };
-
-    const handleImageChange = () => {
-        setImageCheckingModal(true);
-        if (FileUploadInput.current) {
-            FileUploadInput.current.click();
-        }
-    };
-    const ImageChange = async e => {
-        const formData = new FormData();
-        formData.append('image', e.target.files[0]);
-        formData.append('selectUser', UserSelect);
-
-        const ImageSending = await axios({
-            baseURL: `${process.env.REACT_APP_DB_HOST}`,
-            url: '/users/Detail_Person_Image_Upload',
-            method: 'POST',
-            data: formData,
-            headers: {
-                'Content-Type': 'multipart/form-data',
-                User_ID: UserSelect?.user_id,
-            },
-        })
-            .then(response => {
-                if (response.data.dataSuccess) {
-                    ChnagingData(response.data.url_string, UserSelect);
-                } else {
-                    alert('에러 발생 다시 시도');
-                }
-            })
-            .catch(error => {
-                console.error(error);
-                alert('에러 발생');
-            });
-    };
-
-    const ChnagingData = (data, UserData) => {
-        setUserSelect({ ...UserSelect, person_Image: data });
-        Get_Floor_Room_Position();
-    };
-
-    const handleDeleteImage = async () => {
-        const Checking_Delete = window.confirm('정말 삭제 하시겠습니까?');
-        if (Checking_Delete) {
-            try {
-                const Delete_Image_Data = await request.post(`/users/Detail_Person_Image_Delete`, {
-                    UserSelect,
-                });
-
-                if (Delete_Image_Data.data.dataSuccess) {
-                    setUserSelect({ ...UserSelect, person_Image: null });
-                    Get_Floor_Room_Position();
-                }
-            } catch (error) {
-                console.log(error);
-            }
-        } else {
-            return;
-        }
     };
 
     return (
         <FloorLayoutUserSelectMainDivBox UserSelect={UserSelect}>
             <div className="User_Detail_Info">
-                {/* {LoginInfo.Login_Admin_Access ? (
-                    <div className="User_Image_Container">
-                        <h2 style={{ fontSize: '3em', marginBottom: '10px' }}>
-                            {UserSelect?.person_Image ? (
-                                <div className="User_Image_Something">
-                                    <img
-                                        src={`${process.env.REACT_APP_DB_HOST}/public/images/${UserSelect?.person_Image}`}
-                                        width="150px"
-                                        alt={UserSelect?.name}
-                                    ></img>
-                                    <span className="ImageDeleteButton" onClick={() => handleDeleteImage()}>
-                                        <TiDelete></TiDelete>
-                                    </span>
-                                </div>
-                            ) : (
-                                <div className="User_Image_Nothing" onClick={() => handleImageChange()}>
-                                    <div className="ClickUserIcon">
-                                        <BsPersonSquare></BsPersonSquare>
-                                    </div>
-                                    <div className="ClickButton">+</div>
-                                    <input
-                                        type="file"
-                                        ref={FileUploadInput}
-                                        accept="image/*"
-                                        onChange={ImageChange}
-                                        style={{ display: 'none' }}
-                                    ></input>
-                                </div>
-                            )}
-                        </h2>
-                    </div>
-                ) : (
-                    <div className="User_Image_Container">
-                        <h2 style={{ fontSize: '3em', marginBottom: '10px' }}>
-                            {UserSelect?.person_Image ? (
-                                <div>
-                                    <img
-                                        src={`${process.env.REACT_APP_DB_HOST}/public/images/${UserSelect?.person_Image}`}
-                                        width="150px"
-                                        height="200px"
-                                        alt={UserSelect?.name}
-                                    ></img>
-                                </div>
-                            ) : (
-                                <div>
-                                    <div className="ClickUserIcon">
-                                        <BsPersonSquare></BsPersonSquare>
-                                    </div>
-                                </div>
-                            )}
-                        </h2>
-                    </div>
-                )} */}
                 <div className="User_Image_Container">
                     <h2 style={{ fontSize: '3em', marginBottom: '10px' }}>
                         <div>

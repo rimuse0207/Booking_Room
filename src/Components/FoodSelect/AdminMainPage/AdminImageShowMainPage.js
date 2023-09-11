@@ -9,7 +9,7 @@ import { useState } from 'react';
 import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io';
 import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { request } from '../../../API';
+import { Axios_Get_Moduls, request } from '../../../API';
 const AdminImageShowMainPageMainDivBox = styled.div`
     min-height: 100vh;
     width: 100%;
@@ -61,14 +61,12 @@ const AdminImageShowMainPage = () => {
 
     const getAllImageData = async () => {
         try {
-            const getAllImageDataFromServer = await request.get(`/FoodApp/getAllImageDataFromServer`, {
-                params: {
-                    times: NowDates,
-                },
+            const getAllImageDataFromServer = await Axios_Get_Moduls(`/FoodApp/getAllImageDataFromServer`, {
+                times: NowDates,
             });
 
-            if (getAllImageDataFromServer.data.dataSuccess) {
-                setImageUrlInfo(getAllImageDataFromServer.data.getAllImage_Rows);
+            if (getAllImageDataFromServer) {
+                setImageUrlInfo(getAllImageDataFromServer);
             }
         } catch (error) {
             console.log(error);

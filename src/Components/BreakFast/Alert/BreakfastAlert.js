@@ -2,15 +2,14 @@ import React from 'react';
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
-import { request } from '../../../API';
+import { Axios_Post_Moduls, request } from '../../../API';
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 
 const BreakfastAlertMainDivBox = styled.div`
-    padding:30px;
-
-`
+    padding: 30px;
+`;
 
 const BreakfastAlert = () => {
     const history = useHistory();
@@ -20,23 +19,19 @@ const BreakfastAlert = () => {
     const [Food_URL, setFood_URL] = useState(null);
     const Sending_BreakFast_Data_Mail = async () => {
         try {
-            
-            const Sending_BreakFast_Data_Mail_Axios = await request.post(`/FoodApp/Sending_BreakFast_Data_Mail`, {
+            const Sending_BreakFast_Data_Mail_Axios = await Axios_Post_Moduls(`/FoodApp/Sending_BreakFast_Data_Mail`, {
                 Food_Data,
-                name:LoginInfo.Login_name,
-                id: LoginInfo.Login_id
+                name: LoginInfo.Login_name,
+                id: LoginInfo.Login_id,
             });
-            console.log(Sending_BreakFast_Data_Mail_Axios);
-            if (Sending_BreakFast_Data_Mail_Axios.data.dataSuccess) {
-                if (Sending_BreakFast_Data_Mail_Axios.data.Food_Image_Getting_Rows) {
-                    setFood_URL(Sending_BreakFast_Data_Mail_Axios.data.Food_Image_Getting_Rows[0].breakfast_info_image_src);
-                }
-            }
 
+            if (Sending_BreakFast_Data_Mail_Axios) {
+                setFood_URL(Sending_BreakFast_Data_Mail_Axios[0].breakfast_info_image_src);
+            }
         } catch (error) {
             console.log(error);
         }
-    }
+    };
 
     useEffect(() => {
         if (LoginInfo.Login_company === 'DHKS') {
@@ -44,31 +39,35 @@ const BreakfastAlert = () => {
         } else if (!LoginInfo.Login_token) {
             history.push('/Login_Page');
         } else {
-            alert("죄송합니다. DHKS 임직원만 신청 가능합니다.");
+            alert('죄송합니다. DHKS 임직원만 신청 가능합니다.');
             setCompanyChecking(true);
         }
-    },[])
+    }, []);
     return (
         <BreakfastAlertMainDivBox>
-            {CompanyChecking ? <div>
-                <h2>죄송합니다.</h2>
-                <h2>DHKS 임직원만 신청 가능합니다.</h2>
-            </div>:<div>
+            {CompanyChecking ? (
+                <div>
+                    <h2>죄송합니다.</h2>
+                    <h2>DHKS 임직원만 신청 가능합니다.</h2>
+                </div>
+            ) : (
+                <div>
                     <h2>조식 자동 발주 안내.</h2>
                     <div>
-                        <img width={"100%"} src={`${process.env.REACT_APP_DB_HOST}/FoodImages/${Food_URL}`}></img>
+                        <img width={'100%'} src={`${process.env.REACT_APP_DB_HOST}/FoodImages/${Food_URL}`}></img>
                     </div>
-                    <div style={{lineHeight:"40px"}}>
+                    <div style={{ lineHeight: '40px' }}>
                         <div>
                             <strong>{Food_Data}</strong>
                             <span>의 조식 정리를 해 주셔서 감사합니다.</span>
                         </div>
                         <div>빠른 시일 내에</div>
                         <div>소정의 Will을 지급 예정입니다.</div>
-                        </div>
-                </div>}
+                    </div>
+                </div>
+            )}
         </BreakfastAlertMainDivBox>
-    )
-}
+    );
+};
 
 export default BreakfastAlert;

@@ -6,7 +6,7 @@ import { toast } from '../../ToasMessage/ToastManager';
 import { TiUserDelete } from 'react-icons/ti';
 import { RiLockPasswordFill } from 'react-icons/ri';
 import UserAddMainModal from '../UserAddModal/UserAddMainModal';
-import { request } from '../../../API';
+import { Axios_Get_Moduls, Axios_Post_Moduls, request } from '../../../API';
 
 const UserManageTableMainDivBox = styled.div`
     width: 95%;
@@ -125,10 +125,10 @@ const UserManageTable = ({ AddUserModalIsOpen, setAddUserModalIsOpen }) => {
     ///데이터 조회
     const getUserInfoData = async () => {
         try {
-            const GetUserInfoDataFromServer = await request.get(`/users/User_Data_Getting_From_Admin`);
+            const GetUserInfoDataFromServer = await Axios_Get_Moduls(`/users/User_Data_Getting_From_Admin`, {});
 
-            if (GetUserInfoDataFromServer.data.dataSuccess) {
-                setUsersInfoDatas(GetUserInfoDataFromServer.data.Datas);
+            if (GetUserInfoDataFromServer) {
+                setUsersInfoDatas(GetUserInfoDataFromServer);
             } else {
                 toast.show({
                     title: `조회 권한이 없습니다. DHKS_IT팀에게 문의바랍니다.`,
@@ -153,11 +153,11 @@ const UserManageTable = ({ AddUserModalIsOpen, setAddUserModalIsOpen }) => {
                 return;
             }
 
-            const DeleteUserInfoDataFromServer = await request.post(`/users/User_Data_Delete_From_Admin`, {
+            const DeleteUserInfoDataFromServer = await Axios_Post_Moduls(`/users/User_Data_Delete_From_Admin`, {
                 UserInfoData,
             });
 
-            if (DeleteUserInfoDataFromServer.data.dataSuccess) {
+            if (DeleteUserInfoDataFromServer) {
                 getUserInfoData();
                 toast.show({
                     title: `${UserInfoData.brity_works_user_info_name}님의 ID를 삭제 하였습니다.`,
@@ -187,12 +187,11 @@ const UserManageTable = ({ AddUserModalIsOpen, setAddUserModalIsOpen }) => {
             if (!window.confirm(`${UserInfoData.brity_works_user_info_name}님의 비밀번호를 초기화 하시겠습니까?`)) {
                 return;
             }
-
-            const ResetPasswordUserInfoDataFromServer = await request.post(`/users/User_Data_Reset_Password_From_Admin`, {
+            const ResetPasswordUserInfoDataFromServer = await Axios_Post_Moduls(`/users/User_Data_Reset_Password_From_Admin`, {
                 UserInfoData,
             });
 
-            if (ResetPasswordUserInfoDataFromServer.data.dataSuccess) {
+            if (ResetPasswordUserInfoDataFromServer) {
                 toast.show({
                     title: `${UserInfoData.brity_works_user_info_name}님의 비밀번호를 초기화 하였습니다.`,
                     successCheck: true,

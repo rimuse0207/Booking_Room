@@ -9,7 +9,7 @@ import axios from 'axios';
 import { Loader_Check_For_False, Loader_Check_For_True } from '../../../Models/LoaderCheckReducer/LoaderCheckReducer';
 import { useState } from 'react';
 import { toast } from '../../ToasMessage/ToastManager';
-import { request } from '../../../API';
+import { Axios_Post_Moduls, request } from '../../../API';
 export const SurvayContainerMainDivBox = styled.div`
     min-height: 100vh;
     .Survay_Main_Content {
@@ -136,24 +136,17 @@ const SurvayContainer = () => {
                 return;
             }
             setSubmitOneClick(false);
-
-            const SaveDataFromSurvayFromServer = await request.post(`/FoodApp/SaveDataFromSurvayFromServer`, {
+            const SaveDataFromSurvayFromServer = await Axios_Post_Moduls(`/FoodApp/SaveDataFromSurvayFromServer`, {
                 SurvayState,
                 LoginInfo,
             });
+            // const SaveDataFromSurvayFromServer = await request.post(`/FoodApp/SaveDataFromSurvayFromServer`, {
+            //     SurvayState,
+            //     LoginInfo,
+            // });
 
-            if (SaveDataFromSurvayFromServer.data.dataSuccess) {
-                // toast.show({
-                //     title: `설문에 응해주셔서 감사합니다.`,
-                //     successCheck: true,
-                //     duration: 6000,
-                // });
+            if (SaveDataFromSurvayFromServer) {
                 alert(`설문에 응해주셔서 감사합니다.\n${SaveDataFromSurvayFromServer.data.Will}Will에 당첨되셨습니다.`);
-                // toast.show({
-                //     title: `${SaveDataFromSurvayFromServer.data.Will}Will에 당첨되셨습니다.`,
-                //     successCheck: true,
-                //     duration: 6000,
-                // });
 
                 window.location.href = '/Today_Food';
             } else {

@@ -5,7 +5,7 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
-import { request } from '../../../API';
+import { Axios_Get_Moduls, request } from '../../../API';
 import { Loader_Check_For_False, Loader_Check_For_True } from '../../../Models/LoaderCheckReducer/LoaderCheckReducer';
 import LoaderMainPage from '../../Loader/LoaderMainPage';
 import FloorLayoutUserContent from './FloorLayoutUserContent/FloorLayoutUserContent';
@@ -40,9 +40,10 @@ const FloorLayoutUserMainPage = () => {
     const Get_Floor_Room_Position = async () => {
         dispatch(Loader_Check_For_True());
         try {
-            const Get_Floor_Room_Position_State_Axios = await request.get(`/users/User_Get_Floor_Room_Position_State`);
-            if (Get_Floor_Room_Position_State_Axios.data.dataSuccess) {
-                setPlaceState(Get_Floor_Room_Position_State_Axios.data.PlaceState);
+            const Get_Floor_Room_Position_State_Axios = await Axios_Get_Moduls(`/users/User_Get_Floor_Room_Position_State`, {});
+
+            if (Get_Floor_Room_Position_State_Axios) {
+                setPlaceState(Get_Floor_Room_Position_State_Axios);
                 dispatch(Loader_Check_For_False());
             }
         } catch (error) {
