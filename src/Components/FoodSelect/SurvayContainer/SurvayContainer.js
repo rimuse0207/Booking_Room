@@ -10,6 +10,7 @@ import { Loader_Check_For_False, Loader_Check_For_True } from '../../../Models/L
 import { useState } from 'react';
 import { toast } from '../../ToasMessage/ToastManager';
 import { Axios_Post_Moduls, request } from '../../../API';
+import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 export const SurvayContainerMainDivBox = styled.div`
     min-height: 100vh;
     .Survay_Main_Content {
@@ -80,10 +81,11 @@ export const SurvayContainerMainDivBox = styled.div`
 `;
 
 const SurvayContainer = () => {
+    const dispatch = useDispatch();
+    const history = useHistory();
     const [TodayFoodState, setTodayFoodState] = useState([]);
     const [SubmitOneClick, setSubmitOneClick] = useState(true);
     const LoginInfo = useSelector(state => state.LoginInfoDataRedux.Infomation);
-    const dispatch = useDispatch();
 
     const [SurvayState, setSurvayState] = useState({
         company: LoginInfo.Login_company ? LoginInfo.Login_company : '',
@@ -140,15 +142,12 @@ const SurvayContainer = () => {
                 SurvayState,
                 LoginInfo,
             });
-            // const SaveDataFromSurvayFromServer = await request.post(`/FoodApp/SaveDataFromSurvayFromServer`, {
-            //     SurvayState,
-            //     LoginInfo,
-            // });
 
             if (SaveDataFromSurvayFromServer) {
-                alert(`설문에 응해주셔서 감사합니다.\n${SaveDataFromSurvayFromServer.data.Will}Will에 당첨되셨습니다.`);
+                alert(`설문에 응해주셔서 감사합니다.\n${SaveDataFromSurvayFromServer}Will에 당첨되셨습니다.`);
 
-                window.location.href = '/Today_Food';
+                history.push('/Today_Food');
+                // window.location.href = '/Today_Food';
             } else {
                 toast.show({
                     title: `Error발생. 다시 시도 해 주세요.`,
