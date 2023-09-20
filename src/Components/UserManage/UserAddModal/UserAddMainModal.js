@@ -6,9 +6,9 @@ import { request } from '../../../API';
 import { toast } from '../../ToasMessage/ToastManager';
 import UserAddTeamModalCheck from './UserAddTeamModalCheck';
 
-const UserAddMainModalMainDivBox = styled.div`
-    padding:20px;
-    padding-top:0px;
+export const UserAddMainModalMainDivBox = styled.div`
+    padding: 20px;
+    padding-top: 0px;
     .ApplyModal_Input_Container {
         margin-top: 10px;
         border-top: 1px solid gray;
@@ -132,22 +132,21 @@ const customStyles = {
 };
 Modal.setAppElement('#AddUserModal');
 
-const UserAddMainModal = ({ }) => {
+const UserAddMainModal = ({}) => {
     const [AddUserModalIsOpen, setAddUserModalIsOpen] = useState(false);
     const [AddUserInfoData, setAddUserInfoData] = useState({
         Company: 'DHK',
         Email: '',
         Name: '',
-        PhoneNumber: "",
-        Team : "",
-        Team_Code:""
+        PhoneNumber: '',
+        Team: '',
+        Team_Code: '',
     });
 
     const HandleUserAdd = async () => {
         try {
-
             if (!AddUserInfoData.Email || !AddUserInfoData.Name || !AddUserInfoData.PhoneNumber || !AddUserInfoData.Team) {
-                 toast.show({
+                toast.show({
                     title: `공란을 적부 입력 해주세요.`,
                     successCheck: false,
                     duration: 6000,
@@ -160,7 +159,6 @@ const UserAddMainModal = ({ }) => {
             });
 
             if (UserAddInfoDataFromServer.data.dataSuccess) {
-                
                 toast.show({
                     title: `${AddUserInfoData.Name}님의 인원을 추가하였습니다.`,
                     successCheck: true,
@@ -170,8 +168,8 @@ const UserAddMainModal = ({ }) => {
                     Company: 'DHK',
                     Email: '',
                     Name: '',
-                    PhoneNumber: "",
-                    Team : "",
+                    PhoneNumber: '',
+                    Team: '',
                 });
             } else {
                 toast.show({
@@ -192,100 +190,100 @@ const UserAddMainModal = ({ }) => {
 
     const handleOpenModal = () => {
         setAddUserModalIsOpen(true);
-    }
-   
+    };
 
     return (
-        
-            <UserAddMainModalMainDivBox>
-                <div>
-                    <h2>사용자 추가.</h2>
-                    <div className="ApplyModal_Input_Container">
-                        <div style={{ marginTop: '20px' }}>
-                            <div className="Float_cotainer_box">
-                                <div className="Float_cotainer_box_Left">회사</div>
-                                <div className="Float_cotainer_box_Right">
-                                    <div className="Float_cotainer_box_Right_InpuBox_cotainer">
-                                        <input type="text" value={AddUserInfoData.Company}></input>
-                                    </div>
+        <UserAddMainModalMainDivBox>
+            <div>
+                <h2>사용자 추가.</h2>
+                <div className="ApplyModal_Input_Container">
+                    <div style={{ marginTop: '20px' }}>
+                        <div className="Float_cotainer_box">
+                            <div className="Float_cotainer_box_Left">회사</div>
+                            <div className="Float_cotainer_box_Right">
+                                <div className="Float_cotainer_box_Right_InpuBox_cotainer">
+                                    <input type="text" value={AddUserInfoData.Company}></input>
                                 </div>
-                            </div>
-                            <div className="Float_cotainer_box">
-                                <div className="Float_cotainer_box_Left">Email(ID)</div>
-                                <div className="Float_cotainer_box_Right">
-                                    <div className="Float_cotainer_box_Right_InpuBox_cotainer">
-                                        <input
-                                            type="text"
-                                            placeholder="이메일을 적어주세요."
-                                            value={AddUserInfoData.Email}
-                                            onChange={e => setAddUserInfoData({ ...AddUserInfoData, Email: e.target.value })}
-                                        ></input>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="Float_cotainer_box">
-                                <div className="Float_cotainer_box_Left">이름</div>
-                                <div className="Float_cotainer_box_Right">
-                                    <div className="Float_cotainer_box_Right_InpuBox_cotainer">
-                                        <input
-                                            type="text"
-                                            placeholder="이름을 적어주세요."
-                                            value={AddUserInfoData.Name}
-                                            onChange={e => setAddUserInfoData({ ...AddUserInfoData, Name: e.target.value })}
-                                        ></input>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="Float_cotainer_box">
-                                <div className="Float_cotainer_box_Left">팀명</div>
-                                <div className="Float_cotainer_box_Right">
-                                    <div className="Float_cotainer_box_Right_InpuBox_cotainer">
-                                        <input
-                                            type="text"
-                                            placeholder="팀을 선택 해 주세요."
-                                            value={AddUserInfoData.Team}
-                                            // onChange={e => setAddUserInfoData({ ...AddUserInfoData, Team: e.target.value })}
-                                        onClick={() => handleOpenModal()}
-                                        readOnly
-                                        ></input>
-                                    </div>
-                            </div>
-                            
-                            </div>
-                              <div className="Float_cotainer_box">
-                                <div className="Float_cotainer_box_Left">핸드폰 번호</div>
-                                <div className="Float_cotainer_box_Right">
-                                    <div className="Float_cotainer_box_Right_InpuBox_cotainer">
-                                        <input
-                                            type="text"
-                                            placeholder="핸드폰 번호를 적어주세요."
-                                            value={AddUserInfoData.PhoneNumber}
-                                            onChange={e => setAddUserInfoData({ ...AddUserInfoData, PhoneNumber: e.target.value })}
-                                        ></input>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="Float_cotainer_box">
-                                <div className="Float_cotainer_box_Left">초기비밀번호</div>
-                                <div className="Float_cotainer_box_Right">
-                                    <div className="Float_cotainer_box_Right_InpuBox_cotainer">
-                                        <input type="text" value="1234"></input>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div className="Button_Cotainer">
-                                <button className="Submit" onClick={() => HandleUserAdd()}>
-                                    추가하기
-                                </button>
-                               
                             </div>
                         </div>
+                        <div className="Float_cotainer_box">
+                            <div className="Float_cotainer_box_Left">Email(ID)</div>
+                            <div className="Float_cotainer_box_Right">
+                                <div className="Float_cotainer_box_Right_InpuBox_cotainer">
+                                    <input
+                                        type="text"
+                                        placeholder="이메일을 적어주세요."
+                                        value={AddUserInfoData.Email}
+                                        onChange={e => setAddUserInfoData({ ...AddUserInfoData, Email: e.target.value })}
+                                    ></input>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="Float_cotainer_box">
+                            <div className="Float_cotainer_box_Left">이름</div>
+                            <div className="Float_cotainer_box_Right">
+                                <div className="Float_cotainer_box_Right_InpuBox_cotainer">
+                                    <input
+                                        type="text"
+                                        placeholder="이름을 적어주세요."
+                                        value={AddUserInfoData.Name}
+                                        onChange={e => setAddUserInfoData({ ...AddUserInfoData, Name: e.target.value })}
+                                    ></input>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="Float_cotainer_box">
+                            <div className="Float_cotainer_box_Left">팀명</div>
+                            <div className="Float_cotainer_box_Right">
+                                <div className="Float_cotainer_box_Right_InpuBox_cotainer">
+                                    <input
+                                        type="text"
+                                        placeholder="팀을 선택 해 주세요."
+                                        value={AddUserInfoData.Team}
+                                        // onChange={e => setAddUserInfoData({ ...AddUserInfoData, Team: e.target.value })}
+                                        onClick={() => handleOpenModal()}
+                                        readOnly
+                                    ></input>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="Float_cotainer_box">
+                            <div className="Float_cotainer_box_Left">핸드폰 번호</div>
+                            <div className="Float_cotainer_box_Right">
+                                <div className="Float_cotainer_box_Right_InpuBox_cotainer">
+                                    <input
+                                        type="text"
+                                        placeholder="핸드폰 번호를 적어주세요."
+                                        value={AddUserInfoData.PhoneNumber}
+                                        onChange={e => setAddUserInfoData({ ...AddUserInfoData, PhoneNumber: e.target.value })}
+                                    ></input>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="Float_cotainer_box">
+                            <div className="Float_cotainer_box_Left">초기비밀번호</div>
+                            <div className="Float_cotainer_box_Right">
+                                <div className="Float_cotainer_box_Right_InpuBox_cotainer">
+                                    <input type="text" value="1234"></input>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="Button_Cotainer">
+                            <button className="Submit" onClick={() => HandleUserAdd()}>
+                                추가하기
+                            </button>
+                        </div>
                     </div>
+                </div>
             </div>
-            <UserAddTeamModalCheck AddUserModalIsOpen={AddUserModalIsOpen} setAddUserModalIsOpen={()=>setAddUserModalIsOpen(false)} AddUserInfoData={AddUserInfoData} setAddUserInfoData={(data)=>setAddUserInfoData(data)}></UserAddTeamModalCheck>
-            </UserAddMainModalMainDivBox>
-       
+            <UserAddTeamModalCheck
+                AddUserModalIsOpen={AddUserModalIsOpen}
+                setAddUserModalIsOpen={() => setAddUserModalIsOpen(false)}
+                AddUserInfoData={AddUserInfoData}
+                setAddUserInfoData={data => setAddUserInfoData(data)}
+            ></UserAddTeamModalCheck>
+        </UserAddMainModalMainDivBox>
     );
 };
 

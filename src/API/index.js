@@ -17,9 +17,12 @@ export const Axios_Get_Moduls = async (Path_URL, Params_Data) => {
         });
         if (Axios_Get_Moduls_Axios.data.status === 200) {
             return Axios_Get_Moduls_Axios.data.data;
-        } else {
+        } else if (Axios_Get_Moduls_Axios.data.status === 401) {
             alert('세션이 종료되었습니다. 재 로그인 바랍니다.');
             window.location.href = '/Login_Page';
+        } else {
+            alert('Error 발생. IT팀에 문의바랍니다.');
+            return [];
         }
     } catch (error) {
         console.log(error);
@@ -32,9 +35,12 @@ export const Axios_Post_Moduls = async (Path_URL, Post_Data) => {
 
         if (Axios_Post_Moduls_Axios.data.status === 200) {
             return Axios_Post_Moduls_Axios.data.data;
-        } else {
+        } else if (Axios_Post_Moduls_Axios.data.status === 401) {
             alert('세션이 종료되었습니다. 재 로그인 바랍니다.');
             window.location.href = '/Login_Page';
+        } else {
+            alert('Error 발생. IT팀에 문의바랍니다.');
+            return [];
         }
     } catch (error) {
         console.log(error);

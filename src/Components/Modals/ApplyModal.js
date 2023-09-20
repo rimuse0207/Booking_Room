@@ -644,6 +644,7 @@ const ApplyModal = ({
                 Mail_State,
                 Selected_User_State,
             });
+            console.log(ReserverationForServer);
             if (ReserverationForServer) {
                 if (ReserverationForServer.errorCode) {
                     dispatch(Loader_Check_For_False());
@@ -771,7 +772,7 @@ const ApplyModal = ({
                                     isClearable={true}
                                     isSearchable={true}
                                     name="Room"
-                                    options={LeftHeaderInfo}
+                                    options={RoomDatas}
                                     onChange={value => handleChangeRoom(value)}
                                 />
                             </h4>

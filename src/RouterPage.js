@@ -35,6 +35,8 @@ import VehicleOperationMainPage from './Components/VehicleOperation/VehicleOpera
 import CarContact from './Components/Car_Contact/CarContact';
 import BreakfastAlert from './Components/BreakFast/Alert/BreakfastAlert';
 import VehicleOperationSubmitMainPage from './Components/VehicleOperation/User_Input_Info/VehicleOperationSubmitMainPage';
+import PartyPostMainPage from './Components/PartyPost/PartyPostMainPage';
+import AdminResoucesMainPage from './Components/AdminResources/AdminResourcesMainPage';
 
 const RouterPageMainContainer = styled.div``;
 
@@ -100,9 +102,16 @@ const RouterPage = () => {
                         <Route exact path="/FloorLayout" component={FloorLayoutMainPage}></Route>
                         <Route path="/FloorLayout/AdminChange" component={FloorLayoutAdminMinPage}></Route>
                         {/* 차량운행 */}
-                        {/* <Route exact path="/VehicleOperaion" component={VehicleOperationMainPage}></Route>
-                        <Route path="/VehicleOperaion/NewVehicleOperation/:company_car_epid" component={VehicleOperationSubmitMainPage}></Route>
-                        <Route path="/VehicleOperaion/NewVehicleOperation" component={VehicleOperationSubmitMainPage}></Route> */}
+                        <Route exact path="/VehicleOperaion" component={VehicleOperationMainPage}></Route>
+                        <Route
+                            path="/VehicleOperaion/NewVehicleOperation/:company_car_epid"
+                            component={VehicleOperationSubmitMainPage}
+                        ></Route>
+                        <Route path="/VehicleOperaion/NewVehicleOperation" component={VehicleOperationSubmitMainPage}></Route>
+                        {/* 당직근무 */}
+                        <Route path="/PartyPost" component={PartyPostMainPage}></Route>
+                        {/* DHKS 관리자 */}
+                        <Route path="/DHKS_Admin_Access_Control_Page" component={AdminResoucesMainPage}></Route>
                         {/* 기타 */}
                         <Route path="/Info_Loading/cLCYwLMPxquhcvijjqwoewmqwoi/:id/:date/:company" component={SpamTrainingMainPage}></Route>
                         <Route path="/Users/OrganChart/MainPage/:token/:id/:name" component={OrganChartMainPage}></Route>

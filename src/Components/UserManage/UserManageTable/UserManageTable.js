@@ -8,7 +8,7 @@ import { RiLockPasswordFill } from 'react-icons/ri';
 import UserAddMainModal from '../UserAddModal/UserAddMainModal';
 import { Axios_Get_Moduls, Axios_Post_Moduls, request } from '../../../API';
 
-const UserManageTableMainDivBox = styled.div`
+export const UserManageTableMainDivBox = styled.div`
     width: 95%;
     max-height: 80vh;
     overflow: auto;
