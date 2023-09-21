@@ -209,6 +209,7 @@ const LoginMainPage = () => {
             if (CheckingLoginFromServer.data.dataSuccess) {
                 if (!CheckingLoginFromServer.data.PasswordChange) {
                     //로그인 성공
+                    localStorage.setItem('Login_token', CheckingLoginFromServer.data.token);
                     const datas = {
                         Login_id: CheckingLoginFromServer.data.Getting_Brity_Works_User_Info_Rows[0].brity_works_user_info_id,
                         Login_name: CheckingLoginFromServer.data.Getting_Brity_Works_User_Info_Rows[0].brity_works_user_info_name,
@@ -221,7 +222,7 @@ const LoginMainPage = () => {
                                 ? true
                                 : false,
                     };
-                    localStorage.setItem('Login_token', CheckingLoginFromServer.data.token);
+
                     setCookie('Login_token', CheckingLoginFromServer.data.token);
                     dispatch(LOGIN_INFO_DATA_Changes(datas));
                     history.push('/');

@@ -546,16 +546,16 @@ const MainTableContainer = () => {
     const getDatas = async () => {
         try {
             dispatch(Loader_Check_For_True());
-            const getDatasFromServer = await Axios_Post_Moduls(`/users/Test_Brity_works_Pims_API_Router`, {
+            const getDatasFromServer = await request.post(`/users/Test_Brity_works_Pims_API_Router`, {
                 Show_Date: moment(NowTimes).format('YYYY-MM-DD'),
                 SelectBasicTitle,
             });
-            if (getDatasFromServer) {
-                setRoomDatas(getDatasFromServer);
+            if (getDatasFromServer.data.status === 200) {
+                setRoomDatas(getDatasFromServer.data.data);
                 dispatch(Loader_Check_For_False());
             } else {
                 toast.show({
-                    title: `BrityWorks API Error발생. DHKS_IT팀에게 문의바랍니다.`,
+                    title: `BrityWorks API Error발생. Errcode_FA001 DHKS_IT팀에게 문의바랍니다.`,
                     successCheck: false,
                     duration: 6000,
                 });
@@ -564,7 +564,7 @@ const MainTableContainer = () => {
         } catch (error) {
             console.log(error);
             toast.show({
-                title: `BrityWorks API Error발생. DHKS_IT팀에게 문의바랍니다.`,
+                title: `BrityWorks API Error발생. Errcode_FA002 DHKS_IT팀에게 문의바랍니다.`,
                 successCheck: false,
                 duration: 6000,
             });
