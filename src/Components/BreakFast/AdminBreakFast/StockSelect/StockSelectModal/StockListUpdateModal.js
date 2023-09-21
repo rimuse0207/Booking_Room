@@ -7,6 +7,7 @@ import { useEffect } from 'react';
 import { StockSelectMainPageMainDivBox } from '../StockSelectMainPage';
 import { UserApplySelectMainPageMainDivBox } from '../../UserApplySelect/UserApplySelectMainPage';
 import { Axios_Get_Moduls, request } from '../../../../../API';
+import { toast } from '../../../../ToasMessage/ToastManager';
 const StockListUpdateModalMainDivBox = styled.div`
     .Close_button_container {
         position: fixed;
@@ -32,7 +33,12 @@ const StockListUpdateModal = ({ SelectList, OnClose }) => {
 
             if (History_Stock_Show_Axios) {
                 setAfterUpdateData(History_Stock_Show_Axios);
-            }
+            } else
+                toast.show({
+                    title: `IT팀에게 문의바랍니다.`,
+                    successCheck: false,
+                    duration: 6000,
+                });
         } catch (error) {
             console.log(error);
         }

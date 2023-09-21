@@ -644,7 +644,6 @@ const ApplyModal = ({
                 Mail_State,
                 Selected_User_State,
             });
-            console.log(ReserverationForServer);
             if (ReserverationForServer) {
                 if (ReserverationForServer.errorCode) {
                     dispatch(Loader_Check_For_False());
@@ -712,6 +711,12 @@ const ApplyModal = ({
                         duration: 8000,
                     });
                 }
+            } else {
+                toast.show({
+                    title: `IT팀에게 문의바랍니다.`,
+                    successCheck: false,
+                    duration: 6000,
+                });
             }
         } catch (error) {
             console.log(error);

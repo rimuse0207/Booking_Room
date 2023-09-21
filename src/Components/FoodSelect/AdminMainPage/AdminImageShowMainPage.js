@@ -10,6 +10,7 @@ import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io';
 import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { Axios_Get_Moduls, request } from '../../../API';
+import { toast } from '../../ToasMessage/ToastManager';
 const AdminImageShowMainPageMainDivBox = styled.div`
     min-height: 100vh;
     width: 100%;
@@ -67,7 +68,12 @@ const AdminImageShowMainPage = () => {
 
             if (getAllImageDataFromServer) {
                 setImageUrlInfo(getAllImageDataFromServer);
-            }
+            } else
+                toast.show({
+                    title: `IT팀에게 문의바랍니다.`,
+                    successCheck: false,
+                    duration: 6000,
+                });
         } catch (error) {
             console.log(error);
         }

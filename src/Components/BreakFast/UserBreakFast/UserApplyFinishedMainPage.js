@@ -5,6 +5,7 @@ import { Axios_Get_Moduls, request } from '../../../API/index';
 import { useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { useState } from 'react';
+import { toast } from '../../ToasMessage/ToastManager';
 
 const UserApplyFinishedMainPageMainDivBox = styled.div`
     .Registered_List_Container {
@@ -43,7 +44,12 @@ const UserApplyFinishedMainPage = () => {
 
             if (getToday_BreakFast_Data_Axios) {
                 setApply_Lists(getToday_BreakFast_Data_Axios);
-            }
+            } else
+                toast.show({
+                    title: `IT팀에게 문의바랍니다.`,
+                    successCheck: false,
+                    duration: 6000,
+                });
         } catch (error) {
             console.log(error);
         }

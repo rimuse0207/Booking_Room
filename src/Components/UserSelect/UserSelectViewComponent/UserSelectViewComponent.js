@@ -63,7 +63,12 @@ const UserSelectViewComponent = ({ SearchTitle, setUserSearchModalOn, setClicked
             const Get_User_Info_Data_Axios = await Axios_Get_Moduls('/users/Get_User_Info_Data', {});
             if (Get_User_Info_Data_Axios) {
                 setUserList(Get_User_Info_Data_Axios);
-            }
+            } else
+                toast.show({
+                    title: `IT팀에게 문의바랍니다.`,
+                    successCheck: false,
+                    duration: 6000,
+                });
         } catch (error) {
             console.log(error);
         }

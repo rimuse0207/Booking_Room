@@ -6,6 +6,7 @@ import { useEffect } from 'react';
 import { Axios_Get_Moduls, request } from '../../../API';
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
+import { toast } from '../../ToasMessage/ToastManager';
 
 const TeamRoomListMainPageMainDivBox = styled.div`
     padding: 10px;
@@ -22,7 +23,12 @@ const TeamRoomListMainPage = () => {
             });
             if (Access_Team_List_Getting_Axios) {
                 setTeam_List(Access_Team_List_Getting_Axios);
-            }
+            } else
+                toast.show({
+                    title: `IT팀에게 문의바랍니다.`,
+                    successCheck: false,
+                    duration: 6000,
+                });
         } catch (error) {
             console.log(error);
         }

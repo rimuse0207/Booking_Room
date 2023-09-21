@@ -4,6 +4,7 @@ import { UserManageTableMainDivBox } from '../../../UserManage/UserManageTable/U
 import { Axios_Get_Moduls, Axios_Post_Moduls, request } from '../../../../API';
 import Toggle from '../Toggle/Toggle';
 import { RiDeleteBack2Fill } from 'react-icons/ri';
+import { toast } from '../../../ToasMessage/ToastManager';
 
 const ManageMainDivBox = styled.div`
     td {
@@ -34,6 +35,12 @@ const Manage = () => {
             if (Handle_Delete_Company_Room_Axios) {
                 alert('삭제처리 하였습니다.');
                 setAdmin_Room_Info(Handle_Delete_Company_Room_Axios);
+            } else {
+                toast.show({
+                    title: `IT팀에게 문의바랍니다.`,
+                    successCheck: false,
+                    duration: 6000,
+                });
             }
         } catch (error) {
             console.log(error);
@@ -48,6 +55,12 @@ const Manage = () => {
             });
 
             if (Change_Room_Info_State_axios) setAdmin_Room_Info(Change_Room_Info_State_axios);
+            else
+                toast.show({
+                    title: `IT팀에게 문의바랍니다.`,
+                    successCheck: false,
+                    duration: 6000,
+                });
         } catch (error) {
             console.log(error);
         }
@@ -56,7 +69,15 @@ const Manage = () => {
     const Company_Room_Info_Admin_State_Getting = async () => {
         try {
             const Company_Room_Info_Admin_State_Getting_Axios = await Axios_Get_Moduls('/users/Company_Room_Info_Admin_State_Getting');
-            if (Company_Room_Info_Admin_State_Getting_Axios) setAdmin_Room_Info(Company_Room_Info_Admin_State_Getting_Axios);
+            if (Company_Room_Info_Admin_State_Getting_Axios) {
+                setAdmin_Room_Info(Company_Room_Info_Admin_State_Getting_Axios);
+            } else {
+                toast.show({
+                    title: `IT팀에게 문의바랍니다.`,
+                    successCheck: false,
+                    duration: 6000,
+                });
+            }
         } catch (error) {
             console.log(error);
         }

@@ -10,6 +10,7 @@ import { Loader_Check_For_False, Loader_Check_For_True } from '../../../Models/L
 import LoaderMainPage from '../../Loader/LoaderMainPage';
 import FloorLayoutUserContent from './FloorLayoutUserContent/FloorLayoutUserContent';
 import FloorLayoutUserSelect from './FloorLayoutUserSelect/FloorLayoutUserSelect';
+import { toast } from '../../ToasMessage/ToastManager';
 
 const FloorLayoutUserMainPageMainDivBox = styled.div`
     overflow: auto;
@@ -45,7 +46,12 @@ const FloorLayoutUserMainPage = () => {
             if (Get_Floor_Room_Position_State_Axios) {
                 setPlaceState(Get_Floor_Room_Position_State_Axios);
                 dispatch(Loader_Check_For_False());
-            }
+            } else
+                toast.show({
+                    title: `IT팀에게 문의바랍니다.`,
+                    successCheck: false,
+                    duration: 6000,
+                });
         } catch (error) {
             console.log(error);
             dispatch(Loader_Check_For_False());

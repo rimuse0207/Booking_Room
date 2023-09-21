@@ -9,6 +9,7 @@ import FloorLayoutModal from './FloorLayoutModals/FloorLayoutModal';
 import { Axios_Get_Moduls, Axios_Post_Moduls, request } from '../../../API';
 import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+import { toast } from '../../ToasMessage/ToastManager';
 const FloorLayoutContainerMainDivBox = styled.div`
     margin-top: 10px;
     padding: 10px;
@@ -151,6 +152,12 @@ const FloorLayoutContainer = () => {
 
             if (handleSave_data_Axios) {
                 alert('저장 되었습니다.');
+            } else {
+                toast.show({
+                    title: `IT팀에게 문의바랍니다.`,
+                    successCheck: false,
+                    duration: 6000,
+                });
             }
         } catch (error) {
             console.log(error);
@@ -166,7 +173,12 @@ const FloorLayoutContainer = () => {
                 setPlace_Chair_State(Get_Floor_Room_Position_State_Axios.Place_Chair_State);
                 setPlace_Room_State(Get_Floor_Room_Position_State_Axios.Place_Room_State);
                 setPlace_Window_State(Get_Floor_Room_Position_State_Axios.Place_Window_State);
-            }
+            } else
+                toast.show({
+                    title: `IT팀에게 문의바랍니다.`,
+                    successCheck: false,
+                    duration: 6000,
+                });
         } catch (error) {
             console.log(error);
         }

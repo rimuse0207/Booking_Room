@@ -7,6 +7,7 @@ import { useState } from 'react';
 import moment from 'moment';
 import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io';
 import { FaFileExcel } from 'react-icons/fa';
+import { toast } from '../../ToasMessage/ToastManager';
 
 const UserBookingCheck = () => {
     const [Month_Date, setMonth_Date] = useState(moment().format('YYYY-MM'));
@@ -22,7 +23,12 @@ const UserBookingCheck = () => {
 
             if (Getting_Booking_Info_Data_Excel_Download_Axios) {
                 window.open(`${process.env.REACT_APP_DB_HOST}/${Getting_Booking_Info_Data_Excel_Download_Axios.data.URL}`);
-            }
+            } else
+                toast.show({
+                    title: `IT팀에게 문의바랍니다.`,
+                    successCheck: false,
+                    duration: 6000,
+                });
         } catch (error) {
             console.log(error);
         }
@@ -36,7 +42,12 @@ const UserBookingCheck = () => {
 
             if (Getting_Booking_Info_Data_Axios) {
                 setBooking_Info(Getting_Booking_Info_Data_Axios);
-            }
+            } else
+                toast.show({
+                    title: `IT팀에게 문의바랍니다.`,
+                    successCheck: false,
+                    duration: 6000,
+                });
         } catch (error) {
             console.log(error);
         }

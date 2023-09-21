@@ -6,6 +6,7 @@ import { useState } from 'react';
 import moment from 'moment';
 import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io';
 import { FaFileExcel } from 'react-icons/fa';
+import { toast } from '../../ToasMessage/ToastManager';
 
 export const UserLoginCheckMainDivBox = styled.div`
     .Date_Show_Click_Main_Container {
@@ -85,7 +86,12 @@ const UserLoginCheck = () => {
 
             if (Login_User_Data_Checking_Excel_Download_Axios) {
                 window.open(`${process.env.REACT_APP_DB_HOST}/${Login_User_Data_Checking_Excel_Download_Axios.URL}`);
-            }
+            } else
+                toast.show({
+                    title: `IT팀에게 문의바랍니다.`,
+                    successCheck: false,
+                    duration: 6000,
+                });
         } catch (error) {
             console.log(error);
         }

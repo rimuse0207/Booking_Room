@@ -1,11 +1,16 @@
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 import { toast } from '../Components/ToasMessage/ToastManager';
+import { Cookies } from 'react-cookie';
 
+const cookies = new Cookies();
+export const getCookie = name => {
+    return cookies.get(name);
+};
 export const request = axios.create({
     baseURL: process.env.REACT_APP_DB_HOST,
     headers: {
-        Authorization: localStorage.getItem('Login_token'),
+        Authorization: localStorage.getItem('Login_token') ? localStorage.getItem('Login_token') : getCookie('Login_token'),
         id: localStorage.getItem('Login_id'),
     },
 });

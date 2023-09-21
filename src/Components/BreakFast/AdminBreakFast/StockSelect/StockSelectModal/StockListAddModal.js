@@ -5,6 +5,7 @@ import { BiMinusCircle, BiPlusCircle } from 'react-icons/bi';
 import { useState } from 'react';
 import axios from 'axios';
 import { Axios_Post_Moduls, request } from '../../../../../API';
+import { toast } from '../../../../ToasMessage/ToastManager';
 
 const StockListAddModalMainDivBox = styled.div`
     .Close_button_container {
@@ -121,6 +122,12 @@ const StockListAddModal = ({ SelectList, OnClose, Get_NowDates_Apply_User_Select
             if (HandleSendCount_Axios) {
                 Get_NowDates_Apply_User_Select();
                 OnClose();
+            } else {
+                toast.show({
+                    title: `IT팀에게 문의바랍니다.`,
+                    successCheck: false,
+                    duration: 6000,
+                });
             }
         } catch (error) {
             console.log(error);

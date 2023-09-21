@@ -6,6 +6,7 @@ import { Axios_Post_Moduls, request } from '../../../API';
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
+import { toast } from '../../ToasMessage/ToastManager';
 
 const BreakfastAlertMainDivBox = styled.div`
     padding: 30px;
@@ -27,6 +28,12 @@ const BreakfastAlert = () => {
 
             if (Sending_BreakFast_Data_Mail_Axios) {
                 setFood_URL(Sending_BreakFast_Data_Mail_Axios[0].breakfast_info_image_src);
+            } else {
+                toast.show({
+                    title: `IT팀에게 문의바랍니다.`,
+                    successCheck: false,
+                    duration: 6000,
+                });
             }
         } catch (error) {
             console.log(error);

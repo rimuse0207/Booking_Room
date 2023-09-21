@@ -6,6 +6,7 @@ import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io';
 import { useEffect } from 'react';
 import { Axios_Get_Moduls, request } from '../../../../API';
 import { FaFileExcel } from 'react-icons/fa';
+import { toast } from '../../../ToasMessage/ToastManager';
 
 export const UserApplySelectMainPageMainDivBox = styled.div`
     .DateClickContainer {
@@ -83,7 +84,12 @@ const UserApplySelectMainPage = () => {
 
             if (Get_Now_Dates_Apply_User_Select_Axios) {
                 setTableData(Get_Now_Dates_Apply_User_Select_Axios);
-            }
+            } else
+                toast.show({
+                    title: `IT팀에게 문의바랍니다.`,
+                    successCheck: false,
+                    duration: 6000,
+                });
         } catch (error) {
             console.log(error);
         }

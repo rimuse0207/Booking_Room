@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { UserAddMainModalMainDivBox } from '../../../UserManage/UserAddModal/UserAddMainModal';
 import { Axios_Post_Moduls } from '../../../../API';
+import { toast } from '../../../ToasMessage/ToastManager';
 
 const RegisteredMainDivBox = styled.div`
     .Float_cotainer_box_Left {
@@ -30,8 +31,18 @@ const Registered = () => {
                 Room_Register_State,
             });
 
-            if (Room_Booking_Store_Axios.length === 0) {
-                alert('정상적으로 회의실 등록이 완료되었습니다.');
+            if (Room_Booking_Store_Axios) {
+                toast.show({
+                    title: `정상적으로 회의실 등록이 완료되었습니다.`,
+                    successCheck: true,
+                    duration: 6000,
+                });
+            } else {
+                toast.show({
+                    title: `IT팀에게 문의바랍니다.`,
+                    successCheck: false,
+                    duration: 6000,
+                });
             }
         } catch (error) {
             console.log(error);

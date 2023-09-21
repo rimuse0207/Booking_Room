@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { LOGOUT_INFO_DATA_Changes } from '../../../Models/LoginInfoReducer/LoginInfoReducer';
 import { Title_Change_Func } from '../../../Models/TitleSelectorReducer/TitleSelectorReducer';
+import { useHistory } from 'react-router-dom';
 
 const HambergerMenuMainPageMainDivBox = styled.div`
     .menubar {
@@ -203,6 +204,7 @@ const HambergerMenuMainPageMainDivBox = styled.div`
 const HambergerMenuMainPage = () => {
     const LoginInfo = useSelector(state => state.LoginInfoDataRedux.Infomation);
     const dispatch = useDispatch();
+    const history = useHistory();
     const myMenuRef = useRef('null');
     const [hambergerOpen, setHambergerOpen] = useState(false);
     const [menuStatus, setMenuStatus] = useState('');
@@ -321,7 +323,8 @@ const HambergerMenuMainPage = () => {
                                 onClick={() => {
                                     dispatch(Title_Change_Func('Company_Room'));
                                     dispatch(LOGOUT_INFO_DATA_Changes());
-                                    window.location.href = '/Today_Food';
+
+                                    history.push('/');
                                 }}
                             >
                                 <div>로그아웃</div>

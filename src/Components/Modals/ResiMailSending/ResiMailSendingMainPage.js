@@ -163,7 +163,12 @@ const ResiMailSendingMainPage = ({ Mail_State, setMail_State, setDetailInfo, set
                         SelectUserRef.current.focus();
                     }
                 }
-            }
+            } else
+                toast.show({
+                    title: `IT팀에게 문의바랍니다.`,
+                    successCheck: false,
+                    duration: 6000,
+                });
         } catch (error) {
             console.log(error);
         }

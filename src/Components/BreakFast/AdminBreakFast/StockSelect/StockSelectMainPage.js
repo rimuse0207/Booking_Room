@@ -14,6 +14,7 @@ import { IoCloseSharp } from 'react-icons/io5';
 import StockAddDataModal from './StockSelectModal/StockAddDataModal';
 import { Axios_Get_Moduls, Axios_Post_Moduls, request } from '../../../../API';
 import { confirmAlert } from 'react-confirm-alert';
+import { toast } from '../../../ToasMessage/ToastManager';
 
 const customStyles = {
     content: {
@@ -90,7 +91,12 @@ const StockSelectMainPage = () => {
 
             if (Get_Now_Dates_Apply_User_Select_Axios) {
                 setStockSelect(Get_Now_Dates_Apply_User_Select_Axios);
-            }
+            } else
+                toast.show({
+                    title: `IT팀에게 문의바랍니다.`,
+                    successCheck: false,
+                    duration: 6000,
+                });
         } catch (error) {
             console.log(error);
         }
@@ -104,6 +110,12 @@ const StockSelectMainPage = () => {
 
             if (Delete_Stock_List_Axios) {
                 Get_NowDates_Apply_User_Select();
+            } else {
+                toast.show({
+                    title: `IT팀에게 문의바랍니다.`,
+                    successCheck: false,
+                    duration: 6000,
+                });
             }
         } catch (error) {
             console.log(error);

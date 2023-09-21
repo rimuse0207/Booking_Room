@@ -8,6 +8,7 @@ import OrganChartData from './OrganChartData/OrganChartData';
 import Tree from 'react-animated-tree-v2';
 import { IoCloseSharp } from 'react-icons/io5';
 import Select from 'react-select';
+import { toast } from '../../ToasMessage/ToastManager';
 
 const customStyles = {
     content: {
@@ -172,7 +173,12 @@ const OrganChartMainPage = ({ UserSearchModalOn, setUserSearchModalOn, ClickedUs
 
             if (Upper_Department_Select_Getting_Axios) {
                 setOrganChartState(Upper_Department_Select_Getting_Axios.Tree_DepartMent);
-            }
+            } else
+                toast.show({
+                    title: `IT팀에게 문의바랍니다.`,
+                    successCheck: false,
+                    duration: 6000,
+                });
         } catch (error) {
             console.log(error);
         }
@@ -192,7 +198,12 @@ const OrganChartMainPage = ({ UserSearchModalOn, setUserSearchModalOn, ClickedUs
 
             if (Select_UserInfoDataGetting_Axios) {
                 setSelectUserInfoData(Select_UserInfoDataGetting_Axios);
-            }
+            } else
+                toast.show({
+                    title: `IT팀에게 문의바랍니다.`,
+                    successCheck: false,
+                    duration: 6000,
+                });
         } catch (error) {
             console.log(error);
         }
@@ -206,7 +217,12 @@ const OrganChartMainPage = ({ UserSearchModalOn, setUserSearchModalOn, ClickedUs
 
             if (OrganDataGetting_Axios) {
                 setOrganChartState(OrganDataGetting_Axios);
-            }
+            } else
+                toast.show({
+                    title: `IT팀에게 문의바랍니다.`,
+                    successCheck: false,
+                    duration: 6000,
+                });
         } catch (error) {
             console.log(error);
         }
@@ -223,7 +239,12 @@ const OrganChartMainPage = ({ UserSearchModalOn, setUserSearchModalOn, ClickedUs
 
             if (ChangeSelectedInfoGettingPersonInfo_Axios) {
                 setUserDetailInfo(ChangeSelectedInfoGettingPersonInfo_Axios);
-            }
+            } else
+                toast.show({
+                    title: `IT팀에게 문의바랍니다.`,
+                    successCheck: false,
+                    duration: 6000,
+                });
         } catch (error) {
             console.log(error);
         }
