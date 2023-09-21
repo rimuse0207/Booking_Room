@@ -519,7 +519,7 @@ const MainTableContainer = () => {
     //Table의 시간 선택 시
     const handleTableTimeSelect = data => {
         if (data.Reservation_Permissions) {
-            setSelectLeftHeaderInfo(LeftHeaderInfo.filter(list => list.value === data.SelectRoom)[0]);
+            setSelectLeftHeaderInfo(RoomDatas.filter(list => list.value === data.SelectRoom)[0]);
             setSelectDate({
                 StartDate: new Date(NowTimes),
                 StartTime: data.StartTime,
@@ -531,7 +531,7 @@ const MainTableContainer = () => {
             setApplyModalIsOpen(true);
         } else {
             toast.show({
-                title: `B1F강당 예약은 예약 조회만 가능합니다. `,
+                title: `${data.SelectRoom} 예약은 예약 조회만 가능합니다. `,
                 successCheck: false,
                 duration: 6000,
             });
@@ -550,7 +550,6 @@ const MainTableContainer = () => {
                 Show_Date: moment(NowTimes).format('YYYY-MM-DD'),
                 SelectBasicTitle,
             });
-
             if (getDatasFromServer) {
                 setRoomDatas(getDatasFromServer);
                 dispatch(Loader_Check_For_False());

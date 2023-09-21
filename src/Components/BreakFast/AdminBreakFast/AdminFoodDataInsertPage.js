@@ -5,7 +5,6 @@ import { request } from '../../../API';
 import { useHistory } from 'react-router-dom';
 
 const AdminFoodDataInsertPageMainDivBox = styled.div`
-    border: 1px solid black;
     .textarea-container {
         display: flex;
         justify-content: center;
@@ -66,7 +65,7 @@ const AdminFoodDataInsertPage = () => {
 
     return (
         <AdminFoodDataInsertPageMainDivBox>
-            <h4>저장 하실 식단표 데이터를 넣어주세요.</h4>
+            <h4 style={{ marginLeft: '20px' }}>저장 하실 식단표 데이터를 넣어주세요.</h4>
             <div className="textarea-container">
                 <textarea
                     className="styled-textarea"

@@ -224,7 +224,7 @@ const LoginMainPage = () => {
                     localStorage.setItem('Login_token', CheckingLoginFromServer.data.token);
                     setCookie('Login_token', CheckingLoginFromServer.data.token);
                     dispatch(LOGIN_INFO_DATA_Changes(datas));
-                    history.goBack();
+                    history.push('/');
                 } else {
                     //비밀번호 변경 요청
                     setLogin_Password_Change_State(true);
@@ -263,7 +263,7 @@ const LoginMainPage = () => {
                 setPasswordChangeData({ ...PasswordChangeData, New_PW_Check: '' });
                 New_Password_Check_Focus_Func();
                 toast.show({
-                    title: `바꾸실 비밀번호가 서로 다릅니다. 다시 확인 바랍니다.`,
+                    title: `변경 하실 비밀번호가 서로 다릅니다. 다시 확인 바랍니다.`,
                     successCheck: false,
                     duration: 6000,
                 });

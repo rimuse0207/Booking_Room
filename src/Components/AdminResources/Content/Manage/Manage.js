@@ -9,10 +9,36 @@ const ManageMainDivBox = styled.div`
     td {
         width: auto !important;
     }
+    .Delete_Tables_Room_Info {
+        color: red;
+        :hover {
+            cursor: pointer;
+        }
+    }
 `;
 
 const Manage = () => {
     const [Admin_Room_Info, setAdmin_Room_Info] = useState([]);
+
+    // Handle_Delete_Company_Room
+
+    const Handle_Delete_Company_Room = async data => {
+        if (!window.confirm('정말로 삭제하시겠습니까?')) {
+            return;
+        }
+        try {
+            const Handle_Delete_Company_Room_Axios = await Axios_Post_Moduls('/users/Handle_Delete_Company_Room', {
+                data,
+            });
+
+            if (Handle_Delete_Company_Room_Axios) {
+                alert('삭제처리 하였습니다.');
+                setAdmin_Room_Info(Handle_Delete_Company_Room_Axios);
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    };
 
     const Change_Room_Info_State = async (data, select_menu) => {
         try {
@@ -21,17 +47,16 @@ const Manage = () => {
                 select_menu,
             });
 
-            setAdmin_Room_Info(Change_Room_Info_State_axios);
+            if (Change_Room_Info_State_axios) setAdmin_Room_Info(Change_Room_Info_State_axios);
         } catch (error) {
             console.log(error);
         }
-        console.log(data);
     };
 
     const Company_Room_Info_Admin_State_Getting = async () => {
         try {
             const Company_Room_Info_Admin_State_Getting_Axios = await Axios_Get_Moduls('/users/Company_Room_Info_Admin_State_Getting');
-            setAdmin_Room_Info(Company_Room_Info_Admin_State_Getting_Axios);
+            if (Company_Room_Info_Admin_State_Getting_Axios) setAdmin_Room_Info(Company_Room_Info_Admin_State_Getting_Axios);
         } catch (error) {
             console.log(error);
         }
@@ -80,7 +105,7 @@ const Manage = () => {
                                             Change_Room_Info_State={() => Change_Room_Info_State(list, 'brity_works_room_info_permission')}
                                         ></Toggle>
                                     </td>
-                                    <td style={{ color: 'red' }}>
+                                    <td className="Delete_Tables_Room_Info" onClick={() => Handle_Delete_Company_Room(list)}>
                                         <RiDeleteBack2Fill></RiDeleteBack2Fill>
                                     </td>
                                 </tr>

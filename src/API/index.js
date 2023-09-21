@@ -22,7 +22,7 @@ export const Axios_Get_Moduls = async (Path_URL, Params_Data) => {
             window.location.href = '/Login_Page';
         } else {
             alert('Error 발생. IT팀에 문의바랍니다.');
-            return [];
+            return false;
         }
     } catch (error) {
         console.log(error);
@@ -40,7 +40,7 @@ export const Axios_Post_Moduls = async (Path_URL, Post_Data) => {
             window.location.href = '/Login_Page';
         } else {
             alert('Error 발생. IT팀에 문의바랍니다.');
-            return [];
+            return false;
         }
     } catch (error) {
         console.log(error);
