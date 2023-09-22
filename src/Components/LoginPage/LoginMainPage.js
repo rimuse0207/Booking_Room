@@ -6,6 +6,13 @@ import { toast } from '../ToasMessage/ToastManager';
 import { useHistory } from 'react-router-dom';
 import { request } from '../../API';
 import { useCookies } from 'react-cookie';
+import { Cookies } from 'react-cookie';
+
+const cookies = new Cookies();
+
+export const setCookie = (name, value) => {
+    return cookies.set(name, value);
+};
 
 const LoginMainPageMainDivBox = styled.div`
     background-color: #efefef;
@@ -180,7 +187,7 @@ const LoginMainPage = () => {
 
     const history = useHistory();
     const dispatch = useDispatch();
-    const [cookies, setCookie] = useCookies(['Login_token']);
+
     const [LoginInfoData, setLoginInfoData] = useState({
         ID: '',
         PW: '',
@@ -210,6 +217,8 @@ const LoginMainPage = () => {
                 if (!CheckingLoginFromServer.data.PasswordChange) {
                     //로그인 성공
                     localStorage.setItem('Login_token', CheckingLoginFromServer.data.token);
+                    setCookie('Login_token', CheckingLoginFromServer.data.token);
+
                     const datas = {
                         Login_id: CheckingLoginFromServer.data.Getting_Brity_Works_User_Info_Rows[0].brity_works_user_info_id,
                         Login_name: CheckingLoginFromServer.data.Getting_Brity_Works_User_Info_Rows[0].brity_works_user_info_name,
@@ -223,7 +232,6 @@ const LoginMainPage = () => {
                                 : false,
                     };
 
-                    setCookie('Login_token', CheckingLoginFromServer.data.token);
                     dispatch(LOGIN_INFO_DATA_Changes(datas));
                     history.push('/');
                 } else {
