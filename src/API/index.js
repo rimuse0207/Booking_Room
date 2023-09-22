@@ -3,8 +3,8 @@ import { useHistory } from 'react-router-dom';
 import { toast } from '../Components/ToasMessage/ToastManager';
 import { Cookies } from 'react-cookie';
 
-const cookies = new Cookies();
 export const getCookie = name => {
+    const cookies = new Cookies();
     return cookies.get(name);
 };
 export const request = axios.create({

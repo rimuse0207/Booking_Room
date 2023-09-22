@@ -6,6 +6,7 @@ import styled from 'styled-components';
 import { LOGOUT_INFO_DATA_Changes } from '../../../Models/LoginInfoReducer/LoginInfoReducer';
 import { Title_Change_Func } from '../../../Models/TitleSelectorReducer/TitleSelectorReducer';
 import { useHistory } from 'react-router-dom';
+import { cookies } from 'react-cookie';
 
 const HambergerMenuMainPageMainDivBox = styled.div`
     .menubar {
@@ -323,7 +324,7 @@ const HambergerMenuMainPage = () => {
                                 onClick={() => {
                                     dispatch(Title_Change_Func('Company_Room'));
                                     dispatch(LOGOUT_INFO_DATA_Changes());
-
+                                    cookies.remove('Login_token');
                                     history.push('/');
                                 }}
                             >

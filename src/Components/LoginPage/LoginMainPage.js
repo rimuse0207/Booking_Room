@@ -205,6 +205,11 @@ const LoginMainPage = () => {
         Login_ID_Focus_Func();
     }, []);
 
+    const TokenSettings = async Tokens => {
+        localStorage.setItem('Login_token', Tokens);
+        setCookie('Login_token', Tokens);
+    };
+
     const HandleSubmitLogin = async e => {
         e.preventDefault();
 
@@ -216,8 +221,8 @@ const LoginMainPage = () => {
             if (CheckingLoginFromServer.data.dataSuccess) {
                 if (!CheckingLoginFromServer.data.PasswordChange) {
                     //로그인 성공
-                    localStorage.setItem('Login_token', CheckingLoginFromServer.data.token);
-                    setCookie('Login_token', CheckingLoginFromServer.data.token);
+
+                    await TokenSettings(CheckingLoginFromServer.data.token);
 
                     const datas = {
                         Login_id: CheckingLoginFromServer.data.Getting_Brity_Works_User_Info_Rows[0].brity_works_user_info_id,
