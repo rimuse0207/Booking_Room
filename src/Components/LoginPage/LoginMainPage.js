@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { LOGIN_INFO_DATA_Changes } from '../../Models/LoginInfoReducer/LoginInfoReducer';
 import { toast } from '../ToasMessage/ToastManager';
@@ -184,6 +184,7 @@ const LoginMainPage = () => {
     const Login_Password_Focus = useRef(null);
     const New_Password_Focus = useRef(null);
     const New_Password_Check_Focus = useRef(null);
+    const LoginInfo = useSelector(state => state.LoginInfoDataRedux.Infomation);
 
     const history = useHistory();
     const dispatch = useDispatch();
@@ -204,6 +205,11 @@ const LoginMainPage = () => {
     useEffect(() => {
         Login_ID_Focus_Func();
     }, []);
+    useEffect(() => {
+        if (localStorage.getItem('Login_token')) {
+            history.push('/');
+        }
+    }, [localStorage.getItem('Login_token')]);
 
     const TokenSettings = async Tokens => {
         localStorage.setItem('Login_token', Tokens);
@@ -238,7 +244,6 @@ const LoginMainPage = () => {
                     };
 
                     dispatch(LOGIN_INFO_DATA_Changes(datas));
-                    history.push('/');
                 } else {
                     //비밀번호 변경 요청
                     setLogin_Password_Change_State(true);

@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { LOGOUT_INFO_DATA_Changes } from '../../../../Models/LoginInfoReducer/LoginInfoReducer';
 import { Title_Change_Func } from '../../../../Models/TitleSelectorReducer/TitleSelectorReducer';
 import LoginModal from '../../../Modals/LoginModal';
-
+import { cookies } from 'react-cookie';
 const UserInfoMainPageMainDivBox = styled.div`
     .MenuList {
         padding: 10px;
@@ -36,6 +36,7 @@ const UserInfoMainPage = () => {
                         onClick={() => {
                             dispatch(Title_Change_Func('Company_Room'));
                             dispatch(LOGOUT_INFO_DATA_Changes());
+                            cookies.remove('Login_token');
                         }}
                     >
                         로그아웃
