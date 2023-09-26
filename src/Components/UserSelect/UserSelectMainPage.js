@@ -105,6 +105,14 @@ const UserSelectMainPage = () => {
     };
 
     const handleClickUserSelecthandleClickUserSelect = async () => {
+        if (!LoginInfo.Login_token) {
+            toast.show({
+                title: `로그인 후 이용 가능합니다.`,
+                successCheck: false,
+                duration: 6000,
+            });
+            return;
+        }
         setUserSearchModalOn(true);
     };
 
