@@ -205,11 +205,11 @@ const LoginMainPage = () => {
     useEffect(() => {
         Login_ID_Focus_Func();
     }, []);
-    useEffect(() => {
-        if (localStorage.getItem('Login_token')) {
-            history.push('/');
-        }
-    }, [localStorage.getItem('Login_token')]);
+    // useEffect(() => {
+    //     if (localStorage.getItem('Login_token')) {
+    //         history.push('/');
+    //     }
+    // }, [localStorage.getItem('Login_token')]);
 
     const TokenSettings = async Tokens => {
         localStorage.setItem('Login_token', Tokens);
