@@ -7,7 +7,7 @@ import { useSelector } from 'react-redux';
 import { toast } from '../../../../../ToasMessage/ToastManager';
 import { request } from '../../../../../../API';
 
-const UserBattingModalMainDivBox = styled.div`
+export const UserBattingModalMainDivBox = styled.div`
     .Close_button_container {
         position: fixed;
         top: 10px;
