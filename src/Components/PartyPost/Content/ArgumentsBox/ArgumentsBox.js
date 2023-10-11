@@ -2,69 +2,46 @@ import React from 'react';
 import styled from 'styled-components';
 import { InfoBoxMainPageMainDivBox } from '../InfoBox/InfoBoxMainPage';
 import { useState, useCallback, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Party_Post_State_Change_Func } from '../../../../Models/PartyPostReducer/PartyPostReducer';
 
 const ArgumentsBoxMainDivBox = styled.div``;
 
 const ArgumentsBox = () => {
-    const [textareas, setTextareas] = useState([
-        { indexs: 1, Select_Time: '특기사항(인수사항)', Patrol_State: '없습니다.', height: 'auto' },
-        { indexs: 2, Select_Time: '인계사항', Patrol_State: '없습니다.', height: 'auto' },
-    ]);
+    const dispatch = useDispatch();
+    const Party_Post_State = useSelector(state => state.PartyPostReduce.Party_Post_State);
 
     const handleChange = useCallback(
-        (e, index) => {
-            const textareaLineHeight = 24;
-
-            const updatedTextareas = [...textareas];
-            const currentTextarea = updatedTextareas[index];
-
-            e.target.rows = 1;
-
-            const currentRows = Math.floor(e.target.scrollHeight / textareaLineHeight);
-
-            if (currentRows === currentTextarea.rows) {
-                e.target.rows = currentRows;
-            }
-
-            currentTextarea.Patrol_State = e.target.value;
-            currentTextarea.height = `${e.target.scrollHeight}px`;
-
-            setTextareas(updatedTextareas);
+        e => {
+            dispatch(
+                Party_Post_State_Change_Func({
+                    ...Party_Post_State,
+                    Argument_State: { ...Party_Post_State.Argument_State, Patrol_State: e.target.value },
+                })
+            );
         },
-        [textareas]
+        [Party_Post_State.Argument_State]
     );
-
-    useEffect(() => {
-        // 페이지가 다시 로드될 때 높이를 초기화
-        window.addEventListener('beforeunload', () => {
-            const updatedTextareas = textareas.map(textarea => {
-                textarea.height = 'auto';
-                return textarea;
-            });
-            setTextareas(updatedTextareas);
-        });
-    }, []);
 
     return (
         <InfoBoxMainPageMainDivBox>
-            <h3>3. 인수사항</h3>
-            {textareas.map((textarea, index) => (
-                <div className="Box_Container" key={index}>
-                    <div>
-                        <h4>{textarea.Select_Time}</h4>
-                        <div className="Input_Container">
-                            <textarea
-                                rows={1}
-                                style={{ height: textarea.height }}
-                                value={textarea.Patrol_State}
-                                onChange={e => handleChange(e, index)}
-                                onInput={e => handleChange(e, index)}
-                                placeholder={`Textarea ${index + 1}`}
-                            />
-                        </div>
+            <h3>3. 특이사항</h3>
+
+            <div className="Box_Container">
+                <div>
+                    <h4>{Party_Post_State.Argument_State.Select_Time}</h4>
+                    <div className="Input_Container">
+                        <textarea
+                            rows={1}
+                            style={{ height: Party_Post_State.Argument_State.height }}
+                            value={Party_Post_State.Argument_State.Patrol_State}
+                            onChange={e => handleChange(e)}
+                            onInput={e => handleChange(e)}
+                            placeholder={`Textarea`}
+                        />
                     </div>
                 </div>
-            ))}
+            </div>
         </InfoBoxMainPageMainDivBox>
     );
 };
