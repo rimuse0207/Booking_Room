@@ -37,6 +37,7 @@ import BreakfastAlert from './Components/BreakFast/Alert/BreakfastAlert';
 import VehicleOperationSubmitMainPage from './Components/VehicleOperation/User_Input_Info/VehicleOperationSubmitMainPage';
 import PartyPostMainPage from './Components/PartyPost/PartyPostMainPage';
 import AdminResoucesMainPage from './Components/AdminResources/AdminResourcesMainPage';
+import AdminSurvayMainPage from './Components/FoodSelect/SurvayContainer/Admin/AdminSurvayMainPage';
 
 const RouterPageMainContainer = styled.div``;
 
@@ -112,6 +113,7 @@ const RouterPage = () => {
                         <Route path="/PartyPost" component={PartyPostMainPage}></Route>
                         {/* DHKS 관리자 */}
                         <Route path="/DHKS_Admin_Access_Control_Page" component={AdminResoucesMainPage}></Route>
+                        <Route path="/Admin_Week_Survay_Check" component={AdminSurvayMainPage}></Route>
                         {/* 기타 */}
                         <Route path="/Info_Loading/cLCYwLMPxquhcvijjqwoewmqwoi/:id/:date/:company" component={SpamTrainingMainPage}></Route>
                         <Route path="/Users/OrganChart/MainPage/:token/:id/:name" component={OrganChartMainPage}></Route>

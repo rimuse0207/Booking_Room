@@ -8,7 +8,7 @@ import UserApplySelectMainPage from './UserApplySelect/UserApplySelectMainPage';
 import ExcelDownloadMainPage from './ExcelDownload/ExcelDownloadMainPage';
 import AdminFoodDataInsertPage from './AdminFoodDataInsertPage';
 
-const AdminBreakFastMainPageMainDivBox = styled.div`
+export const AdminBreakFastMainPageMainDivBox = styled.div`
     .Nav_Menu_Container {
         display: flex;
         max-width: 400px;
