@@ -3,13 +3,13 @@ import { useState } from 'react';
 import styled from 'styled-components';
 import Manage from '../Content/Manage/Manage';
 import Registered from '../Content/Registered/Registered';
+import PartyPostList from '../Content/PartyPostList/PartyPostList';
 
 const ContainerMainPageMainDivBox = styled.div`
     .Nav_Menu_Container {
         display: flex;
-        max-width: 400px;
         min-height: 50px;
-        justify-content: space-between;
+        justify-content: start;
         align-items: center;
         padding-left: 10px;
         padding-right: 10px;
@@ -19,11 +19,12 @@ const ContainerMainPageMainDivBox = styled.div`
         }
 
         li {
-            width: 45%;
+            width: 300px;
             border-bottom: 2px solid #368;
             text-align: center;
             padding: 10px;
             font-size: 1.1em;
+            margin-right: 10px;
             :hover {
                 cursor: pointer;
             }
@@ -39,6 +40,10 @@ const ContainerMainPage = () => {
         },
         {
             Nav_Menu: '회의실 등록',
+            Nav_Access: false,
+        },
+        {
+            Nav_Menu: '당직근무 메일 및 메시지 전송 추가',
             Nav_Access: false,
         },
     ]);
@@ -68,6 +73,8 @@ const ContainerMainPage = () => {
                     <Manage key={list.Nav_Menu}></Manage>
                 ) : list.Nav_Access && list.Nav_Menu === '회의실 등록' ? (
                     <Registered></Registered>
+                ) : list.Nav_Access && list.Nav_Menu === '당직근무 메일 및 메시지 전송 추가' ? (
+                    <PartyPostList></PartyPostList>
                 ) : (
                     <div key={list.Nav_Menu}></div>
                 );
