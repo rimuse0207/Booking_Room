@@ -95,7 +95,6 @@ const ContentContainer = () => {
     const Handle_Click_File_Download = async Select_Menu => {
         if (Select_Menu === 'contact') {
             const Handle_Click_File_Download_Axios = await request.get('/PartyPost/emergency_phone_number');
-            console.log(Handle_Click_File_Download_Axios);
         } else {
             const Handle_Click_File_Download_Axios = await request.get('/PartyPost/checklist_down');
         }

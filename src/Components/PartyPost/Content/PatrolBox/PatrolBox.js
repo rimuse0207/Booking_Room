@@ -50,28 +50,25 @@ const PatrolBox = () => {
         (e, index, data) => {
             const textareaLineHeight = 24;
 
-            const updatedTextareas = [...Party_Post_State.Patrol_State];
-            const currentTextarea = updatedTextareas[index];
+            const updatedTextareas = textareas.map((textarea, i) => {
+                if (i === index) {
+                    return {
+                        ...textarea,
+                        Patrol_State: e.target.value,
+                        height: '${e.target.scrollHeight}px',
+                    };
+                }
+                return textarea;
+            });
+            setTextareas(updatedTextareas);
 
-            e.target.rows = 1;
-
-            const currentRows = Math.floor(e.target.scrollHeight / textareaLineHeight);
-
-            if (currentRows === currentTextarea.rows) {
-                e.target.rows = currentRows;
-            }
-
-            currentTextarea.Patrol_State = e.target.value;
-            currentTextarea.height = `${e.target.scrollHeight}px`;
-
-            // setTextareas(updatedTextareas);
             const Change_Data = Party_Post_State.Patrol_State.map(list =>
                 list.indexs === data.indexs ? { ...list, Patrol_State: e.target.value } : list
             );
 
             dispatch(Party_Post_State_Change_Func({ ...Party_Post_State, Patrol_State: Change_Data }));
         },
-        [Party_Post_State.Patrol_State]
+        [dispatch, Party_Post_State, textareas]
     );
 
     useEffect(() => {
@@ -89,7 +86,7 @@ const PatrolBox = () => {
         <InfoBoxMainPageMainDivBox>
             <h3>2. 순찰사항</h3>
             {Party_Post_State.Patrol_State.map((textarea, index) => (
-                <div className="Box_Container" key={index}>
+                <div className="Box_Container" key={textarea.indexs}>
                     <div>
                         <h4>
                             <FormControl sx={{ m: 1, minWidth: 100 }} size="small">
@@ -118,7 +115,7 @@ const PatrolBox = () => {
                                 style={{ height: textarea.height }}
                                 value={textarea.Patrol_State}
                                 onChange={e => handleChange(e, index, textarea)}
-                                onInput={e => handleChange(e, index, textarea)}
+                                // onInput={e => handleChange(e, index, textarea)}
                                 placeholder={`Textarea ${index + 1}`}
                             />
                         </div>

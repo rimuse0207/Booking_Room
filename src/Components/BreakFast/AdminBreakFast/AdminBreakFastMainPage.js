@@ -50,6 +50,15 @@ const AdminBreakFastMainPage = () => {
             Nav_Access: false,
         },
     ]);
+    const vehicles = [
+        { id: 1, number: '(판교) 191허3655' },
+        { id: 2, number: '(아산) 191허3153' },
+        { id: 3, number: '(아산) 74러3874' },
+        { id: 4, number: '(동탄) 191허3152' },
+        { id: 5, number: '(판교) 14나1878' },
+        { id: 6, number: '(판교) 223하3516' },
+        { id: 7, number: '(동탄) 223하3517' },
+    ];
 
     const handleMoveToMenu = data => {
         setAdmin_Nav_Menu(

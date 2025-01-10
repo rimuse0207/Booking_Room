@@ -1,12 +1,11 @@
-import React,{useEffect} from "react";
-import { useParams } from "react-router-dom";
-import styled from "styled-components";
-import { request } from "../../../API";
-import { GoAlert } from "react-icons/go";
+import React, { useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import styled from 'styled-components';
+import { request } from '../../../API';
+import { GoAlert } from 'react-icons/go';
 
 const SpamTrainingContainerMainDivBox = styled.div`
-
- .TopBar {
+    .TopBar {
         height: 100px;
         background-color: #e04239;
     }
@@ -29,16 +28,16 @@ const SpamTrainingContainerMainDivBox = styled.div`
         .ContentContents {
             padding-left: 80px;
             line-height: 40px;
-            font-size:1.2em;
+            font-size: 1.2em;
         }
     }
-    li{
+    li {
         list-style: decimal;
     }
-`
+`;
 
 const SpamTrainingContainer = () => {
-     const { id, date,company } = useParams();
+    const { id, date, company } = useParams();
 
     useEffect(() => {
         SendDataIp();
@@ -50,7 +49,7 @@ const SpamTrainingContainer = () => {
                 params: {
                     id,
                     date,
-                    company
+                    company,
                 },
             });
 
@@ -63,7 +62,7 @@ const SpamTrainingContainer = () => {
     };
     return (
         <SpamTrainingContainerMainDivBox>
-             <div className="TopBar"></div>
+            <div className="TopBar"></div>
             <div className="ContentContainer">
                 <div className="ContentTitle">
                     <div className="ContentIcons">
@@ -79,11 +78,10 @@ const SpamTrainingContainer = () => {
                     <ul>
                         <li>인터넷을(랜선 및 와이파이) 연결을 차단 해주세요.</li>
                         <li>설치되어있는 Trendmicro를 사용하여 '바이러스 검사'를 실행 해주세요.</li>
-                        <li>즉시, IT담당자에게 연락 해주세요.</li>
                     </ul>
                 </div>
             </div>
         </SpamTrainingContainerMainDivBox>
-    )
-}
-export default SpamTrainingContainer
+    );
+};
+export default SpamTrainingContainer;

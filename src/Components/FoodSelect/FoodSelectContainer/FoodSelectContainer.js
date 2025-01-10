@@ -216,39 +216,6 @@ const FoodSelectContainer = ({ history }) => {
 
     return (
         <FoodSelectContainerMainDivBox>
-            <div>
-                <h2>사진 업로드</h2>
-            </div>
-            <div>
-                <h3>{moment().lang('ko').format('YYYY년 MM월 DD일 dddd')}</h3>
-            </div>
-            {FileStateData ? (
-                <div className="UploadInput_Container">
-                    <div
-                        className="UploadImage"
-                        style={{
-                            backgroundImage: `url(${process.env.REACT_APP_DB_HOST}/FoodImages/${
-                                FileStateData.filename.split('.')[0]
-                            }_resize.jpg)`,
-                        }}
-                    ></div>
-                    <div className="DeleteButton" onClick={() => handleDeleteFromServerImage()}>
-                        <RiDeleteBin6Line></RiDeleteBin6Line>
-                    </div>
-                </div>
-            ) : (
-                <div className="UploadInput_Container" style={{ backgroundImage: `url(icon.png)` }}>
-                    <input
-                        className="File_UploadInput"
-                        type="file"
-                        accept="image/*"
-                        name="thumbnail"
-                        ref={inputRef}
-                        onChange={onUploadImage}
-                    />
-                </div>
-            )}
-
             <div style={{ marginTop: '20px' }}>
                 <div>
                     <span>회사 : </span>
@@ -258,15 +225,13 @@ const FoodSelectContainer = ({ history }) => {
                     <span>이름 : </span>
                     <span>{LoginInfo.Login_name}</span>
                 </div>
-                <div></div>
-            </div>
-            {OneClickCheck ? (
-                <div className="UploadButtonDiv">
-                    <button onClick={() => handleUploadDataFromServer()}>업로드</button>
+                <div>
+                    <span>안녕하세요 임직원여러분 그 동안 잔반줄이기 이벤트를</span>
+                    <span>참여해주셔서 대단히 감사드립니다. </span>
+                    <span>여러분들의 적극적인 참여로 그 목적에 맞게 이벤트가 진행될 수 있었습니다.</span>
+                    <span>6월부터는 이 이벤트를 잠시 쉬어가며, 또 다른 이벤트로 찾아뵙겠습니다. 감사합니다. </span>
                 </div>
-            ) : (
-                <div>-</div>
-            )}
+            </div>
 
             {/* 로딩 컴포넌트 시작 */}
             <LoaderMainPage loading={Loading}></LoaderMainPage>

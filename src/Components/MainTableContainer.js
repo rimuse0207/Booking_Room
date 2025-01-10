@@ -293,193 +293,21 @@ const MainTableContainer = () => {
     moment.locale('ko');
     const dispatch = useDispatch();
 
-    // const RoomData = [
-    //     {
-    //         name: '2F_A_ROOM',
-    //         value: '2F_A_ROOM',
-    //         targetId: 'M220506085327A348577',
-    //         userId: 'a34dhk02.a',
-    //         label: '판교 2층 A룸  (  2F_A_ROOM )',
-    //         Reservation_Permissions: true,
-    //     },
-    //     {
-    //         name: '2F_B_ROOM',
-    //         value: '2F_B_ROOM',
-    //         targetId: 'M220511051804A346734',
-    //         userId: 'a34dhk02.b',
-    //         label: '판교 2층 B룸  (  2F_B_ROOM )',
-    //         Reservation_Permissions: true,
-    //     },
-    //     {
-    //         name: '2F_C_ROOM',
-    //         value: '2F_C_ROOM',
-    //         targetId: 'M220511052330A343086',
-    //         userId: 'a34dhk02.c',
-    //         label: '판교 2층 C룸   ( 2F_C_ROOM )',
-    //         Reservation_Permissions: true,
-    //     },
-    //     {
-    //         name: '2F_D_ROOM',
-    //         value: '2F_D_ROOM',
-    //         targetId: 'M220511052716A342216',
-    //         userId: 'a34dhk02.d',
-    //         label: '판교 2층 D룸  ( 2F_D_ROOM )',
-    //         Reservation_Permissions: true,
-    //     },
-    //     {
-    //         name: '8F_A_ROOM',
-    //         value: '8F_A_ROOM',
-    //         targetId: 'M220511053254A341850',
-    //         userId: 'a34dhk08.a',
-    //         label: '판교 8층 A룸 ( 8F_A_ROOM )',
-    //         Reservation_Permissions: true,
-    //     },
-    //     {
-    //         name: '8F_C_ROOM',
-    //         value: '8F_C_ROOM',
-    //         targetId: 'M220511053429A342914',
-    //         userId: 'a34dhk08.c',
-    //         label: '판교 8층 C룸 ( 8F_C_ROOM )',
-    //         Reservation_Permissions: true,
-    //     },
-    //     {
-    //         name: '8F_D_ROOM',
-    //         value: '8F_D_ROOM',
-    //         targetId: 'M220511053957A341367',
-    //         userId: 'a34dhk08.d',
-    //         label: '판교 8층 D룸 ( 8F_D_ROOM )',
-    //         Reservation_Permissions: true,
-    //     },
-    //     {
-    //         name: 'B1F_ROOM',
-    //         value: 'B1F_ROOM',
-    //         targetId: 'M220506083209A349980',
-    //         userId: 'a34dhkb1.g',
-    //         label: '판교 B1층 강당 ( B1F_ROOM )',
-    //         Reservation_Permissions: false,
-    //     },
-    // ];
-    // const CarData = [
-    //     {
-    //         name: '(판교)_155허 7880',
-    //         value: '(판교)_155허 7880',
-    //         targetId: 'M220511063942A348400',
-    //         userId: 'a34car1.car2',
-    //         label: '판교 법인차량 ( (판교)_155허 7880 )',
-    //         Reservation_Permissions: true,
-    //     },
-    //     {
-    //         name: '(판교)_191허 3655',
-    //         value: '(판교)_191허 3655',
-    //         targetId: 'M220511064441A34933',
-    //         userId: 'a34car1.car7',
-    //         label: '판교 법인차량 ( (판교)_191허 3655 )',
-    //         Reservation_Permissions: true,
-    //     },
-    //     {
-    //         name: '(동탄)_14나 1878',
-    //         value: '(동탄)_14나 1878',
-    //         targetId: 'M220511064243A342636',
-    //         userId: 'a34car1.car5',
-    //         label: '동탄 법인차량 ( (동탄)_14나 1878 )',
-    //         Reservation_Permissions: true,
-    //     },
-    //     {
-    //         name: '(동탄)_155허 7879',
-    //         value: '(동탄)_155허 7879',
-    //         targetId: 'M220511063838A347157',
-    //         userId: 'a34car1.car1',
-    //         label: '동탄 법인차량 ( (동탄)_155허 7879 )',
-    //         Reservation_Permissions: true,
-    //     },
-    //     {
-    //         name: '(동탄)_155허 8053',
-    //         value: '(동탄)_155허 8053',
-    //         targetId: 'M220511064109A345960',
-    //         userId: 'a34car1.car3',
-    //         label: '동탄 법인차량 ( (동탄)_155허 8053 )',
-    //         Reservation_Permissions: true,
-    //     },
-    //     {
-    //         name: '(동탄)_45호 6144',
-    //         value: '(동탄)_45호 6144',
-    //         targetId: 'M220511064534A346135',
-    //         userId: 'a34car1.car8',
-    //         label: '동탄 법인차량 ( (동탄)_45호 6144 )',
-    //         Reservation_Permissions: true,
-    //     },
-    //     {
-    //         name: '(아산)_155허 7765',
-    //         value: '(아산)_155허 7765',
-    //         targetId: 'M220511064156A344713',
-    //         userId: 'a34car1.car4',
-    //         label: '아산 법인차량 ( (아산)_155허 7765 )',
-    //         Reservation_Permissions: true,
-    //     },
-    //     {
-    //         name: '(아산)_191허 3152',
-    //         value: '(아산)_191허 3152',
-    //         targetId: 'M220511065112A342288',
-    //         userId: 'a34car1.car10',
-    //         label: '아산 법인차량 ( (아산)_191허 3152 )',
-    //         Reservation_Permissions: true,
-    //     },
-    //     {
-    //         name: '(아산)_191허 3153',
-    //         value: '(아산)_191허 3153',
-    //         targetId: 'M220511064348A348000',
-    //         userId: 'a34car1.car6',
-    //         label: '아산 법인차량 ( (아산)_191허 3153 )',
-    //         Reservation_Permissions: true,
-    //     },
-    //     {
-    //         name: '(아산)_45호 6140',
-    //         value: '(아산)_45호 6140',
-    //         targetId: 'M220511065222A346350',
-    //         userId: 'a34car1.car11',
-    //         label: '아산 법인차량 ( (아산)_45호 6140 )',
-    //         Reservation_Permissions: true,
-    //     },
-    //     {
-    //         name: '(아산)_45호 6141',
-    //         value: '(아산)_45호 6141',
-    //         targetId: 'M220511065331A342699',
-    //         userId: 'a34car1.car12',
-    //         label: '아산 법인차량 ( (아산)_45호 6141 )',
-    //         Reservation_Permissions: true,
-    //     },
-    //     {
-    //         name: '(아산)_45호 6142',
-    //         value: '(아산)_45호 6142',
-    //         targetId: 'M220511065431A343884',
-    //         userId: 'a34car1.car13',
-    //         label: '아산 법인차량 ( (아산)_45호 6142 )',
-    //         Reservation_Permissions: true,
-    //     },
-    //     {
-    //         name: '(아산)_74러 3874',
-    //         value: '(아산)_74러 3874',
-    //         targetId: 'M220511065002A343682',
-    //         userId: 'a34car1.car9',
-    //         label: '아산 법인차량 ( (아산)_74러 3874 )',
-    //         Reservation_Permissions: true,
-    //     },
-    // ];
     const SelectBasicTitle = useSelector(state => state.TitleSelectorRedux.SelectBasicTitle);
     const Loading = useSelector(state => state.LoaderCheckingRedux.loading);
     const LoginInfo = useSelector(state => state.LoginInfoDataRedux.Infomation);
     const setScrollView = useRef(null);
     const [NowTimes, setNowTimes] = useState(new Date());
-    const [LeftHeaderInfo, setLeftHeaderInfo] = useState([]);
     const [SelectLeftHeaderInfo, setSelectLeftHeaderInfo] = useState(null);
     const [RoomDatas, setRoomDatas] = useState([]);
-    const [Room_8F_D_Data, setRoom_8F_D_Data] = useState([]);
     const [FloatingMenuOnCheck, setFloatingMenuOnCheck] = useState(true);
     const [ApplyModalIsOpen, setApplyModalIsOpen] = useState(false);
     const [SelectModalIsOpen, setSelectModalIsOpen] = useState(false);
     const [SelectModalData, setSelectModalData] = useState(null);
     const [SelectModalRomms_Data, setSelectModalRomms_Data] = useState(null);
     const [SelectedRoomName, setSelectRoomName] = useState(null);
+    const [Room_8F_D_Data, setRoom_8F_D_Data] = useState([]);
+    const [LeftHeaderInfo, setLeftHeaderInfo] = useState([]);
 
     const [SelectDate, setSelectDate] = useState({
         StartDate: null,
@@ -618,6 +446,7 @@ const MainTableContainer = () => {
                         <IoIosArrowForward></IoIosArrowForward>
                     </div>
                 </div>
+
                 {/* 날짜 선택 끝 */}
                 <BrowserView>
                     {/* 유저 검색 시작 */}

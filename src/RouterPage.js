@@ -24,8 +24,11 @@ import { request } from './API';
 import FloorLayoutAdminMinPage from './Components/FloorLayout/FloorLayoutAdminMainPage';
 import { CookiesProvider } from 'react-cookie';
 import SpamTrainingMainPage from './Components/SpamTraining/SpamTrainingMainPage';
+import Room from './Components/Rooms/Room';
+import CUSTOMERSECURITY from './Components/CUSTOMERSECURITY/Customersecurity';
 import OrganChartMainPage from './Components/UserSelect/OrganChart/OrganChartMainPage';
 import MailSendingMainPage from './Components/MailSending/MailSendingMainPage';
+import DocumentEducation from './Components/DocumentEducation/DocumentEducationMainPage';
 import KizukiNotepadMainPage from './Components/KizukiNotepad/KizukiNotepadMainPage';
 import KizukiRoomListMainPage from './Components/KizukiNotepad/Kizuki_Room_List/KizukiRoomListMainPage';
 import KizukiContentMainPage from './Components/KizukiNotepad/Kizuki_Content/KizukiContentMainPage';
@@ -36,6 +39,7 @@ import CarContact from './Components/Car_Contact/CarContact';
 import BreakfastAlert from './Components/BreakFast/Alert/BreakfastAlert';
 import VehicleOperationSubmitMainPage from './Components/VehicleOperation/User_Input_Info/VehicleOperationSubmitMainPage';
 import PartyPostMainPage from './Components/PartyPost/PartyPostMainPage';
+import overseasMainPage from './Components/overseas/overseasMainPage';
 import AdminResoucesMainPage from './Components/AdminResources/AdminResourcesMainPage';
 import AdminSurvayMainPage from './Components/FoodSelect/SurvayContainer/Admin/AdminSurvayMainPage';
 
@@ -77,6 +81,11 @@ const RouterPage = () => {
                     <Switch>
                         <Route path="/Login_Page" component={LoginMainPage}></Route>
                         {/* 회의실 관련 */}
+                        <Route path="/overseas" component={overseasMainPage}></Route>
+                        {/* <Route path="/newcar" component={newcarMainPage}></Route> */}
+                        <Route path="/Room" component={Room}></Route>
+                        <Route path="/CUSTOMERSECURITY" component={CUSTOMERSECURITY}></Route>
+                        {/* 해외출장관련 */}
                         <Route exact path="/" component={App}></Route>
                         <Route exact path="/User_Select_or_Add/:UserId/:UserCompany" component={UserManageMainPage}></Route>
                         {/* 식단 관련 */}
@@ -89,6 +98,8 @@ const RouterPage = () => {
                         <Route path="/BreakFast/UserSlect" component={UserBreakFastMainPage}></Route>
                         <Route path="/BreakFast/Finished" component={UserApplyFinishedMainPage}></Route>
                         <Route path="/Admin/BreakFast" component={AdminBreakFastMainPage}></Route>
+                        {/* 회계 전표 안내 동영상 */}
+                        <Route exact path="/Document_Education" component={DocumentEducation}></Route>
                         {/* 키즈키 노트 */}
                         <Route exact path="/KIZUKI_Notepad" component={KizukiNotepadMainPage}></Route>
                         <Route exact path="/KIZUKI_Notepad/:team_code" component={KizukiRoomListMainPage}></Route>

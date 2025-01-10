@@ -20,7 +20,7 @@ const ArgumentsBox = () => {
                 })
             );
         },
-        [Party_Post_State.Argument_State]
+        [dispatch, Party_Post_State]
     );
 
     return (
@@ -36,7 +36,7 @@ const ArgumentsBox = () => {
                             style={{ height: Party_Post_State.Argument_State.height }}
                             value={Party_Post_State.Argument_State.Patrol_State}
                             onChange={e => handleChange(e)}
-                            onInput={e => handleChange(e)}
+                            // onInput={e => handleChange(e)}
                             placeholder={`Textarea`}
                         />
                     </div>

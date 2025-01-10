@@ -6,28 +6,25 @@ const SiginificantBox = () => {
         { indexs: 1, Select_Time: '특이사항', Patrol_State: '특이사항 없습니다.', height: 'auto' },
     ]);
 
-    const handleChange = useCallback(
-        (e, index) => {
-            const textareaLineHeight = 24;
+    const handleChange = useCallback((e, index) => {
+        const textareaLineHeight = 24;
 
-            const updatedTextareas = [...textareas];
-            const currentTextarea = updatedTextareas[index];
+        const updatedTextareas = [...textareas];
+        const currentTextarea = updatedTextareas[index];
 
-            e.target.rows = 1;
+        e.target.rows = 1;
 
-            const currentRows = Math.floor(e.target.scrollHeight / textareaLineHeight);
+        const currentRows = Math.floor(e.target.scrollHeight / textareaLineHeight);
 
-            if (currentRows === currentTextarea.rows) {
-                e.target.rows = currentRows;
-            }
+        if (currentRows === currentTextarea.rows) {
+            e.target.rows = currentRows;
+        }
 
-            currentTextarea.Patrol_State = e.target.value;
-            currentTextarea.height = `${e.target.scrollHeight}px`;
+        currentTextarea.Patrol_State = e.target.value;
+        currentTextarea.height = `${e.target.scrollHeight}px`;
 
-            setTextareas(updatedTextareas);
-        },
-        [textareas]
-    );
+        setTextareas(updatedTextareas);
+    });
 
     useEffect(() => {
         // 페이지가 다시 로드될 때 높이를 초기화
@@ -38,11 +35,11 @@ const SiginificantBox = () => {
             });
             setTextareas(updatedTextareas);
         });
-    }, []);
+    }, [textareas]);
 
     return (
         <InfoBoxMainPageMainDivBox>
-            <h3>4. 특이사항</h3>
+            <h3>3. 특이사항</h3>
             {textareas.map((textarea, index) => (
                 <div className="Box_Container" key={index}>
                     <div>

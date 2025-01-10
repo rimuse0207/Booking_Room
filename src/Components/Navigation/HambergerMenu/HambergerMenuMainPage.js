@@ -265,6 +265,11 @@ const HambergerMenuMainPage = () => {
                                 <li>
                                     <Link to="/KIZUKI_Notepad">KIZUKI 노트</Link>
                                 </li>
+                                <li>
+                                    <Link to="/Document_Education">
+                                        회계 전표 <br></br>작성 안내 동영상
+                                    </Link>
+                                </li>
                                 {/* <li>
                                     <Link to="/VehicleOperaion">차량운행</Link>
                                 </li> */}
