@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import NavigationMainPage from '../Navigation/NavigationMainPage';
-import TeamRoomListMainPage from './Team_Room_List/TeamRoomListMainPage';
+import DocumentEducationListMainPage from './Team_Room_List/DocumentEducationListMainPage';
 
 const KizukiNotepadMainPageMainDivBox = styled.div``;
 
@@ -10,7 +10,7 @@ const DocumentEducationMainPage = () => {
         <KizukiNotepadMainPageMainDivBox>
             <NavigationMainPage TitleName="DHKS 회계 전표 작성 안내 동영상"></NavigationMainPage>
             <div>
-                <TeamRoomListMainPage></TeamRoomListMainPage>
+                <DocumentEducationListMainPage></DocumentEducationListMainPage>
             </div>
         </KizukiNotepadMainPageMainDivBox>
     );
