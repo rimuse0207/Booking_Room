@@ -296,11 +296,9 @@ const HambergerMenuMainPage = () => {
 
                         {LoginInfo.Login_id === 'sjyoo@dhk.co.kr' ||
                         LoginInfo.Login_id === 'sjkim@dhk.co.kr' ||
-                        LoginInfo.Login_id === 'jychoi@dhk.co.kr' ? (
+                        LoginInfo.Login_id === 'jychoi@dhk.co.kr' ||
+                        LoginInfo.Login_id === 'dikim@dhk.co.kr' ? (
                             <>
-                                <li>
-                                    <Link to="/Admin_Image_Check">잔반 이미지 확인</Link>
-                                </li>
                                 <li>
                                     <Link to="/Admin_Week_Survay_Check">식단 설문확인</Link>
                                 </li>

@@ -247,19 +247,7 @@ const TodayFoodContainer = ({ history }) => {
 
                 {moment().format('YYYY-MM-DD') === moment(TodayDate).format('YYYY-MM-DD') && TodayFoodState ? (
                     <div className="Button_Select_Cotainer">
-                        {ImageUploadCheck ? (
-                            <button style={{ backgroundColor: 'orange' }}>잔반 이미지 업로드 완료</button>
-                        ) : (
-                            <button onClick={() => handleImageUploadMoving()}>잔반 이미지 업로드</button>
-                        )}
-                        {SurvayCheck ? (
-                            <button style={{ backgroundColor: 'orange' }}>
-                                식당 설문조사 완료
-                                <br />( {SurvayWillChecking.food_week_survay_will_price} Will )
-                            </button>
-                        ) : (
-                            <button onClick={() => handleSurvayUploadMoving()}>식당 설문조사</button>
-                        )}
+                        <button onClick={() => handleSurvayUploadMoving()}>식당 설문조사</button>
                     </div>
                 ) : (
                     <div className="Button_Select_Cotainer">당일날만 사용가능합니다.</div>

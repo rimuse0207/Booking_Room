@@ -24,6 +24,20 @@ export const SurvayContainerMainDivBox = styled.div`
                 margin-bottom: 10px;
             }
         }
+        .Description_Explain_Container {
+            margin-bottom: 20px;
+        }
+        .Select_Title {
+            margin-bottom: 10px;
+            strong {
+                font-size: 1em;
+            }
+            span {
+                font-size: 0.8em;
+                color: gray;
+                margin-left: 10px;
+            }
+        }
         select {
             width: 100%;
             height: 30px;
@@ -129,7 +143,7 @@ const SurvayContainer = () => {
 
     const SaveDataFromSurvay = async () => {
         try {
-            if (!SurvayState.company || !SurvayState.opinion || SurvayState.FoodSelect === null) {
+            if (!SurvayState.opinion || SurvayState.FoodSelect === null) {
                 toast.show({
                     title: `공란을 전부 작성바랍니다.`,
                     successCheck: false,
@@ -144,10 +158,9 @@ const SurvayContainer = () => {
             });
 
             if (SaveDataFromSurvayFromServer) {
-                alert(`설문에 응해주셔서 감사합니다.\n${SaveDataFromSurvayFromServer}Will에 당첨되셨습니다.`);
+                alert(`설문에 응해주셔서 감사합니다.`);
 
                 history.push('/Today_Food');
-                // window.location.href = '/Today_Food';
             } else {
                 toast.show({
                     title: `Error발생. 다시 시도 해 주세요.`,
@@ -169,16 +182,13 @@ const SurvayContainer = () => {
         <SurvayContainerMainDivBox>
             <NavigationMainPage TitleName="설문조사"></NavigationMainPage>
             <div className="Survay_Main_Content">
-                <div>
+                <div className="Description_Explain_Container">
                     <ul>
-                        <li>
-                            <div>이름을 작성 하지 않으셔도 사용 가능합니다.</div>
-                            <div style={{ textAlign: 'end' }}>단, 이름을 작성 하셔야 Will이 지급됩니다.</div>
-                        </li>
-                        <li>Will 제공은 DHKS,DHK만 해당됩니다.</li>
+                        <li>보다 나은 식당 및 식사 운영의 대한 의견수집용으로만 사용중에 있습니다.</li>
+                        <li>모든 데이터는 무기명으로 관리되고 있습니다.</li>
                     </ul>
                 </div>
-                <div>
+                {/* <div>
                     <select value={SurvayState.company} onChange={e => setSurvayState({ ...SurvayState, company: e.target.value })}>
                         <option value="">회사를 선택해주세요.</option>
                         <option value="DHK">DHK</option>
@@ -186,9 +196,13 @@ const SurvayContainer = () => {
                         <option value="YIKC">YIKC</option>
                         <option value="EXICON">EXICON</option>
                     </select>
-                </div>
-                <div>
+                </div> */}
+                {/* <div>
                     <input value={SurvayState.name} onChange={e => setSurvayState({ ...SurvayState, name: e.target.value })}></input>
+                </div> */}
+                <div className="Select_Title">
+                    <strong>메뉴선택</strong>
+                    <span>( 중복선택 가능 )</span>
                 </div>
                 <div style={{ marginBottom: '20px' }}>
                     <Select
@@ -201,10 +215,13 @@ const SurvayContainer = () => {
                         classNamePrefix="select"
                     />
                 </div>
+                <div className="Select_Title">
+                    <strong>의견</strong>
+                </div>
                 <div>
                     <textarea
                         value={SurvayState.opinion}
-                        placeholder="사용자 의견"
+                        placeholder="식당과 식사에 대해 자유롭게 의견을 적어주세요."
                         onChange={e => setSurvayState({ ...SurvayState, opinion: e.target.value })}
                     ></textarea>
                 </div>

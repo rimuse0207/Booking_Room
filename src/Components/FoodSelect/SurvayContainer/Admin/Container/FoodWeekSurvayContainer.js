@@ -12,10 +12,6 @@ const FoodWeekSurvayContainer = () => {
             Nav_Menu: '식단 설문조사',
             Nav_Access: true,
         },
-        {
-            Nav_Menu: '잔반 이미지 업로드',
-            Nav_Access: false,
-        },
     ]);
     const [NowDates, setNowDates] = useState(moment());
 
@@ -54,8 +50,6 @@ const FoodWeekSurvayContainer = () => {
             {Admin_Nav_Menu.map((list, i) => {
                 return list.Nav_Access && list.Nav_Menu === '식단 설문조사' ? (
                     <FoodWeekSurvayContent key={list.Nav_Menu} NowDates={NowDates}></FoodWeekSurvayContent>
-                ) : list.Nav_Access && list.Nav_Menu === '잔반 이미지 업로드' ? (
-                    <FoodImageUploadContent key={list.Nav_Menu} NowDates={NowDates}></FoodImageUploadContent>
                 ) : (
                     <div key={list.Nav_Menu}></div>
                 );

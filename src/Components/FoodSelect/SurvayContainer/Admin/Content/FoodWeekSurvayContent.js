@@ -85,11 +85,9 @@ const FoodWeekSurvayContent = ({ NowDates }) => {
                     <thead>
                         <tr style={{ background: 'gray' }}>
                             <th>날짜</th>
-                            <th>이름</th>
+
                             <th>메뉴명</th>
                             <th>메뉴의견</th>
-                            <th>WILL</th>
-                            <th>회사</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -97,11 +95,9 @@ const FoodWeekSurvayContent = ({ NowDates }) => {
                             return (
                                 <tr key={list.food_week_survay_indexs}>
                                     <td>{moment(list.food_week_survay_applydate).format('YYYY-MM-DD')}</td>
-                                    <td>{list.food_week_survay_name}</td>
+
                                     <td>{list.food_week_survay_food_select}</td>
                                     <td>{list.food_week_survay_opinion}</td>
-                                    <td>{list.food_week_survay_will_price}</td>
-                                    <td>{list.food_week_survay_company}</td>
                                 </tr>
                             );
                         })}
