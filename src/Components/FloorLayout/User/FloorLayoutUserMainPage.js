@@ -14,7 +14,8 @@ import { toast } from '../../ToasMessage/ToastManager';
 
 const FloorLayoutUserMainPageMainDivBox = styled.div`
     overflow: auto;
-    padding: 10px;
+    /* padding: 10px; */
+    padding-top: 80px;
     height: 90vh;
     ::-webkit-scrollbar {
         width: 5px;
