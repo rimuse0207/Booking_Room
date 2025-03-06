@@ -76,8 +76,8 @@ const FloorLayoutUserContentMainDivBox = styled.div`
     }
     .Explane_Container {
         position: absolute;
-        top: 10px;
-        right: 300px;
+        left: 0px;
+        top: -70px;
         .Person_Green {
             display: flex;
             align-items: center;
