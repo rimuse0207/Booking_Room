@@ -95,7 +95,7 @@ const InfoBoxMainPage = () => {
 
     const User_Select_Options_State_Func = async () => {
         try {
-            const User_Select_Options_State_Axios = await request.get('/DepartmentRouter/Semtek_Select_UserInfoDataGetting');
+            const User_Select_Options_State_Axios = await request.get('/DepartmentRouter/Getting_UserInfo_From_Brity');
 
             if (User_Select_Options_State_Axios.data.dataSuccess) {
                 setUser_Options(User_Select_Options_State_Axios.data.Select_User_datas);
