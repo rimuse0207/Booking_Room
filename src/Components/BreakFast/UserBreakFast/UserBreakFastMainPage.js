@@ -14,7 +14,7 @@ import { useHistory } from 'react-router-dom';
 import { Axios_Get_Moduls, Axios_Post_Moduls, request } from '../../../API';
 import { useRef } from 'react';
 
-const UserBreakFastMainPageMainDivBox = styled.div`
+export const UserBreakFastMainPageMainDivBox = styled.div`
     border: 1px solid black;
     .Select_Container {
         border: 1px solid lightgray;

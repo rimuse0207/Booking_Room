@@ -7,17 +7,18 @@ import StockSelectMainPage from './StockSelect/StockSelectMainPage';
 import UserApplySelectMainPage from './UserApplySelect/UserApplySelectMainPage';
 import ExcelDownloadMainPage from './ExcelDownload/ExcelDownloadMainPage';
 import AdminFoodDataInsertPage from './AdminFoodDataInsertPage';
+import SnackUserApplySelectMainPage from './UserApplySelect/SnackUserApplySelectMainPage';
 
 export const AdminBreakFastMainPageMainDivBox = styled.div`
     .Nav_Menu_Container {
         display: flex;
-        max-width: 400px;
+        max-width: 600px;
         min-height: 50px;
         justify-content: space-between;
         align-items: center;
         padding-left: 10px;
         padding-right: 10px;
-
+        font-size: 0.9em;
         .Not_Checked_Show {
             opacity: 0.5;
         }
@@ -38,8 +39,12 @@ export const AdminBreakFastMainPageMainDivBox = styled.div`
 const AdminBreakFastMainPage = () => {
     const [Admin_Nav_Menu, setAdmin_Nav_Menu] = useState([
         {
-            Nav_Menu: '신청현황',
+            Nav_Menu: '조식신청현황',
             Nav_Access: true,
+        },
+        {
+            Nav_Menu: '탕비실신청현황',
+            Nav_Access: false,
         },
         {
             Nav_Menu: '재고현황',
@@ -83,8 +88,10 @@ const AdminBreakFastMainPage = () => {
                 })}
             </ul>
             {Admin_Nav_Menu.map((list, i) => {
-                return list.Nav_Access && list.Nav_Menu === '신청현황' ? (
+                return list.Nav_Access && list.Nav_Menu === '조식신청현황' ? (
                     <UserApplySelectMainPage key={list.Nav_Menu}></UserApplySelectMainPage>
+                ) : list.Nav_Access && list.Nav_Menu === '탕비실신청현황' ? (
+                    <SnackUserApplySelectMainPage key={list.Nav_Menu}></SnackUserApplySelectMainPage>
                 ) : list.Nav_Access && list.Nav_Menu === '재고현황' ? (
                     <StockSelectMainPage key={list.Nav_Menu}></StockSelectMainPage>
                 ) : list.Nav_Access && list.Nav_Menu === '식단표입력' ? (

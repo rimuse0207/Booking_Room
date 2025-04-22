@@ -1,6 +1,8 @@
+import axios from 'axios';
 import './App.css';
 import MainTableContainer from './Components/MainTableContainer';
 import NavigationMainPage from './Components/Navigation/NavigationMainPage';
+import { useEffect } from 'react';
 function App() {
     return (
         <div className="App">

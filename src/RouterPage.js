@@ -42,6 +42,7 @@ import PartyPostMainPage from './Components/PartyPost/PartyPostMainPage';
 import overseasMainPage from './Components/overseas/overseasMainPage';
 import AdminResoucesMainPage from './Components/AdminResources/AdminResourcesMainPage';
 import AdminSurvayMainPage from './Components/FoodSelect/SurvayContainer/Admin/AdminSurvayMainPage';
+import UserSnakMainPage from './Components/BreakFast/UserSnack/UserSnakMainPage';
 
 const RouterPageMainContainer = styled.div``;
 
@@ -98,6 +99,8 @@ const RouterPage = () => {
                         <Route path="/BreakFast/UserSlect" component={UserBreakFastMainPage}></Route>
                         <Route path="/BreakFast/Finished" component={UserApplyFinishedMainPage}></Route>
                         <Route path="/Admin/BreakFast" component={AdminBreakFastMainPage}></Route>
+                        {/* 탕비실 관련 */}
+                        <Route path="/Snack/UserSlect" component={UserSnakMainPage}></Route>
                         {/* 회계 전표 안내 동영상 */}
                         <Route exact path="/Document_Education" component={DocumentEducation}></Route>
                         {/* 키즈키 노트 */}
