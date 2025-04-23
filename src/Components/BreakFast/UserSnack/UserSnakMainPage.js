@@ -73,7 +73,9 @@ const UserSnakMainPage = () => {
     const submit = Select_Menus => {
         confirmAlert({
             title: `${Select_Menus === 'Coffee' ? '커피' : '스낵'} 1회 이용 신청`,
-            message: `${Select_Menus === 'Coffee' ? '커피' : '스낵'} 1회 이용당 Will이 청구 됩니다.`,
+            message: `${Select_Menus === 'Coffee' ? '커피' : '스낵'} 1회 이용당 ${
+                Select_Menus === 'Coffee' ? 500 : 300
+            }Will이 청구 됩니다.`,
             buttons: [
                 {
                     label: '확인',
@@ -100,7 +102,7 @@ const UserSnakMainPage = () => {
         if (Submit_For_Save_Data_UseSnacks_Axios.status) {
             setSelected_User(null);
             return toast.show({
-                title: `등록이 완료되었습니다. 즐거운 시간 되세요.`,
+                title: `등록 완료. 소소한 평온 받으세요. `,
                 successCheck: true,
                 duration: 6000,
             });
@@ -116,26 +118,28 @@ const UserSnakMainPage = () => {
     return (
         <UserBreakFastMainPageMainDivBox>
             <SurvayContainerMainDivBox>
-                <NavigationMainPage TitleName="탕비실이용"></NavigationMainPage>
+                <NavigationMainPage TitleName="소소한 평온을 담은 쉼터"></NavigationMainPage>
                 <div className="Survay_Main_Content">
                     <div>
                         <div>*주의사항</div>
-                        <ul>
+                        <ul style={{ fontSize: '16px' }}>
                             <li>
-                                <div className="Word_DIV">조식시간은 08:50 까지 입니다. 시간을 준수 해주세요.</div>
+                                <div className="Word_DIV">원활하고 쾌적한 운영을 위해 이용시 Will이 청구됩니다.</div>
+                                <div style={{ textAlign: 'start', color: 'red', marginTop: '10px' }}>{'<커피 500Will / 스낵 300Will>'}</div>
                             </li>
                             <li>
-                                <div className="Word_DIV">식사 후 자리정리 및 지정된 장소에 잔반을 처리 해주세요.</div>
+                                <div className="Word_DIV">커피머신 사용 후 주변 청결을 유지해주세요.</div>
                             </li>
                             <li>
-                                <div className="Word_DIV">비치된 식품을 식당 외부로 반출을 절대 금지합니다.</div>
+                                <div className="Word_DIV">모두가 함께 사용하는 회사자원이므로 낭비는 자제해주세요.</div>
                             </li>
-                            <li>
+                            <h4 style={{}}>" A little kindness goes a long way"</h4>
+                            {/* <li>
                                 <div className="Word_DIV">원활한 조식 운영을 위해 1식당 1,000Will이 청구됩니다.</div>
                                 <div style={{ textAlign: 'end', color: 'red', marginTop: '20px' }}>
                                     *무단 취식 및 반출시 패널티 부과 예정.
                                 </div>
-                            </li>
+                            </li> */}
                         </ul>
                     </div>
 
