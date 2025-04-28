@@ -25,7 +25,7 @@ const SnakCountModalMainDivBox = styled.div`
         color: #eee;
         cursor: pointer;
         display: inline-block;
-        font-size: 12px;
+        font-size: 20px;
         margin-right: 10px;
         outline: none;
         padding: 6px 18px;
