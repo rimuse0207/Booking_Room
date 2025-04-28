@@ -81,7 +81,7 @@ const UserSnakMainPage = () => {
         confirmAlert({
             title: `${Select_Menus === 'Coffee' ? '커피' : '스낵'} 1회 이용 신청`,
             message: `${Select_Menus === 'Coffee' ? '커피' : '스낵'} 1회 이용당 ${
-                Select_Menus === 'Coffee' ? 500 : 300
+                Select_Menus === 'Coffee' ? 700 : 300
             }Will이 청구 됩니다.`,
             buttons: [
                 {
@@ -135,7 +135,7 @@ const UserSnakMainPage = () => {
                         <ul style={{ fontSize: '16px' }}>
                             <li>
                                 <div className="Word_DIV">원활하고 쾌적한 운영을 위해 이용시 Will이 청구됩니다.</div>
-                                <div style={{ textAlign: 'start', color: 'red', marginTop: '10px' }}>{'<커피 500Will / 스낵 300Will>'}</div>
+                                <div style={{ textAlign: 'start', color: 'red', marginTop: '10px' }}>{'<커피 700Will / 스낵 300Will>'}</div>
                             </li>
                             <li>
                                 <div className="Word_DIV">커피머신 사용 후 주변 청결을 유지해주세요.</div>
