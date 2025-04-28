@@ -18,6 +18,7 @@ import { GiCoffeeCup } from 'react-icons/gi';
 import { TbCookie } from 'react-icons/tb';
 import { confirmAlert } from 'react-confirm-alert'; // Import
 import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
+import SnakCountModal from './Modal/SnakCountModal';
 
 const UserSnakMainPageMainDivBox = styled.div`
     display: flex;
@@ -35,7 +36,8 @@ const UserSnakMainPageMainDivBox = styled.div`
 const UserSnakMainPage = () => {
     const [UserSelectOptions, setUserSelectOptions] = useState([]);
     const [Selected_User, setSelected_User] = useState(null);
-
+    const [SnakCountModalIsOpens, setSnakCountModalIsOpens] = useState(false);
+    const [SnacksCounts, setSnacksCounts] = useState(1);
     const Getting_User_Id_Axios_Func = async () => {
         try {
             const Getting_User_Id_Axios_Func_To_Server = await axios.get(
@@ -52,7 +54,12 @@ const UserSnakMainPage = () => {
 
     const HandleClickUseSnack = Select_Menus => {
         if (Selected_User && Selected_User.value) {
-            const Open_Confirm = submit(Select_Menus);
+            if (Select_Menus === 'Snacks') {
+                setSnacksCounts(1);
+                setSnakCountModalIsOpens(true);
+            } else {
+                const Open_Confirm = submit(Select_Menus);
+            }
         } else {
             return toast.show({
                 title: `사용자 선택 후 다시 눌러주세요.`,
@@ -97,10 +104,13 @@ const UserSnakMainPage = () => {
             {
                 Select_Menus,
                 Selected_User,
+                SnacksCounts,
             }
         );
         if (Submit_For_Save_Data_UseSnacks_Axios.status) {
             setSelected_User(null);
+            setSnacksCounts(1);
+            setSnakCountModalIsOpens(false);
             return toast.show({
                 title: `등록 완료. 소소한 평온 받으세요. `,
                 successCheck: true,
@@ -133,13 +143,7 @@ const UserSnakMainPage = () => {
                             <li>
                                 <div className="Word_DIV">모두가 함께 사용하는 회사자원이므로 낭비는 자제해주세요.</div>
                             </li>
-                            <h4 style={{}}>" A little kindness goes a long way"</h4>
-                            {/* <li>
-                                <div className="Word_DIV">원활한 조식 운영을 위해 1식당 1,000Will이 청구됩니다.</div>
-                                <div style={{ textAlign: 'end', color: 'red', marginTop: '20px' }}>
-                                    *무단 취식 및 반출시 패널티 부과 예정.
-                                </div>
-                            </li> */}
+                            <h4 style={{}}>"A little kindness goes a long way"</h4>
                         </ul>
                     </div>
 
@@ -171,6 +175,13 @@ const UserSnakMainPage = () => {
                     </UserSnakMainPageMainDivBox>
                 </div>
             </SurvayContainerMainDivBox>
+            <SnakCountModal
+                SnakCountModalIsOpens={SnakCountModalIsOpens}
+                setSnakCountModalIsOpens={() => setSnakCountModalIsOpens(false)}
+                setSnacksCounts={data => setSnacksCounts(data)}
+                SnacksCounts={SnacksCounts}
+                Submit_For_Save_Data_UseSnacks={() => Submit_For_Save_Data_UseSnacks('Snacks')}
+            ></SnakCountModal>
         </UserBreakFastMainPageMainDivBox>
     );
 };
