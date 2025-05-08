@@ -74,10 +74,13 @@ export const Axios_Post_Moduls = async (Path_URL, Post_Data) => {
             return Axios_Post_Moduls_Axios.data.data;
         } else if (Axios_Post_Moduls_Axios.data.status === 401) {
             alert('세션이 종료되었습니다. 재 로그인 바랍니다.');
-            window.location.href = '/Login_Page';
+            return (window.location.href = '/Login_Page');
+        } else if (Axios_Post_Moduls_Axios.data.status === 400) {
+            return Axios_Post_Moduls_Axios.data.data;
         } else {
             alert('Error 발생. Axios_Error_Code 2000 IT팀에 문의바랍니다.');
-            return false;
+            // return false;
+            throw new Error();
         }
     } catch (error) {
         console.log(error);

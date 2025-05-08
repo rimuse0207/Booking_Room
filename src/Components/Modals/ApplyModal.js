@@ -727,6 +727,7 @@ const ApplyModal = ({
                 duration: 5000,
             });
         }
+        dispatch(Loader_Check_For_False());
     };
 
     const Booking_Reservation_Insert_Time = async (
