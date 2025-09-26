@@ -76,17 +76,9 @@ const SelectTableMainPageMainDivBox = styled.div`
         display: none;
     }
     .disabledTr {
-        color: gray;
-        position: relative;
-        ::after {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 0;
-            width: 100%;
-            transform: translateY(-50%);
-            border-top: 0.5px solid gray;
-        }
+        color: black;
+        background-color: #efefef;
+        opacity: 0.6;
     }
     @media only screen and (max-width: 800px) {
         .Mobile_Container {

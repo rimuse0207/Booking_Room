@@ -141,7 +141,7 @@ const HambergerMenuMainPageMainDivBox = styled.div`
     .IsOpen_Menu_Cotainer {
         background-color: #368;
         width: 200px;
-        height: 90vh;
+        height: calc(100vh - 60px);
         position: absolute;
         top: 50px;
         left: -20px;
