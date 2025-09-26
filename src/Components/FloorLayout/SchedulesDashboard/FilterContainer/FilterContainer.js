@@ -14,6 +14,14 @@ const FilterContainerMainDivBox = styled.div`
     margin-top: 10px;
     background-color: #fff;
     border-radius: 5px;
+    @media only screen and (max-width: 800px) {
+        input {
+            -webkit-appearance: none; /* iOS Safari */
+            -moz-appearance: none; /* Firefox */
+            appearance: none; /* 표준 */
+            background-color: #fff;
+        }
+    }
     .Filter_Lists_Container {
         display: flex;
         align-items: center;
