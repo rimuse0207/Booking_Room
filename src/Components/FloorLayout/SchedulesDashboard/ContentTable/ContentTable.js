@@ -19,7 +19,7 @@ const ContentTableMainDivBox = styled.div`
         background-color: #fff;
         border-radius: 5px;
         @media only screen and (max-width: 800px) {
-            width: 130%;
+            width: 150%;
         }
     }
 
@@ -128,13 +128,13 @@ const ContentTable = ({ Selected_Lists, TableData }) => {
                                     <td
                                         style={
                                             list.division === '출근'
-                                                ? { color: 'green', fontWeight: 'bolder' }
+                                                ? { color: 'green' }
                                                 : list.division === '연차'
-                                                ? { color: 'red', fontWeight: 'bolder' }
+                                                ? { color: 'red' }
                                                 : list.division === '외근'
-                                                ? { color: 'goldenrod', fontWeight: 'bolder' }
+                                                ? { color: 'goldenrod' }
                                                 : list.division === '해외출장'
-                                                ? { color: 'black', fontWeight: 'bolder' }
+                                                ? { color: 'black' }
                                                 : {}
                                         }
                                     >
