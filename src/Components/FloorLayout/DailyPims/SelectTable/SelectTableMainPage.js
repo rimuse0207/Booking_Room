@@ -84,6 +84,7 @@ const SelectTableMainPageMainDivBox = styled.div`
             top: 50%;
             left: 0;
             width: 100%;
+            transform: translateY(-50%);
             border-top: 0.5px solid gray;
         }
     }
