@@ -122,7 +122,27 @@ const ContentTable = ({ Selected_Lists, TableData }) => {
                                     <td>{list.department}</td>
                                     <td>{list.second_department}</td>
                                     <td>{list.name}</td>
-                                    <td>{list.division}</td>
+                                    <td
+                                        style={
+                                            list.division === '출근'
+                                                ? { color: 'green', fontWeight: 'bolder' }
+                                                : list.division === '연차'
+                                                ? { color: 'red', fontWeight: 'bolder' }
+                                                : list.division === '외근'
+                                                ? { color: 'goldenrod', fontWeight: 'bolder' }
+                                                : list.division === '해외출장'
+                                                ? { color: 'black', fontWeight: 'bolder' }
+                                                : {}
+                                        }
+                                    >
+                                        {list?.division === '연차'
+                                            ? list.title === 'moring_off'
+                                                ? '오전반차'
+                                                : list.title === 'afternoon_off'
+                                                ? '오후반차'
+                                                : list.division
+                                            : list.division}
+                                    </td>
                                     <td>{list.custom}</td>
                                     <td>{list.description}</td>
                                     <td>{list.companion}</td>

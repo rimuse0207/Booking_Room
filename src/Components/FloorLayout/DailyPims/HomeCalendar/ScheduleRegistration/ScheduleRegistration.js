@@ -146,6 +146,21 @@ export const ScheduleRegistrationMainContainerDivBox = styled.div`
             }
         }
     }
+    @media only screen and (max-width: 800px) {
+        select {
+            background-color: #fff;
+            -webkit-appearance: none; /* iOS Safari */
+            -moz-appearance: none; /* Firefox */
+            appearance: none; /* 표준 */
+            background: white
+                url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='black'><polygon points='0,0 12,0 6,6'/></svg>")
+                no-repeat right 0.75em center;
+            background-size: 12px 12px;
+            padding-right: 1em; /* 화살표 공간 확보 */
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+    }
     select {
         border: 1px solid lightgray;
         width: 100%;
