@@ -75,6 +75,18 @@ const SelectTableMainPageMainDivBox = styled.div`
     .Mobile_Container {
         display: none;
     }
+    .disabledTr {
+        color: gray;
+        position: relative;
+        ::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            width: 100%;
+            border-top: 0.5px solid gray;
+        }
+    }
     @media only screen and (max-width: 800px) {
         .Mobile_Container {
             display: block;
@@ -164,7 +176,7 @@ const SelectTableMainPage = ({ PimsLists, ChooseDate, Getting_pims_Lists_From_Da
                 <tbody>
                     {PimsLists.map(list => {
                         return (
-                            <tr key={list.pimsKey}>
+                            <tr key={list.pimsKey} className={moment(list.start_date).isBefore(moment(), 'day') ? 'disabledTr' : {}}>
                                 <td>{DivideType.find(item => item.title === list.title).name}</td>
                                 <td>
                                     {moment(list.start_date).format('YYYY/MM/DD')}{' '}
