@@ -31,6 +31,16 @@ const ApplyPimsMainPageMainDivBox = styled.div`
         max-width: 700px;
         margin: 0;
         margin-left: 20px;
+        @media only screen and (max-width: 800px) {
+            display: block;
+
+            select {
+                background-color: #fff;
+                -webkit-appearance: none; /* iOS Safari */
+                -moz-appearance: none; /* Firefox */
+                appearance: none; /* 표준 */
+            }
+        }
         input {
             height: 35px;
             padding-left: 10px;
