@@ -106,7 +106,7 @@ const ContentTable = ({ Selected_Lists, TableData }) => {
                         )
                         .filter(item =>
                             Selected_Lists.find(i => i.Type === 'team').lists.length > 0
-                                ? Selected_Lists.find(i => i.Type === 'team').lists.includes(item.team)
+                                ? Selected_Lists.find(i => i.Type === 'team').lists.includes(item.team.toUpperCase())
                                 : item
                         )
                         .filter(item =>

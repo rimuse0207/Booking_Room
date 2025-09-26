@@ -46,6 +46,9 @@ const FilterContainerMainDivBox = styled.div`
                     padding: 2px 10px;
                     input {
                         background-color: none;
+                        -webkit-appearance: none; /* iOS Safari */
+                        -moz-appearance: none; /* Firefox */
+                        appearance: none; /* 표준 */
                     }
                 }
             }
@@ -141,7 +144,7 @@ const Lists = [
             { label: 'DICER', value: 'DICER', placeMatch: ['판교'], departmentMatch: ['영업'] },
             { label: 'GRINDER', value: 'GRINDER', placeMatch: ['판교'], departmentMatch: ['영업'] },
             { label: 'LASER', value: 'LASER', placeMatch: ['판교'], departmentMatch: ['영업'] },
-            { label: 'CE지원', value: 'CE지원', placeMatch: ['판교'], departmentMatch: ['영업'] },
+            { label: 'CE지원팀', value: 'CE지원팀', placeMatch: ['판교'], departmentMatch: ['영업'] },
         ],
     },
     {

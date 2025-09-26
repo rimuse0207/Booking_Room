@@ -53,7 +53,10 @@ const ApplyPimsMainPageMainDivBox = styled.div`
                 display: block;
 
                 select {
-                    background-color: none;
+                    background-color: #fff;
+                    -webkit-appearance: none; /* iOS Safari */
+                    -moz-appearance: none; /* Firefox */
+                    appearance: none; /* 표준 */
                 }
                 .Division_Container {
                     margin-left: 0px;
