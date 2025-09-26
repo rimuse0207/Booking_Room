@@ -44,6 +44,9 @@ const FilterContainerMainDivBox = styled.div`
                 @media only screen and (max-width: 800px) {
                     margin-right: 3px;
                     padding: 2px 10px;
+                    input {
+                        background-color: none;
+                    }
                 }
             }
             @media only screen and (max-width: 800px) {

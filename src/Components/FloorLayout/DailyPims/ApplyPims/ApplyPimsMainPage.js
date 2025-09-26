@@ -16,6 +16,16 @@ import 'react-datepicker/dist/react-datepicker.css';
 import ModuleDatePickers from './ModuleDatePickers';
 
 const ApplyPimsMainPageMainDivBox = styled.div`
+    @media only screen and (max-width: 800px) {
+        .btn_Group {
+            display: block !important;
+            width: 100%;
+            .btn_container {
+                width: 50%;
+                margin: 0 auto;
+            }
+        }
+    }
     .Survay_Main_Content {
         width: 80%;
         max-width: 700px;
@@ -41,6 +51,10 @@ const ApplyPimsMainPageMainDivBox = styled.div`
 
             @media only screen and (max-width: 800px) {
                 display: block;
+
+                select {
+                    background-color: none;
+                }
                 .Division_Container {
                     margin-left: 0px;
                     margin-bottom: 20px;
@@ -50,78 +64,78 @@ const ApplyPimsMainPageMainDivBox = styled.div`
                     margin-left: 0px;
                     margin-bottom: 10px;
                 }
-            }
 
-            input {
-                width: 40%;
-            }
+                input {
+                    width: 40%;
+                }
 
-            input[type='date'] {
-                border: none; // 테두리 설정은 본인 맘대로
-                position: relative; // 캘린더 아이콘을 클릭해야만 달력이 보이기 때문에 이 영역 자체를 제어하기 위해 설정
-                width: 40%;
-                padding: 8px;
-                /* box-shadow: 2px 2px 7px rgba(0, 0, 0, 0.2); */
-                border-radius: 5px;
-                text-align: center;
-                border: 1px solid lightgray;
-            }
+                input[type='date'] {
+                    border: none; // 테두리 설정은 본인 맘대로
+                    position: relative; // 캘린더 아이콘을 클릭해야만 달력이 보이기 때문에 이 영역 자체를 제어하기 위해 설정
+                    width: 40%;
+                    padding: 8px;
+                    /* box-shadow: 2px 2px 7px rgba(0, 0, 0, 0.2); */
+                    border-radius: 5px;
+                    text-align: center;
+                    border: 1px solid lightgray;
+                }
 
-            // 실제 캘린더 아이콘을 클릭하는 영역을 의미하는 선택자
-            // 이 영역을 확장해서 input의 어떤 곳을 클릭해도 캘린더를 클릭한 것과 같은 효과를 만들자!
-            input[type='date']::-webkit-calendar-picker-indicator {
-                position: absolute; // 이를 설정하기 위해 사전에 relative를 설정한 것이다.
-                left: 0;
-                top: 0;
-                width: 100%;
-                height: 100%;
-                background: transparent; // 배경은 투명하게,
-                color: transparent; // 글자도 투명하게! 이 두 설정을 통해 캘린더 아이콘을 사라지게 만든다.
-                cursor: pointer;
-            }
+                // 실제 캘린더 아이콘을 클릭하는 영역을 의미하는 선택자
+                // 이 영역을 확장해서 input의 어떤 곳을 클릭해도 캘린더를 클릭한 것과 같은 효과를 만들자!
+                input[type='date']::-webkit-calendar-picker-indicator {
+                    position: absolute; // 이를 설정하기 위해 사전에 relative를 설정한 것이다.
+                    left: 0;
+                    top: 0;
+                    width: 100%;
+                    height: 100%;
+                    background: transparent; // 배경은 투명하게,
+                    color: transparent; // 글자도 투명하게! 이 두 설정을 통해 캘린더 아이콘을 사라지게 만든다.
+                    cursor: pointer;
+                }
 
-            // input에 어떠한 유효값이 입력된 상태인지 확인하는 선택자
-            // 날짜를 선택하면 유효값이 입력된다.
-            // 이 속성을 활용하고자 한다면 반드시 태그에 required 속성을 달아줘야한다.
-            input[type='date']:valid::before {
-                /* display: none; // 유효값이 입력된 경우 before에 있는 것을 사라지게 한다. 즉, placeholder를 사라지게 한다. */
+                // input에 어떠한 유효값이 입력된 상태인지 확인하는 선택자
+                // 날짜를 선택하면 유효값이 입력된다.
+                // 이 속성을 활용하고자 한다면 반드시 태그에 required 속성을 달아줘야한다.
+                input[type='date']:valid::before {
+                    /* display: none; // 유효값이 입력된 경우 before에 있는 것을 사라지게 한다. 즉, placeholder를 사라지게 한다. */
+                }
             }
         }
-    }
-    .Division_Container {
-        margin-left: 30px;
-    }
-    .Date_Table_Container {
-        height: 200px;
-        overflow: auto;
-        overflow-x: hidden;
-        table {
-            width: 200px;
-            border-collapse: collapse;
-            font-size: 0.9em;
+        .Division_Container {
+            margin-left: 30px;
+        }
+        .Date_Table_Container {
+            height: 200px;
             overflow: auto;
-        }
-
-        th,
-        td {
-            border: none;
-            border-top: 1px solid #ddd;
-            border-bottom: 1px solid #ddd;
-            padding: 5px;
-            text-align: center;
-            border-left: none;
-            border-right: none;
-        }
-
-        .Delete_Date {
-            color: red;
-            &:hover {
-                cursor: pointer;
-                opacity: 0.8;
+            overflow-x: hidden;
+            table {
+                width: 200px;
+                border-collapse: collapse;
+                font-size: 0.9em;
+                overflow: auto;
             }
-        }
-        th {
-            color: black;
+
+            th,
+            td {
+                border: none;
+                border-top: 1px solid #ddd;
+                border-bottom: 1px solid #ddd;
+                padding: 5px;
+                text-align: center;
+                border-left: none;
+                border-right: none;
+            }
+
+            .Delete_Date {
+                color: red;
+                &:hover {
+                    cursor: pointer;
+                    opacity: 0.8;
+                }
+            }
+            th {
+                color: black;
+            }
         }
     }
 `;
@@ -151,7 +165,7 @@ const ApplyPimsMainPage = ({
         companion: companion ? companion : '',
         pimsKey: pimsKey ? pimsKey : null,
     });
-    const [selectedDates, setSelectedDates] = useState([new Date()]);
+    const [selectedDates, setSelectedDates] = useState([]);
 
     const HandleRegiSchedule = async () => {
         if (['Business_Trip', 'Out_On_Business'].includes(ScheduleTitle.title)) {
