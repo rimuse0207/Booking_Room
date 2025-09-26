@@ -48,11 +48,20 @@ const FloorLayoutUserContentMainDivBox = styled.div`
                 width: 60%;
                 height: 2px;
                 border-radius: 5px;
-                background-color: lime;
+                /* background-color: lime; */
                 position: absolute;
                 top: 3px;
                 left: 20%;
                 /* right: 8px; */
+                display: flex;
+                .right {
+                    width: 50%;
+                    background-color: lime;
+                }
+                .left {
+                    width: 50%;
+                    background-color: lime;
+                }
             }
             .User_Working_Checking_Room {
                 width: 4px;
@@ -101,6 +110,31 @@ const FloorLayoutUserContentMainDivBox = styled.div`
                 border-radius: 10px;
             }
         }
+        .Person_Yellow {
+            margin-left: 130px;
+            display: flex;
+            align-items: center;
+            font-weight: bolder;
+            .Person_Color {
+                width: 50px;
+                height: 10px;
+                background-color: #dfc049;
+                border-radius: 10px;
+            }
+        }
+        .Person_Gray {
+            margin-left: 130px;
+            margin-top: 10px;
+            display: flex;
+            align-items: center;
+            font-weight: bolder;
+            .Person_Color {
+                width: 50px;
+                height: 10px;
+                background-color: gray;
+                border-radius: 10px;
+            }
+        }
     }
 `;
 
@@ -114,6 +148,28 @@ const FloorLayoutUserContent = ({ PlaceState, setUserSelect, UserSelect }) => {
         } else {
             setUserSelect(null);
         }
+    };
+    const LeftgetStyle = list => {
+        if (!list?.person_state?.length) return {};
+
+        const state = list.person_state[0].title; // 첫 번째 값 기준 예시
+
+        if (state === 'Business_Trip') return { backgroundColor: 'darkgray' };
+        if (state === 'Out_On_Business') return { backgroundColor: '#DFC049' };
+        if (state === 'day_off' || state === 'morning_off') return { backgroundColor: 'red' };
+
+        return {};
+    };
+    const RightStyle = list => {
+        if (!list?.person_state?.length) return {};
+
+        const state = list.person_state[0].title; // 첫 번째 값 기준 예시
+
+        if (state === 'Business_Trip') return { backgroundColor: 'darkgray' };
+        if (state === 'Out_On_Business') return { backgroundColor: '#DFC049' };
+        if (state === 'day_off' || state === 'afternoon_off') return { backgroundColor: 'red' };
+
+        return {};
     };
 
     return (
@@ -155,22 +211,10 @@ const FloorLayoutUserContent = ({ PlaceState, setUserSelect, UserSelect }) => {
                                         </div>
                                     )}
                                     {list.name && list.type === 'table' ? (
-                                        <div
-                                            className="User_Working_Checking"
-                                            style={
-                                                list.company === 'DHK'
-                                                    ? list?.person_state.length > 0
-                                                        ? list.person_state[0].status === '판교'
-                                                            ? {}
-                                                            : { backgroundColor: 'red' }
-                                                        : { backgroundColor: 'red' }
-                                                    : list.company === 'DHKS'
-                                                    ? list?.person_state.length > 0
-                                                        ? { backgroundColor: 'red' }
-                                                        : {}
-                                                    : {}
-                                            }
-                                        ></div>
+                                        <div className="User_Working_Checking">
+                                            <div className="right" style={LeftgetStyle(list)}></div>
+                                            <div className="left" style={RightStyle(list)}></div>
+                                        </div>
                                     ) : (
                                         <div></div>
                                     )}
@@ -191,6 +235,16 @@ const FloorLayoutUserContent = ({ PlaceState, setUserSelect, UserSelect }) => {
                     <div className="Person_Red">
                         <div className="Person_Color"></div>
                         <div style={{ marginLeft: '10px' }}> : 휴가</div>
+                    </div>
+                </div>
+                <div className="Explane_Container">
+                    <div className="Person_Yellow">
+                        <div className="Person_Color"></div>
+                        <div style={{ marginLeft: '10px' }}> : 외근</div>
+                    </div>
+                    <div className="Person_Gray">
+                        <div className="Person_Color"></div>
+                        <div style={{ marginLeft: '10px' }}> : 해외출장</div>
                     </div>
                 </div>
             </div>

@@ -1,21 +1,26 @@
 body {
     margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans',
-        'Helvetica Neue', sans-serif;
+    font-family: NotoSansKR, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans',
+        'Droid Sans', 'Helvetica Neue', sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+    font-family: NotoSansKR, source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
 
 * {
     box-sizing: border-box;
-    font-family: TextFontTest, LeeSeoyun, GangwonEdu_OTFBoldA, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans',
-        'Droid Sans', 'Helvetica Neue', sans-serif;
+    font-family: NotoSansKR, TextFontTest, LeeSeoyun, GangwonEdu_OTFBoldA, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell',
+        'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
 }
-
+@font-face {
+    font-family: 'NotoSansKR';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/NotoSansKR.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
 #toast-container-main {
     min-width: 500px;
     position: fixed;
@@ -97,4 +102,18 @@ textarea {
 
 .react-confirm-alert-button-group > button {
     font-size: 20px !important;
+}
+
+/* 기본 선택된 날짜 스타일 제거 */
+.react-datepicker__day--selected,
+.react-datepicker__day--keyboard-selected {
+    background-color: transparent !important;
+    color: inherit !important;
+}
+
+/* highlightDates 스타일만 사용 */
+.react-datepicker__day--highlighted {
+    background-color: #4caf50 !important; /* 원하는 색 */
+    color: #fff !important;
+    border-radius: 50%;
 }

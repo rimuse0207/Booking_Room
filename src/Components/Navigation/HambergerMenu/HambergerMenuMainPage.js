@@ -257,6 +257,12 @@ const HambergerMenuMainPage = () => {
                         {LoginInfo.Login_id && LoginInfo.Login_company === 'DHKS' ? (
                             <>
                                 <li>
+                                    <Link to="/My_Pims">나의 일정</Link>
+                                </li>
+                                <li>
+                                    <Link to="/SchedulesDashboard">전체 일정 조회</Link>
+                                </li>
+                                <li>
                                     <Link to="/BreakFast/UserSlect">조식신청</Link>
                                 </li>
                                 <li>

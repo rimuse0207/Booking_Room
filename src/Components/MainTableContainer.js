@@ -27,7 +27,7 @@ import { Axios_Post_Moduls, request } from '../API';
 import UserSelectMainPage from './UserSelect/UserSelectMainPage';
 import { BrowserView } from 'react-device-detect';
 
-const TestMainDivBox = styled.div`
+export const TestMainDivBox = styled.div`
     margin-bottom: 30px;
     .Date_Show_Click_Main_Container {
         text-align: center;
@@ -419,7 +419,6 @@ const MainTableContainer = () => {
                         <IoIosArrowBack></IoIosArrowBack>
                     </div>
                     <h3 className="Date_Show_Content">
-                        {/* {moment(NowTimes).lang('ko').format('YYYY-MM-DD dddd')} */}
                         <DatePicker
                             locale={ko}
                             selected={NowTimes}
@@ -448,18 +447,17 @@ const MainTableContainer = () => {
                 </div>
 
                 {/* 날짜 선택 끝 */}
-                <BrowserView>
-                    {/* 유저 검색 시작 */}
-                    <UserSelectMainPage></UserSelectMainPage>
-                    {/* 유저 검색 끝 */}
-                </BrowserView>
+                {/* <BrowserView> */}
+                {/* 유저 검색 시작 */}
+                {/* <UserSelectMainPage></UserSelectMainPage> */}
+                {/* 유저 검색 끝 */}
+                {/* </BrowserView> */}
             </div>
             <div className="Mian_Table_Container">
                 {/* 테이블 목록 왼쪽 제목 시작 */}
                 <div className="Room_title_container">
                     <div className="Main_Room_Time_title">
                         <div style={{ lineHeight: '50px', fontSize: '1.2em', fontWeight: 'bold', color: 'red' }}>
-                            {/* {SelectBasicTitle === 'Company_Room' ? '회의실' : '법인차량'} 예약 */}
                             {LoginInfo.Login_company === 'DHKS' ? (
                                 <select
                                     className="Room_OR_Car_CheckTitle_Select"

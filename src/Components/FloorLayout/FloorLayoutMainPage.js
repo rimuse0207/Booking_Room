@@ -7,7 +7,6 @@ import FloorLayoutUserMainPage from './User/FloorLayoutUserMainPage';
 import { BrowserView, MobileView } from 'react-device-detect';
 
 const FloorLayoutMainPageMainDivBox = styled.div`
-    border: 1px solid black;
     overflow: auto;
     height: 100vh;
     width: 100%;
@@ -18,6 +17,7 @@ const FloorLayoutMainPage = () => {
     return (
         <FloorLayoutMainPageMainDivBox>
             <NavigationMainPage TitleName="자리배치도"></NavigationMainPage>
+
             {/* <FloorLayoutContainer></FloorLayoutContainer> */}
 
             {/* PC환경 시작*/}

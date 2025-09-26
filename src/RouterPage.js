@@ -43,6 +43,8 @@ import overseasMainPage from './Components/overseas/overseasMainPage';
 import AdminResoucesMainPage from './Components/AdminResources/AdminResourcesMainPage';
 import AdminSurvayMainPage from './Components/FoodSelect/SurvayContainer/Admin/AdminSurvayMainPage';
 import UserSnakMainPage from './Components/BreakFast/UserSnack/UserSnakMainPage';
+import DailyPimsMainPage from './Components/FloorLayout/DailyPims/DailyPimsMainPage';
+import SchedulesDashboard from './Components/FloorLayout/SchedulesDashboard/SchedulesDashboard';
 
 const RouterPageMainContainer = styled.div``;
 
@@ -82,7 +84,7 @@ const RouterPage = () => {
                     <Switch>
                         <Route path="/Login_Page" component={LoginMainPage}></Route>
                         {/* 회의실 관련 */}
-                        <Route path="/overseas" component={overseasMainPage}></Route>
+                        {/* <Route path="/overseas" component={overseasMainPage}></Route> */}
                         {/* <Route path="/newcar" component={newcarMainPage}></Route> */}
                         <Route path="/Room" component={Room}></Route>
                         <Route path="/CUSTOMERSECURITY" component={CUSTOMERSECURITY}></Route>
@@ -115,6 +117,9 @@ const RouterPage = () => {
                         <Route path="/PIM/QRCode/:Room_keys/:Room_Title" component={PimQRCodeMaker}></Route>
                         {/* 자리배치도 */}
                         <Route exact path="/FloorLayout" component={FloorLayoutMainPage}></Route>
+                        {/* 나의 일정 조회 */}
+                        <Route exact path="/My_Pims" component={DailyPimsMainPage}></Route>
+                        <Route exact path="/SchedulesDashboard" component={SchedulesDashboard}></Route>
                         <Route path="/FloorLayout/AdminChange" component={FloorLayoutAdminMinPage}></Route>
                         {/* 차량운행 */}
                         <Route exact path="/VehicleOperaion" component={VehicleOperationMainPage}></Route>

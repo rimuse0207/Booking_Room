@@ -37,6 +37,7 @@ const UserInfoMainPage = () => {
                             dispatch(Title_Change_Func('Company_Room'));
                             dispatch(LOGOUT_INFO_DATA_Changes());
                             cookies.remove('Login_token');
+                            localStorage.removeItem('Login_token');
                         }}
                     >
                         로그아웃

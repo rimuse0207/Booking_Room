@@ -8,6 +8,7 @@ import { useRef } from 'react';
 import axios from 'axios';
 import { request } from '../../../../API';
 import { useSelector } from 'react-redux';
+import { DivideType } from '../../DailyPims/HomeCalendar/ScheduleRegistration/ScheduleRegistration';
 const FloorLayoutUserSelectMainDivBox = styled.div`
     border-left: 1px solid lightgray;
     position: fixed;
@@ -39,11 +40,7 @@ const FloorLayoutUserSelectMainDivBox = styled.div`
     }
 
     .User_Detail_Info {
-        display: flex;
-        justify-content: center;
-        flex-flow: wrap;
         font-size: 1.1em;
-        border: 1px solid black;
         margin-top: 50px;
         padding-bottom: 40px;
         border-radius: 20px;
@@ -57,7 +54,6 @@ const FloorLayoutUserSelectMainDivBox = styled.div`
         display: flex;
         margin-top: 10px;
         .Text_Flex_Label {
-            text-align: end;
             padding-right: 20px;
             width: 35%;
             min-width: 90px;
@@ -129,6 +125,16 @@ const FloorLayoutUserSelectMainDivBox = styled.div`
             }
         }
     }
+    table {
+        tr {
+            td:first-child {
+                width: 70px;
+            }
+            td {
+                padding: 5px;
+            }
+        }
+    }
 `;
 
 const FloorLayoutUserSelect = ({ UserSelect, handleClicksNotUser, setUserSelect, Get_Floor_Room_Position }) => {
@@ -139,15 +145,8 @@ const FloorLayoutUserSelect = ({ UserSelect, handleClicksNotUser, setUserSelect,
     return (
         <FloorLayoutUserSelectMainDivBox UserSelect={UserSelect}>
             <div className="User_Detail_Info">
-                <div className="User_Image_Container">
-                    <h2 style={{ fontSize: '3em', marginBottom: '10px' }}>
-                        <div>
-                            <div className="ClickUserIcon">
-                                <BsPersonSquare></BsPersonSquare>
-                            </div>
-                        </div>
-                    </h2>
-                </div>
+                <div style={{ border: '1px dashed lightgray' }}></div>
+                <h4>정보</h4>
                 <div className="Text_Flex_Container">
                     <div className="Text_Flex_Label">소속 : </div>
                     <div className="Text_Flex_Content">{UserSelect?.company}</div>
@@ -171,6 +170,66 @@ const FloorLayoutUserSelect = ({ UserSelect, handleClicksNotUser, setUserSelect,
                     <div className="Text_Flex_Content">{UserSelect?.phone_number}</div>
                 </div>
             </div>
+            <div style={{ border: '1px dashed lightgray' }}></div>
+            {UserSelect?.person_state.length > 0 ? (
+                <div>
+                    <h4>일정 내용</h4>
+                    <table>
+                        {UserSelect?.person_state.map((list, j) => {
+                            return (
+                                <tbody>
+                                    <tr>
+                                        <td>{j + 1}. </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td> 구 분 : </td>
+                                        <td>{DivideType.find(item => item.title === list.title).name}</td>
+                                    </tr>
+                                    <tr>
+                                        <td> 일 자 : </td>
+                                        <td> - {list.end_date}까지</td>
+                                    </tr>
+                                    {['Business_Trip', 'Out_On_Business'].includes(list.title) ? (
+                                        <>
+                                            <tr>
+                                                <td>고객사 : </td>
+                                                <td>{list.custom}</td>
+                                            </tr>
+                                            <tr>
+                                                <td> 안 건 : </td>
+                                                <td>{list.description}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>동행자 : </td>
+                                                <td>{list.companion}</td>
+                                            </tr>
+                                        </>
+                                    ) : (
+                                        <>
+                                            <tr>
+                                                <td>고객사 : </td>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <td> 안 건 : </td>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <td>동행자 : </td>
+                                                <td></td>
+                                            </tr>
+                                        </>
+                                    )}
+                                </tbody>
+                            );
+                        })}
+                    </table>
+                </div>
+            ) : (
+                <></>
+            )}
+
             <div className="arrowSlideOut" onClick={e => handleSlideOut(e)}>
                 <MdArrowForwardIos></MdArrowForwardIos>
             </div>
