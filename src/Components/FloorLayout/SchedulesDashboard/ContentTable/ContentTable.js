@@ -18,6 +18,9 @@ const ContentTableMainDivBox = styled.div`
         overflow: auto;
         background-color: #fff;
         border-radius: 5px;
+        @media only screen and (max-width: 800px) {
+            width: 130%;
+        }
     }
 
     th,
