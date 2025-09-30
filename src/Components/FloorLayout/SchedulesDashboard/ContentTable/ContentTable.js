@@ -81,6 +81,7 @@ const ContentTableMainDivBox = styled.div`
 `;
 
 const ContentTable = ({ Selected_Lists, TableData }) => {
+    console.log(TableData);
     return (
         <ContentTableMainDivBox>
             <table>
@@ -120,7 +121,7 @@ const ContentTable = ({ Selected_Lists, TableData }) => {
 
                         .map(list => {
                             return (
-                                <tr key={list.id}>
+                                <tr key={list.indexs ? list.indexs : list.id}>
                                     <td>{list.places}</td>
                                     <td>{list.department}</td>
                                     <td>{list.second_department}</td>
@@ -139,7 +140,7 @@ const ContentTable = ({ Selected_Lists, TableData }) => {
                                         }
                                     >
                                         {list?.division === '연차'
-                                            ? list.title === 'moring_off'
+                                            ? list.title === 'morning_off'
                                                 ? '오전반차'
                                                 : list.title === 'afternoon_off'
                                                 ? '오후반차'
