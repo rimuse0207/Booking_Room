@@ -315,8 +315,7 @@ const HambergerMenuMainPage = () => {
                         {LoginInfo.Login_id === 'sjyoo@dhk.co.kr' ||
                         LoginInfo.Login_id === 'sjkim@dhk.co.kr' ||
                         LoginInfo.Login_id === 'jychoi@dhk.co.kr' ||
-                        LoginInfo.Login_id === 'dikim@dhk.co.kr' ||
-                        LoginInfo.Login_id === 'cjlee@dhk.co.kr' ? (
+                        LoginInfo.Login_id === 'dikim@dhk.co.kr' ? (
                             <>
                                 <li>
                                     <Link to="/Admin/BreakFast">조식 재고 확인</Link>

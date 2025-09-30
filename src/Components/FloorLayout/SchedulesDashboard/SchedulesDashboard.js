@@ -5,6 +5,7 @@ import FilterContainer from './FilterContainer/FilterContainer';
 import ContentTable from './ContentTable/ContentTable';
 import { Request_Get_Axios } from '../../../API';
 import LoaderMainPage from '../../Loader/LoaderMainPage';
+import moment from 'moment';
 
 const SchedulesDashboardMainDivBox = styled.div`
     height: calc(100vh);
@@ -19,7 +20,7 @@ const SchedulesDashboardMainDivBox = styled.div`
 
 const SchedulesDashboard = () => {
     const [Loading, setLoading] = useState(true);
-    const [Selected_Date, setSelected_Date] = useState(new Date().toISOString().substring(0, 10));
+    const [Selected_Date, setSelected_Date] = useState(moment().format('YYYY-MM-DD'));
     const [Selected_Lists, setSelected_Lists] = useState([
         { Type: 'place', lists: [] },
         { Type: 'department', lists: [] },

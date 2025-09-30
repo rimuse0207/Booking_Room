@@ -4,6 +4,8 @@ import { FiRotateCw } from 'react-icons/fi';
 import { GrClose } from 'react-icons/gr';
 import { Request_Get_Axios } from '../../../../API';
 import { toast } from '../../../ToasMessage/ToastManager';
+import { MdOutlineArrowBackIosNew, MdOutlineArrowForwardIos } from 'react-icons/md';
+import moment from 'moment';
 
 const FilterContainerMainDivBox = styled.div`
     border: 1px solid lightgray;
@@ -235,13 +237,27 @@ const FilterContainer = ({ Selected_Lists, setSelected_Lists, Selected_Date, set
                     <div className="Labeling"> 일 시 </div>
                     <ul>
                         <li>
-                            <input
-                                style={{ border: 'none', outline: 'none' }}
-                                type="date"
-                                placeholder="날짜."
-                                value={Selected_Date}
-                                onChange={e => setSelected_Date(e.target.value)}
-                            ></input>
+                            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                                <div
+                                    style={{ marginRight: '5px' }}
+                                    onClick={() => setSelected_Date(moment(Selected_Date).subtract(1, 'day').format('YYYY-MM-DD'))}
+                                >
+                                    <MdOutlineArrowBackIosNew />
+                                </div>
+                                <input
+                                    style={{ border: 'none', outline: 'none' }}
+                                    type="date"
+                                    placeholder="날짜."
+                                    value={Selected_Date}
+                                    onChange={e => setSelected_Date(e.target.value)}
+                                ></input>
+                                <div
+                                    style={{ marginLeft: '5px' }}
+                                    onClick={() => setSelected_Date(moment(Selected_Date).add(1, 'day').format('YYYY-MM-DD'))}
+                                >
+                                    <MdOutlineArrowForwardIos />
+                                </div>
+                            </div>
                         </li>
                     </ul>
                 </div>
