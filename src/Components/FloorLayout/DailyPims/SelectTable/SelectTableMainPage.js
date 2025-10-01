@@ -161,7 +161,7 @@ const SelectTableMainPage = ({ PimsLists, ChooseDate, Getting_pims_Lists_From_Da
                         <th>구분</th>
                         <th>일자</th>
                         <th>고객사</th>
-                        <th>안건</th>
+                        <th style={{minWidth:"100px"}}>안건</th>
                         <th>동행자</th>
                         <th>관리</th>
                     </tr>
@@ -172,7 +172,7 @@ const SelectTableMainPage = ({ PimsLists, ChooseDate, Getting_pims_Lists_From_Da
                             <tr key={list.pimsKey} className={moment(list.start_date).isBefore(moment(), 'day') ? 'disabledTr' : {}}>
                                 <td>{DivideType.find(item => item.title === list.title).name}</td>
                                 <td>
-                                    {moment(list.start_date).format('YYYY/MM/DD')}{' '}
+                                    {moment(list.start_date).format('MM/DD')}{' '}
                                     {moment(list.start_date).format('YYYY/MM/DD') === moment(list.end_date).format('YYYY/MM/DD')
                                         ? ''
                                         : ` ${moment(list.end_date).format('- DD')}`}
