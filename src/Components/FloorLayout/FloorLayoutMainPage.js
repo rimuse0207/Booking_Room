@@ -21,13 +21,15 @@ const FloorLayoutMainPage = () => {
             {/* <FloorLayoutContainer></FloorLayoutContainer> */}
 
             {/* PC환경 시작*/}
-            <BrowserView>
+            {/* <BrowserView>
                 <FloorLayoutUserMainPage></FloorLayoutUserMainPage>
-            </BrowserView>
+            </BrowserView> */}
             {/* PC환경 끝*/}
 
             {/* 모바일 환경 시작 */}
-            <MobileView>모바일 환경에서 지원하지 않습니다.</MobileView>
+            {/* <MobileView>모바일 환경에서 지원하지 않습니다.</MobileView> */}
+
+            <FloorLayoutUserMainPage></FloorLayoutUserMainPage>
             {/* 모바일 환경 끝 */}
         </FloorLayoutMainPageMainDivBox>
     );

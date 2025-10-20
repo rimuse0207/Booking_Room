@@ -25,7 +25,7 @@ const SchedulesDashboard = () => {
         { Type: 'place', lists: [] },
         { Type: 'department', lists: [] },
         { Type: 'team', lists: [] },
-        { Type: 'division', lists: [] },
+        { Type: 'division', lists: ['외근', '해외출장', '연차'] },
     ]);
 
     const [TableData, setTableData] = useState([]);

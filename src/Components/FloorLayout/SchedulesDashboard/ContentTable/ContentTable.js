@@ -19,7 +19,7 @@ const ContentTableMainDivBox = styled.div`
         background-color: #fff;
         border-radius: 5px;
         @media only screen and (max-width: 800px) {
-            width: 150%;
+            width: 300%;
         }
     }
 
@@ -30,8 +30,8 @@ const ContentTableMainDivBox = styled.div`
         border-bottom: 1px solid #ddd;
         padding: 5px;
         text-align: center;
-        border-left: none;
-        border-right: none;
+        border-left: 1px solid lightgray;
+        border-right: 1px solid lightgray;
     }
 
     th {
@@ -121,21 +121,21 @@ const ContentTable = ({ Selected_Lists, TableData }) => {
                         .map(list => {
                             return (
                                 <tr key={list.indexs ? list.indexs : list.id}>
-                                    <td>{list.places}</td>
-                                    <td>{list.department}</td>
-                                    <td>{list.second_department}</td>
-                                    <td>{list.name}</td>
+                                    <td style={{ width: '50px' }}>{list.places}</td>
+                                    <td style={{ width: '50px' }}>{list.department}</td>
+                                    <td style={{ width: '70px' }}>{list.second_department}</td>
+                                    <td style={{ width: '70px' }}>{list.name}</td>
                                     <td
                                         style={
                                             list.division === '출근'
-                                                ? { color: 'green' }
+                                                ? { color: 'green', width: '50px' }
                                                 : list.division === '연차'
-                                                ? { color: 'red' }
+                                                ? { color: 'red', width: '50px' }
                                                 : list.division === '외근'
-                                                ? { color: 'goldenrod' }
+                                                ? { color: 'goldenrod', width: '50px' }
                                                 : list.division === '해외출장'
-                                                ? { color: 'black' }
-                                                : {}
+                                                ? { color: 'black', width: '50px' }
+                                                : { width: '50px' }
                                         }
                                     >
                                         {list?.division === '연차'

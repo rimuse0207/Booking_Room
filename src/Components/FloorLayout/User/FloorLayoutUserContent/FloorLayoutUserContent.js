@@ -46,9 +46,9 @@ const FloorLayoutUserContentMainDivBox = styled.div`
 
             .User_Working_Checking {
                 width: 60%;
-                height: 2px;
-                border-radius: 5px;
-                /* background-color: lime; */
+                height: 7px;
+                border-radius: 7px;
+                /* background-color: limegreen; */
                 position: absolute;
                 top: 3px;
                 left: 20%;
@@ -56,23 +56,28 @@ const FloorLayoutUserContentMainDivBox = styled.div`
                 display: flex;
                 .right {
                     width: 50%;
-                    background-color: lime;
+                    background-color: limegreen;
+                    border-top-left-radius: 10px;
+                    border-bottom-left-radius: 10px;
                 }
                 .left {
                     width: 50%;
-                    background-color: lime;
+                    background-color: limegreen;
+                    border-top-right-radius: 10px;
+                    border-bottom-right-radius: 10px;
                 }
             }
             .User_Working_Checking_Room {
                 width: 4px;
                 /* height: 50px; */
                 border-radius: 5px;
-                background-color: lime;
+                background-color: limegreen;
                 position: absolute;
                 right: 8px;
             }
             .Font_Checking_Team {
                 font-size: 0.7em;
+                margin-top: 10px;
                 width: 100%;
                 overflow-wrap: break-word;
                 position: relative;
@@ -94,7 +99,7 @@ const FloorLayoutUserContentMainDivBox = styled.div`
             .Person_Color {
                 width: 50px;
                 height: 10px;
-                background-color: lime;
+                background-color: limegreen;
                 border-radius: 10px;
             }
         }
