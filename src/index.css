@@ -1,23 +1,24 @@
 body {
     margin: 0;
-    font-family: NotoSansKR, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans',
+    font-family: 'NotoSansKR', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans',
         'Droid Sans', 'Helvetica Neue', sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-    font-family: NotoSansKR, source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+    font-family: 'NotoSansKR', source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
 
 * {
     box-sizing: border-box;
-    font-family: NotoSansKR, TextFontTest, LeeSeoyun, GangwonEdu_OTFBoldA, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell',
+    font-family: 'NotoSansKR', TextFontTest, LeeSeoyun, GangwonEdu_OTFBoldA, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell',
         'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
 }
+
 @font-face {
     font-family: 'NotoSansKR';
-    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/NotoSansKR.woff') format('woff');
+    src: url('//fonts.googleapis.com/earlyaccess/notosanskr.css');
     font-weight: normal;
     font-style: normal;
 }
@@ -71,6 +72,13 @@ li {
 @font-face {
     font-family: 'TextFontTest';
     src: url('/public/Font/EF_YOONY_Window.ttf');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'GowoonDodum';
+    src: url('../public/Font/GowunDodum-Regular.woff');
     font-weight: normal;
     font-style: normal;
 }
