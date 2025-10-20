@@ -128,14 +128,14 @@ const ContentTable = ({ Selected_Lists, TableData }) => {
                                     <td
                                         style={
                                             list.division === '출근'
-                                                ? { color: 'green', width: '50px' }
+                                                ? { color: 'green', width: '40px' }
                                                 : list.division === '연차'
-                                                ? { color: 'red', width: '50px' }
+                                                ? { color: 'red', width: '40px' }
                                                 : list.division === '외근'
-                                                ? { color: 'goldenrod', width: '50px' }
+                                                ? { color: 'goldenrod', width: '40px' }
                                                 : list.division === '해외출장'
-                                                ? { color: 'black', width: '50px' }
-                                                : { width: '50px' }
+                                                ? { color: 'black', width: '40px' }
+                                                : { width: '40px' }
                                         }
                                     >
                                         {list?.division === '연차'

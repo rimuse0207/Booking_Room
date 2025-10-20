@@ -249,11 +249,11 @@ const HambergerMenuMainPage = () => {
                         <li>
                             <Link to="/Today_Food">식단표</Link>
                         </li>
-                        {/* <BrowserView> */}
-                        <li>
-                            <Link to="/FloorLayout">자리배치도</Link>
-                        </li>
-                        {/* </BrowserView> */}
+                        <BrowserView>
+                            <li>
+                                <Link to="/FloorLayout">자리배치도</Link>
+                            </li>
+                        </BrowserView>
                         {LoginInfo.Login_id && LoginInfo.Login_company === 'DHKS' ? (
                             <>
                                 <li>
