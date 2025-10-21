@@ -25,8 +25,8 @@ const SelectTableMainPageMainDivBox = styled.div`
         border-bottom: 1px solid #ddd;
         padding: 5px;
         text-align: center;
-        border-left: none;
-        border-right: none;
+        border-left: 1px solid lightgray;
+        border-right: 1px solid lightgray;
     }
 
     th {
@@ -158,10 +158,10 @@ const SelectTableMainPage = ({ PimsLists, ChooseDate, Getting_pims_Lists_From_Da
             <table>
                 <thead>
                     <tr>
-                        <th>구분</th>
-                        <th>일자</th>
+                        <th style={{ width: '50px' }}>구분</th>
+                        <th style={{ width: '70px' }}>일자</th>
                         <th>고객사</th>
-                        <th style={{minWidth:"100px"}}>안건</th>
+                        <th style={{ minWidth: '100px' }}>안건</th>
                         <th>동행자</th>
                         <th>관리</th>
                     </tr>

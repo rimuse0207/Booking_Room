@@ -12,8 +12,14 @@ code {
 
 * {
     box-sizing: border-box;
-    font-family: 'GowoonDodum', 'NotoSansKR', TextFontTest, LeeSeoyun, GangwonEdu_OTFBoldA, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu',
-        'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+    font-family: 'Nanoom', 'GowoonDodum', 'NotoSansKR', TextFontTest, LeeSeoyun, GangwonEdu_OTFBoldA, 'Segoe UI', 'Roboto', 'Oxygen',
+        'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+    font-weight: bold;
+}
+
+input,
+select {
+    font-family: 'Nanoom' !important;
 }
 
 @font-face {
@@ -21,6 +27,13 @@ code {
     src: url('../public/Font/Notosan.woff2');
     font-weight: normal;
     font-style: normal;
+}
+
+@font-face {
+    font-family: 'Nanoom';
+    src: url('../public/Font/nanoom2.woff2');
+    font-weight: bold;
+    font-style: bold;
 }
 
 /* @font-face {
@@ -65,27 +78,6 @@ li {
 }
 
 @font-face {
-    font-family: 'GangwonEdu_OTFBoldA';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/GangwonEdu_OTFBoldA.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'LeeSeoyun';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2202-2@1.0/LeeSeoyun.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'TextFontTest';
-    src: url('/public/Font/EF_YOONY_Window.ttf');
-    font-weight: normal;
-    font-style: normal;
-}
-
-@font-face {
     font-family: 'GowoonDodum';
     src: url('../public/Font/GowunDodum-Regular.woff');
     font-weight: normal;
@@ -114,7 +106,7 @@ input[type='password'] {
 input,
 textarea {
     font-size: 0.8em !important;
-    font-family: sans-serif, serif, monospace, cursive, fantasy !important;
+    /* font-family: sans-serif, serif, monospace, cursive, fantasy !important; */
 }
 
 .react-confirm-alert-button-group > button {

@@ -137,7 +137,7 @@ const ApplyModalMainDivBox = styled.div`
                             overflow: hidden;
                             text-overflow: ellipsis;
                             white-space: nowrap;
-                            padding-top: 8px;
+                            padding-top: 4px;
                             :hover {
                                 cursor: pointer;
                                 opacity: 0.9;

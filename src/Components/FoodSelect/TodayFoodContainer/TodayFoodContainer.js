@@ -16,7 +16,6 @@ import { Axios_Get_Moduls, request } from '../../../API';
 import WeekFoodCount from './WeekFoodCount/WeekFoodCount';
 
 const TodayFoodContainerMainDivBox = styled.div`
-    border: 1px solid black;
     min-height: 100vh;
     padding-bottom: 50px;
 

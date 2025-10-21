@@ -42,7 +42,7 @@ const NavigationMainPageMainDivBox = styled.div`
                 font-size: 0.8em;
                 /* top: 5px; */
                 h2 {
-                    margin-top: 0px;
+                    margin-top: 15px;
                 }
             }
         }
