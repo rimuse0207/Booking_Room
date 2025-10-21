@@ -142,7 +142,7 @@ const SelectModalMainDivBox = styled.div`
                                 overflow: hidden;
                                 font-weight: light;
                                 white-space: nowrap;
-                                padding-top: 8px;
+                                padding-top: 2px;
                                 .ContentTitle {
                                     overflow: hidden;
                                     text-overflow: ellipsis;

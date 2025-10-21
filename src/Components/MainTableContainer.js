@@ -179,11 +179,11 @@ export const TestMainDivBox = styled.div`
                             }
 
                             .ContentTextCotainer {
-                                font-size: 0.9em;
+                                font-size: 0.8em;
                                 overflow: hidden;
                                 font-weight: light;
                                 white-space: nowrap;
-                                padding-top: 5px;
+                                padding-top: 2px;
                                 .ContentTitle {
                                     overflow: hidden;
                                     text-overflow: ellipsis;

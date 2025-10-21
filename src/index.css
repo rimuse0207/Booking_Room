@@ -1,27 +1,36 @@
 body {
     margin: 0;
-    font-family: 'NotoSansKR', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans',
-        'Droid Sans', 'Helvetica Neue', sans-serif;
+    font-family: 'GowoonDodum', 'NotoSansKR', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell',
+        'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-    font-family: 'NotoSansKR', source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+    font-family: 'GowoonDodum', 'NotoSansKR', source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
 
 * {
     box-sizing: border-box;
-    font-family: 'NotoSansKR', TextFontTest, LeeSeoyun, GangwonEdu_OTFBoldA, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell',
-        'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+    font-family: 'GowoonDodum', 'NotoSansKR', TextFontTest, LeeSeoyun, GangwonEdu_OTFBoldA, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu',
+        'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
 }
 
 @font-face {
     font-family: 'NotoSansKR';
-    src: url('//fonts.googleapis.com/earlyaccess/notosanskr.css');
+    src: url('../public/Font/Notosan.woff2');
     font-weight: normal;
     font-style: normal;
 }
+
+/* @font-face {
+    font-family: 'Noto Sans KR';
+    font-style: normal;
+    font-weight: 100;
+    src: url(https://fonts.gstatic.com/s/notosanskr/v38/PbykFmXiEBPT4ITbgNA5Cgm20xz64px_1hVWr0wuPNGmlQNMEfD4.1.woff2) format('woff2');
+    unicode-range: U+f92f-f980, U+f982-f9c9;
+} */
+
 #toast-container-main {
     min-width: 500px;
     position: fixed;
