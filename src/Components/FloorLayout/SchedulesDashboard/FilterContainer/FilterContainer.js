@@ -151,8 +151,20 @@ const Lists = [
     Type: "team",
     lists: [
       {
-        label: "영업",
-        value: "영업",
+        label: "영업 1그룹",
+        value: "영업 1그룹",
+        placeMatch: ["동탄", "아산"],
+        departmentMatch: ["CE"],
+      },
+      {
+        label: "영업 2그룹",
+        value: "영업 2그룹",
+        placeMatch: ["동탄", "아산"],
+        departmentMatch: ["CE"],
+      },
+      {
+        label: "영업 3그룹",
+        value: "영업 3그룹",
         placeMatch: ["동탄", "아산"],
         departmentMatch: ["CE"],
       },
@@ -194,13 +206,13 @@ const Lists = [
       },
       {
         label: "기술교육팀",
-        value: "기술교육",
+        value: "기술교육팀",
         placeMatch: ["판교"],
         departmentMatch: ["영업"],
       },
       {
         label: "안전팀",
-        value: "안전",
+        value: "안전팀",
         placeMatch: ["판교"],
         departmentMatch: ["영업"],
       },
