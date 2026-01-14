@@ -64,10 +64,10 @@ const UserManageMainPage = () => {
       Nav_Menu: "사용자 추가",
       Nav_Access: false,
     },
-    {
-      Nav_Menu: "로그인 확인",
-      Nav_Access: false,
-    },
+    // {
+    //   Nav_Menu: "로그인 확인",
+    //   Nav_Access: false,
+    // },
     {
       Nav_Menu: "월별 예약 확인",
       Nav_Access: false,
