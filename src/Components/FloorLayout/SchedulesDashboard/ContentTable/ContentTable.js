@@ -81,8 +81,6 @@ const ContentTableMainDivBox = styled.div`
 `;
 
 const ContentTable = ({ Selected_Lists, TableData }) => {
-  console.log(Selected_Lists);
-  console.log("TableData", TableData);
   return (
     <ContentTableMainDivBox>
       <table>

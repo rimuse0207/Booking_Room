@@ -45,6 +45,8 @@ import AdminSurvayMainPage from "./Components/FoodSelect/SurvayContainer/Admin/A
 import UserSnakMainPage from "./Components/BreakFast/UserSnack/UserSnakMainPage";
 import DailyPimsMainPage from "./Components/FloorLayout/DailyPims/DailyPimsMainPage";
 import SchedulesDashboard from "./Components/FloorLayout/SchedulesDashboard/SchedulesDashboard";
+import VehicleContact from "./Components/Car_Contact/VehicleContact";
+import VehiclePortal from "./Components/Car_Contact/VehiclePortal";
 
 const RouterPageMainContainer = styled.div``;
 
@@ -58,7 +60,7 @@ const RouterPage = () => {
         `${process.env.REACT_APP_DB_HOST}/users/Token_Checking_Router`,
         {
           token: LoginInfo.Login_token,
-        }
+        },
       );
 
       if (TokenCheckFromServerVerify.data.dataSuccess) {
@@ -230,6 +232,11 @@ const RouterPage = () => {
               path="/BreakFast/cLCYwLMPxquhcvijjqwoewmqwoi/cLCYwLMPxquhcvijjqwoewmqwoi/:Food_Data"
               component={BreakfastAlert}
             ></Route>
+            <Route
+              path="/Vehicle/Contact/:car_Target_ID/:car_User_ID"
+              component={VehicleContact}
+            ></Route>
+            <Route path="/Vehicle/Portal" component={VehiclePortal}></Route>
           </Switch>
         </BrowserRouter>
       </CookiesProvider>
