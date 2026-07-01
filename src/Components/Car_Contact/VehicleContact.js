@@ -9,14 +9,6 @@ const fadeIn = keyframes`
 `;
 
 export default function VehicleContact() {
-  // 차량 및 연락처 정보 (실제 구현 시 API 또는 파라미터 연동)
-  // const [vehicle] = useState({
-  //   plateNumber: "123가 4567",
-  //   modelName: "Genesis G80",
-  //   driverPhone: "01012345678", // 1차 운전자
-  //   managerPhone: "01098765432", // 2차 비상 연락망 (관리 담당자)
-  // });
-
   const { car_User_ID, car_Target_ID } = useParams();
   const [vehicle, setVehicle] = useState(null);
   const [etcPhoneNumber, setetcPhoneNumber] = useState("+82-31-639-9031");
@@ -43,7 +35,7 @@ export default function VehicleContact() {
         car_User_ID,
       },
     );
-    console.log(result);
+
     if (result.status) {
       setVehicle(result.data.carInfos);
       if (result.data.gettingSuccess) {
